@@ -1,6 +1,6 @@
 # FeiraScore
-O FeiraScore moderniza a feira com votação digital, tornando tudo mais rápido, prático e participativo. 
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/63b574ae-de61-4ea0-a8b3-9ae8faee826f" />
+O FeiraScore moderniza com votação digital, tornando tudo mais rápido, prático e participativo. 
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/283b1516-4c93-4410-a1a2-5087d15d81c9" />
 
 ## Exemplo Paleta de Cores 
 <img width="3780" height="1890" alt="image" src="https://github.com/user-attachments/assets/c2230fc3-c7f2-4bd0-abb1-daad4b76e457" />
