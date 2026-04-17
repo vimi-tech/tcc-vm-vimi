@@ -17,7 +17,7 @@ O FeiraScore busca tornar a feira tecnológica mais eficiente e participativa, s
 
 
 ## FeiraScore
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/36f589ce-9554-44a9-9458-b3d83013e75e" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/a52e62f1-841e-49f8-8760-f8632d8aa687" />
 
 
 ## Exemplo da Paleta de Cores
