@@ -11,13 +11,13 @@ O FeiraScore busca tornar a feira tecnológica mais eficiente e participativa, s
 ## 🛠️ Tecnologias utilizadas
 
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
-![Spring](https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-00758F?style=for-the-badge&logo=mysql&logoColor=white)
 ![HTML](https://img.shields.io/badge/HTML-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS](https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 
-## FeiraScore
 
+## FeiraScore
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/36f589ce-9554-44a9-9458-b3d83013e75e" />
 
 
 ## Exemplo da Paleta de Cores
