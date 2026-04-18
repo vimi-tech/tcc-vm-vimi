@@ -1,12 +1,23 @@
-<h1> 
-Programação de fluxo de login
-<h2>  
-<p>1- Instalação da Biblioteca oficial do Google para que o nosso código converse com o Firebase.</p>
-<img width="790" height="333" alt="Captura de tela 1" src="https://github.com/user-attachments/assets/5107dde2-ccc6-47bb-8e68-b4503bac46e0" />
-  <h2>Que já está instalada no nosso projeto:</h2>
+<h1> Programação de fluxo de login
+
+<h2> 1- Configurar um projeto e uma conta de serviço do Firebase.</h2>
+  
+<p> Precisaremos de:
+  
+  •Um projeto do Firebase (Já temos).
+  <img width="258" height="97" alt="Captura de tela 2026-04-17 235846" src="https://github.com/user-attachments/assets/e21fa294-d3c1-48ea-bc11-d29d38d2bb44" />
+
+  •Uma conta de serviço do SDK Admin do Firebase para se comunicar com o Firebase (Já foi gerada com a criação do nosso projeto).
+
+  •Um arquivo de configuração com as credenciais da sua conta de serviço (Já criamos e está armazenada no Gmail).
+  </p>
+  <p>Instalação da Biblioteca oficial do Google para que o nosso código converse com o Firebase:</p>
+<img width="993" height="302" alt="Captura de tela 2026-04-18 001052" src="https://github.com/user-attachments/assets/80b3b570-3ceb-49a1-aa30-0c8ccf843415" />
+
+  <P>Que já está instalada no nosso projeto:</P>
   <img width="495" height="217" alt="Captura de tela 2026-04-17 210707" src="https://github.com/user-attachments/assets/19f8f886-512b-4df4-8c03-c92ee98ac86e" />
 
-<h2>
+
   
   <p>2-Para a inicialização do nosso projeto, se quisermos ter uma simplicidade na configuração do ambiente, podemos utilizar o Application Default Credentials, um sistema que ao invés de criarmos um arquivo .json com senhas e carregarmos todo o servidor, ele já identifica nosso projeto automaticamente.</p>
   <p>Agora se na inicialização, quisermos especificar os detalhes do nosso projeto usaremos a variável FIREBASE_CONFIG.</p>
@@ -39,6 +50,13 @@ Para utilizarmos a Chave em outro ambiente usamos a variável:
 Inicializamos o SDK:
 <img width="999" height="145" alt="Captura de tela 2026-04-17 232934" src="https://github.com/user-attachments/assets/e2507e40-a20d-4b3b-80d6-053808273886" />
 
+
 <h2>Inicializar vários aplicativos</h2>
-<p></p>
+<p> Quando queremos gerenciar múltiplos projetos do Firebase, por exemplo: 
+
+  Estamos lendo dados de um projeto e preciso escrever em outro.
+  Então usamos os seguintes comandos:
+  <img width="995" height="286" alt="Captura de tela 2026-04-18 001014" src="https://github.com/user-attachments/assets/541ecaf2-befc-4fcb-974a-af60a1ea1fe6" />
+
+</p>
  
