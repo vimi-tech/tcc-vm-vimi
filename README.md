@@ -43,7 +43,8 @@ O FeiraScore busca tornar a feira tecnológica mais eficiente e participativa, s
 <img width="1280" height="720" alt="WhatsApp Image 2026-04-18 at 17 59 58 (6)" src="https://github.com/user-attachments/assets/5e05966d-7c65-4cb7-b9db-0bbdc18a490a" />
 
 ## 💼 Patrocinadores
-<img width="588" height="393" alt="WhatsApp Image 2026-04-18 at 18 13 43 (1)" src="https://github.com/user-attachments/assets/cab7d865-eb83-4808-9f8d-952bb764b7ce" /><img width="1600" height="800" alt="WhatsApp Image 2026-04-18 at 18 13 43" src="https://github.com/user-attachments/assets/a3e77b36-8366-47df-b3db-d7f6cfabb3fb" />
+<img width="588" height="393" alt="WhatsApp Image 2026-04-18 at 18 13 43 (1)" src="https://github.com/user-attachments/assets/cab7d865-eb83-4808-9f8d-952bb764b7ce" />
+<img width="588" height="393" alt="WhatsApp Image 2026-04-18 at 18 13 43" src="https://github.com/user-attachments/assets/a3e77b36-8366-47df-b3db-d7f6cfabb3fb" />
 
 
 
