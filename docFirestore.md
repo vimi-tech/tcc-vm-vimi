@@ -1,0 +1,4 @@
+# Cloud Firestore 
+## O Cloud Firestore é um banco de dados NoSQL escalonável e flexível do Google Cloud, focado no armazenamento e sincronização de dados entre servidores e clientes. Ele se destaca pela capacidade de manter dados em sincronia em tempo real e por oferecer suporte off-line, o que permite que os aplicativos funcionem perfeitamente mesmo sem conexão estável com a internet.
+<img width="857" height="261" alt="Firebaseadmin" src="https://github.com/user-attachments/assets/051b87b8-9474-4c2b-b4ae-8bbd91730e4a" />
+No contexto deste projeto, a utilização do serviço é viabilizada pela presença do Firebase Admin SDK, conforme demonstrado no arquivo de dependências. Essa configuração estabelece a base necessária para que o código Python interaja de forma administrativa e segura com o banco de dados, permitindo a gestão completa de documentos e coleções diretamente pelo backend da aplicação.
