@@ -6,7 +6,7 @@ O FeiraScore busca tornar a feira tecnológica mais eficiente e participativa, s
 * 📊 Divulgar a pontuação obtida de cada projeto avaliado
 * 🗳️ Incluir democraticamente alunos e visitantes na votação
 * 💻 Substituir os métodos manuais por meios mais tecnológicos
-* 
+  
 ## 🛠️ Tecnologias utilizadas
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-00758F?style=for-the-badge&logo=mysql&logoColor=white)
@@ -14,7 +14,8 @@ O FeiraScore busca tornar a feira tecnológica mais eficiente e participativa, s
 ![CSS](https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 
 ## FeiraScore
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/a52e62f1-841e-49f8-8760-f8632d8aa687" />
+<img width="1280" height="720" alt="WhatsApp Image 2026-05-19 at 13 15 17" src="https://github.com/user-attachments/assets/712a3b31-acc8-44fe-8e71-ce673d13cb0c" />
+
 
 ## 🎨 Exemplo da Paleta de Cores
 <img width="786" height="300" alt="WhatsApp Image 2026-04-17 at 17 00 27" src="https://github.com/user-attachments/assets/bed8bc3f-12b0-48b8-b6e2-ead938a7151d" />
@@ -46,6 +47,8 @@ O FeiraScore busca tornar a feira tecnológica mais eficiente e participativa, s
 <img width="588" height="393" alt="WhatsApp Image 2026-04-18 at 18 13 43 (1)" src="https://github.com/user-attachments/assets/cab7d865-eb83-4808-9f8d-952bb764b7ce" />
 <img width="588" height="393" alt="WhatsApp Image 2026-04-18 at 18 13 43" src="https://github.com/user-attachments/assets/a3e77b36-8366-47df-b3db-d7f6cfabb3fb" />
 
+## 👔 Persona de Usuários
+<img width="1024" height="1280" alt="WhatsApp Image 2026-05-19 at 13 18 04" src="https://github.com/user-attachments/assets/0b31aa8b-2af8-4237-ba20-7bc44224481c" />
 
 
 
