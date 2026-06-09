@@ -18,3 +18,10 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+@app.route('/')
+def home():
+    # Tem que incluir o 'pages/' antes do index.html!
+    return render_template('pages/index.html')
+    if __name__ == '__main__':
+    app.run(debug=True)
