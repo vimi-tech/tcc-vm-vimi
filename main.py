@@ -1,14 +1,21 @@
 import os
 
-from flask import render_template, Flask
+from flask import Flask, render_template, url_for
 
 app = Flask(__name__)
+
 
 @app.route("/")
 def index():
     nome = 'Feirascore'
     return render_template('index.html', site = nome)
-    
+   
+# Certifique-se de que não há espaços antes do '@' e do 'def'
+@app.route('/loginestudante')
+def loginestudante():
+    # Esse nome tem que ser idêntico ao do arquivo salvo!
+    return render_template('loginestudante.html')
+
 @app.route("/login")
 def login():
     return render_template('login/login.html')
@@ -19,9 +26,4 @@ def main():
 if __name__ == "__main__":
     main()
 
-@app.route('/')
-def home():
-    # Tem que incluir o 'pages/' antes do index.html!
-    return render_template('pages/index.html')
-    if __name__ == '__main__':
-    app.run(debug=True)
+
