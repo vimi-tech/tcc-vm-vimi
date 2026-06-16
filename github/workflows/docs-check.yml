@@ -1,0 +1,21 @@
+name: Validacao da Documentacao
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  lint-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Run Markdown Lint
+        uses: davidanson/markdownlint-cli2-action@v1
+        with:
+          globs: |
+            README.md
+            docs/**/*.md
