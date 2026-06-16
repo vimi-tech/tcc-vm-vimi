@@ -20,104 +20,94 @@
 
     body {
       min-height: 100vh;
-      /* Degradê de vermelho escuro para um tom mais aberto, simulando a imagem */
-      background: linear-gradient(135deg, #3d0000 0%, #800000 50%, #b61c1c 100%);
+      
+      /* Fundo com degradê diagonal perfeito e ondas com espessura refinada (stroke-width: 7) */
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 810' width='100%25' height='100%25'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='15%25' y1='85%25' x2='85%25' y2='15%25'%3E%3Cstop offset='0%25' stop-color='%230b0202'/%3E%3Cstop offset='35%25' stop-color='%23380404'/%3E%3Cstop offset='70%25' stop-color='%23880808'/%3E%3Cstop offset='100%25' stop-color='%23b81111'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grad)'/%3E%3Cg stroke='rgba(255,255,255,0.035)' stroke-width='7' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M-100,520 C120,240 420,120 670,-50' /%3E%3Cpath d='M-100,660 C170,340 500,210 780,10' /%3E%3Cpath d='M-100,800 C220,440 580,290 890,70' /%3E%3Cpath d='M-50,920 C280,520 650,370 1000,140' /%3E%3Cpath d='M50,1020 C350,600 720,440 1100,210' /%3E%3Cpath d='M180,1100 C430,680 820,530 1220,290' /%3E%3Cpath d='M920,260 C780,380 870,640 1040,740 C1210,840 1320,620 1210,410 C1110,230 1040,160 920,260 Z' fill='rgba(255,255,255,0.008)' stroke='rgba(255,255,255,0.035)' /%3E%3Cpath d='M980,330 C880,420 930,580 1050,650 C1170,720 1230,560 1150,440 C1080,320 1050,280 980,330 Z' stroke='rgba(255,255,255,0.025)' /%3E%3Cpath d='M1350,80 C1180,30 1020,-60 920,-110' stroke='rgba(255,255,255,0.03)' /%3E%3Cpath d='M1450,150 C1280,90 1120,-20 1020,-80' stroke='rgba(255,255,255,0.03)' /%3E%3C/g%3E%3C/svg%3E");
+      
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 20px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Linhas de ondas no fundo (Simulação do background-login.jpg) */
-    body::before {
-      content: "";
-      position: absolute;
-      width: 200%;
-      height: 200%;
-      top: -50%;
-      left: -50%;
-      background-image: radial-gradient(circle, rgba(0,0,0,0.15) 1px, transparent 1px),
-                        linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
-      transform: rotate(15deg);
-      pointer-events: none;
     }
 
     .login-container {
       width: 100%;
-      max-width: 450px;
+      max-width: 420px;
       text-align: center;
       z-index: 1;
     }
 
-    /* Estilização do grupo de avatares (SVG customizado igual à imagem) */
+    /* Imagem das pessoas com tamanho proporcional e sombra suave */
     .avatar-group {
-      width: 180px;
+      width: 220px;
       height: auto;
       margin: 0 auto 15px auto;
-      filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.3));
+      filter: drop-shadow(0px 6px 12px rgba(0, 0, 0, 0.35));
     }
 
     .welcome-text {
-      color: rgba(255, 255, 255, 0.8);
+      color: rgba(255, 255, 255, 0.85);
       font-size: 14px;
       font-weight: 300;
-      margin-bottom: 30px;
+      margin-bottom: 35px;
+      letter-spacing: 0.5px;
     }
 
-    /* Customização das caixas de texto (Inputs brancos arredondados) */
+    /* Customização das caixas de texto com cantos levemente arredondados */
     .input-group-custom {
       background-color: #ffffff;
-      border-radius: 4px;
-      margin-bottom: 15px;
+      border-radius: 6px;
+      margin-bottom: 16px;
       display: flex;
       align-items: center;
-      padding: 5px 15px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      padding: 4px 18px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
     }
 
     .input-group-custom i {
-      color: #333;
+      color: #444;
       font-size: 18px;
-      margin-right: 12px;
+      margin-right: 14px;
     }
 
     .input-group-custom input {
       border: none;
       background: transparent;
       width: 100%;
-      padding: 10px 0;
+      padding: 12px 0;
       font-size: 14px;
-      color: #333;
+      color: #222;
       outline: none;
     }
 
     .input-group-custom input::placeholder {
-      color: #aaa;
+      color: #b0b0b0;
     }
 
-    /* Botão Entrar Preto Arredondado */
+    /* Botão Entrar Puro */
     .btn-entrar {
       background-color: #000000;
       color: #ffffff;
       border: none;
       border-radius: 8px;
-      padding: 12px 40px;
-      font-size: 12px;
+      padding: 12px 50px;
+      font-size: 13px;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
       font-weight: 500;
-      margin-top: 15px;
+      margin-top: 20px;
       transition: background-color 0.3s, transform 0.2s;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.45);
     }
 
     .btn-entrar:hover {
       background-color: #1a1a1a;
-      transform: scale(1.03);
-      color: #fff;
+      transform: scale(1.02);
+      color: #ffffff;
     }
   </style>
 </head>
@@ -125,7 +115,7 @@
 
   <div class="login-container">
     
-    <svg class="avatar-group" viewBox="0 0 100 45" fill="#3c3c3c" stroke="#ffffff" stroke-width="1.5">
+    <svg class="avatar-group" viewBox="0 0 100 45" fill="#3c3c3c" stroke="#ffffff" stroke-width="1.4">
       <circle cx="20" cy="22" r="7"/>
       <path d="M10,40 C10,30 30,30 30,40"/>
       
