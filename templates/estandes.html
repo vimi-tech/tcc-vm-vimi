@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estandes - FeiraScore</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; font-family: sans-serif; }
+    .estandes-section { padding: 60px 0; background-color: #f9f9f9; }
+    .section-title-dark { text-align: center; color: #b61c1c; font-size: 2.5rem; text-transform: uppercase; margin-bottom: 40px; }
+    .category-btn { background-color: #fff; color: #333; border: 2px solid #b61c1c; border-radius: 20px; padding: 8px 20px; text-transform: uppercase; transition: 0.3s; }
+    .category-btn.active, .category-btn:hover { background-color: #b61c1c; color: #fff; }
+    .estande-card { background: #fff; border-radius: 15px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-left: 5px solid #b61c1c; transition: transform 0.2s; }
+    .estande-card:hover { transform: translateY(-5px); }
+    .estande-badge { font-size: 12px; background-color: #333; color: #fff; padding: 3px 10px; border-radius: 10px; text-transform: uppercase; }
+    .pagination-custom .page-link { color: #b61c1c; border: 1px solid #dee2e6; }
+    .pagination-custom .page-item.active .page-link { background-color: #b61c1c; border-color: #b61c1c; color: #fff; }
+  </style>
+</head>
+<body>
+
+  <section class="estandes-section" id="estandes">
+    <div class="container">
+      <h2 class="section-title-dark">Estandes do Evento</h2>
+      
+      <div class="d-flex flex-wrap justify-content-center gap-2 mb-5">
+        <button class="category-btn active" onclick="filterCategory('todos')">Todos</button>
+        <button class="category-btn" onclick="filterCategory('informatica')">Informática</button>
+        <button class="category-btn" onclick="filterCategory('mecanica')">Mecânica</button>
+        <button class="category-btn" onclick="filterCategory('eletro')">Eletrotécnica</button>
+      </div>
+
+      <div class="row g-4" id="estandes-container"></div>
+
+      <div class="d-flex justify-content-center mt-5">
+        <nav><ul class="pagination pagination-custom" id="pagination-container"></ul></nav>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const todosEstandes = [
+      { id: 1, nome: "Estande Alpha - IA na Saúde", categoria: "informatica", descricao: "Uso de redes neurais para diagnósticos médicos preliminares." },
+      { id: 2, nome: "Estande Beta - Automação Residencial", categoria: "eletro", descricao: "Controlando sua casa por comandos de voz e sensores IoT." },
+      { id: 3, nome: "Estande Gamma - EcoMecânica", categoria: "mecanica", descricao: "Protótipo de motor movido a biocombustíveis eficientes." },
+      { id: 4, nome: "Estande Delta - CyberSegurança", categoria: "informatica", descricao: "Simulações de invasões e como proteger seus dados online." },
+      { id: 5, nome: "Estande Epsilon - Energia Solar", categoria: "eletro", descricao: "Painéis solares inteligentes auto-ajustáveis." },
+      { id: 6, nome: "Estande Zeta - Braço Robótico", categoria: "mecanica", descricao: "Automação industrial utilizando braços mecânicos de alta precisão." },
+      { id: 7, nome: "Estande Eta - App de Votação", categoria: "informatica", descricao: "Por trás dos panos do próprio FeiraScore." }
+    ];
+
+    let categoriaAtual = 'todos';
+    let paginaAtual = 1;
+    const itensPorPagina = 3; 
+
+    function renderEstandes() {
+      const container = document.getElementById('estandes-container');
+      container.innerHTML = '';
+      const filtrados = todosEstandes.filter(e => categoriaAtual === 'todos' || e.categoria === categoriaAtual);
+      const totalPaginas = Math.ceil(filtrados.length / itensPorPagina);
+      
+      if (paginaAtual > totalPaginas && totalPaginas > 0) paginaAtual = totalPaginas;
+      const itensExibidos = filtrados.slice((paginaAtual - 1) * itensPorPagina, paginaAtual * itensPorPagina);
+
+      if(itensExibidos.length === 0) {
+        container.innerHTML = `<div class="col-12 text-center text-muted"><p>Nenhum estande encontrado.</p></div>`;
+        renderPagination(0); return;
+      }
+
+      itensExibidos.forEach(estande => {
+        const div = document.createElement('div');
+        div.className = 'col-sm-6 col-md-4';
+        div.innerHTML = `
+          <div class="estande-card h-100 d-flex flex-column justify-content-between">
+            <div>
+              <span class="estande-badge">${estande.categoria}</span>
+              <h4 class="mt-2 mb-3" style="color: #b61c1c;">${estande.nome}</h4>
+              <p style="color: #555; font-size: 14px;">${estande.descricao}</p>
+            </div>
+            <a href="#" class="btn btn-sm btn-outline-danger mt-3 w-100 rounded-pill">VOTAR NESTE</a>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+      renderPagination(totalPaginas);
+    }
+
+    function renderPagination(totalPaginas) {
+      const container = document.getElementById('pagination-container');
+      container.innerHTML = '';
+      if (totalPaginas <= 1) return;
+
+      container.innerHTML += `<li class="page-item ${paginaAtual === 1 ? 'disabled' : ''}"><a class="page-link" href="#estandes" onclick="mudarPagina(${paginaAtual - 1})">Anterior</a></li>`;
+      for (let i = 1; i <= totalPaginas; i++) {
+        container.innerHTML += `<li class="page-item ${paginaAtual === i ? 'active' : ''}"><a class="page-link" href="#estandes" onclick="mudarPagina(${i})">${i}</a></li>`;
+      }
+      container.innerHTML += `<li class="page-item ${paginaAtual === totalPaginas ? 'disabled' : ''}"><a class="page-link" href="#estandes" onclick="mudarPagina(${paginaAtual + 1})">Próximo</a></li>`;
+    }
+
+    function mudarPagina(num) { paginaAtual = num; renderEstandes(); }
+    function filterCategory(cat) {
+      categoriaAtual = cat; paginaAtual = 1;
+      document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+      if (window.event?.target) window.event.target.classList.add('active');
+      renderEstandes();
+    }
+
+    document.addEventListener("DOMContentLoaded", renderEstandes);
+  </script>
+</body>
+</html>
