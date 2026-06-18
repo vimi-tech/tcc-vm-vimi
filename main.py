@@ -5,17 +5,15 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
- nome = 'Feirascore'
- return render_template('index.html', site=nome)
+    nome = 'Feirascore'
+    return render_template('index.html', site=nome)
 
 
-
-@app.route('/estudantelogin')
+@app.route('/estandelogin')
 
 def estudantelogin():
     # Certifique-se de que o arquivo loginestudante.html está na pasta correta
     return render_template('login/estudantelogin.html')
-
 
 
 @app.route("/login")
