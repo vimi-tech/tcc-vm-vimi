@@ -52,6 +52,7 @@
       color: white;
     }
 
+    /* NOVOS ESTILOS PARA OS BOTÕES DE NAVEGAÇÃO VERMELHOS */
     .btn-nav-custom-red {
       display: inline-flex;
       align-items: center;
@@ -226,12 +227,198 @@
       color: #7a0000;
     }
 
+    .estandes-section {
+      padding: 90px 0;
+      background-color: #f9f9f9;
+    }
+
+    .section-title-dark {
+      text-align: center;
+      color: #b61c1c;
+      font-size: 2.5rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+    }
+
+    .category-btn {
+      background-color: #fff;
+      color: #333;
+      border: 2px solid #b61c1c;
+      border-radius: 20px;
+      padding: 8px 20px;
+      font-size: 14px;
+      text-transform: uppercase;
+      transition: 0.3s;
+    }
+
+    .category-btn.active, .category-btn:hover {
+      background-color: #b61c1c;
+      color: #fff;
+    }
+
+    .estande-card {
+      background: #fff;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      border-left: 5px solid #b61c1c;
+      transition: transform 0.2s;
+    }
+
+    .estande-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .estande-badge {
+      font-size: 12px;
+      background-color: #333;
+      color: #fff;
+      padding: 3px 10px;
+      border-radius: 10px;
+      text-transform: uppercase;
+    }
+
+    .pagination-custom .page-link {
+      color: #b61c1c;
+      border: 1px solid #dee2e6;
+      font-size: 14px;
+    }
+
+    .pagination-custom .page-item.active .page-link {
+      background-color: #b61c1c;
+      border-color: #b61c1c;
+      color: #fff;
+    }
+
+    .pagination-custom .page-link:focus {
+      box-shadow: 0 0 0 0.25rem rgba(182, 28, 28, 0.25);
+    }
+
+    /* ESTILOS: Seção de Notícias / Feed */
+    .news-section {
+      padding: 90px 0;
+      background-color: #ededed;
+    }
+
+    .news-card {
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+      transition: 0.3s;
+    }
+
+    .news-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+    }
+
+    .news-img-wrapper {
+      height: 200px;
+      background-color: #ccc;
+      overflow: hidden;
+    }
+
+    .news-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .news-body {
+      padding: 25px;
+    }
+
+    .news-date {
+      font-size: 12px;
+      color: #888;
+      font-family: sans-serif;
+      margin-bottom: 8px;
+    }
+
+    .news-title {
+      font-size: 1.2rem;
+      color: #333;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .news-text {
+      font-family: sans-serif;
+      font-size: 14px;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .btn-news-link {
+      color: #b61c1c;
+      text-decoration: none;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: 0.2s;
+    }
+
+    .btn-news-link:hover {
+      color: #7a0000;
+      padding-left: 5px;
+    }
+
+    /* ESTILOS: Seção FAQ Accordion */
+    .faq-section {
+      padding: 90px 0;
+      background: #0d0b0b;
+      color: white;
+    }
+
+    .accordion-item-custom {
+      background: rgba(255, 255, 255, 0.06) !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+      border-radius: 15px !important;
+      margin-bottom: 15px;
+      overflow: hidden;
+      backdrop-filter: blur(4px);
+    }
+
+    .accordion-button-custom {
+      background: transparent !important;
+      color: white !important;
+      font-size: 15px;
+      text-transform: uppercase;
+      padding: 20px;
+      box-shadow: none !important;
+    }
+
+    .accordion-button-custom:not(.collapsed) {
+      color: #ff4d4d !important;
+      background: rgba(255, 255, 255, 0.03) !important;
+    }
+
+    .accordion-button-custom::after {
+      filter: invert(1);
+    }
+
+    .accordion-body-custom {
+      background: rgba(0, 0, 0, 0.2);
+      color: #ccc;
+      font-size: 14px;
+      line-height: 1.6;
+      font-family: sans-serif;
+    }
+
     .footer-custom {
       background-color: #050505;
       color: rgba(255,255,255,0.6);
       padding: 60px 0;
       font-size: 14px;
       border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .footer-custom p {
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .footer-custom a {
@@ -252,11 +439,21 @@
     @media(max-width: 768px) {
       .intro-section { padding: 40px 0; }
       .about-section { padding: 60px 0; }
+      .estandes-section { padding: 50px 0; }
+      .news-section { padding: 50px 0; }
+      .faq-section { padding: 50px 0; }
       .main-title { font-size: 2.2rem; }
       .main-subtitle { font-size: 1rem; margin-bottom: 20px; }
       .about-title { font-size: 1.8rem; }
       .about-text { font-size: 14px; }
+      .section-title-dark { font-size: 2rem; margin-bottom: 25px; }
       .about-section::before { width: 280px; height: 280px; }
+    }
+
+    @media(max-width: 480px) {
+      .graph-mockup { display: none; }
+      .main-title { font-size: 1.9rem; }
+      .highlight-text { font-size: 15px; }
     }
   </style>
 </head>
@@ -273,14 +470,23 @@
         </button>
 
         <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-          <div class="d-flex flex-wrap gap-2 justify-content-center my-3 my-lg-0">
-            <a class="btn-nav-custom-red" href="{{ url_for('index') }}">Início</a>
-            <a class="btn-nav-custom-red" href="{{ url_for('estandes') }}">Estandes</a>
-            <a class="btn-nav-custom-red" href="{{ url_for('noticias') }}">Notícias</a>
-            <a class="btn-nav-custom-red" href="{{ url_for('localizacao') }}">Localização</a>
-            <a class="btn-nav-custom-red" href="{{ url_for('faq') }}">FAQ</a>
-            <a class="btn-nav-custom-red" href="{{ url_for('estudantelogin') }}">Buscar por Turma</a>
-          </div>
+          <ul class="navbar-nav gap-3 my-3 my-lg-0">
+            <li class="nav-item">
+              <a class="btn-nav-custom-red" href="#estandes">Estandes</a>
+            </li>
+            <li class="nav-item">
+              <a class="btn-nav-custom-red" href="#noticias">Notícias</a>
+            </li>
+            <li class="nav-item">
+              <a class="btn-nav-custom-red" href="#sobre">Localização</a>
+            </li>
+            <li class="nav-item">
+              <a class="btn-nav-custom-red" href="#faq">FAQ</a>
+            </li>
+            <li class="nav-item">
+              <a class="btn-nav-custom-red" href="{{ url_for('estudantelogin') }}">Buscar por Turma</a>
+            </li>
+          </ul>
         </div>
 
         <div class="brand-logos-container ms-auto ms-lg-0">
@@ -328,8 +534,143 @@
               CADA VOTO AJUDA A DESTACAR IDEIAS, RECONHECER ESFORÇOS E VALORIZAR PROJETOS INCRÍVEIS.
             </p>
             <div class="d-flex flex-wrap justify-content-center gap-2">
-              <a href="{{ url_for('estandes') }}" class="btn-main-white d-inline-flex align-items-center justify-content-center text-decoration-none">Ver Estandes</a>
+              <a href="#estandes" class="btn-main-white d-inline-flex align-items-center justify-content-center text-decoration-none">Ver Estandes</a>
               <a class="btn-main-white d-inline-flex align-items-center justify-content-center text-decoration-none" href="{{ url_for('login') }}">Votar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="estandes-section" id="estandes">
+      <div class="container">
+        <h2 class="section-title-dark">Estandes do Evento</h2>
+         
+        <div class="d-flex flex-wrap justify-content-center gap-2 mb-4 mb-md-5">
+          <button class="category-btn active" onclick="filterCategory('todos')">Todos</button>
+          <button class="category-btn" onclick="filterCategory('informatica')">Informática</button>
+          <button class="category-btn" onclick="filterCategory('mecanica')">Mecânica</button>
+          <button class="category-btn" onclick="filterCategory('eletro')">Eletrotécnica</button>
+        </div>
+
+        <div class="row g-4" id="estandes-container"></div>
+
+        <div class="d-flex justify-content-center mt-4 mt-md-5">
+          <nav>
+            <ul class="pagination pagination-custom" id="pagination-container"></ul>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <section class="news-section" id="noticias">
+      <div class="container">
+        <h2 class="section-title-dark">Últimas Notícias</h2>
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="news-card h-100 d-flex flex-column justify-content-between">
+              <div>
+                <div class="news-img-wrapper">
+                  <img src="{{ url_for('static', filename='evento.jpg') }}" alt="Abertura do Evento" class="news-img">
+                </div>
+                <div class="news-body">
+                  <div class="news-date">16 de Junho, 2026</div>
+                  <h3 class="news-title">Grande Abertura da Feira Tecnológica</h3>
+                  <p class="news-text">Os portões estão abertos! Venha conferir os projetos inovadores desenvolvidos pelos alunos deste ano.</p>
+                </div>
+              </div>
+              <div class="news-body pt-0">
+                <a href="#" class="btn-news-link">Ler Matéria Completa →</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="news-card h-100 d-flex flex-column justify-content-between">
+              <div>
+                <div class="news-img-wrapper">
+                  <img src="{{ url_for('static', filename='logo_feira.jpg') }}" alt="Sistema de Votação" class="news-img">
+                </div>
+                <div class="news-body">
+                  <div class="news-date">15 de Junho, 2026</div>
+                  <h3 class="news-title">Como funciona o Novo Sistema Score</h3>
+                  <p class="news-text">Entenda como a sua avaliação digital ajuda a computar as notas parciais e definir os vencedores em tempo real.</p>
+                </div>
+              </div>
+              <div class="news-body pt-0">
+                <a href="#" class="btn-news-link">Ler Matéria Completa →</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="news-card h-100 d-flex flex-column justify-content-between">
+              <div>
+                <div class="news-img-wrapper">
+                  <img src="{{ url_for('static', filename='vini_logo.jpg') }}" alt="Premiação" class="news-img">
+                </div>
+                <div class="news-body">
+                  <div class="news-date">12 de Junho, 2026</div>
+                  <h3 class="news-title">Revelados os Prêmios dos Destaques</h3>
+                  <p class="news-text">A coordenação revelou os detalhes das medalhas e troféus que serão entregues para as equipes mais votadas.</p>
+                </div>
+              </div>
+              <div class="news-body pt-0">
+                <a href="#" class="btn-news-link">Ler Matéria Completa →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq-section" id="faq">
+      <div class="container">
+        <h2 class="text-center text-uppercase mb-5" style="letter-spacing: 1px; color: #b61c1c;">Perguntas Frequentes</h2>
+         
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="accordion" id="accordionFAQ">
+               
+              <div class="accordion-item accordion-item-custom">
+                <h2 class="accordion-header">
+                  <button class="accordion-button accordion-button-custom collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                    Como posso registrar meu voto em um estande?
+                  </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
+                  <div class="accordion-body accordion-body-custom">
+                    É muito simples! Basta clicar no botão "Votar" localizado na barra superior ou diretamente no card do estande de sua preferência. Você será redirecionado para a tela de autenticação para validar sua escolha com segurança.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item accordion-item-custom">
+                <h2 class="accordion-header">
+                  <button class="accordion-button accordion-button-custom collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                    Posso votar em mais de um projeto diferente?
+                  </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
+                  <div class="accordion-body accordion-body-custom">
+                    As regras padrão permitem que cada visitante dê sua pontuação para múltiplos estandes distintos, contudo, o sistema restringe o abuso limitando um voto por pessoa dentro de um mesmo projeto.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item accordion-item-custom">
+                <h2 class="accordion-header">
+                  <button class="accordion-button accordion-button-custom collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                    Como os resultados parciais são calculados?
+                  </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
+                  <div class="accordion-body accordion-body-custom">
+                    O painel do FeiraScore realiza uma varredura constante em nosso banco de dados. À medida que as notas entram, a média ponderada é calculada instantaneamente de acordo com a categoria selecionada.
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
@@ -343,8 +684,118 @@
       <p class="mb-3 px-3">Entre em contato conosco pelo e-mail e responderemos o mais rápido possível!</p>
       <p class="mb-0"><a href="mailto:contato@feirascore.com">contato@feirascore.com</a></p>
     </div>
-  </footer>
+  </footer >
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    const todosEstandes = [
+      { id: 1, nome: "Estande Alpha - IA na Saúde", categoria: "informatica", descricao: "Uso de redes neurais para diagnósticos médicos preliminares." },
+      { id: 2, nome: "Estande Beta - Automação Residencial", categoria: "eletro", descricao: "Controlando sua casa por comandos de voz e sensores IoT." },
+      { id: 3, nome: "Estande Gamma - EcoMecânica", categoria: "mecanica", descricao: "Protótipo de motor movido a biocombustíveis eficientes." },
+      { id: 4, nome: "Estande Delta - CyberSegurança", categoria: "informatica", descricao: "Simulações de invasões e como proteger seus dados online." },
+      { id: 5, nome: "Estande Epsilon - Energia Solar", categoria: "eletro", descricao: "Painéis solares inteligentes auto-ajustáveis." },
+      { id: 6, nome: "Estande Zeta - Braço Robótico", categoria: "mecanica", descricao: "Automação industrial utilizando braços mecânicos de alta precisão." },
+      { id: 7, nome: "Estande Eta - App de Votação", categoria: "informatica", descricao: "Por trás dos panos do próprio FeiraScore." }
+    ];
+
+    let categoriaAtual = 'todos';
+    let paginaAtual = 1;
+    const itensPorPagina = 3; 
+
+    function renderEstandes() {
+      const container = document.getElementById('estandes-container');
+      container.innerHTML = '';
+
+      const estandesFiltrados = todosEstandes.filter(estande => {
+        return categoriaAtual === 'todos' || estande.categoria === categoriaAtual;
+      });
+
+      const totalItens = estandesFiltrados.length;
+      const totalPaginas = Math.ceil(totalItens / itensPorPagina);
+       
+      if (paginaAtual > totalPaginas && totalPaginas > 0) paginaAtual = totalPaginas;
+
+      const inicio = (paginaAtual - 1) * itensPorPagina;
+      const fim = inicio + itensPorPagina;
+      const itensExibidos = estandesFiltrados.slice(inicio, fim);
+
+      if(itensExibidos.length === 0) {
+        container.innerHTML = `<div class="col-12 text-center text-muted"><p>Nenhum estande encontrado nesta categoria.</p></div>`;
+        renderPagination(0);
+        return;
+      }
+
+      itensExibidos.forEach(estande => {
+        const div = document.createElement('div');
+        div.className = 'col-sm-6 col-md-4';
+        div.innerHTML = `
+          <div class="estande-card h-100 d-flex flex-column justify-content-between">
+            <div>
+              <span class="estande-badge">${estande.categoria}</span>
+              <h4 class="mt-2 mb-3" style="font-size: 1.1rem; color: #b61c1c;">${estande.nome}</h4>
+              <p style="font-family: sans-serif; font-size: 14px; color: #555;">${estande.descricao}</p>
+            </div>
+            <a href="{{ url_for('login') }}" class="btn btn-sm btn-outline-danger mt-3 w-100 rounded-pill">VOTAR NESTE</a>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+
+      renderPagination(totalPaginas);
+    }
+
+    function renderPagination(totalPaginas) {
+      const container = document.getElementById('pagination-container');
+      container.innerHTML = '';
+
+      if (totalPaginas <= 1) return;
+
+      const prevDisabled = paginaAtual === 1 ? 'disabled' : '';
+      container.innerHTML += `
+        <li class="page-item ${prevDisabled}">
+          <a class="page-link" href="#estandes" onclick="mudarPagina(${paginaAtual - 1})">Anterior</a>
+        </li>
+      `;
+
+      for (let i = 1; i <= totalPaginas; i++) {
+        const activeClass = paginaAtual === i ? 'active' : '';
+        container.innerHTML += `
+          <li class="page-item ${activeClass}">
+            <a class="page-link" href="#estandes" onclick="mudarPagina(${i})">${i}</a>
+          </li>
+        `;
+      }
+
+      const nextDisabled = paginaAtual === totalPaginas ? 'disabled' : '';
+      container.innerHTML += `
+        <li class="page-item ${nextDisabled}">
+          <a class="page-link" href="#estandes" onclick="mudarPagina(${paginaAtual + 1})">Próximo</a>
+        </li>
+      `;
+    }
+
+    function mudarPagina(numeroPagina) {
+      paginaAtual = numeroPagina;
+      renderEstandes();
+    }
+
+    function filterCategory(categoria) {
+      categoriaAtual = categoria;
+      paginaAtual = 1;
+
+      const botoes = document.querySelectorAll('.category-btn');
+      botoes.forEach(btn => btn.classList.remove('active'));
+      if (window.event && window.event.target) {
+        window.event.target.classList.add('active');
+      }
+
+      renderEstandes();
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      renderEstandes();
+    });
+  </script>
 </body>
 </html>
