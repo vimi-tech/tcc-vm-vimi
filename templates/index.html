@@ -7,6 +7,7 @@
   <title>FeiraScore - Principal</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
@@ -52,35 +53,11 @@
       color: white;
     }
 
-    /* NOVOS ESTILOS PARA OS BOTÕES DE NAVEGAÇÃO VERMELHOS */
-    .btn-nav-custom-red {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      color: #ffffff !important;
-      background-color: #b61c1c;
-      padding: 8px 18px;
-      font-size: 14px;
-      font-weight: bold;
+    .nav-link-custom {
+      color: #333 !important;
       text-transform: uppercase;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      transition: all 0.3s ease;
-      border: none;
-      white-space: nowrap;
-    }
-
-    .btn-nav-custom-red:hover {
-      background-color: #8a1212;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-      color: #ffffff !important;
-    }
-
-    .btn-nav-custom-red:active {
-      transform: translateY(0);
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      font-size: 15px;
+      letter-spacing: 0.5px;
     }
 
     .brand-logos-container {
@@ -310,7 +287,6 @@
     }
 
     .news-card:hover {
-      transform: translateY(-5px);
       box-shadow: 0 12px 25px rgba(0,0,0,0.12);
     }
 
@@ -349,7 +325,18 @@
       font-size: 14px;
       color: #666;
       line-height: 1.6;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
+    }
+
+    /* Estilo para o texto expandido da matéria completa */
+    .full-story-text {
+      font-family: sans-serif;
+      font-size: 14px;
+      color: #444;
+      line-height: 1.6;
+      border-top: 1px dashed #ddd;
+      padding-top: 15px;
+      margin-top: 10px;
     }
 
     .btn-news-link {
@@ -359,11 +346,38 @@
       text-transform: uppercase;
       letter-spacing: 0.5px;
       transition: 0.2s;
+      display: inline-block;
+      cursor: pointer;
+      border: none;
+      background: none;
+      padding: 0;
     }
 
     .btn-news-link:hover {
       color: #7a0000;
-      padding-left: 5px;
+    }
+
+    /* ESTILOS: Seção de Localização (Google Maps) */
+    .location-section {
+      padding: 90px 0;
+      background-color: #f9f9f9;
+    }
+
+    .map-responsive {
+      overflow: hidden;
+      padding-bottom: 450px;
+      position: relative;
+      height: 0;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .map-responsive iframe {
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      position: absolute;
     }
 
     /* ESTILOS: Seção FAQ Accordion */
@@ -431,9 +445,27 @@
       color: white;
     }
 
+    .social-share-buttons a {
+      font-size: 20px;
+      width: 45px;
+      height: 45px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      transition: 0.3s;
+    }
+
+    .social-share-buttons a:hover {
+      background: #b61c1c;
+      transform: translateY(-3px);
+    }
+
     @media(max-width: 991px) {
-      .navbar-custom .container { gap: 15px; }
-      .brand-logos-container { margin-top: 15px; width: 100%; justify-content: center; }
+      .navbar-custom .container { gap: 10px; }
+      .brand-logos-container { margin-top: 10px; width: 100%; justify-content: center; }
     }
 
     @media(max-width: 768px) {
@@ -441,6 +473,7 @@
       .about-section { padding: 60px 0; }
       .estandes-section { padding: 50px 0; }
       .news-section { padding: 50px 0; }
+      .location-section { padding: 50px 0; }
       .faq-section { padding: 50px 0; }
       .main-title { font-size: 2.2rem; }
       .main-subtitle { font-size: 1rem; margin-bottom: 20px; }
@@ -470,28 +503,20 @@
         </button>
 
         <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-          <ul class="navbar-nav gap-3 my-3 my-lg-0">
+          <ul class="navbar-nav gap-2 my-3 my-lg-0 text-center">
+            <li class="nav-item"><a class="nav-link nav-link-custom" href="#estandes">Estandes</a></li>
+            <li class="nav-item"><a class="nav-link nav-link-custom" href="#noticias">Notícias</a></li>
+            <li class="nav-item"><a class="nav-link nav-link-custom" href="#localizacao">Localização</a></li>
+            <li class="nav-item"><a class="nav-link nav-link-custom" href="#faq">FAQ</a></li>
             <li class="nav-item">
-              <a class="btn-nav-custom-red" href="#estandes">Estandes</a>
-            </li>
-            <li class="nav-item">
-              <a class="btn-nav-custom-red" href="#noticias">Notícias</a>
-            </li>
-            <li class="nav-item">
-              <a class="btn-nav-custom-red" href="#sobre">Localização</a>
-            </li>
-            <li class="nav-item">
-              <a class="btn-nav-custom-red" href="#faq">FAQ</a>
-            </li>
-            <li class="nav-item">
-              <a class="btn-nav-custom-red" href="{{ url_for('estudantelogin') }}">Buscar por Turma</a>
+              <a class="nav-link nav-link-custom" href="{{ url_for('estudantelogin') }}">Buscar por Turma</a>
             </li>
           </ul>
         </div>
 
         <div class="brand-logos-container ms-auto ms-lg-0">
           <img src="{{ url_for('static', filename='logo_feira.jpg') }}" alt="FeiraScore" class="img-navbar-logo" width="65" height="45">
-          <img src="{{ url_for('static', filename='vini_logo.jpg') }}" alt="Vimi" class="img-navbar-logo" width="45" height="45">
+          <img src="{{ url_for('static', filename='vimi_logo.jpg') }}" alt="Vimi" class="img-navbar-logo" width="45" height="45">
         </div>
       </div>
     </nav>
@@ -545,7 +570,7 @@
     <section class="estandes-section" id="estandes">
       <div class="container">
         <h2 class="section-title-dark">Estandes do Evento</h2>
-         
+        
         <div class="d-flex flex-wrap justify-content-center gap-2 mb-4 mb-md-5">
           <button class="category-btn active" onclick="filterCategory('todos')">Todos</button>
           <button class="category-btn" onclick="filterCategory('informatica')">Informática</button>
@@ -567,6 +592,7 @@
       <div class="container">
         <h2 class="section-title-dark">Últimas Notícias</h2>
         <div class="row g-4">
+          
           <div class="col-md-4">
             <div class="news-card h-100 d-flex flex-column justify-content-between">
               <div>
@@ -577,10 +603,18 @@
                   <div class="news-date">16 de Junho, 2026</div>
                   <h3 class="news-title">Grande Abertura da Feira Tecnológica</h3>
                   <p class="news-text">Os portões estão abertos! Venha conferir os projetos inovadores desenvolvidos pelos alunos deste ano.</p>
+                  
+                  <div class="collapse" id="materiaCompleta1">
+                    <p class="full-story-text">
+                      A cerimônia de abertura contou com a presença da diretoria, professores e empresários parceiros da região. Este ano, o foco principal está voltado à sustentabilidade e inteligência artificial aplicadas ao cotidiano. Os alunos trabalharam por meses em protótipos funcionais que prometem solucionar problemas reais da comunidade local. Não perca a oportunidade de passar em cada corredor e conversar diretamente com os desenvolvedores!
+                    </p>
+                  </div>
                 </div>
               </div>
               <div class="news-body pt-0">
-                <a href="#" class="btn-news-link">Ler Matéria Completa →</a>
+                <button class="btn-news-link" type="button" data-bs-toggle="collapse" data-bs-target="#materiaCompleta1" aria-expanded="false" onclick="toggleText(this)">
+                  Ler Matéria Completa ↓
+                </button>
               </div>
             </div>
           </div>
@@ -589,35 +623,60 @@
             <div class="news-card h-100 d-flex flex-column justify-content-between">
               <div>
                 <div class="news-img-wrapper">
-                  <img src="{{ url_for('static', filename='logo_feira.jpg') }}" alt="Sistema de Votação" class="news-img">
+                  <img src="{{ url_for('static', filename='meninas_votando.jpg') }}" alt="Sistema de Votação" class="news-img">
                 </div>
                 <div class="news-body">
                   <div class="news-date">15 de Junho, 2026</div>
                   <h3 class="news-title">Como funciona o Novo Sistema Score</h3>
                   <p class="news-text">Entenda como a sua avaliação digital ajuda a computar as notas parciais e definir os vencedores em tempo real.</p>
+                  
+                  <div class="collapse" id="materiaCompleta2">
+                    <p class="full-story-text">
+                      Desenvolvido para eliminar as antigas cédulas de papel, o FeiraScore opera de forma totalmente integrada à rede. Quando você valida seu login e escolhe um estande, nosso banco de dados processa o voto de forma criptografada. A grande novidade desta edição é o algoritmo de auditoria contra fraudes, garantindo que o ranking final seja 100% justo e transparente para todas as turmas concorrentes.
+                    </p>
+                  </div>
                 </div>
               </div>
               <div class="news-body pt-0">
-                <a href="#" class="btn-news-link">Ler Matéria Completa →</a>
+                <button class="btn-news-link" type="button" data-bs-toggle="collapse" data-bs-target="#materiaCompleta2" aria-expanded="false" onclick="toggleText(this)">
+                  Ler Matéria Completa ↓
+                </button>
               </div>
             </div>
           </div>
 
           <div class="col-md-4">
-            <div class="news-card h-100 d-flex flex-column justify-content-between">
+            <div class="news-card h-100 d-flex flex-column justify-content-between" style="border: 2px dashed #b61c1c;">
               <div>
-                <div class="news-img-wrapper">
-                  <img src="{{ url_for('static', filename='vini_logo.jpg') }}" alt="Premiação" class="news-img">
+                <div class="news-img-wrapper d-flex align-items-center justify-content-center" style="background-color: #fceaea;">
+                  <i class="fa-solid fa-rss text-danger" style="font-size: 3rem;"></i>
                 </div>
-                <div class="news-body">
-                  <div class="news-date">12 de Junho, 2026</div>
-                  <h3 class="news-title">Revelados os Prêmios dos Destaques</h3>
-                  <p class="news-text">A coordenação revelou os detalhes das medalhas e troféus que serão entregues para as equipes mais votadas.</p>
+                <div class="news-body" id="rss-feed-container">
+                  <div class="news-date" id="rss-date">Atualizado agora</div>
+                  <h3 class="news-title" id="rss-title">Carregando feed de notícias...</h3>
+                  <p class="news-text" id="rss-text">Este bloco está integrado via script para puxar dinamicamente novidades do mundo da tecnologia.</p>
                 </div>
               </div>
               <div class="news-body pt-0">
-                <a href="#" class="btn-news-link">Ler Matéria Completa →</a>
+                <a href="https://g1.globo.com/tecnologia/" target="_blank" class="btn-news-link" id="rss-link">
+                  Ver Feed Externo →
+                </a>
               </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="location-section" id="localizacao">
+      <div class="container">
+        <h2 class="section-title-dark">Onde Estamos</h2>
+        <p class="text-center mb-4 text-muted" style="font-family: sans-serif;">Venha visitar os estandes na Etec Sylvio de Mattos Carvalho em Matão-SP</p>
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
+            <div class="map-responsive">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3701.352494294025!2d-48.3653195240212!3d-21.727889797285325!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b8e1927e1d520d%3A0xc6cb7605e557fc9a!2sEtec%20Sylvio%20de%20Mattos%20Carvalho!5e0!3m2!1spt-BR!2sbr!4v1710000000000!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
           </div>
         </div>
@@ -627,11 +686,11 @@
     <section class="faq-section" id="faq">
       <div class="container">
         <h2 class="text-center text-uppercase mb-5" style="letter-spacing: 1px; color: #b61c1c;">Perguntas Frequentes</h2>
-         
+        
         <div class="row justify-content-center">
           <div class="col-lg-8">
             <div class="accordion" id="accordionFAQ">
-               
+              
               <div class="accordion-item accordion-item-custom">
                 <h2 class="accordion-header">
                   <button class="accordion-button accordion-button-custom collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
@@ -682,13 +741,36 @@
     <div class="container">
       <p class="mb-2 px-3">Você tem mais alguma pergunta que não está na nossa FAQ?</p>
       <p class="mb-3 px-3">Entre em contato conosco pelo e-mail e responderemos o mais rápido possível!</p>
-      <p class="mb-0"><a href="mailto:contato@feirascore.com">contato@feirascore.com</a></p>
+      <p class="mb-4"><a href="mailto:contato@feirascore.com">contato@feirascore.com</a></p>
+      
+      <div class="social-share-container">
+        <p class="mb-2" style="font-size: 12px; color: rgba(255,255,255,0.4);">Compartilhe a Feira</p>
+        <div class="social-share-buttons d-flex justify-content-center gap-3">
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://feirascore.com" target="_blank" title="Compartilhar no Facebook">
+            <i class="fa-brands fa-facebook-f"></i>
+          </a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://feirascore.com" target="_blank" title="Compartilhar no LinkedIn">
+            <i class="fa-brands fa-linkedin-in"></i>
+          </a>
+          <a href="https://api.whatsapp.com/send?text=Confira%20os%20projetos%20da%20Feira%20Tecnol%C3%B3gica%20no%20FeiraScore!%20https://feirascore.com" target="_blank" title="Compartilhar no WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+          </a>
+        </div>
+      </div>
     </div>
   </footer >
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
+    // Função auxiliar para mudar o texto do botão de ler notícia dinamicamente
+    function toggleText(button) {
+      setTimeout(() => {
+        const isExpanded = button.getAttribute('aria-expanded') === 'true';
+        button.innerHTML = isExpanded ? 'Fechar Matéria ↑' : 'Ler Matéria Completa ↓';
+      }, 50);
+    }
+
     const todosEstandes = [
       { id: 1, nome: "Estande Alpha - IA na Saúde", categoria: "informatica", descricao: "Uso de redes neurais para diagnósticos médicos preliminares." },
       { id: 2, nome: "Estande Beta - Automação Residencial", categoria: "eletro", descricao: "Controlando sua casa por comandos de voz e sensores IoT." },
@@ -713,7 +795,7 @@
 
       const totalItens = estandesFiltrados.length;
       const totalPaginas = Math.ceil(totalItens / itensPorPagina);
-       
+      
       if (paginaAtual > totalPaginas && totalPaginas > 0) paginaAtual = totalPaginas;
 
       const inicio = (paginaAtual - 1) * itensPorPagina;
@@ -793,8 +875,25 @@
       renderEstandes();
     }
 
+    // SIMULAÇÃO DA LEITURA DE UM FEED RSS VIA API
+    // Quando você criar sua rota no Flask para ler o RSS, o JavaScript fará o fetch dela
+    function carregarFeedRSS() {
+      // Exemplo de como o JS buscaria a sua API Flask futuramente:
+      // fetch('/api/rss-noticias')
+      //   .then(response => response.json())
+      //   .then(data => { ... })
+      
+      // Simulando o carregamento dos dados que viriam do script Python:
+      setTimeout(() => {
+        document.getElementById('rss-title').innerText = "Inovações Tecnológicas 2026";
+        document.getElementById('rss-text').innerText = "Principais tendências mundiais de IA e Robótica que inspiraram os projetos das Etecs este ano.";
+        document.getElementById('rss-date').innerText = "Via Feed RSS Externo";
+      }, 1500);
+    }
+
     document.addEventListener("DOMContentLoaded", () => {
       renderEstandes();
+      carregarFeedRSS(); // Inicializa a função do RSS
     });
   </script>
 </body>
