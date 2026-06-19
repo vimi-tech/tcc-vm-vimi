@@ -1,0 +1,20 @@
+<section class="estandes-section" id="estandes">
+    <div class="container">
+      <h2 class="section-title-dark">Estandes do Evento</h2>
+      
+      <div class="d-flex flex-wrap justify-content-center gap-2 mb-4 mb-md-5">
+        <button class="category-btn active" onclick="filterCategory('todos')">Todos</button>
+        <button class="category-btn" onclick="filterCategory('informatica')">Informática</button>
+        <button class="category-btn" onclick="filterCategory('mecanica')">Mecânica</button>
+        <button class="category-btn" onclick="filterCategory('eletro')">Eletrotécnica</button>
+      </div>
+  
+      <div class="row g-4" id="estandes-container"></div>
+  
+      <div class="d-flex justify-content-center mt-4 mt-md-5">
+        <nav>
+          <ul class="pagination pagination-custom" id="pagination-container"></ul>
+        </nav>
+      </div>
+    </div>
+  </section>

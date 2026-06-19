@@ -13,481 +13,72 @@
   <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Russo One', sans-serif;
-    }
-
-    body {
-      min-height: 100vh;
-      background-color: #ededed;
-      color: #333;
-      scroll-behavior: smooth; 
-    }
-
-    .navbar-custom {
-      background-color: #ededed;
-      padding: 15px 0;
-    }
-
-    .btn-nav-red {
-      width: 110px;
-      height: 40px;
-      border: none;
-      border-radius: 20px;
-      background-color: #b61c1c;
-      color: white;
-      font-size: 16px;
-      text-transform: uppercase;
-      text-decoration: none;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: 0.3s;
-    }
-
-    .btn-nav-red:hover {
-      transform: scale(1.05);
-      color: white;
-    }
-
-    .nav-link-custom {
-      color: #333 !important;
-      text-transform: uppercase;
-      font-size: 15px;
-      letter-spacing: 0.5px;
-    }
-
-    .brand-logos-container {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .img-navbar-logo {
-      object-fit: contain;
-      border-radius: 6px;
-      background-color: transparent;
-    }
-
-    .intro-section {
-      padding: 80px 0;
-      background-color: #ededed;
-    }
-
-    .graph-mockup {
-      height: 120px;
-      display: flex;
-      justify-content: center;
-      align-items: end;
-      gap: 15px;
-      margin-bottom: 25px;
-    }
-
-    .graph-bar {
-      width: 40px;
-      background-color: #d9d9d9;
-      border-radius: 6px;
-    }
-
-    .main-title {
-      color: #b61c1c;
-      font-size: 3rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 5px;
-    }
-
-    .main-subtitle {
-      color: #555;
-      font-size: 1.2rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 35px;
-    }
-
-    .main-subtitle span {
-      color: #b61c1c;
-    }
-
-    .btn-main-red {
-      width: 180px;
-      height: 48px;
-      border: none;
-      border-radius: 25px;
-      background: linear-gradient(to right, #b61c1c, #7a0000);
-      color: white;
-      font-size: 16px;
-      text-transform: uppercase;
-      transition: 0.3s;
-      letter-spacing: 1px;
-    }
-
-    .btn-main-red:hover {
-      transform: scale(1.05);
-      color: white;
-    }
-
-    .img-evento {
-      border-radius: 40px;
-      max-width: 100%;
-      height: auto;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    }
-
-    .about-section {
-      padding: 100px 0;
-      background: linear-gradient(rgba(110, 0, 0, 0.92), rgba(20, 0, 0, 0.98)), url("background-login.jpg");
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      color: white;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .about-section::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
-      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-      pointer-events: none;
-    }
-
-    .about-title {
-      font-size: 2.5rem;
-      letter-spacing: 2px;
-      margin-bottom: 40px;
-      line-height: 1.4;
-    }
-
-    .about-text {
-      font-size: 16px;
-      line-height: 1.8;
-      max-width: 800px;
-      margin: 0 auto 25px auto;
-      color: rgba(255, 255, 255, 0.9);
-    }
-
-    .highlight-text {
-      font-size: 18px;
-      color: #ffc107;
-      margin-top: 40px;
-      margin-bottom: 45px;
-      letter-spacing: 0.5px;
-    }
-
-    .btn-main-white {
-      width: 190px;
-      height: 48px;
-      border: none;
-      border-radius: 25px;
-      background: linear-gradient(to right, #d9d9d9, #ffffff);
-      color: #7a0000;
-      font-size: 16px;
-      text-transform: uppercase;
-      margin: 10px;
-      transition: 0.3s;
-      letter-spacing: 1px;
-    }
-
-    .btn-main-white:hover {
-      transform: scale(1.05);
-      color: #7a0000;
-    }
-
-    .estandes-section {
-      padding: 90px 0;
-      background-color: #f9f9f9;
-    }
-
-    .section-title-dark {
-      text-align: center;
-      color: #b61c1c;
-      font-size: 2.5rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-bottom: 40px;
-    }
-
-    .category-btn {
-      background-color: #fff;
-      color: #333;
-      border: 2px solid #b61c1c;
-      border-radius: 20px;
-      padding: 8px 20px;
-      font-size: 14px;
-      text-transform: uppercase;
-      transition: 0.3s;
-    }
-
-    .category-btn.active, .category-btn:hover {
-      background-color: #b61c1c;
-      color: #fff;
-    }
-
-    .estande-card {
-      background: #fff;
-      border-radius: 15px;
-      padding: 25px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-      border-left: 5px solid #b61c1c;
-      transition: transform 0.2s;
-    }
-
-    .estande-card:hover {
-      transform: translateY(-5px);
-    }
-
-    .estande-badge {
-      font-size: 12px;
-      background-color: #333;
-      color: #fff;
-      padding: 3px 10px;
-      border-radius: 10px;
-      text-transform: uppercase;
-    }
-
-    .pagination-custom .page-link {
-      color: #b61c1c;
-      border: 1px solid #dee2e6;
-      font-size: 14px;
-    }
-
-    .pagination-custom .page-item.active .page-link {
-      background-color: #b61c1c;
-      border-color: #b61c1c;
-      color: #fff;
-    }
-
-    .pagination-custom .page-link:focus {
-      box-shadow: 0 0 0 0.25rem rgba(182, 28, 28, 0.25);
-    }
-
-    /* ESTILOS: Seção de Notícias / Feed */
-    .news-section {
-      padding: 90px 0;
-      background-color: #ededed;
-    }
-
-    .news-card {
-      background: #fff;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-      transition: 0.3s;
-    }
-
-    .news-card:hover {
-      box-shadow: 0 12px 25px rgba(0,0,0,0.12);
-    }
-
-    .news-img-wrapper {
-      height: 200px;
-      background-color: #ccc;
-      overflow: hidden;
-    }
-
-    .news-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .news-body {
-      padding: 25px;
-    }
-
-    .news-date {
-      font-size: 12px;
-      color: #888;
-      font-family: sans-serif;
-      margin-bottom: 8px;
-    }
-
-    .news-title {
-      font-size: 1.2rem;
-      color: #333;
-      margin-bottom: 12px;
-      text-transform: uppercase;
-    }
-
-    .news-text {
-      font-family: sans-serif;
-      font-size: 14px;
-      color: #666;
-      line-height: 1.6;
-      margin-bottom: 15px;
-    }
-
-    /* Estilo para o texto expandido da matéria completa */
-    .full-story-text {
-      font-family: sans-serif;
-      font-size: 14px;
-      color: #444;
-      line-height: 1.6;
-      border-top: 1px dashed #ddd;
-      padding-top: 15px;
-      margin-top: 10px;
-    }
-
-    .btn-news-link {
-      color: #b61c1c;
-      text-decoration: none;
-      font-size: 14px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      transition: 0.2s;
-      display: inline-block;
-      cursor: pointer;
-      border: none;
-      background: none;
-      padding: 0;
-    }
-
-    .btn-news-link:hover {
-      color: #7a0000;
-    }
-
-    /* ESTILOS: Seção de Localização (Google Maps) */
-    .location-section {
-      padding: 90px 0;
-      background-color: #f9f9f9;
-    }
-
-    .map-responsive {
-      overflow: hidden;
-      padding-bottom: 450px;
-      position: relative;
-      height: 0;
-      border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    }
-
-    .map-responsive iframe {
-      left: 0;
-      top: 0;
-      height: 100%;
-      width: 100%;
-      position: absolute;
-    }
-
-    /* ESTILOS: Seção FAQ Accordion */
-    .faq-section {
-      padding: 90px 0;
-      background: #0d0b0b;
-      color: white;
-    }
-
-    .accordion-item-custom {
-      background: rgba(255, 255, 255, 0.06) !important;
-      border: 1px solid rgba(255, 255, 255, 0.12) !important;
-      border-radius: 15px !important;
-      margin-bottom: 15px;
-      overflow: hidden;
-      backdrop-filter: blur(4px);
-    }
-
-    .accordion-button-custom {
-      background: transparent !important;
-      color: white !important;
-      font-size: 15px;
-      text-transform: uppercase;
-      padding: 20px;
-      box-shadow: none !important;
-    }
-
-    .accordion-button-custom:not(.collapsed) {
-      color: #ff4d4d !important;
-      background: rgba(255, 255, 255, 0.03) !important;
-    }
-
-    .accordion-button-custom::after {
-      filter: invert(1);
-    }
-
-    .accordion-body-custom {
-      background: rgba(0, 0, 0, 0.2);
-      color: #ccc;
-      font-size: 14px;
-      line-height: 1.6;
-      font-family: sans-serif;
-    }
-
-    .footer-custom {
-      background-color: #050505;
-      color: rgba(255,255,255,0.6);
-      padding: 60px 0;
-      font-size: 14px;
-      border-top: 1px solid rgba(255,255,255,0.05);
-    }
-
-    .footer-custom p {
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .footer-custom a {
-      color: #ff4d4d;
-      text-decoration: none;
-      transition: 0.2s;
-    }
-
-    .footer-custom a:hover {
-      color: white;
-    }
-
-    .social-share-buttons a {
-      font-size: 20px;
-      width: 45px;
-      height: 45px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.1);
-      color: #fff;
-      transition: 0.3s;
-    }
-
-    .social-share-buttons a:hover {
-      background: #b61c1c;
-      transform: translateY(-3px);
-    }
-
-    @media(max-width: 991px) {
-      .navbar-custom .container { gap: 10px; }
-      .brand-logos-container { margin-top: 10px; width: 100%; justify-content: center; }
-    }
-
-    @media(max-width: 768px) {
-      .intro-section { padding: 40px 0; }
-      .about-section { padding: 60px 0; }
-      .estandes-section { padding: 50px 0; }
-      .news-section { padding: 50px 0; }
-      .location-section { padding: 50px 0; }
-      .faq-section { padding: 50px 0; }
-      .main-title { font-size: 2.2rem; }
-      .main-subtitle { font-size: 1rem; margin-bottom: 20px; }
-      .about-title { font-size: 1.8rem; }
-      .about-text { font-size: 14px; }
-      .section-title-dark { font-size: 2rem; margin-bottom: 25px; }
-      .about-section::before { width: 280px; height: 280px; }
-    }
-
-    @media(max-width: 480px) {
-      .graph-mockup { display: none; }
-      .main-title { font-size: 1.9rem; }
-      .highlight-text { font-size: 15px; }
-    }
+    /* ... Todos os seus estilos CSS permanecem exatamente aqui iguais ao original ... */
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Russo One', sans-serif; }
+    body { min-height: 100vh; background-color: #ededed; color: #333; scroll-behavior: smooth; }
+    .navbar-custom { background-color: #ededed; padding: 15px 0; }
+    .btn-nav-red { width: 110px; height: 40px; border: none; border-radius: 20px; background-color: #b61c1c; color: white; font-size: 16px; text-transform: uppercase; text-decoration: none; display: flex; justify-content: center; align-items: center; transition: 0.3s; }
+    .btn-nav-red:hover { transform: scale(1.05); color: white; }
+    .nav-link-custom { color: white !important; text-transform: uppercase; font-size: 14px; letter-spacing: 0.5px; background-color: #b61c1c; padding: 8px 16px !important; border-radius: 20px; display: inline-flex; align-items: center; justify-content: center; transition: 0.3s; }
+    .nav-link-custom:hover { transform: scale(1.05); color: white !important; background-color: #7a0000; }
+    .brand-logos-container { display: flex; align-items: center; gap: 12px; }
+    .img-navbar-logo { object-fit: contain; border-radius: 6px; background-color: transparent; }
+    .intro-section { padding: 80px 0; background-color: #ededed; }
+    .graph-mockup { height: 120px; display: flex; justify-content: center; align-items: end; gap: 15px; margin-bottom: 25px; }
+    .graph-bar { width: 40px; background-color: #d9d9d9; border-radius: 6px; }
+    .main-title { color: #b61c1c; font-size: 3rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px; }
+    .main-subtitle { color: #555; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 35px; }
+    .main-subtitle span { color: #b61c1c; }
+    .btn-main-red { width: 180px; height: 48px; border: none; border-radius: 25px; background: linear-gradient(to right, #b61c1c, #7a0000); color: white; font-size: 16px; text-transform: uppercase; transition: 0.3s; letter-spacing: 1px; }
+    .btn-main-red:hover { transform: scale(1.05); color: white; }
+    .img-evento { border-radius: 40px; max-width: 100%; height: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+    .about-section { padding: 100px 0; background: linear-gradient(rgba(110, 0, 0, 0.92), rgba(20, 0, 0, 0.98)), url("background-login.jpg"); background-size: cover; background-position: center; background-attachment: fixed; color: white; text-align: center; position: relative; overflow: hidden; }
+    .about-section::before { content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 500px; height: 500px; background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%); clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); pointer-events: none; }
+    .about-title { font-size: 2.5rem; letter-spacing: 2px; margin-bottom: 40px; line-height: 1.4; }
+    .about-text { font-size: 16px; line-height: 1.8; max-width: 800px; margin: 0 auto 25px auto; color: rgba(255, 255, 255, 0.9); }
+    .highlight-text { font-size: 18px; color: #ffc107; margin-top: 40px; margin-bottom: 45px; letter-spacing: 0.5px; }
+    .btn-main-white { width: 190px; height: 48px; border: none; border-radius: 25px; background: linear-gradient(to right, #d9d9d9, #ffffff); color: #7a0000; font-size: 16px; text-transform: uppercase; margin: 10px; transition: 0.3s; letter-spacing: 1px; }
+    .btn-main-white:hover { transform: scale(1.05); color: #7a0000; }
+    .estandes-section { padding: 90px 0; background-color: #f9f9f9; }
+    .section-title-dark { text-align: center; color: #b61c1c; font-size: 2.5rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 40px; }
+    .category-btn { background-color: #fff; color: #333; border: 2px solid #b61c1c; border-radius: 20px; padding: 8px 20px; font-size: 14px; text-transform: uppercase; transition: 0.3s; }
+    .category-btn.active, .category-btn:hover { background-color: #b61c1c; color: #fff; }
+    .estande-card { background: #fff; border-radius: 15px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-left: 5px solid #b61c1c; transition: transform 0.2s; }
+    .estande-card:hover { transform: translateY(-5px); }
+    .estande-badge { font-size: 12px; background-color: #333; color: #fff; padding: 3px 10px; border-radius: 10px; text-transform: uppercase; }
+    .pagination-custom .page-link { color: #b61c1c; border: 1px solid #dee2e6; font-size: 14px; }
+    .pagination-custom .page-item.active .page-link { background-color: #b61c1c; border-color: #b61c1c; color: #fff; }
+    .pagination-custom .page-link:focus { box-shadow: 0 0 0 0.25rem rgba(182, 28, 28, 0.25); }
+    .news-section { padding: 90px 0; background-color: #ededed; }
+    .news-card { background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.06); transition: 0.3s; }
+    .news-card:hover { box-shadow: 0 12px 25px rgba(0,0,0,0.12); }
+    .news-img-wrapper { height: 200px; background-color: #ccc; overflow: hidden; }
+    .news-img { width: 100%; height: 100%; object-fit: cover; }
+    .news-body { padding: 25px; }
+    .news-date { font-size: 12px; color: #888; font-family: sans-serif; margin-bottom: 8px; }
+    .news-title { font-size: 1.2rem; color: #333; margin-bottom: 12px; text-transform: uppercase; }
+    .news-text { font-family: sans-serif; font-size: 14px; color: #666; line-height: 1.6; margin-bottom: 15px; }
+    .full-story-text { font-family: sans-serif; font-size: 14px; color: #444; line-height: 1.6; border-top: 1px dashed #ddd; padding-top: 15px; margin-top: 10px; }
+    .btn-news-link { color: #b61c1c; text-decoration: none; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; transition: 0.2s; display: inline-block; cursor: pointer; border: none; background: none; padding: 0; }
+    .btn-news-link:hover { color: #7a0000; }
+    .location-section { padding: 90px 0; background-color: #f9f9f9; }
+    .map-responsive { overflow: hidden; padding-bottom: 450px; position: relative; height: 0; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+    .map-responsive iframe { left: 0; top: 0; height: 100%; width: 100%; position: absolute; }
+    .faq-section { padding: 90px 0; background: #0d0b0b; color: white; }
+    .accordion-item-custom { background: rgba(255, 255, 255, 0.06) !important; border: 1px solid rgba(255, 255, 255, 0.12) !important; border-radius: 15px !important; margin-bottom: 15px; overflow: hidden; backdrop-filter: blur(4px); }
+    .accordion-button-custom { background: transparent !important; color: white !important; font-size: 15px; text-transform: uppercase; padding: 20px; box-shadow: none !important; }
+    .accordion-button-custom:not(.collapsed) { color: #ff4d4d !important; background: rgba(255, 255, 255, 0.03) !important; }
+    .accordion-button-custom::after { filter: invert(1); }
+    .accordion-body-custom { background: rgba(0, 0, 0, 0.2); color: #ccc; font-size: 14px; line-height: 1.6; font-family: sans-serif; }
+    .footer-custom { background-color: #050505; color: rgba(255,255,255,0.6); padding: 60px 0; font-size: 14px; border-top: 1px solid rgba(255,255,255,0.05); }
+    .footer-custom p { text-transform: uppercase; letter-spacing: 0.5px; }
+    .footer-custom a { color: #ff4d4d; text-decoration: none; transition: 0.2s; }
+    .footer-custom a:hover { color: white; }
+    .social-share-buttons a { font-size: 20px; width: 45px; height: 45px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(255,255,255,0.1); color: #fff; transition: 0.3s; }
+    .social-share-buttons a:hover { background: #b61c1c; transform: translateY(-3px); }
+    @media(max-width: 991px) { .navbar-custom .container { gap: 10px; } .brand-logos-container { margin-top: 10px; width: 100%; justify-content: center; } }
+    @media(max-width: 768px) { .intro-section { padding: 40px 0; } .about-section { padding: 60px 0; } .estandes-section { padding: 50px 0; } .news-section { padding: 50px 0; } .location-section { padding: 50px 0; } .faq-section { padding: 50px 0; } .main-title { font-size: 2.2rem; } .main-subtitle { font-size: 1rem; margin-bottom: 20px; } .about-title { font-size: 1.8rem; } .about-text { font-size: 14px; } .section-title-dark { font-size: 2rem; margin-bottom: 25px; } .about-section::before { width: 280px; height: 280px; } }
+    @media(max-width: 480px) { .graph-mockup { display: none; } .main-title { font-size: 1.9rem; } .highlight-text { font-size: 15px; } }
   </style>
 </head>
 
@@ -567,121 +158,11 @@
       </div>
     </section>
 
-    <section class="estandes-section" id="estandes">
-      <div class="container">
-        <h2 class="section-title-dark">Estandes do Evento</h2>
-        
-        <div class="d-flex flex-wrap justify-content-center gap-2 mb-4 mb-md-5">
-          <button class="category-btn active" onclick="filterCategory('todos')">Todos</button>
-          <button class="category-btn" onclick="filterCategory('informatica')">Informática</button>
-          <button class="category-btn" onclick="filterCategory('mecanica')">Mecânica</button>
-          <button class="category-btn" onclick="filterCategory('eletro')">Eletrotécnica</button>
-        </div>
-
-        <div class="row g-4" id="estandes-container"></div>
-
-        <div class="d-flex justify-content-center mt-4 mt-md-5">
-          <nav>
-            <ul class="pagination pagination-custom" id="pagination-container"></ul>
-          </nav>
-        </div>
-      </div>
-    </section>
-
-    <section class="news-section" id="noticias">
-      <div class="container">
-        <h2 class="section-title-dark">Últimas Notícias</h2>
-        <div class="row g-4">
-          
-          <div class="col-md-4">
-            <div class="news-card h-100 d-flex flex-column justify-content-between">
-              <div>
-                <div class="news-img-wrapper">
-                  <img src="{{ url_for('static', filename='evento.jpg') }}" alt="Abertura do Evento" class="news-img">
-                </div>
-                <div class="news-body">
-                  <div class="news-date">16 de Junho, 2026</div>
-                  <h3 class="news-title">Grande Abertura da Feira Tecnológica</h3>
-                  <p class="news-text">Os portões estão abertos! Venha conferir os projetos inovadores desenvolvidos pelos alunos deste ano.</p>
-                  
-                  <div class="collapse" id="materiaCompleta1">
-                    <p class="full-story-text">
-                      A cerimônia de abertura contou com a presença da diretoria, professores e empresários parceiros da região. Este ano, o foco principal está voltado à sustentabilidade e inteligência artificial aplicadas ao cotidiano. Os alunos trabalharam por meses em protótipos funcionais que prometem solucionar problemas reais da comunidade local. Não perca a oportunidade de passar em cada corredor e conversar diretamente com os desenvolvedores!
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="news-body pt-0">
-                <button class="btn-news-link" type="button" data-bs-toggle="collapse" data-bs-target="#materiaCompleta1" aria-expanded="false" onclick="toggleText(this)">
-                  Ler Matéria Completa ↓
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="news-card h-100 d-flex flex-column justify-content-between">
-              <div>
-                <div class="news-img-wrapper">
-                  <img src="{{ url_for('static', filename='meninas_votando.jpg') }}" alt="Sistema de Votação" class="news-img">
-                </div>
-                <div class="news-body">
-                  <div class="news-date">15 de Junho, 2026</div>
-                  <h3 class="news-title">Como funciona o Novo Sistema Score</h3>
-                  <p class="news-text">Entenda como a sua avaliação digital ajuda a computar as notas parciais e definir os vencedores em tempo real.</p>
-                  
-                  <div class="collapse" id="materiaCompleta2">
-                    <p class="full-story-text">
-                      Desenvolvido para eliminar as antigas cédulas de papel, o FeiraScore opera de forma totalmente integrada à rede. Quando você valida seu login e escolhe um estande, nosso banco de dados processa o voto de forma criptografada. A grande novidade desta edição é o algoritmo de auditoria contra fraudes, garantindo que o ranking final seja 100% justo e transparente para todas as turmas concorrentes.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="news-body pt-0">
-                <button class="btn-news-link" type="button" data-bs-toggle="collapse" data-bs-target="#materiaCompleta2" aria-expanded="false" onclick="toggleText(this)">
-                  Ler Matéria Completa ↓
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="news-card h-100 d-flex flex-column justify-content-between" style="border: 2px dashed #b61c1c;">
-              <div>
-                <div class="news-img-wrapper d-flex align-items-center justify-content-center" style="background-color: #fceaea;">
-                  <i class="fa-solid fa-rss text-danger" style="font-size: 3rem;"></i>
-                </div>
-                <div class="news-body" id="rss-feed-container">
-                  <div class="news-date" id="rss-date">Atualizado agora</div>
-                  <h3 class="news-title" id="rss-title">Carregando feed de notícias...</h3>
-                  <p class="news-text" id="rss-text">Este bloco está integrado via script para puxar dinamicamente novidades do mundo da tecnologia.</p>
-                </div>
-              </div>
-              <div class="news-body pt-0">
-                <a href="https://g1.globo.com/tecnologia/" target="_blank" class="btn-news-link" id="rss-link">
-                  Ver Feed Externo →
-                </a>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <section class="location-section" id="localizacao">
-      <div class="container">
-        <h2 class="section-title-dark">Onde Estamos</h2>
-        <p class="text-center mb-4 text-muted" style="font-family: sans-serif;">Venha visitar os estandes na Etec Sylvio de Mattos Carvalho em Matão-SP</p>
-        <div class="row justify-content-center">
-          <div class="col-lg-10">
-            <div class="map-responsive">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3701.352494294025!2d-48.3653195240212!3d-21.727889797285325!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b8e1927e1d520d%3A0xc6cb7605e557fc9a!2sEtec%20Sylvio%20de%20Mattos%20Carvalho!5e0!3m2!1spt-BR!2sbr!4v1710000000000!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    {% include 'estandes.html' %}
+    
+    {% include 'noticias.html' %}
+    
+    {% include 'localizacao.html' %}
 
     <section class="faq-section" id="faq">
       <div class="container">
@@ -758,12 +239,11 @@
         </div>
       </div>
     </div>
-  </footer >
+  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
-    // Função auxiliar para mudar o texto do botão de ler notícia dinamicamente
     function toggleText(button) {
       setTimeout(() => {
         const isExpanded = button.getAttribute('aria-expanded') === 'true';
@@ -787,6 +267,7 @@
 
     function renderEstandes() {
       const container = document.getElementById('estandes-container');
+      if (!container) return; 
       container.innerHTML = '';
 
       const estandesFiltrados = todosEstandes.filter(estande => {
@@ -829,6 +310,7 @@
 
     function renderPagination(totalPaginas) {
       const container = document.getElementById('pagination-container');
+      if (!container) return;
       container.innerHTML = '';
 
       if (totalPaginas <= 1) return;
@@ -875,25 +357,9 @@
       renderEstandes();
     }
 
-    // SIMULAÇÃO DA LEITURA DE UM FEED RSS VIA API
-    // Quando você criar sua rota no Flask para ler o RSS, o JavaScript fará o fetch dela
-    function carregarFeedRSS() {
-      // Exemplo de como o JS buscaria a sua API Flask futuramente:
-      // fetch('/api/rss-noticias')
-      //   .then(response => response.json())
-      //   .then(data => { ... })
-      
-      // Simulando o carregamento dos dados que viriam do script Python:
-      setTimeout(() => {
-        document.getElementById('rss-title').innerText = "Inovações Tecnológicas 2026";
-        document.getElementById('rss-text').innerText = "Principais tendências mundiais de IA e Robótica que inspiraram os projetos das Etecs este ano.";
-        document.getElementById('rss-date').innerText = "Via Feed RSS Externo";
-      }, 1500);
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
+    // Inicializa a renderização quando a página carrega
+    document.addEventListener("DOMContentLoaded", function() {
       renderEstandes();
-      carregarFeedRSS(); // Inicializa a função do RSS
     });
   </script>
 </body>

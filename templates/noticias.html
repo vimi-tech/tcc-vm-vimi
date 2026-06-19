@@ -1,0 +1,80 @@
+<section class="news-section" id="noticias">
+    <div class="container">
+      <h2 class="section-title-dark">Últimas Notícias</h2>
+      <div class="row g-4">
+        
+        <div class="col-md-4">
+          <div class="news-card h-100 d-flex flex-column justify-content-between">
+            <div>
+              <div class="news-img-wrapper">
+                <img src="{{ url_for('static', filename='evento.jpg') }}" alt="Abertura do Evento" class="news-img">
+              </div>
+              <div class="news-body">
+                <div class="news-date">16 de Junho, 2026</div>
+                <h3 class="news-title">Grande Abertura da Feira Tecnológica</h3>
+                <p class="news-text">Os portões estão abertos! Venha conferir os projetos inovadores desenvolvidos pelos alunos deste ano.</p>
+                
+                <div class="collapse" id="materiaCompleta1">
+                  <p class="full-story-text">
+                    A cerimônia de abertura contou com a presença da diretoria, professores e empresários parceiros da região. Este ano, o foco principal está voltado à sustentabilidade e inteligência artificial aplicadas ao cotidiano. Os alunos trabalharam por meses em protótipos funcionais que prometem solucionar problemas reais da comunidade local. Não perca a oportunidade de passar em cada corredor e conversar diretamente com os desenvolvedores!
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="news-body pt-0">
+              <button class="btn-news-link" type="button" data-bs-toggle="collapse" data-bs-target="#materiaCompleta1" aria-expanded="false" onclick="toggleText(this)">
+                Ler Matéria Completa ↓
+              </button>
+            </div>
+          </div>
+        </div>
+  
+        <div class="col-md-4">
+          <div class="news-card h-100 d-flex flex-column justify-content-between">
+            <div>
+              <div class="news-img-wrapper">
+                <img src="{{ url_for('static', filename='meninas_votando.jpg') }}" alt="Sistema de Votação" class="news-img">
+              </div>
+              <div class="news-body">
+                <div class="news-date">15 de Junho, 2026</div>
+                <h3 class="news-title">Como funciona o Novo Sistema Score</h3>
+                <p class="news-text">Entenda como a sua avaliação digital ajuda a computar as notas parciais e definir os vencedores em tempo real.</p>
+                
+                <div class="collapse" id="materiaCompleta2">
+                  <p class="full-story-text">
+                    Desenvolvido para eliminar as antigas cédulas de papel, o FeiraScore opera de forma totalmente integrada à rede. Quando você valida seu login e escolhe um estande, nosso banco de dados processa o voto de forma criptografada. A grande novidade desta edição é o algoritmo de auditoria contra fraudes, garantindo que o ranking final seja 100% justo e transparente para todas as turmas concorrentes.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="news-body pt-0">
+              <button class="btn-news-link" type="button" data-bs-toggle="collapse" data-bs-target="#materiaCompleta2" aria-expanded="false" onclick="toggleText(this)">
+                Ler Matéria Completa ↓
+              </button>
+            </div>
+          </div>
+        </div>
+  
+        <div class="col-md-4">
+          <div class="news-card h-100 d-flex flex-column justify-content-between" style="border: 2px dashed #b61c1c;">
+            <div>
+              <div class="news-img-wrapper d-flex align-items-center justify-content-center" style="background-color: #fceaea;">
+                <i class="fa-solid fa-rss text-danger" style="font-size: 3rem;"></i>
+              </div>
+              <div class="news-body" id="rss-feed-container">
+                <div class="news-date" id="rss-date">Atualizado agora</div>
+                <h3 class="news-title" id="rss-title">Carregando feed de notícias...</h3>
+                <p class="news-text" id="rss-text">Este bloco está integrado via script para puxar dinamicamente novidades do mundo da tecnologia.</p>
+              </div>
+            </div>
+            <div class="news-body pt-0">
+              <a href="https://g1.globo.com/tecnologia/" target="_blank" class="btn-news-link" id="rss-link">
+                Ver Feed Externo →
+              </a>
+            </div>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </section>
