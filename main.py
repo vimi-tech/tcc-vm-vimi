@@ -12,7 +12,7 @@ def index():
 @app.route('/estandelogin')
 
 def estudantelogin():
-    # Certifique-se de que o arquivo loginestudante.html está na pasta correta
+
     return render_template('login/estudantelogin.html')
 
 

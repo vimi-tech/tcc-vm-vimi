@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FeiraScore - Sobre Nós</title>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       ESTILOS GERAIS & RESET
+       ========================================================================== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Russo One', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background-color: #ededed;
+      color: #333;
+    }
+
+    /* ==========================================================================
+       HEADER & NAVBAR (Mantendo a Estética Padrão)
+       ========================================================================== */
+    .navbar-custom {
+      background-color: #ededed;
+      padding: 15px 0;
+    }
+
+    .btn-nav-red {
+      width: 110px;
+      height: 40px;
+      border: none;
+      border-radius: 20px;
+      background-color: #b61c1c;
+      color: white;
+      font-size: 16px;
+      text-transform: uppercase;
+      text-decoration: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: 0.3s;
+    }
+
+    .btn-nav-red:hover {
+      transform: scale(1.05);
+      color: white;
+    }
+
+    .btn-nav-custom-red {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: #ffffff !important;
+      background-color: #b61c1c;
+      padding: 8px 18px;
+      font-size: 14px;
+      font-weight: bold;
+      text-transform: uppercase;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      border: none;
+      white-space: nowrap;
+    }
+
+    .btn-nav-custom-red:hover {
+      background-color: #8a1212;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      color: #ffffff !important;
+    }
+
+    /* ==========================================================================
+       CONTEÚDO DA PÁGINA SOBRE NÓS
+       ========================================================================== */
+    .about-company-section {
+      padding: 80px 0;
+    }
+
+    .section-title-dark {
+      text-align: center;
+      color: #b61c1c;
+      font-size: 2.5rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+    }
+
+    .company-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+      border-top: 6px solid #b61c1c;
+    }
+
+    .company-text {
+      font-family: sans-serif; /* Fonte legível para leitura longa */
+      font-size: 16px;
+      color: #444;
+      line-height: 1.8;
+      margin-bottom: 20px;
+      text-align: justify;
+    }
+
+    .company-highlight {
+      font-size: 1.2rem;
+      color: #b61c1c;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 30px;
+    }
+
+    /* ==========================================================================
+       RODAPÉ (FOOTER)
+       ========================================================================== */
+    .footer-custom {
+      background-color: #050505;
+      color: rgba(255,255,255,0.6);
+      padding: 40px 0;
+      font-size: 14px;
+    }
+
+    .footer-custom a {
+      color: #ff4d4d;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+
+    .footer-custom a:hover {
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-custom">
+      <div class="container">
+        <a class="btn-nav-red" href="{{ url_for('login') }}">Votar</a>
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+          <div class="d-flex flex-wrap gap-2 justify-content-center my-3 my-lg-0">
+            <a class="btn-nav-custom-red" href="{{ url_for('index') }}">Início</a>
+            <a class="btn-nav-custom-red" href="{{ url_for('estandes') }}">Estandes</a>
+            <a class="btn-nav-custom-red" href="{{ url_for('noticias') }}">Notícias</a>
+            <a class="btn-nav-custom-red" href="{{ url_for('localizacao') }}">Localização</a>
+            <a class="btn-nav-custom-red" href="{{ url_for('faq') }}">FAQ</a>
+            <a class="btn-nav-custom-red" href="{{ url_for('estudantelogin') }}">Buscar por Turma</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container about-company-section">
+    <div class="row justify-content-center">
+      <div class="col-lg-9">
+        <div class="company-card">
+          <h2 class="section-title-dark mb-4">Sobre Nós</h2>
+          
+          <p class="company-text">
+            Nós somos a <strong>Vimi</strong>, uma equipe focada em criar soluções inteligentes, práticas e dinâmicas para o mercado tecnológico. Nosso objetivo é transformar processos tradicionais em experiências digitais completas, unindo design de ponta e eficiência no desenvolvimento.
+          </p>
+          
+          <p class="company-text">
+            Nascido dessa visão, desenvolvemos o <strong>FeiraScore</strong>: uma plataforma inovadora criada especialmente para modernizar a tradicional feira tecnológica da <strong>Etec Sylvio de Mattos Carvalho</strong>.
+          </p>
+          
+          <p class="company-text">
+            O FeiraScore substitui as cédulas de papel e os métodos antigos de avaliação por um sistema de votação 100% digital, interativo e intuitivo. Com ele, os visitantes conseguem explorar os estandes, conhecer os detalhes de cada projeto e registrar seus votos em tempo real direto pelo celular.
+          </p>
+          
+          <p class="company-text">
+            Mais do que apenas um sistema de contagem, o FeiraScore valida o esforço dos estudantes, engaja o público e entrega resultados precisos de forma instantânea para a organização do evento.
+          </p>
+          
+          <div class="text-center mt-4">
+            <p class="company-highlight"><strong>Vimi: Inovando processos, destacando ideias.</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer-custom text-center">
+    <div class="container">
+      <p class="mb-0"><a href="mailto:contato@feirascore.com">contato@feirascore.com</a></p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

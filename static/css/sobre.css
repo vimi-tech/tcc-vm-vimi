@@ -1,0 +1,108 @@
+
+   * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Russo One', sans-serif;
+}
+
+body {
+    background-color: #ededed;
+    color: #333;
+}
+
+
+.navbar-custom {
+    background-color: #ededed;
+    padding: 15px 0;
+}
+
+.btn-nav-red {
+    width: 110px;
+    height: 40px;
+    border: none;
+    border-radius: 20px;
+    background-color: #b61c1c;
+    color: white;
+    font-size: 16px;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.btn-nav-custom-red {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #ffffff !important;
+    background-color: #b61c1c;
+    padding: 8px 18px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: none;
+    white-space: nowrap;
+}
+
+.btn-nav-custom-red:hover {
+    background-color: #8a1212;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+.about-company-section {
+    padding: 80px 0;
+}
+
+.section-title-dark {
+    text-align: center;
+    color: #b61c1c;
+    font-size: 2.5rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+}
+
+.company-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+    border-top: 6px solid #b61c1c;
+}
+
+.company-text {
+    font-family: sans-serif; 
+    color: #444;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+.company-highlight {
+    font-size: 1.2rem;
+    color: #b61c1c;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 30px;
+}
+
+.footer-custom {
+    background-color: #050505;
+    color: rgba(255,255,255,0.6);
+    padding: 40px 0;
+    font-size: 14px;
+}
+
+.footer-custom a {
+    color: #ff4d4d;
+    text-decoration: none;
+}
