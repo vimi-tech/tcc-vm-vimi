@@ -13,16 +13,15 @@
 <img width="267" height="202" alt="Captura de tela 2026-07-26 111843" src="https://github.com/user-attachments/assets/733111a5-10ec-4c3b-8419-790d3ea4bc28" />
 
 
-  <p>2. Na lista de projetos, seleciona-se o projeto do trabalho/sistema (ex.: tarefaicoma).</p>
-<img width="851" height="552" alt="Captura de tela 2026-07-26 111925" src="https://github.com/user-attachments/assets/d869745a-40e2-4576-8122-3f2df88a62c2" />
+  
 
   <hr>
 
   <h2>2. Abertura do Cloud Shell no Google Cloud / Firebase</h2>
-  <p>1. No painel do console, localiza-se e clica-se no ícone do Cloud Shell (&gt;_) localizado na barra superior/lateral direita.</p>
+  <p>1. O terminal do Cloud Shell é inicializado na parte inferior da página, com a sessão configurada e apontada para o ID do projeto selecionado (ex.: tarefaicoma).</p>
   <img width="317" height="226" alt="Captura de tela 2026-07-26 111937" src="https://github.com/user-attachments/assets/2e496d2a-919b-43a5-a0e8-c23329271e31" />
 
-  <p>2. O terminal do Cloud Shell é inicializado na parte inferior da página, com a sessão configurada e apontada para o ID do projeto selecionado (ex.: tarefaicoma).</p>
+
   
 
   <hr>
