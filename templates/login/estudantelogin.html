@@ -35,23 +35,110 @@
 
     <p class="welcome-text">Seja bem-vindo de volta!</p>
 
-    <form action="#" method="POST">
+    <form id="formLogin" onsubmit="return false;">
 
       <div class="input-group-custom">
         <i class="bi bi-person"></i>
-        <input type="text" name="username" placeholder="charlixcxgod" required autocomplete="off">
+        <input type="text" id="username" name="username" placeholder="charlixcxgod" required autocomplete="off">
       </div>
 
       <div class="input-group-custom">
         <i class="bi bi-lock"></i>
-        <input type="password" name="password" placeholder="**********" required>
+        <input type="password" id="password" name="password" placeholder="**********" required>
       </div>
 
-      <button type="submit" class="btn btn-entrar">Entrar</button>
+      <button type="button" id="btnEntrar" class="btn btn-entrar">Entrar</button>
 
     </form>
 
   </div>
+
+  <script>
+    const CODIGOS_TURMAS = {
+      "2176327": "Turma 01",
+      "1489922": "Turma 02",
+      "8163598": "Turma 03",
+      "8629015": "Turma 04",
+      "3908372": "Turma 05",
+      "8077417": "Turma 06",
+      "5337343": "Turma 07",
+      "9884271": "Turma 08",
+      "2339790": "Turma 09",
+      "2427323": "Turma 10",
+      "4928715": "Turma 11",
+      "3304636": "Turma 12",
+      "8016938": "Turma 13",
+      "2886634": "Turma 14",
+      "3228520": "Turma 15",
+      "3828733": "Turma 16",
+      "6740665": "Turma 17",
+      "2270644": "Turma 18",
+      "3599645": "Turma 19",
+      "2823172": "Turma 20",
+      "3702262": "Turma 21",
+      "1903026": "Turma 22",
+      "3978598": "Turma 23",
+      "1420347": "Turma 24",
+      "7451325": "Turma 25",
+      "6159853": "Turma 26",
+      "2136936": "Turma 27",
+      "2703088": "Turma 28",
+      "8689658": "Turma 29",
+      "2775943": "Turma 30",
+      "4532520": "Turma 31",
+      "1940696": "Turma 32",
+      "7637084": "Turma 33",
+      "7969875": "Turma 34",
+      "7597285": "Turma 35",
+      "7483143": "Turma 36",
+      "5888905": "Turma 37",
+      "3562208": "Turma 38",
+      "2338031": "Turma 39",
+      "9281775": "Turma 40",
+      "2550093": "Turma 41",
+      "9508326": "Turma 42",
+      "8564983": "Turma 43",
+      "3362444": "Turma 44",
+      "1925012": "Turma 45",
+      "5703566": "Turma 46",
+      "1780694": "Turma 47",
+      "1513580": "Turma 48",
+      "4344516": "Turma 49",
+      "6860590": "Turma 50",
+      "3439684": "Turma 51",
+      "8418400": "Turma 52",
+      "1786135": "Turma 53",
+      "4742360": "Turma 54",
+      "6880917": "Turma 55",
+      "6066107": "Turma 56",
+      "2866878": "Turma 57",
+      "4802876": "Turma 58"
+    };
+
+    document.getElementById('btnEntrar').addEventListener('click', function(e) {
+      e.preventDefault();
+
+      const campoUsuario = document.getElementById('username');
+      const campoCodigo = document.getElementById('password');
+
+      const usuario = campoUsuario.value.trim();
+      const codigoDigitado = campoCodigo.value.trim();
+
+      if (!usuario || !codigoDigitado) {
+        alert("Por favor, preencha o usuário e o código!");
+        return;
+      }
+
+      if (CODIGOS_TURMAS[codigoDigitado]) {
+        const turmaNome = CODIGOS_TURMAS[codigoDigitado];
+        window.location.href = `descricaoprojeto.html?turma=${encodeURIComponent(turmaNome)}&usuario=${encodeURIComponent(usuario)}`;
+      } else {
+        alert("Código de turma inválido! Digite o código impresso no papel fornecido.");
+        campoCodigo.value = '';
+        campoCodigo.focus();
+      }
+    });
+  </script>
 
 </body>
 </html>
