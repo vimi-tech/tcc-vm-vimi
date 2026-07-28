@@ -8,6 +8,10 @@ def index():
     nome = 'Feirascore'
     return render_template('index.html', site=nome)
 
+@app.route('/descricaoprojeto')
+def pagina_descricao():
+    return render_template('pages/descricaoprojeto.html')
+
 
 @app.route('/estandelogin')
 

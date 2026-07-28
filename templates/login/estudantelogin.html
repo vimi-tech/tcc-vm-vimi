@@ -130,13 +130,14 @@
       }
 
       if (CODIGOS_TURMAS[codigoDigitado]) {
-        const turmaNome = CODIGOS_TURMAS[codigoDigitado];
-        window.location.href = `descricaoprojeto.html?turma=${encodeURIComponent(turmaNome)}&usuario=${encodeURIComponent(usuario)}`;
-      } else {
-        alert("Código de turma inválido! Digite o código impresso no papel fornecido.");
-        campoCodigo.value = '';
-        campoCodigo.focus();
-      }
+  const turmaNome = CODIGOS_TURMAS[codigoDigitado];
+  // Mudamos de 'descricaoprojeto.html' para '/descricaoprojeto'
+  window.location.href = `/descricaoprojeto?turma=${encodeURIComponent(turmaNome)}&usuario=${encodeURIComponent(usuario)}`;
+} else {
+  alert("Código de turma inválido! Digite o código impresso no papel fornecido.");
+  campoCodigo.value = '';
+  campoCodigo.focus();
+}
     });
   </script>
 

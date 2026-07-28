@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Envio do Projeto</title>
+  
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/descricao.css') }}">
+</head>
+<body>
+
+  <div class="page-container">
+    
+    <header class="header-logo">
+      <img src="{{ url_for('static', filename='pessoas.jpeg') }}" alt="Ícone Pessoas" class="img-pessoas">
+      <span class="logo-text">3b2A</span>
+    </header>
+
+    <main class="content-wrapper">
+      
+      <p class="instruction-text">
+        Para que seu projeto seja visto e avaliado, é necessário que você preencha abaixo, começando com o nome e um breve resumo do projeto.
+      </p>
+
+      <form class="form-section">
+        <div class="input-container">
+          <input type="text" class="custom-input" placeholder="Nome da turma e do projeto" required>
+        </div>
+
+        <div class="input-container">
+          <textarea class="custom-textarea" maxlength="300" placeholder="Faça um resumo do seu projeto aqui." required></textarea>
+          <span class="field-limit">limite de 300 caracteres.</span>
+        </div>
+
+        <button type="submit" class="btn-main">Enviar dados principais</button>
+      </form>
+
+      <p class="instruction-text media-instruction">
+        Agora, anexe uma ou duas fotos e um video de ate um minuto do seu estande
+      </p>
+
+      <div class="upload-box">
+        <label for="file-upload" class="btn-upload">
+          Upload das Imagens e vídeo
+        </label>
+        <input type="file" id="file-upload" multiple accept="image/*,video/*" hidden>
+      </div>
+
+      <div class="info-box">
+        <h3>Informações adicionais:</h3>
+        <p>
+          O vídeo pode ser gravado na vertical ou na horizontal. É necessário utilizar um linguajar neutro e não apelativo, apresentando um breve resumo do tema e mostrando mais do estande. Recomenda-se que o vídeo seja editado para proporcionar uma melhor experiência ao público.
+        </p>
+      </div>
+
+      <button type="button" class="btn-main">Enviar imagens</button>
+
+    </main>
+
+  </div>
+
+</body>
+</html>
