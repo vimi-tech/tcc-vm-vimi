@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Envio do Projeto</title>
-  
   <link rel="stylesheet" href="{{ url_for('static', filename='css/descricao.css') }}">
 </head>
 <body>
@@ -19,7 +18,7 @@
     <main class="content-wrapper">
       
       <p class="instruction-text">
-        Para que seu projeto seja visto e avaliado, é necessário que você preencha abaixo, começando com o nome e um breve resumo do projeto.
+        Para que seu projeto seja visto e avaliado, é necessário que você preencha abaixo, começando com o nome e um breve resumo do projeto (limite 300 caracteres)
       </p>
 
       <form class="form-section">
@@ -28,22 +27,30 @@
         </div>
 
         <div class="input-container">
-          <textarea class="custom-textarea" maxlength="300" placeholder="Faça um resumo do seu projeto aqui." required></textarea>
-          <span class="field-limit">limite de 300 caracteres.</span>
+          <textarea 
+            class="custom-textarea" 
+            rows="1" 
+            maxlength="300" 
+            placeholder="Faça um resumo do seu projeto aqui." 
+            required
+            oninput="autoResize(this)"></textarea>
+
         </div>
 
-        <button type="submit" class="btn-main">Enviar dados principais</button>
+        <button type="button" class="btn-main">Enviar dados principais</button>
       </form>
 
       <p class="instruction-text media-instruction">
-        Agora, anexe uma ou duas fotos e um video de ate um minuto do seu estande
+        Agora, anexe uma ou duas fotos e um vídeo de até um minuto do seu estande
       </p>
 
       <div class="upload-box">
         <label for="file-upload" class="btn-upload">
           Upload das Imagens e vídeo
         </label>
-        <input type="file" id="file-upload" multiple accept="image/*,video/*" hidden>
+        <input type="file" id="file-upload" multiple accept="image/*,video/*" hidden onchange="addFiles(this)">
+        
+        <div id="preview-container" class="preview-container"></div>
       </div>
 
       <div class="info-box">
@@ -58,6 +65,72 @@
     </main>
 
   </div>
+
+  <script>
+    // Lista para acumular todas as fotos e vídeos enviados
+    let selectedFiles = [];
+
+    // Faz a caixa do resumo crescer em altura conforme digita
+    function autoResize(textarea) {
+      textarea.style.height = 'auto';
+      textarea.style.height = textarea.scrollHeight + 'px';
+    }
+
+    // Adiciona novos arquivos à lista sem apagar os anteriores
+    function addFiles(input) {
+      if (input.files) {
+        Array.from(input.files).forEach(file => {
+          selectedFiles.push(file);
+        });
+        renderPreviews();
+      }
+    }
+
+    // Remove um arquivo específico da lista pelo botão X
+    function removeFile(index) {
+      selectedFiles.splice(index, 1);
+      renderPreviews();
+    }
+
+    // Renderiza o preview na tela com o botão vermelho de remover (X)
+    function renderPreviews() {
+      const container = document.getElementById('preview-container');
+      container.innerHTML = ''; 
+
+      selectedFiles.forEach((file, index) => {
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+          const wrapper = document.createElement('div');
+          wrapper.className = 'preview-item';
+
+          const removeBtn = document.createElement('button');
+          removeBtn.className = 'remove-btn';
+          removeBtn.type = 'button';
+          removeBtn.innerHTML = '&times;';
+          removeBtn.onclick = function() { removeFile(index); };
+
+          if (file.type.startsWith('image/')) {
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            img.className = 'preview-media';
+            wrapper.appendChild(img);
+          } else if (file.type.startsWith('video/')) {
+            const video = document.createElement('video');
+            video.src = e.target.result;
+            video.className = 'preview-media';
+            video.controls = true;
+            wrapper.appendChild(video);
+          }
+
+          wrapper.appendChild(removeBtn);
+          container.appendChild(wrapper);
+        }
+
+        reader.readAsDataURL(file);
+      });
+    }
+  </script>
 
 </body>
 </html>
