@@ -16,15 +16,30 @@
     </header>
 
     <main class="content-wrapper">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <div class="flash-messages">
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
       
       <form action="{{ url_for('pagina_descricao') }}" method="POST" enctype="multipart/form-data" id="form-projeto">
         
         <p class="instruction-text">
-          Para que seu projeto seja visto e avaliado, é necessário que você preencha abaixo, começando com o nome e um breve resumo do projeto (limite 300 caracteres)
+          Para que seu projeto seja visto e avaliado, é necessário que você preencha abaixo com os dados da turma e do projeto (limite do resumo: 300 caracteres).
         </p>
 
         <div class="input-container">
-          <input type="text" name="nome" class="custom-input" placeholder="Nome da turma e do projeto" required>
+          <input type="text" name="turma" class="custom-input" placeholder="Sua turma (Ex: 3º B, 2º A, MKT-01)" required>
+        </div>
+
+        <div class="input-container">
+          <input type="text" name="nome_projeto" class="custom-input" placeholder="Nome do Projeto / Estande" required>
         </div>
 
         <div class="input-container">
@@ -90,7 +105,6 @@
       renderPreviews();
     }
 
-    // Atualiza o elemento de upload do HTML para enviar a lista acumulada de arquivos
     function updateFileInput() {
       const dataTransfer = new DataTransfer();
       selectedFiles.forEach(file => dataTransfer.items.add(file));

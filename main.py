@@ -1,135 +1,97 @@
 import os
-
-from flask import Flask, render_template, request, redirect, url_for
-
+from flask import Flask, render_template, request, redirect, url_for, flash
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
-
-
-
-# Configuração da pasta onde os arquivos de mídia enviados serão salvos
+app.secret_key = 'sua_chave_secreta_aqui'
 
 UPLOAD_FOLDER = os.path.join('static', 'uploads')
-
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
-
-
-
-# Lista global para armazenar os estandes cadastrados
 
 estandes_cadastrados = []
 
 
-
-
-
 @app.route("/")
-
 def index():
-
     nome = 'Feirascore'
-
     return render_template('index.html', site=nome)
 
 
-
-
-
-# Atualizada com suporte a POST para receber as fotos e a descrição enviadas
-
 @app.route('/descricaoprojeto', methods=['GET', 'POST'])
-
 def pagina_descricao():
-
     if request.method == 'POST':
-
-        nome_projeto = request.form.get('nome_projeto')
-
-        resumo_projeto = request.form.get('resumo_projeto')
-
-       
-
-        # Recebe a lista de arquivos (imagens/vídeos)
-
-        arquivos = request.files.getlist('midias')
-
-        midias_salvas = []
-
-       
-
-        for file in arquivos:
-
-            if file and file.filename != '':
-
-                filename = secure_filename(file.filename)
-
-                caminho = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-
-                file.save(caminho)
-
-                midias_salvas.append(filename)
-
-
-
-        # Adiciona o novo estande no início da lista
-
-        estandes_cadastrados.insert(0, {
-
-            'nome': nome_projeto,
-
-            'resumo': resumo_projeto,
-
-            'midias': midias_salvas
-
-        })
-
-
-
-        # Redireciona para a página de estandes após cadastrar
-
-        return redirect(url_for('estandes'))
-
-
+        return processar_envio_estande()
 
     return render_template('pages/descricaoprojeto.html')
 
 
+@app.route('/cadastrar-estande', methods=['POST'])
+def cadastrar_estande():
+    return processar_envio_estande()
 
 
+def processar_envio_estande():
+    turma = request.form.get('turma')
+    nome_projeto = request.form.get('nome') or request.form.get('nome_projeto')
+    resumo_projeto = request.form.get('resumo') or request.form.get('resumo_projeto')
+    
+    # 1. Validação de campos obrigatórios
+    if not turma or not turma.strip():
+        flash('Por favor, informe a sua turma!', 'error')
+        return redirect(url_for('pagina_descricao'))
 
-# Atualizada para enviar os estandes cadastrados para o HTML
+    turma = turma.strip()
+
+    # ------------------------------------------------------------------
+    # VALIDAÇÃO: Bloqueia se a TURMA já cadastrou algum projeto
+    # ------------------------------------------------------------------
+    turma_ja_cadastrou = any(
+        estande['turma'].lower() == turma.lower() 
+        for estande in estandes_cadastrados
+    )
+
+    if turma_ja_cadastrou:
+        flash(f'A turma "{turma}" já possui um estande cadastrado!', 'error')
+        return redirect(url_for('pagina_descricao'))
+
+    # 2. Salva as mídias se a turma for nova
+    arquivos = request.files.getlist('midias')
+    midias_salvas = []
+    
+    for file in arquivos:
+        if file and file.filename != '':
+            filename = secure_filename(file.filename)
+            caminho = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            file.save(caminho)
+            midias_salvas.append(filename)
+
+    # 3. Adiciona o estande associado à turma
+    estandes_cadastrados.insert(0, {
+        'turma': turma,
+        'nome': nome_projeto or 'Projeto sem título',
+        'resumo': resumo_projeto,
+        'midias': midias_salvas
+    })
+    
+    flash('Estande cadastrado com sucesso!', 'success')
+    return redirect(url_for('estandes'))
+
 
 @app.route('/estandes')
-
 def estandes():
-
     return render_template('estandes.html', estandes=estandes_cadastrados)  
 
 
-
-
-
 @app.route('/estandelogin')
-
 def estudantelogin():
-
     return render_template('login/estudantelogin.html')
 
 
-
-
-
 @app.route("/login")
-
 def login():
-
     return render_template('login/login.html')
 
+
 if __name__ == "__main__":
-
-
-
     app.run(debug=True)

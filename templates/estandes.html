@@ -34,6 +34,8 @@
     <main class="estandes-list">
       
       {% for estande in estandes %}
+      {% set estande_index = loop.index %}
+
       <div class="estande-card">
         
         <div class="estande-info">
@@ -44,7 +46,7 @@
         <div class="estande-media">
           {% if estande.midias and estande.midias|length > 1 %}
             
-            <div class="carousel" id="carousel-{{ loop.index }}">
+            <div class="carousel" id="carousel-{{ estande_index }}">
               <div class="carousel-slides">
                 {% for midia in estande.midias %}
                   <div class="slide {% if loop.first %}active{% endif %}">
@@ -57,12 +59,12 @@
                 {% endfor %}
               </div>
               
-              <button class="carousel-prev" type="button" data-carousel="{{ loop.index }}" data-dir="-1">&lt;</button>
-              <button class="carousel-next" type="button" data-carousel="{{ loop.index }}" data-dir="1">&gt;</button>
+              <button class="carousel-prev" type="button" data-carousel="{{ estande_index }}" data-dir="-1">&lt;</button>
+              <button class="carousel-next" type="button" data-carousel="{{ estande_index }}" data-dir="1">&gt;</button>
               
               <div class="carousel-dots">
                 {% for midia in estande.midias %}
-                  <span class="dot {% if loop.first %}active{% endif %}" data-carousel="{{ loop.parent.loop.index }}" data-slide="{{ loop.index0 }}"></span>
+                  <span class="dot {% if loop.first %}active{% endif %}" data-carousel="{{ estande_index }}" data-slide="{{ loop.index0 }}"></span>
                 {% endfor %}
               </div>
             </div>

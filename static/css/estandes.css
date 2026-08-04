@@ -12,35 +12,37 @@
   margin: 0;
   padding: 0;
 }
+
 body {
-    padding: 100px 0;
-    background: linear-gradient(rgba(110, 0, 0, 0.92), rgba(20, 0, 0, 0.98)), url("background-login.jpg");
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    color: white;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
+  padding: 60px 0;
+  background: linear-gradient(rgba(110, 0, 0, 0.92), rgba(20, 0, 0, 0.98)), url("background-login.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: white;
+  text-align: center;
+  position: relative;
+  overflow-x: hidden;
 }
 
 .about-section::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
-    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-    pointer-events: none;
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  pointer-events: none;
 }
 
-
+/* EXPANDIDO: Aumentado de 850px para 1050px para dar mais espaço na página */
 .page-container {
-  max-width: 850px;
+  max-width: 1050px;
   margin: 0 auto;
+  padding: 0 20px;
   position: relative;
 }
 
@@ -53,7 +55,7 @@ body {
 }
 
 .nav-link {
-  color: #000000;
+  color: #ffffff;
   text-decoration: none;
   font-size: 13px;
   font-weight: bold;
@@ -67,25 +69,52 @@ body {
 
 /* TÍTULO PRINCIPAL (ESTANDES 2026) */
 .main-title { 
-  font-family: 'Russo One', sans-serif;
+  font-family: 'Sceageus', sans-serif !important;
   font-size: 3rem;
   letter-spacing: 2px;
   text-transform: uppercase;
   margin-bottom: 5px;
-  color: #ffffff; /* Deixando o texto principal totalmente branco */
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
 }
 
+/* Garante que o 2026 use A MESMA FONTE e O MESMO TAMANHO do ESTANDES */
 .main-title span {
-  font-family: 'Russo One', sans-serif;
-  font-size: 3rem;
-  color: #ffffff; /* Deixando o span (número/ano) totalmente branco também */
+  font-family: 'Sceageus', sans-serif !important;
+  font-size: 3rem !important;
+  color: #ffffff;
+  line-height: 1;
+}
+
+/* --- CAMPOS DO FORMULÁRIO --- */
+.custom-input,
+.custom-textarea {
+  font-family: 'Sceageus', sans-serif !important;
+  font-size: 1rem;
+  color: #ffffff;
+}
+
+/* Texto de dica (placeholder) */
+.custom-input::placeholder,
+.custom-textarea::placeholder {
+  font-family: 'Sceageus', sans-serif !important;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Botões */
+.btn-upload,
+.btn-main {
+  font-family: 'Sceageus', sans-serif !important;
 }
 
 /* BANNER CENTRALIZADO */
 .banner-container {
   width: 100%;
-  max-width: 520px;
-  height: 280px;
+  max-width: 600px; /* Aumentado um pouco para acompanhar a expansão da tela */
+  height: 300px;
   margin: 0 auto 30px auto;
   border-radius: 35px;
   overflow: hidden;
@@ -122,50 +151,83 @@ body {
 .estandes-list {
   display: flex;
   flex-direction: column;
-  gap: 35px;
+  gap: 45px;
 }
 
 .estande-card {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 25px;
+  gap: 40px; /* DISTÂNCIA: Aumentado de 25px para 40px para afastar o texto da mídia */
+  background: rgba(0, 0, 0, 0.25);
+  padding: 25px;
+  border-radius: 30px;
 }
 
 .estande-info {
   flex: 1;
+  text-align: left; /* Alinhamento do texto para facilitar a leitura */
 }
 
-/* 2. TITULOS DOS ESTANDES COM A MESMA FONTE "SCEAGEUS" DO TITULO */
-.estande-title{ 
-  margin: 0; 
-  padding: 0; 
-  box-sizing: border-box; 
-  font-family: 'Russo One', sans-serif; /* <--- Esta é a fonte */
+/* --- ALERTAS DE ERRO E SUCESSO --- */
+.flash-messages {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto 20px auto;
+}
+
+.alert {
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Mensagem de Erro (Vermelho) */
+.alert-error {
+  background-color: #ff3333;
+  color: #ffffff;
+  border: 1px solid #cc0000;
+  box-shadow: 0 4px 10px rgba(255, 0, 0, 0.3);
+}
+
+/* Mensagem de Sucesso (Verde) */
+.alert-success {
+  background-color: #28a745;
+  color: #ffffff;
+}
+/* TÍTULOS DOS ESTANDES */
+.estande-title { 
+  margin-bottom: 12px; 
+  font-family: 'Russo One', sans-serif;
+  font-size: 1.6rem;
+  color: #ffffff;
 }
 
 /* Descrição legível */
 .estande-description {
   font-family: Arial, sans-serif;
-  font-size: 13.5px;
-  line-height: 1.4;
+  font-size: 14px;
+  line-height: 1.5;
   color: #ffffff;
-  font-weight: 600;
+  font-weight: 500;
   text-align: justify;
 }
 
+/* AUMENTADO: Imagem e container de mídia maiores */
 .estande-media {
-  width: 330px;
-  height: 210px;
+  width: 420px;  /* Aumentado de 330px para 420px */
+  height: 260px; /* Aumentado de 210px para 260px */
   flex-shrink: 0;
   position: relative;
 }
 
 .media-box {
   width: 100%;
-  height: 210px;
+  height: 260px;
   object-fit: cover;
-  border-radius: 25px;
+  border-radius: 20px;
   box-shadow: 0 6px 15px rgba(0,0,0,0.4);
 }
 
@@ -174,7 +236,7 @@ body {
   position: relative;
   width: 100%;
   height: 100%;
-  border-radius: 25px;
+  border-radius: 20px;
   overflow: hidden;
 }
 
@@ -198,7 +260,7 @@ body {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
   color: #fff;
   border: none;
   font-size: 18px;
@@ -207,18 +269,24 @@ body {
   cursor: pointer;
   border-radius: 50%;
   z-index: 2;
+  transition: background 0.3s;
 }
 
-.carousel-prev { left: 8px; }
-.carousel-next { right: 8px; }
+.carousel-prev:hover,
+.carousel-next:hover {
+  background: rgba(0, 0, 0, 0.9);
+}
+
+.carousel-prev { left: 10px; }
+.carousel-next { right: 10px; }
 
 .carousel-dots {
   position: absolute;
-  bottom: 8px;
+  bottom: 12px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 6px;
+  gap: 8px;
   z-index: 2;
 }
 
@@ -228,6 +296,7 @@ body {
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 50%;
   cursor: pointer;
+  transition: all 0.3s;
 }
 
 .dot.active {
