@@ -1,58 +1,247 @@
-.estandes-section {
-    padding: 90px 0;
-    background-color: #f9f9f9;
-  }
-  
-  .category-btn {
-    background-color: #fff;
-    color: #333;
-    border: 2px solid #b61c1c;
-    border-radius: 20px;
-    padding: 8px 20px;
-    font-size: 14px;
-    text-transform: uppercase;
-    transition: 0.3s;
-  }
-  
-  .category-btn.active, .category-btn:hover {
-    background-color: #b61c1c;
-    color: #fff;
-  }
-  
-  .estande-card {
-    background: #fff;
-    border-radius: 15px;
-    padding: 25px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    border-left: 5px solid #b61c1c;
-    transition: transform 0.2s;
-  }
-  
-  .estande-card:hover {
-    transform: translateY(-5px);
-  }
-  
-  .estande-badge {
-    font-size: 12px;
-    background-color: #333;
-    color: #fff;
-    padding: 3px 10px;
-    border-radius: 10px;
-    text-transform: uppercase;
-  }
-  
-  .pagination-custom .page-link {
-    color: #b61c1c;
-    border: 1px solid #dee2e6;
-    font-size: 14px;
-  }
-  
-  .pagination-custom .page-item.active .page-link {
-    background-color: #b61c1c;
-    border-color: #b61c1c;
-    color: #fff;
-  }
-  
-  .pagination-custom .page-link:focus {
-    box-shadow: 0 0 0 0.25rem rgba(182, 28, 28, 0.25);
-  }
+/* Declaração e importação da fonte Sceageus */
+@font-face {
+  font-family: 'Sceageus';
+  src: url('../Sceageus.otf') format('opentype'),
+       url('/static/Sceageus.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+    padding: 100px 0;
+    background: linear-gradient(rgba(110, 0, 0, 0.92), rgba(20, 0, 0, 0.98)), url("background-login.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.about-section::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    pointer-events: none;
+}
+
+
+.page-container {
+  max-width: 850px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* 1. NAVEGAÇÃO "VOLTAR" MAIS NO CANTO */
+.top-nav {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 5px;
+  width: 100%;
+}
+
+.nav-link {
+  color: #000000;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+}
+
+.header-section {
+  text-align: center;
+  margin: 5px 0 20px 0;
+}
+
+/* TÍTULO PRINCIPAL (ESTANDES 2026) */
+.main-title { 
+  font-family: 'Russo One', sans-serif;
+  font-size: 3rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  color: #ffffff; /* Deixando o texto principal totalmente branco */
+}
+
+.main-title span {
+  font-family: 'Russo One', sans-serif;
+  font-size: 3rem;
+  color: #ffffff; /* Deixando o span (número/ano) totalmente branco também */
+}
+
+/* BANNER CENTRALIZADO */
+.banner-container {
+  width: 100%;
+  max-width: 520px;
+  height: 280px;
+  margin: 0 auto 30px auto;
+  border-radius: 35px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* TEMA COM FONTE SCEAGEUS E COR BRANCA */
+.theme-section {
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 0 10px;
+}
+
+.theme-section h2 {
+  font-family: 'Russo One', sans-serif;
+  font-size: 24px;
+  color: #ffffff;
+  text-transform: uppercase;
+  line-height: 1.3;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+}
+
+/* LISTA DOS ESTANDES */
+.estandes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+}
+
+.estande-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+}
+
+.estande-info {
+  flex: 1;
+}
+
+/* 2. TITULOS DOS ESTANDES COM A MESMA FONTE "SCEAGEUS" DO TITULO */
+.estande-title{ 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+  font-family: 'Russo One', sans-serif; /* <--- Esta é a fonte */
+}
+
+/* Descrição legível */
+.estande-description {
+  font-family: Arial, sans-serif;
+  font-size: 13.5px;
+  line-height: 1.4;
+  color: #ffffff;
+  font-weight: 600;
+  text-align: justify;
+}
+
+.estande-media {
+  width: 330px;
+  height: 210px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.media-box {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  border-radius: 25px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+}
+
+/* CARROSSEL */
+.carousel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 25px;
+  overflow: hidden;
+}
+
+.carousel-slides {
+  width: 100%;
+  height: 100%;
+}
+
+.slide {
+  display: none;
+  width: 100%;
+  height: 100%;
+}
+
+.slide.active {
+  display: block;
+}
+
+.carousel-prev,
+.carousel-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.carousel-prev { left: 8px; }
+.carousel-next { right: 8px; }
+
+.carousel-dots {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  z-index: 2;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.dot.active {
+  background-color: #ffffff;
+  width: 10px;
+  height: 10px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  font-family: 'Sceageus', sans-serif;
+  font-size: 18px;
+  color: #ffffff;
+}

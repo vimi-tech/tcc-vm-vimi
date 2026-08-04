@@ -17,82 +17,86 @@
 
     <main class="content-wrapper">
       
-      <p class="instruction-text">
-        Para que seu projeto seja visto e avaliado, é necessário que você preencha abaixo, começando com o nome e um breve resumo do projeto (limite 300 caracteres)
-      </p>
+      <form action="{{ url_for('pagina_descricao') }}" method="POST" enctype="multipart/form-data" id="form-projeto">
+        
+        <p class="instruction-text">
+          Para que seu projeto seja visto e avaliado, é necessário que você preencha abaixo, começando com o nome e um breve resumo do projeto (limite 300 caracteres)
+        </p>
 
-      <form class="form-section">
         <div class="input-container">
-          <input type="text" class="custom-input" placeholder="Nome da turma e do projeto" required>
+          <input type="text" name="nome" class="custom-input" placeholder="Nome da turma e do projeto" required>
         </div>
 
         <div class="input-container">
           <textarea 
+            name="resumo" 
             class="custom-textarea" 
             rows="1" 
             maxlength="300" 
             placeholder="Faça um resumo do seu projeto aqui." 
             required
             oninput="autoResize(this)"></textarea>
-
         </div>
 
-        <button type="button" class="btn-main">Enviar dados principais</button>
-      </form>
-
-      <p class="instruction-text media-instruction">
-        Agora, anexe uma ou duas fotos e um vídeo de até um minuto do seu estande
-      </p>
-
-      <div class="upload-box">
-        <label for="file-upload" class="btn-upload">
-          Upload das Imagens e vídeo
-        </label>
-        <input type="file" id="file-upload" multiple accept="image/*,video/*" hidden onchange="addFiles(this)">
-        
-        <div id="preview-container" class="preview-container"></div>
-      </div>
-
-      <div class="info-box">
-        <h3>Informações adicionais:</h3>
-        <p>
-          O vídeo pode ser gravado na vertical ou na horizontal. É necessário utilizar um linguajar neutro e não apelativo, apresentando um breve resumo do tema e mostrando mais do estande. Recomenda-se que o vídeo seja editado para proporcionar uma melhor experiência ao público.
+        <p class="instruction-text media-instruction">
+          Agora, anexe uma ou duas fotos e um vídeo de até um minuto do seu estande
         </p>
-      </div>
 
-      <button type="button" class="btn-main">Enviar imagens</button>
+        <div class="upload-box">
+          <label for="file-upload" class="btn-upload">
+            Upload das Imagens e vídeo
+          </label>
+          <input type="file" id="file-upload" name="midias" multiple accept="image/*,video/*" hidden onchange="addFiles(this)">
+          
+          <div id="preview-container" class="preview-container"></div>
+        </div>
+
+        <div class="info-box">
+          <h3>Informações adicionais:</h3>
+          <p>
+            O vídeo pode ser gravado na vertical ou na horizontal. É necessário utilizar um linguajar neutro e não apelativo, apresentando um breve resumo do tema e mostrando mais do estande. Recomenda-se que o vídeo seja editado para proporcionar uma melhor experiência ao público.
+          </p>
+        </div>
+
+        <button type="submit" class="btn-main">Enviar informações</button>
+
+      </form>
 
     </main>
 
   </div>
 
   <script>
-    // Lista para acumular todas as fotos e vídeos enviados
     let selectedFiles = [];
 
-    // Faz a caixa do resumo crescer em altura conforme digita
     function autoResize(textarea) {
       textarea.style.height = 'auto';
       textarea.style.height = textarea.scrollHeight + 'px';
     }
 
-    // Adiciona novos arquivos à lista sem apagar os anteriores
     function addFiles(input) {
       if (input.files) {
         Array.from(input.files).forEach(file => {
           selectedFiles.push(file);
         });
+        updateFileInput();
         renderPreviews();
       }
     }
 
-    // Remove um arquivo específico da lista pelo botão X
     function removeFile(index) {
       selectedFiles.splice(index, 1);
+      updateFileInput();
       renderPreviews();
     }
 
-    // Renderiza o preview na tela com o botão vermelho de remover (X)
+    // Atualiza o elemento de upload do HTML para enviar a lista acumulada de arquivos
+    function updateFileInput() {
+      const dataTransfer = new DataTransfer();
+      selectedFiles.forEach(file => dataTransfer.items.add(file));
+      document.getElementById('file-upload').files = dataTransfer.files;
+    }
+
     function renderPreviews() {
       const container = document.getElementById('preview-container');
       container.innerHTML = ''; 

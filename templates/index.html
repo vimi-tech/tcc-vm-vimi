@@ -38,16 +38,6 @@
     .highlight-text { font-size: 18px; color: #ffc107; margin-top: 40px; margin-bottom: 45px; letter-spacing: 0.5px; }
     .btn-main-white { width: 190px; height: 48px; border: none; border-radius: 25px; background: linear-gradient(to right, #d9d9d9, #ffffff); color: #7a0000; font-size: 16px; text-transform: uppercase; margin: 10px; transition: 0.3s; letter-spacing: 1px; }
     .btn-main-white:hover { transform: scale(1.05); color: #7a0000; }
-    .estandes-section { padding: 90px 0; background-color: #f9f9f9; }
-    .section-title-dark { text-align: center; color: #b61c1c; font-size: 2.5rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 40px; }
-    .category-btn { background-color: #fff; color: #333; border: 2px solid #b61c1c; border-radius: 20px; padding: 8px 20px; font-size: 14px; text-transform: uppercase; transition: 0.3s; }
-    .category-btn.active, .category-btn:hover { background-color: #b61c1c; color: #fff; }
-    .estande-card { background: #fff; border-radius: 15px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-left: 5px solid #b61c1c; transition: transform 0.2s; }
-    .estande-card:hover { transform: translateY(-5px); }
-    .estande-badge { font-size: 12px; background-color: #333; color: #fff; padding: 3px 10px; border-radius: 10px; text-transform: uppercase; }
-    .pagination-custom .page-link { color: #b61c1c; border: 1px solid #dee2e6; font-size: 14px; }
-    .pagination-custom .page-item.active .page-link { background-color: #b61c1c; border-color: #b61c1c; color: #fff; }
-    .pagination-custom .page-link:focus { box-shadow: 0 0 0 0.25rem rgba(182, 28, 28, 0.25); }
     .news-section { padding: 90px 0; background-color: #ededed; }
     .news-card { background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.06); transition: 0.3s; }
     .news-card:hover { box-shadow: 0 12px 25px rgba(0,0,0,0.12); }
@@ -76,7 +66,7 @@
     .social-share-buttons a { font-size: 20px; width: 45px; height: 45px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(255,255,255,0.1); color: #fff; transition: 0.3s; }
     .social-share-buttons a:hover { background: #b61c1c; transform: translateY(-3px); }
     @media(max-width: 991px) { .navbar-custom .container { gap: 10px; } .brand-logos-container { margin-top: 10px; width: 100%; justify-content: center; } }
-    @media(max-width: 768px) { .intro-section { padding: 40px 0; } .about-section { padding: 60px 0; } .estandes-section { padding: 50px 0; } .news-section { padding: 50px 0; } .location-section { padding: 50px 0; } .faq-section { padding: 50px 0; } .main-title { font-size: 2.2rem; } .main-subtitle { font-size: 1rem; margin-bottom: 20px; } .about-title { font-size: 1.8rem; } .about-text { font-size: 14px; } .section-title-dark { font-size: 2rem; margin-bottom: 25px; } .about-section::before { width: 280px; height: 280px; } }
+    @media(max-width: 768px) { .intro-section { padding: 40px 0; } .about-section { padding: 60px 0; } .news-section { padding: 50px 0; } .location-section { padding: 50px 0; } .faq-section { padding: 50px 0; } .main-title { font-size: 2.2rem; } .main-subtitle { font-size: 1rem; margin-bottom: 20px; } .about-title { font-size: 1.8rem; } .about-text { font-size: 14px; } .about-section::before { width: 280px; height: 280px; } }
     @media(max-width: 480px) { .graph-mockup { display: none; } .main-title { font-size: 1.9rem; } .highlight-text { font-size: 15px; } }
   </style>
 </head>
@@ -94,7 +84,9 @@
 
         <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
           <ul class="navbar-nav gap-2 my-3 my-lg-0 text-center">
-            <li class="nav-item"><a class="nav-link nav-link-custom" href="#estandes">Estandes</a></li>
+            <li class="nav-item">
+              <a class="nav-link nav-link-custom" href="{{ url_for('estandes') }}">Estandes</a>
+            </li>
             <li class="nav-item"><a class="nav-link nav-link-custom" href="#noticias">Notícias</a></li>
             <li class="nav-item"><a class="nav-link nav-link-custom" href="#localizacao">Localização</a></li>
             <li class="nav-item"><a class="nav-link nav-link-custom" href="#faq">FAQ</a></li>
@@ -149,7 +141,6 @@
               CADA VOTO AJUDA A DESTACAR IDEIAS, RECONHECER ESFORÇOS E VALORIZAR PROJETOS INCRÍVEIS.
             </p>
             <div class="d-flex flex-wrap justify-content-center gap-2">
-              <a href="#estandes" class="btn-main-white d-inline-flex align-items-center justify-content-center text-decoration-none">Ver Estandes</a>
               <a class="btn-main-white d-inline-flex align-items-center justify-content-center text-decoration-none" href="{{ url_for('login') }}">Votar</a>
             </div>
           </div>
@@ -157,8 +148,6 @@
       </div>
     </section>
 
-    {% include 'estandes.html' %}
-    
     {% include 'noticias.html' %}
     
     {% include 'localizacao.html' %}
@@ -249,117 +238,6 @@
         button.innerHTML = isExpanded ? 'Fechar Matéria ↑' : 'Ler Matéria Completa ↓';
       }, 50);
     }
-
-    const todosEstandes = [
-      { id: 1, nome: "Estande Alpha - IA na Saúde", categoria: "informatica", descricao: "Uso de redes neurais para diagnósticos médicos preliminares." },
-      { id: 2, nome: "Estande Beta - Automação Residencial", categoria: "eletro", descricao: "Controlando sua casa por comandos de voz e sensores IoT." },
-      { id: 3, nome: "Estande Gamma - EcoMecânica", categoria: "mecanica", descricao: "Protótipo de motor movido a biocombustíveis eficientes." },
-      { id: 4, nome: "Estande Delta - CyberSegurança", categoria: "informatica", descricao: "Simulações de invasões e como proteger seus dados online." },
-      { id: 5, nome: "Estande Epsilon - Energia Solar", categoria: "eletro", descricao: "Painéis solares inteligentes auto-ajustáveis." },
-      { id: 6, nome: "Estande Zeta - Braço Robótico", categoria: "mecanica", descricao: "Automação industrial utilizando braços mecânicos de alta precisão." },
-      { id: 7, nome: "Estande Eta - App de Votação", categoria: "informatica", descricao: "Por trás dos panos do próprio FeiraScore." }
-    ];
-
-    let categoriaAtual = 'todos';
-    let paginaAtual = 1;
-    const itensPorPagina = 3; 
-
-    function renderEstandes() {
-      const container = document.getElementById('estandes-container');
-      if (!container) return; 
-      container.innerHTML = '';
-
-      const estandesFiltrados = todosEstandes.filter(estande => {
-        return categoriaAtual === 'todos' || estande.categoria === categoriaAtual;
-      });
-
-      const totalItens = estandesFiltrados.length;
-      const totalPaginas = Math.ceil(totalItens / itensPorPagina);
-      
-      if (paginaAtual > totalPaginas && totalPaginas > 0) paginaAtual = totalPaginas;
-
-      const inicio = (paginaAtual - 1) * itensPorPagina;
-      const fim = inicio + itensPorPagina;
-      const itensExibidos = estandesFiltrados.slice(inicio, fim);
-
-      if(itensExibidos.length === 0) {
-        container.innerHTML = `<div class="col-12 text-center text-muted"><p>Nenhum estande encontrado nesta categoria.</p></div>`;
-        renderPagination(0);
-        return;
-      }
-
-      itensExibidos.forEach(estande => {
-        const div = document.createElement('div');
-        div.className = 'col-sm-6 col-md-4';
-        div.innerHTML = `
-          <div class="estande-card h-100 d-flex flex-column justify-content-between">
-            <div>
-              <span class="estande-badge">${estande.categoria}</span>
-              <h4 class="mt-2 mb-3" style="font-size: 1.1rem; color: #b61c1c;">${estande.nome}</h4>
-              <p style="font-family: sans-serif; font-size: 14px; color: #555;">${estande.descricao}</p>
-            </div>
-            <a href="{{ url_for('login') }}" class="btn btn-sm btn-outline-danger mt-3 w-100 rounded-pill">VOTAR NESTE</a>
-          </div>
-        `;
-        container.appendChild(div);
-      });
-
-      renderPagination(totalPaginas);
-    }
-
-    function renderPagination(totalPaginas) {
-      const container = document.getElementById('pagination-container');
-      if (!container) return;
-      container.innerHTML = '';
-
-      if (totalPaginas <= 1) return;
-
-      const prevDisabled = paginaAtual === 1 ? 'disabled' : '';
-      container.innerHTML += `
-        <li class="page-item ${prevDisabled}">
-          <a class="page-link" href="#estandes" onclick="mudarPagina(${paginaAtual - 1})">Anterior</a>
-        </li>
-      `;
-
-      for (let i = 1; i <= totalPaginas; i++) {
-        const activeClass = paginaAtual === i ? 'active' : '';
-        container.innerHTML += `
-          <li class="page-item ${activeClass}">
-            <a class="page-link" href="#estandes" onclick="mudarPagina(${i})">${i}</a>
-          </li>
-        `;
-      }
-
-      const nextDisabled = paginaAtual === totalPaginas ? 'disabled' : '';
-      container.innerHTML += `
-        <li class="page-item ${nextDisabled}">
-          <a class="page-link" href="#estandes" onclick="mudarPagina(${paginaAtual + 1})">Próximo</a>
-        </li>
-      `;
-    }
-
-    function mudarPagina(numeroPagina) {
-      paginaAtual = numeroPagina;
-      renderEstandes();
-    }
-
-    function filterCategory(categoria) {
-      categoriaAtual = categoria;
-      paginaAtual = 1;
-
-      const botoes = document.querySelectorAll('.category-btn');
-      botoes.forEach(btn => btn.classList.remove('active'));
-      if (window.event && window.event.target) {
-        window.event.target.classList.add('active');
-      }
-
-      renderEstandes();
-    }
-
-    
-    document.addEventListener("DOMContentLoaded", function() {
-      renderEstandes();
-    });
   </script>
 </body>
 </html>

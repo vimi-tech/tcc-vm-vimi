@@ -1,20 +1,145 @@
-<section class="estandes-section" id="estandes">
-    <div class="container">
-      <h2 class="section-title-dark">Estandes do Evento</h2>
-      
-      <div class="d-flex flex-wrap justify-content-center gap-2 mb-4 mb-md-5">
-        <button class="category-btn active" onclick="filterCategory('todos')">Todos</button>
-        <button class="category-btn" onclick="filterCategory('informatica')">Informática</button>
-        <button class="category-btn" onclick="filterCategory('mecanica')">Mecânica</button>
-        <button class="category-btn" onclick="filterCategory('eletro')">Eletrotécnica</button>
-      </div>
-  
-      <div class="row g-4" id="estandes-container"></div>
-  
-      <div class="d-flex justify-content-center mt-4 mt-md-5">
-        <nav>
-          <ul class="pagination pagination-custom" id="pagination-container"></ul>
-        </nav>
-      </div>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estandes 2026</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Syne:wght@700;800&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/estandes.css') }}">
+</head>
+<body>
+
+  <div class="page-container">
+    
+    <div class="top-nav">
+      <a href="{{ url_for('index') }}" class="nav-link">voltar para a página inicial &gt;</a>
     </div>
-  </section>
+
+    <header class="header-section">
+      <h1 class="main-title">ESTANDES <span>2026</span></h1>
+    </header>
+
+    <div class="banner-container">
+      <img src="{{ url_for('static', filename='evento.jpg') }}" alt="Foto do evento" class="banner-img">
+    </div>
+
+    <div class="theme-section">
+      <h2>TEMA: Explorando o invisível, avanço para o mundo inteligente</h2>
+    </div>
+
+    <main class="estandes-list">
+      
+      {% for estande in estandes %}
+      <div class="estande-card">
+        
+        <div class="estande-info">
+          <h3 class="estande-title">{{ estande.nome }}</h3>
+          <p class="estande-description">{{ estande.resumo }}</p>
+        </div>
+
+        <div class="estande-media">
+          {% if estande.midias and estande.midias|length > 1 %}
+            
+            <div class="carousel" id="carousel-{{ loop.index }}">
+              <div class="carousel-slides">
+                {% for midia in estande.midias %}
+                  <div class="slide {% if loop.first %}active{% endif %}">
+                    {% if midia.endswith('.mp4') or midia.endswith('.webm') or midia.endswith('.mov') %}
+                      <video src="{{ url_for('static', filename='uploads/' + midia) }}" controls class="media-box"></video>
+                    {% else %}
+                      <img src="{{ url_for('static', filename='uploads/' + midia) }}" alt="Foto do Estande" class="media-box">
+                    {% endif %}
+                  </div>
+                {% endfor %}
+              </div>
+              
+              <button class="carousel-prev" type="button" data-carousel="{{ loop.index }}" data-dir="-1">&lt;</button>
+              <button class="carousel-next" type="button" data-carousel="{{ loop.index }}" data-dir="1">&gt;</button>
+              
+              <div class="carousel-dots">
+                {% for midia in estande.midias %}
+                  <span class="dot {% if loop.first %}active{% endif %}" data-carousel="{{ loop.parent.loop.index }}" data-slide="{{ loop.index0 }}"></span>
+                {% endfor %}
+              </div>
+            </div>
+
+          {% elif estande.midias and estande.midias|length == 1 %}
+            {% set midia = estande.midias[0] %}
+            {% if midia.endswith('.mp4') or midia.endswith('.webm') or midia.endswith('.mov') %}
+              <video src="{{ url_for('static', filename='uploads/' + midia) }}" controls class="media-box"></video>
+            {% else %}
+              <img src="{{ url_for('static', filename='uploads/' + midia) }}" alt="Foto do Estande" class="media-box">
+            {% endif %}
+
+          {% else %}
+            <img src="{{ url_for('static', filename='pessoas.jpeg') }}" alt="Sem Foto" class="media-box">
+          {% endif %}
+        </div>
+
+      </div>
+      {% else %}
+        <div class="empty-state">
+          <p>Nenhum estande cadastrado no momento.</p>
+        </div>
+      {% endfor %}
+
+    </main>
+
+  </div>
+
+  <script>
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.carousel-prev, .carousel-next');
+      if (btn) {
+        const carouselId = btn.getAttribute('data-carousel');
+        const direction = parseInt(btn.getAttribute('data-dir'));
+        moveSlide(carouselId, direction);
+        return;
+      }
+
+      const dot = e.target.closest('.dot');
+      if (dot) {
+        const carouselId = dot.getAttribute('data-carousel');
+        const slideIndex = parseInt(dot.getAttribute('data-slide'));
+        setSlide(carouselId, slideIndex);
+      }
+    });
+
+    function moveSlide(carouselId, direction) {
+      const carousel = document.getElementById('carousel-' + carouselId);
+      if (!carousel) return;
+      const slides = carousel.querySelectorAll('.slide');
+      const dots = carousel.querySelectorAll('.dot');
+      let activeIndex = Array.from(slides).findIndex(slide => slide.classList.contains('active'));
+
+      if (activeIndex === -1) activeIndex = 0;
+
+      slides[activeIndex].classList.remove('active');
+      if (dots.length && dots[activeIndex]) dots[activeIndex].classList.remove('active');
+
+      activeIndex = (activeIndex + direction + slides.length) % slides.length;
+
+      slides[activeIndex].classList.add('active');
+      if (dots.length && dots[activeIndex]) dots[activeIndex].classList.add('active');
+    }
+
+    function setSlide(carouselId, slideIndex) {
+      const carousel = document.getElementById('carousel-' + carouselId);
+      if (!carousel) return;
+      const slides = carousel.querySelectorAll('.slide');
+      const dots = carousel.querySelectorAll('.dot');
+
+      slides.forEach(s => s.classList.remove('active'));
+      dots.forEach(d => d.classList.remove('active'));
+
+      if (slides[slideIndex]) slides[slideIndex].classList.add('active');
+      if (dots[slideIndex]) dots[slideIndex].classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
