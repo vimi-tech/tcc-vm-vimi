@@ -53,7 +53,40 @@
 
   </div>
 
+  <div id="custom-alert" class="custom-alert-overlay">
+    <div class="custom-alert-box">
+      <p id="custom-alert-message">Mensagem de aviso...</p>
+      <div class="custom-alert-footer">
+        <button type="button" id="btnAlertOk" class="btn-alert-ok" onclick="closeCustomAlert()">OK</button>
+      </div>
+    </div>
+  </div>
+
   <script>
+    // Funções de controle do Modal Personalizado
+    function showAlert(msg) {
+      document.getElementById('custom-alert-message').innerText = msg;
+      document.getElementById('custom-alert').classList.add('active');
+      setTimeout(() => {
+        document.getElementById('btnAlertOk').focus();
+      }, 50);
+    }
+
+    function closeCustomAlert() {
+      document.getElementById('custom-alert').classList.remove('active');
+    }
+
+    // Permitir fechar o modal com Enter ou ESC
+    document.addEventListener('keydown', function(e) {
+      const alertOverlay = document.getElementById('custom-alert');
+      if (alertOverlay.classList.contains('active')) {
+        if (e.key === 'Enter' || e.key === 'Escape') {
+          e.preventDefault();
+          closeCustomAlert();
+        }
+      }
+    });
+
     const CODIGOS_TURMAS = {
       "2176327": "Turma 01",
       "1489922": "Turma 02",
@@ -125,19 +158,18 @@
       const codigoDigitado = campoCodigo.value.trim();
 
       if (!usuario || !codigoDigitado) {
-        alert("Por favor, preencha o usuário e o código!");
+        showAlert("Por favor, preencha o usuário e o código!");
         return;
       }
 
       if (CODIGOS_TURMAS[codigoDigitado]) {
-  const turmaNome = CODIGOS_TURMAS[codigoDigitado];
-  // Mudamos de 'descricaoprojeto.html' para '/descricaoprojeto'
-  window.location.href = `/descricaoprojeto?turma=${encodeURIComponent(turmaNome)}&usuario=${encodeURIComponent(usuario)}`;
-} else {
-  alert("Código de turma inválido! Digite o código impresso no papel fornecido.");
-  campoCodigo.value = '';
-  campoCodigo.focus();
-}
+        const turmaNome = CODIGOS_TURMAS[codigoDigitado];
+        window.location.href = `/descricaoprojeto?turma=${encodeURIComponent(turmaNome)}&usuario=${encodeURIComponent(usuario)}`;
+      } else {
+        showAlert("Código de turma inválido! Digite o código impresso no papel fornecido.");
+        campoCodigo.value = '';
+        campoCodigo.focus();
+      }
     });
   </script>
 
