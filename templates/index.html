@@ -13,7 +13,49 @@
   <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
 
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Russo One', sans-serif; }
+    <style>
+  /* 1. Mapeamento das fontes personalizadas no Flask */
+  {
+    font-family: 'Sceageus';
+    src: url("{{ url_for('static', filename='fonts/Sceageus.otf') }}") format('opentype'),
+         url("{{ url_for('static', filename='fonts/Sceageus.ttf') }}") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Zoika';
+    src: url("{{ url_for('static', filename='fonts/Zoika.otf') }}") format('opentype'),
+         url("{{ url_for('static', filename='fonts/Zoika.ttf') }}") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  /* 2. Aplicação da fonte Sceageus no FEIRA SCORE */
+  .main-title {
+    font-family: 'Sceageus', 'Russo One', sans-serif !important;
+    color: #b61c1c !important;
+    font-size: 3.5rem !important;
+    line-height: 0.9 !important;
+    text-transform: uppercase !important;
+    margin-bottom: 10px !important;
+  }
+
+  /* 3. Aplicação da fonte Zoika no subtítulo */
+  .main-subtitle {
+    font-family: 'Zoika', 'Russo One', sans-serif !important;
+    color: #000 !important;
+    font-size: 1.3rem !important;
+    text-transform: uppercase !important;
+    margin-bottom: 30px !important;
+  }
+
+  .main-subtitle span {
+    font-family: inherit !important;
+    color: #b61c1c !important;
+  }
+</style>
+    <style>* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Russo One', sans-serif; }
     body { min-height: 100vh; background-color: #ededed; color: #333; scroll-behavior: smooth; }
     .navbar-custom { background-color: #ededed; padding: 15px 0; }
     .btn-nav-red { width: 110px; height: 40px; border: none; border-radius: 20px; background-color: #b61c1c; color: white; font-size: 16px; text-transform: uppercase; text-decoration: none; display: flex; justify-content: center; align-items: center; transition: 0.3s; }
@@ -23,13 +65,19 @@
     .brand-logos-container { display: flex; align-items: center; gap: 12px; }
     .img-navbar-logo { object-fit: contain; border-radius: 6px; background-color: transparent; }
     .intro-section { padding: 80px 0; background-color: #ededed; }
-    .graph-mockup { height: 120px; display: flex; justify-content: center; align-items: end; gap: 15px; margin-bottom: 25px; }
-    .graph-bar { width: 40px; background-color: #d9d9d9; border-radius: 6px; }
+
+    /* Estilo atualizado do Pódio idêntico ao modelo */
+    .podium-container { display: flex; justify-content: center; align-items: flex-end; gap: 15px; height: 210px; margin-bottom: 25px; }
+    .podium-bar { background-color: #d8d8d8; border-radius: 12px; }
+    .podium-bar.place-2 { width: 100px; height: 125px; }
+    .podium-bar.place-1 { width: 100px; height: 195px; }
+    .podium-bar.place-3 { width: 100px; height: 145px; }
+
     .main-title { color: #b61c1c; font-size: 3rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px; }
-    .main-subtitle { color: #555; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 35px; }
+    .main-subtitle { color: #000; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 35px; }
     .main-subtitle span { color: #b61c1c; }
-    .btn-main-red { width: 180px; height: 48px; border: none; border-radius: 25px; background: linear-gradient(to right, #b61c1c, #7a0000); color: white; font-size: 16px; text-transform: uppercase; transition: 0.3s; letter-spacing: 1px; }
-    .btn-main-red:hover { transform: scale(1.05); color: white; }
+    .btn-main-red { width: 220px; height: 50px; border: none; border-radius: 25px; background-color: #b61c1c; color: white; font-size: 18px; text-transform: uppercase; transition: 0.3s; letter-spacing: 1px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+    .btn-main-red:hover { transform: scale(1.05); color: white; background-color: #8a1212; }
     .img-evento { border-radius: 40px; max-width: 100%; height: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
     .about-section { padding: 100px 0; background: linear-gradient(rgba(110, 0, 0, 0.92), rgba(20, 0, 0, 0.98)), url("background-login.jpg"); background-size: cover; background-position: center; background-attachment: fixed; color: white; text-align: center; position: relative; overflow: hidden; }
     .about-section::before { content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 500px; height: 500px; background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%); clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); pointer-events: none; }
@@ -67,7 +115,7 @@
     .social-share-buttons a:hover { background: #b61c1c; transform: translateY(-3px); }
     @media(max-width: 991px) { .navbar-custom .container { gap: 10px; } .brand-logos-container { margin-top: 10px; width: 100%; justify-content: center; } }
     @media(max-width: 768px) { .intro-section { padding: 40px 0; } .about-section { padding: 60px 0; } .news-section { padding: 50px 0; } .location-section { padding: 50px 0; } .faq-section { padding: 50px 0; } .main-title { font-size: 2.2rem; } .main-subtitle { font-size: 1rem; margin-bottom: 20px; } .about-title { font-size: 1.8rem; } .about-text { font-size: 14px; } .about-section::before { width: 280px; height: 280px; } }
-    @media(max-width: 480px) { .graph-mockup { display: none; } .main-title { font-size: 1.9rem; } .highlight-text { font-size: 15px; } }
+    @media(max-width: 480px) { .podium-container { scale: 0.8; } .main-title { font-size: 1.9rem; } .highlight-text { font-size: 15px; } }
   </style>
 </head>
 
@@ -109,13 +157,18 @@
       <div class="container">
         <div class="row align-items-center text-center text-md-start">
           <div class="col-md-6 mb-5 mb-md-0 text-center">
-            <div class="graph-mockup">
-              <div class="graph-bar" style="height: 60px;"></div>
-              <div class="graph-bar" style="height: 110px; background-color: #b61c1c;"></div>
-              <div class="graph-bar" style="height: 85px;"></div>
+            
+            <div class="podium-container">
+              <div class="podium-bar place-2"></div>
+              <div class="podium-bar place-1"></div>
+              <div class="podium-bar place-3"></div>
             </div>
-            <h1 class="main-title">Feira Score</h1>
-            <p class="main-subtitle">Quem lidera, <span>brilha.</span></p>
+
+            <!-- Título com a fonte Sceageus e quebra de linha -->
+<h1 class="main-title">FEIRA<br>SCORE</h1>
+
+<!-- Subtítulo com a fonte Zoika -->
+<p class="main-subtitle">Quem lidera, <span>brilha.</span></p>
             <a href="#sobre" class="btn-main-red d-inline-flex align-items-center justify-content-center text-decoration-none">Saiba Mais</a>
           </div>
           <div class="col-md-6 text-center">
