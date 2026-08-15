@@ -42,11 +42,14 @@ body {
 }
 .login-title {
   color: #ffffff;
-  text-align: center;
-  font-size: 18px;
-  line-height: 1.6;
-  text-transform: uppercase;
-  margin-bottom: 35px;
+  font-family: 'Russo One', sans-serif;
+  font-size: 1rem;           
+  font-weight: 400;
+  text-align: justify;        
+  text-justify: inter-word;    
+  line-height: 1.5;            
+  margin-bottom: 25px;
+  text-transform: uppercase;  
   letter-spacing: 0.5px;
 }
 

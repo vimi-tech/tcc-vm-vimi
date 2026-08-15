@@ -88,9 +88,9 @@ def estudantelogin():
     return render_template('login/estudantelogin.html')
 
 
-@app.route("/login")
-def login():
-    return render_template('login/login.html')
+@app.route('/register')
+def register():
+    return render_template('login/register.html')
 
 def main():
     app.run(host="0.0.0.0", port = int(os.environ.get("PORT", 10000)))
