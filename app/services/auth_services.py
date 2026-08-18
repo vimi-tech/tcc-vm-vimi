@@ -15,6 +15,6 @@ class AuthService:
 
             self.user_repo.save_user_data(uid, email, codigo_email)
 
-            return True, "Cadastro feito com sucesso!"
+            return True, "Cadastro feito com sucesso!Agora você pode votar!"
             except Exception as e:
                 raise Exception(f"Erro ao criar conta: {str(e)}")
