@@ -60,6 +60,16 @@ Registra as avaliações dadas pelos usuários aos projetos.
 | nota_voto | DECIMAL(4,2)  |  Not Null    |Nota atribuída ao critério|
 | data_voto | DATETIME  |  Not Null    |Data e hora exatas do registro do voto|
 
+## 7. Ranking
+Registra os projetos que foram destacados, conforme votação.
+
+| Atributos | Tipo de Dados | Restrição | Descrição 
+| ----------- | ----------- | ----------- | ----------- |
+| id_ranking | INT / UUID     |PK, Auto Increment   | Identificador único do ranking|
+| id_estande | INT / UUID     |FK, Unique, Not Null   | Conecta a chave estrangeira do estande|
+| media_final| INT / UUID  | Not Null   |Média geral das notas calculadas para o projeto|
+
+
 
 
 
