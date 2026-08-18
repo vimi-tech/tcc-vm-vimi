@@ -23,11 +23,11 @@ class UserRepository:
             db = firestore.client()
             doc = db.collection('users').document(uid).get()
             if doc.exists:
-                data = doc.to_dist()
+                data = doc.to_dict()
                 return User(
                     uid=uid,
-                    nome=data['nome'],
-                    email=data['email'],
-                    created_at=data['created_at'],
-                    update_at=data['updated_at']
-                )
+                    nome=data('nome'),
+                    email=data('email'),
+                    created_at=data('created_at'),
+                    update_at=data('updated_at'))
+            return None 
