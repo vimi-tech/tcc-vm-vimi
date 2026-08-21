@@ -68,7 +68,8 @@ Registra os projetos que foram destacados, conforme votação.
 | id_ranking | INT / UUID     |PK, Auto Increment   | Identificador único do ranking|
 | id_estande | INT / UUID     |FK, Unique, Not Null   | Conecta a chave estrangeira do estande|
 | media_final| INT / UUID  | Not Null   |Média geral das notas calculadas para o projeto|
-
+| posicao| INT   | Not Null   |Posição dos projetos|
+| total_votos| INT   | Not Null   |Total dos votos|
 
 
 
