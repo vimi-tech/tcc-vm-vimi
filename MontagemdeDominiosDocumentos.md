@@ -63,3 +63,19 @@ Atributos principais:
 • id_criterio: Identifica qual critério está sendo pontuado.
 
 • nota_voto e data_voto: O valor da nota dada e o registro exato de quando o voto foi efetuado.
+
+## 7. Ranking 
+
+O que acontece: É a tabela de consolidação de resultados do evento. Enquanto a tabela de votos guarda cada avaliação individual, a tabela de ranking processa e armazena o panorama final, registrando quais projetos se destacaram com base no somatório e na média das votações.
+
+Atributos principais:
+
+• id_ranking: Identificador único de cada linha gerada no ranking.
+
+• id_estande: Conecta a chave estrangeira para identificar exatamente qual estande/projeto pertence aquela posição.
+
+• media_final: Armazena a nota média geral calculada para o projeto.
+
+• posicao: Indica o lugar ou a colocação final do projeto (ex: 1º, 2º lugar).
+
+• total_votos: O somatório total de votos que o projeto acumulou.
