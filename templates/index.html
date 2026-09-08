@@ -11,7 +11,7 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Teko:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@800;900&family=Russo+One&family=Teko:wght@600;700&display=swap" rel="stylesheet">
 
   <style>
     /* Reset e Fonte Padrão */
@@ -28,15 +28,27 @@
     .img-navbar-logo { object-fit: contain; border-radius: 6px; background-color: transparent; }
     .intro-section { padding: 80px 0; background-color: #ededed; }
 
-    /* Imagem do Troféu com Marca */
-    .img-feirascore-brand {
-      width: 100%;
-      max-width: 320px;
-      height: auto;
-      margin-bottom: 10px;
+    /* Pódio */
+    .podium-container { display: flex; justify-content: center; align-items: flex-end; gap: 15px; height: 210px; margin-bottom: 25px; }
+    .podium-bar { background-color: #d8d8d8; border-radius: 12px; }
+    .podium-bar.place-2 { width: 100px; height: 125px; }
+    .podium-bar.place-1 { width: 100px; height: 195px; }
+    .podium-bar.place-3 { width: 100px; height: 145px; }
+
+    /* ==========================================
+       NOVAS FONTES NO TÍTULO E SUBTÍTULO
+       ========================================== */
+    .main-title { 
+      font-family: 'Orbitron', sans-serif !important; 
+      font-weight: 900 !important;
+      color: #b61c1c !important; 
+      font-size: 3.2rem !important; 
+      line-height: 0.95 !important; 
+      text-transform: uppercase !important; 
+      margin-bottom: 12px !important; 
+      letter-spacing: 2px !important;
     }
 
-    /* Subtítulo */
     .main-subtitle { 
       font-family: 'Teko', sans-serif !important; 
       font-weight: 700 !important;
@@ -93,8 +105,8 @@
     .social-share-buttons a:hover { background: #b61c1c; transform: translateY(-3px); }
 
     @media(max-width: 991px) { .navbar-custom .container { gap: 10px; } .brand-logos-container { margin-top: 10px; width: 100%; justify-content: center; } }
-    @media(max-width: 768px) { .intro-section { padding: 40px 0; } .about-section { padding: 60px 0; } .news-section { padding: 50px 0; } .location-section { padding: 50px 0; } .faq-section { padding: 50px 0; } .main-subtitle { font-size: 1.6rem !important; margin-bottom: 20px !important; } .about-title { font-size: 1.8rem; } .about-text { font-size: 14px; } .about-section::before { width: 280px; height: 280px; } }
-    @media(max-width: 480px) { .img-feirascore-brand { max-width: 250px; } .highlight-text { font-size: 15px; } }
+    @media(max-width: 768px) { .intro-section { padding: 40px 0; } .about-section { padding: 60px 0; } .news-section { padding: 50px 0; } .location-section { padding: 50px 0; } .faq-section { padding: 50px 0; } .main-title { font-size: 2.3rem !important; } .main-subtitle { font-size: 1.6rem !important; margin-bottom: 20px !important; } .about-title { font-size: 1.8rem; } .about-text { font-size: 14px; } .about-section::before { width: 280px; height: 280px; } }
+    @media(max-width: 480px) { .podium-container { scale: 0.8; } .main-title { font-size: 1.8rem !important; } .highlight-text { font-size: 15px; } }
   </style>
 </head>
 
@@ -137,10 +149,14 @@
         <div class="row align-items-center text-center text-md-start">
           <div class="col-md-6 mb-5 mb-md-0 text-center">
             
-            <!-- Imagem contendo o Troféu e o Título FEIRA SCORE juntos -->
-            <img src="{{ url_for('static', filename='trofeu.jpg') }}" alt="FeiraScore" class="img-feirascore-brand">
+            <div class="podium-container">
+              <div class="podium-bar place-2"></div>
+              <div class="podium-bar place-1"></div>
+              <div class="podium-bar place-3"></div>
+            </div>
 
-            <!-- Subtítulo -->
+            <h1 class="main-title">FEIRA<br>SCORE</h1>
+
             <p class="main-subtitle">Quem lidera, <span>brilha.</span></p>
 
             <a href="#sobre" class="btn-main-red d-inline-flex align-items-center justify-content-center text-decoration-none">Saiba Mais</a>
