@@ -98,3 +98,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+    from controllers.auth_controller import auth_bp
+app.register_blueprint(auth_bp)
