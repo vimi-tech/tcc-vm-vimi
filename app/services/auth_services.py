@@ -1,20 +1,18 @@
-from app.repositories.user_repositories import UserRepository
-class AuthService: 
-    def __init___(self):
-        self.user_repo= UserRepository()
-    
-    def register_user(email: str, codigo_email: str):
-        if not email or not codigo_email:
-            raise ValueError("Todos os campos são obrigatórios.")
+class AuthService:
+    def __init__(self):
+        # Inicialize seus repositórios aqui se necessário
+        pass
 
-        if codigo_email != codigo_email:
-            raise ValueError("O código não coincide.")
+    def register_user(self, nome, email, senha, confirma_senha):
+        if not nome or not email or not senha:
+            raise ValueError("Preencha todos os campos obrigatórios.")
+
+        if senha != confirma_senha:
+            raise ValueError("As senhas não coincidem.")
 
         try:
-            uid = self.user_repo.create_user_auth(email, codigo_email)
-
-            self.user_repo.save_user_data(uid, email, codigo_email)
-
-            return True, "Cadastro feito com sucesso!Agora você pode votar nos projetos"
-            except Exception as e:
-                raise Exception(f"Erro ao criar conta: {str(e)}")
+            # Lógica de criação do usuário
+            # self.user_repo.save_user_data(uid, email, codigo_email)
+            return True, "Cadastro feito com sucesso! Agora você pode votar nos projetos"
+        except Exception as e:
+            raise Exception(f"Erro ao criar conta: {str(e)}")
