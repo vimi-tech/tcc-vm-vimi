@@ -13,8 +13,29 @@
   <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
 
   <style>
+    /* ==========================================================================
+       1. IMPORTAÇÃO DAS FONTES PERSONALIZADAS
+       ========================================================================== */
+    @font-face {
+      font-family: 'Sceageus';
+      src: url("{{ url_for('static', filename='fonts/Sceageus.otf') }}") format('opentype'),
+           url("{{ url_for('static', filename='fonts/Sceageus.ttf') }}") format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'Zoika';
+      src: url("{{ url_for('static', filename='fonts/Zoika.otf') }}") format('opentype'),
+           url("{{ url_for('static', filename='fonts/Zoika.ttf') }}") format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Russo One', sans-serif; }
     body { min-height: 100vh; background-color: #ededed; color: #333; scroll-behavior: smooth; }
+    
+    /* Navbar Styles */
     .navbar-custom { background-color: #ededed; padding: 15px 0; }
     .btn-nav-red { width: 110px; height: 40px; border: none; border-radius: 20px; background-color: #b61c1c; color: white; font-size: 16px; text-transform: uppercase; text-decoration: none; display: flex; justify-content: center; align-items: center; transition: 0.3s; }
     .btn-nav-red:hover { transform: scale(1.05); color: white; }
@@ -23,13 +44,76 @@
     .brand-logos-container { display: flex; align-items: center; gap: 12px; }
     .img-navbar-logo { object-fit: contain; border-radius: 6px; background-color: transparent; }
     .intro-section { padding: 80px 0; background-color: #ededed; }
-    .graph-mockup { height: 120px; display: flex; justify-content: center; align-items: end; gap: 15px; margin-bottom: 25px; }
-    .graph-bar { width: 40px; background-color: #d9d9d9; border-radius: 6px; }
-    .main-title { color: #b61c1c; font-size: 3rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px; }
-    .main-subtitle { color: #555; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 35px; }
-    .main-subtitle span { color: #b61c1c; }
-    .btn-main-red { width: 180px; height: 48px; border: none; border-radius: 25px; background: linear-gradient(to right, #b61c1c, #7a0000); color: white; font-size: 16px; text-transform: uppercase; transition: 0.3s; letter-spacing: 1px; }
-    .btn-main-red:hover { transform: scale(1.05); color: white; }
+
+    /* ==========================================================================
+       2. PÓDIO IDENTICO AO DESIGN DE REFERÊNCIA
+       ========================================================================== */
+    .podium-container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 16px;
+      height: 180px;
+      margin: 0 auto 25px auto;
+    }
+
+    .podium-bar {
+      background-color: #d8d8d8; /* Cor cinza exata */
+      border-radius: 12px;       /* Cantos arredondados suavizados */
+    }
+
+    /* Proporção das barras idêntica à foto */
+    .podium-bar.place-2 { width: 92px; height: 115px; } /* Menor (Esquerda) */
+    .podium-bar.place-1 { width: 92px; height: 170px; } /* Maior (Centro) */
+    .podium-bar.place-3 { width: 92px; height: 140px; } /* Médio (Direita) */
+
+    /* ==========================================================================
+       3. LOGO / TÍTULO / SUBTÍTULO / BOTÃO "SAIBA MAIS"
+       ========================================================================== */
+    .main-title {
+      font-family: 'Sceageus', 'Russo One', sans-serif;
+      color: #c91818;
+      font-size: 3.2rem;
+      line-height: 0.95;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      letter-spacing: 0px;
+    }
+
+    .main-subtitle {
+      font-family: 'Zoika', 'Russo One', sans-serif;
+      color: #000;
+      font-size: 1.35rem;
+      text-transform: uppercase;
+      margin-bottom: 35px;
+    }
+
+    .main-subtitle span {
+      font-family: inherit;
+      color: #c91818;
+    }
+
+    .btn-main-red {
+      width: 230px;
+      height: 52px;
+      border: none;
+      border-radius: 100px; /* Formato pílula idêntico ao modelo */
+      background-color: #c91818;
+      color: white;
+      font-family: 'Sceageus', 'Russo One', sans-serif;
+      font-size: 18px;
+      text-transform: uppercase;
+      transition: 0.3s ease;
+      box-shadow: 0 4px 12px rgba(201, 24, 24, 0.2);
+    }
+
+    .btn-main-red:hover {
+      transform: scale(1.05);
+      color: white;
+      background-color: #a01010;
+    }
+
+    /* Demais seções do seu site */
     .img-evento { border-radius: 40px; max-width: 100%; height: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
     .about-section { padding: 100px 0; background: linear-gradient(rgba(110, 0, 0, 0.92), rgba(20, 0, 0, 0.98)), url("background-login.jpg"); background-size: cover; background-position: center; background-attachment: fixed; color: white; text-align: center; position: relative; overflow: hidden; }
     .about-section::before { content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 500px; height: 500px; background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%); clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); pointer-events: none; }
@@ -38,16 +122,6 @@
     .highlight-text { font-size: 18px; color: #ffc107; margin-top: 40px; margin-bottom: 45px; letter-spacing: 0.5px; }
     .btn-main-white { width: 190px; height: 48px; border: none; border-radius: 25px; background: linear-gradient(to right, #d9d9d9, #ffffff); color: #7a0000; font-size: 16px; text-transform: uppercase; margin: 10px; transition: 0.3s; letter-spacing: 1px; }
     .btn-main-white:hover { transform: scale(1.05); color: #7a0000; }
-    .estandes-section { padding: 90px 0; background-color: #f9f9f9; }
-    .section-title-dark { text-align: center; color: #b61c1c; font-size: 2.5rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 40px; }
-    .category-btn { background-color: #fff; color: #333; border: 2px solid #b61c1c; border-radius: 20px; padding: 8px 20px; font-size: 14px; text-transform: uppercase; transition: 0.3s; }
-    .category-btn.active, .category-btn:hover { background-color: #b61c1c; color: #fff; }
-    .estande-card { background: #fff; border-radius: 15px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-left: 5px solid #b61c1c; transition: transform 0.2s; }
-    .estande-card:hover { transform: translateY(-5px); }
-    .estande-badge { font-size: 12px; background-color: #333; color: #fff; padding: 3px 10px; border-radius: 10px; text-transform: uppercase; }
-    .pagination-custom .page-link { color: #b61c1c; border: 1px solid #dee2e6; font-size: 14px; }
-    .pagination-custom .page-item.active .page-link { background-color: #b61c1c; border-color: #b61c1c; color: #fff; }
-    .pagination-custom .page-link:focus { box-shadow: 0 0 0 0.25rem rgba(182, 28, 28, 0.25); }
     .news-section { padding: 90px 0; background-color: #ededed; }
     .news-card { background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.06); transition: 0.3s; }
     .news-card:hover { box-shadow: 0 12px 25px rgba(0,0,0,0.12); }
@@ -75,9 +149,10 @@
     .footer-custom a:hover { color: white; }
     .social-share-buttons a { font-size: 20px; width: 45px; height: 45px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(255,255,255,0.1); color: #fff; transition: 0.3s; }
     .social-share-buttons a:hover { background: #b61c1c; transform: translateY(-3px); }
+    
     @media(max-width: 991px) { .navbar-custom .container { gap: 10px; } .brand-logos-container { margin-top: 10px; width: 100%; justify-content: center; } }
-    @media(max-width: 768px) { .intro-section { padding: 40px 0; } .about-section { padding: 60px 0; } .estandes-section { padding: 50px 0; } .news-section { padding: 50px 0; } .location-section { padding: 50px 0; } .faq-section { padding: 50px 0; } .main-title { font-size: 2.2rem; } .main-subtitle { font-size: 1rem; margin-bottom: 20px; } .about-title { font-size: 1.8rem; } .about-text { font-size: 14px; } .section-title-dark { font-size: 2rem; margin-bottom: 25px; } .about-section::before { width: 280px; height: 280px; } }
-    @media(max-width: 480px) { .graph-mockup { display: none; } .main-title { font-size: 1.9rem; } .highlight-text { font-size: 15px; } }
+    @media(max-width: 768px) { .intro-section { padding: 40px 0; } .about-section { padding: 60px 0; } .news-section { padding: 50px 0; } .location-section { padding: 50px 0; } .faq-section { padding: 50px 0; } .main-title { font-size: 2.4rem; } .main-subtitle { font-size: 1.1rem; margin-bottom: 20px; } .about-title { font-size: 1.8rem; } .about-text { font-size: 14px; } .about-section::before { width: 280px; height: 280px; } }
+    @media(max-width: 480px) { .podium-container { scale: 0.85; } .main-title { font-size: 2.1rem; } .highlight-text { font-size: 15px; } }
   </style>
 </head>
 
@@ -86,7 +161,7 @@
   <header>
     <nav class="navbar navbar-expand-lg navbar-custom">
       <div class="container">
-        <a class="btn-nav-red" href="{{ url_for('auth.login') }}">Votar</a>
+        <a class="btn-nav-red" href="{{ url_for('login') }}">Votar</a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
           <span class="navbar-toggler-icon"></span>
@@ -94,12 +169,14 @@
 
         <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
           <ul class="navbar-nav gap-2 my-3 my-lg-0 text-center">
-            <li class="nav-item"><a class="nav-link nav-link-custom" href="#estandes">Estandes</a></li>
+            <li class="nav-item">
+              <a class="nav-link nav-link-custom" href="{{ url_for('estandes') }}">Estandes</a>
+            </li>
             <li class="nav-item"><a class="nav-link nav-link-custom" href="#noticias">Notícias</a></li>
             <li class="nav-item"><a class="nav-link nav-link-custom" href="#localizacao">Localização</a></li>
             <li class="nav-item"><a class="nav-link nav-link-custom" href="#faq">FAQ</a></li>
             <li class="nav-item">
-              <a class="nav-link nav-link-custom" href="{{ url_for('auth.login') }}">Buscar por Turma</a>
+              <a class="nav-link nav-link-custom" href="{{ url_for('estudantelogin') }}">Buscar por Turma</a>
             </li>
           </ul>
         </div>
@@ -117,15 +194,19 @@
       <div class="container">
         <div class="row align-items-center text-center text-md-start">
           <div class="col-md-6 mb-5 mb-md-0 text-center">
-            <div class="graph-mockup">
-              <div class="graph-bar" style="height: 60px;"></div>
-              <div class="graph-bar" style="height: 110px; background-color: #b61c1c;"></div>
-              <div class="graph-bar" style="height: 85px;"></div>
+            
+            <div class="podium-container">
+              <div class="podium-bar place-2"></div>
+              <div class="podium-bar place-1"></div>
+              <div class="podium-bar place-3"></div>
             </div>
-            <h1 class="main-title">Feira Score</h1>
+
+            <h1 class="main-title">FEIRA<br>SCORE</h1>
             <p class="main-subtitle">Quem lidera, <span>brilha.</span></p>
+            
             <a href="#sobre" class="btn-main-red d-inline-flex align-items-center justify-content-center text-decoration-none">Saiba Mais</a>
           </div>
+          
           <div class="col-md-6 text-center">
             <img src="{{ url_for('static', filename='evento.jpg') }}" alt="Evento Feira" class="img-evento">
           </div>
@@ -149,16 +230,13 @@
               CADA VOTO AJUDA A DESTACAR IDEIAS, RECONHECER ESFORÇOS E VALORIZAR PROJETOS INCRÍVEIS.
             </p>
             <div class="d-flex flex-wrap justify-content-center gap-2">
-              <a href="#estandes" class="btn-main-white d-inline-flex align-items-center justify-content-center text-decoration-none">Ver Estandes</a>
-              <a class="btn-main-white d-inline-flex align-items-center justify-content-center text-decoration-none" href="{{ url_for('auth.login') }}">Votar</a>
+              <a class="btn-main-white d-inline-flex align-items-center justify-content-center text-decoration-none" href="{{ url_for('login') }}">Votar</a>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    {% include 'estandes.html' %}
-    
     {% include 'noticias.html' %}
     
     {% include 'localizacao.html' %}
@@ -249,116 +327,6 @@
         button.innerHTML = isExpanded ? 'Fechar Matéria ↑' : 'Ler Matéria Completa ↓';
       }, 50);
     }
-
-    const todosEstandes = [
-      { id: 1, nome: "Estande Alpha - IA na Saúde", categoria: "informatica", descricao: "Uso de redes neurais para diagnósticos médicos preliminares." },
-      { id: 2, nome: "Estande Beta - Automação Residencial", categoria: "eletro", descricao: "Controlando sua casa por comandos de voz e sensores IoT." },
-      { id: 3, nome: "Estande Gamma - EcoMecânica", categoria: "mecanica", descricao: "Protótipo de motor movido a biocombustíveis eficientes." },
-      { id: 4, nome: "Estande Delta - CyberSegurança", categoria: "informatica", descricao: "Simulações de invasões e como proteger seus dados online." },
-      { id: 5, nome: "Estande Epsilon - Energia Solar", categoria: "eletro", descricao: "Painéis solares inteligentes auto-ajustáveis." },
-      { id: 6, nome: "Estande Zeta - Braço Robótico", categoria: "mecanica", descricao: "Automação industrial utilizando braços mecânicos de alta precisão." },
-      { id: 7, nome: "Estande Eta - App de Votação", categoria: "informatica", descricao: "Por trás dos panos do próprio FeiraScore." }
-    ];
-
-    let categoriaAtual = 'todos';
-    let paginaAtual = 1;
-    const itensPorPagina = 3; 
-
-    function renderEstandes() {
-      const container = document.getElementById('estandes-container');
-      if (!container) return; 
-      container.innerHTML = '';
-
-      const estandesFiltrados = todosEstandes.filter(estande => {
-        return categoriaAtual === 'todos' || estande.categoria === categoriaAtual;
-      });
-
-      const totalItens = estandesFiltrados.length;
-      const totalPaginas = Math.ceil(totalItens / itensPorPagina);
-      
-      if (paginaAtual > totalPaginas && totalPaginas > 0) paginaAtual = totalPaginas;
-
-      const inicio = (paginaAtual - 1) * itensPorPagina;
-      const fim = inicio + itensPorPagina;
-      const itensExibidos = estandesFiltrados.slice(inicio, fim);
-
-      if(itensExibidos.length === 0) {
-        container.innerHTML = `<div class="col-12 text-center text-muted"><p>Nenhum estande encontrado nesta categoria.</p></div>`;
-        renderPagination(0);
-        return;
-      }
-
-      itensExibidos.forEach(estande => {
-        const div = document.createElement('div');
-        div.className = 'col-sm-6 col-md-4';
-        div.innerHTML = `
-          <div class="estande-card h-100 d-flex flex-column justify-content-between">
-            <div>
-              <span class="estande-badge">${estande.categoria}</span>
-              <h4 class="mt-2 mb-3" style="font-size: 1.1rem; color: #b61c1c;">${estande.nome}</h4>
-              <p style="font-family: sans-serif; font-size: 14px; color: #555;">${estande.descricao}</p>
-            </div>
-            <a href="{{ url_for('auth.login') }}" class="btn btn-sm btn-outline-danger mt-3 w-100 rounded-pill">VOTAR NESTE</a>
-          </div>
-        `;
-        container.appendChild(div);
-      });
-
-      renderPagination(totalPaginas);
-    }
-
-    function renderPagination(totalPaginas) {
-      const container = document.getElementById('pagination-container');
-      if (!container) return;
-      container.innerHTML = '';
-
-      if (totalPaginas <= 1) return;
-
-      const prevDisabled = paginaAtual === 1 ? 'disabled' : '';
-      container.innerHTML += `
-        <li class="page-item ${prevDisabled}">
-          <a class="page-link" href="#estandes" onclick="mudarPagina(${paginaAtual - 1})">Anterior</a>
-        </li>
-      `;
-
-      for (let i = 1; i <= totalPaginas; i++) {
-        const activeClass = paginaAtual === i ? 'active' : '';
-        container.innerHTML += `
-          <li class="page-item ${activeClass}">
-            <a class="page-link" href="#estandes" onclick="mudarPagina(${i})">${i}</a>
-          </li>
-        `;
-      }
-
-      const nextDisabled = paginaAtual === totalPaginas ? 'disabled' : '';
-      container.innerHTML += `
-        <li class="page-item ${nextDisabled}">
-          <a class="page-link" href="#estandes" onclick="mudarPagina(${paginaAtual + 1})">Próximo</a>
-        </li>
-      `;
-    }
-
-    function mudarPagina(numeroPagina) {
-      paginaAtual = numeroPagina;
-      renderEstandes();
-    }
-
-    function filterCategory(categoria) {
-      categoriaAtual = categoria;
-      paginaAtual = 1;
-
-      const botoes = document.querySelectorAll('.category-btn');
-      botoes.forEach(btn => btn.classList.remove('active'));
-      if (window.event && window.event.target) {
-        window.event.target.classList.add('active');
-      }
-
-      renderEstandes();
-    }
-
-    document.addEventListener("DOMContentLoaded", function() {
-      renderEstandes();
-    });
   </script>
 </body>
 </html>
