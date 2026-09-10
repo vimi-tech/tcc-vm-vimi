@@ -11,8 +11,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Importando a fonte Shrikhand e Russo One -->
-  <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Shrikhand&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@800;900&family=Russo+One&family=Teko:wght@600;700&display=swap" rel="stylesheet">
 
   <style>
     /* Reset e Fonte Padrão */
@@ -29,7 +28,7 @@
     .img-navbar-logo { object-fit: contain; border-radius: 6px; background-color: transparent; }
     .intro-section { padding: 80px 0; background-color: #ededed; }
 
-    /* Estilo do Troféu e Título com Fonte Personalizada */
+    /* Estilo do Troféu e Título Centralizados */
     .hero-brand-block {
       display: flex;
       flex-direction: column;
@@ -38,39 +37,43 @@
       text-align: center;
     }
 
-    /* Troféu Maior e Centralizado */
+    /* Troféu Centralizado e Grande */
     .img-feirascore-brand {
       width: 100%;
-      max-width: 420px; /* Aumentado para maior destaque */
+      max-width: 420px;
       height: auto;
       margin: 0 auto 15px auto;
       display: block;
     }
 
-    /* Título FEIRA SCORE com a fonte curva/estilizada */
-    .brand-title-styled {
-      font-family: 'Shrikhand', cursive, sans-serif !important;
-      color: #c81919 !important;
-      font-size: 3.5rem !important;
-      line-height: 0.95 !important;
-      text-transform: uppercase !important;
-      margin-bottom: 15px !important;
-      letter-spacing: 1px !important;
+    /* ==========================================
+       FONTES NO TÍTULO E SUBTÍTULO
+       ========================================== */
+    .main-title { 
+      font-family: 'Orbitron', sans-serif !important; 
+      font-weight: 900 !important;
+      color: #b61c1c !important; 
+      font-size: 3.2rem !important; 
+      line-height: 0.95 !important; 
+      text-transform: uppercase !important; 
+      margin-bottom: 12px !important; 
+      letter-spacing: 2px !important;
     }
 
-    /* Subtítulo Quem lidera, brilha. */
     .main-subtitle { 
-      font-family: 'Shrikhand', cursive, sans-serif !important; 
+      font-family: 'Teko', sans-serif !important; 
+      font-weight: 700 !important;
       color: #000 !important; 
       font-size: 2.2rem !important; 
-      line-height: 1.1 !important;
+      line-height: 1 !important;
+      text-transform: uppercase !important; 
       margin-bottom: 30px !important; 
-      letter-spacing: 0.5px !important;
+      letter-spacing: 1.5px !important;
     }
 
-    .main-subtitle .highlight-red { 
+    .main-subtitle span { 
       font-family: inherit !important; 
-      color: #c81919 !important; 
+      color: #b61c1c !important; 
     }
 
     /* Outras Seções */
@@ -79,7 +82,7 @@
     .img-evento { border-radius: 40px; max-width: 100%; height: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
     .about-section { padding: 100px 0; background: linear-gradient(rgba(110, 0, 0, 0.92), rgba(20, 0, 0, 0.98)), url("background-login.jpg"); background-size: cover; background-position: center; background-attachment: fixed; color: white; text-align: center; position: relative; overflow: hidden; }
     .about-section::before { content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 500px; height: 500px; background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%); clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); pointer-events: none; }
-    .about-title { font-family: 'Shrikhand', cursive, sans-serif; font-size: 2.8rem; letter-spacing: 2px; margin-bottom: 40px; line-height: 1.3; }
+    .about-title { font-size: 2.5rem; letter-spacing: 2px; margin-bottom: 40px; line-height: 1.4; }
     .about-text { font-size: 16px; line-height: 1.8; max-width: 800px; margin: 0 auto 25px auto; color: rgba(255, 255, 255, 0.9); }
     .highlight-text { font-size: 18px; color: #ffc107; margin-top: 40px; margin-bottom: 45px; letter-spacing: 0.5px; }
     .btn-main-white { width: 190px; height: 48px; border: none; border-radius: 25px; background: linear-gradient(to right, #d9d9d9, #ffffff); color: #7a0000; font-size: 16px; text-transform: uppercase; margin: 10px; transition: 0.3s; letter-spacing: 1px; }
@@ -113,8 +116,8 @@
     .social-share-buttons a:hover { background: #b61c1c; transform: translateY(-3px); }
 
     @media(max-width: 991px) { .navbar-custom .container { gap: 10px; } .brand-logos-container { margin-top: 10px; width: 100%; justify-content: center; } }
-    @media(max-width: 768px) { .intro-section { padding: 40px 0; } .about-section { padding: 60px 0; } .news-section { padding: 50px 0; } .location-section { padding: 50px 0; } .faq-section { padding: 50px 0; } .brand-title-styled { font-size: 2.8rem !important; } .main-subtitle { font-size: 1.6rem !important; margin-bottom: 20px !important; } .about-title { font-size: 2rem; } .about-text { font-size: 14px; } .about-section::before { width: 280px; height: 280px; } }
-    @media(max-width: 480px) { .img-feirascore-brand { max-width: 280px; } .brand-title-styled { font-size: 2.2rem !important; } .highlight-text { font-size: 15px; } }
+    @media(max-width: 768px) { .intro-section { padding: 40px 0; } .about-section { padding: 60px 0; } .news-section { padding: 50px 0; } .location-section { padding: 50px 0; } .faq-section { padding: 50px 0; } .main-title { font-size: 2.3rem !important; } .main-subtitle { font-size: 1.6rem !important; margin-bottom: 20px !important; } .about-title { font-size: 1.8rem; } .about-text { font-size: 14px; } .about-section::before { width: 280px; height: 280px; } }
+    @media(max-width: 480px) { .main-title { font-size: 1.8rem !important; } .highlight-text { font-size: 15px; } }
   </style>
 </head>
 
@@ -156,16 +159,14 @@
       <div class="container">
         <div class="row align-items-center justify-content-center">
           
-          <!-- Bloco do Troféu e Título Centralizados -->
+          <!-- Bloco do Troféu e Texto Centralizados -->
           <div class="col-md-6 mb-5 mb-md-0 hero-brand-block">
 
             <!-- Troféu Centralizado e Maior -->
             <img src="{{ url_for('static', filename='trofeu.png') }}" alt="Troféu FeiraScore" class="img-feirascore-brand">
 
-            <!-- Subtítulo formatado com a mesma fonte da imagem -->
-            <p class="main-subtitle">
-              Quem lidera, <span class="highlight-red">brilha.</span>
-            </p>
+            <!-- Subtítulo em Teko com destaque -->
+            <p class="main-subtitle">Quem lidera, <span>brilha.</span></p>
 
             <a href="#sobre" class="btn-main-red d-inline-flex align-items-center justify-content-center text-decoration-none">Saiba Mais</a>
           </div>
