@@ -5,4 +5,4 @@ home_bp = Blueprint('home', __name__)
 @home_bp.route("/")
 def index():
     nome = 'tcc-vm-vimi.onrender.com'
-    return render_template('index.html', site=nome)
+    return render_template('index.html', site=nome)     
