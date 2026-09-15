@@ -1,9 +1,11 @@
 @font-face {
   font-family: 'Disco Phonic';
-  src: url('../fonts/DiscoPhonic-Regular.ttf') format('truetype');
+  src: url('/static/fonts/DiscoPhonic-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -49,20 +51,49 @@ body {
   position: relative;
 }
 
-/* 1. NAVEGAÇÃO "VOLTAR" MAIS NO CANTO */
+/* --- NAVEGAÇÃO "VOLTAR" (FIXADO NO CANTO DA TELA) --- */
+/* NAVEGAÇÃO "VOLTAR" (FIXADO NO CANTO EXTREMO DIREITO E TOPO) */
 .top-nav {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 5px;
-  width: 100%;
+  position: fixed;
+  top: 15px;
+  right: 20px;
+  margin-bottom: 0;
+  width: auto;
+  z-index: 1000;
 }
 
-.nav-link {
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
   color: #ffffff;
   text-decoration: none;
+  font-family: Arial, sans-serif;
   font-size: 13px;
   font-weight: bold;
-  font-family: Arial, sans-serif;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+  white-space: nowrap;
+}
+
+.btn-back:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+  border-color: #ffffff;
+  transform: translateX(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.btn-back .arrow {
+  font-size: 14px;
+  transition: transform 0.3s ease;
+}
+
+.btn-back:hover .arrow {
+  transform: translateX(-3px);
 }
 
 .header-section {
@@ -71,28 +102,22 @@ body {
 }
 
 /* TÍTULO PRINCIPAL (ESTANDES 2026) */
-.main-title { 
-  font-family: 'Disco Phonic', sans-serif !important;
-  font-size: 3rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: 5px;
-  color: #ffffff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
+/* TÍTULO PRINCIPAL (ESTANDES 2026) COM ESTILO ULTRA ULTRA-HEAVY */
+/* --- TÍTULO EM IMAGEM (CENTRALIZADO) --- */
+.header-section {
+  text-align: center;
+  margin: 15px 0 25px 0;
+  width: 100%;
 }
 
-/* Garante que o 2026 use A MESMA FONTE e O MESMO TAMANHO do ESTANDES */
-.main-title span {
-  font-family: 'Disco Phonic', sans-serif !important;
-  font-size: 3rem !important;
-  color: #ffffff;
-  line-height: 1;
+.main-title-image {
+  max-width: 450px;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
 }
-
-/* --- CAMPOS DO FORMULÁRIO --- */
+--- CAMPOS DO FORMULÁRIO --- */
 .custom-input,
 .custom-textarea {
   font-family: 'Disco Phonic', sans-serif !important;
