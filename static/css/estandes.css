@@ -1,12 +1,9 @@
-/* Declaração e importação da fonte Sceageus */
 @font-face {
-  font-family: 'Sceageus';
-  src: url('../Sceageus.otf') format('opentype'),
-       url('/static/Sceageus.otf') format('opentype');
+  font-family: 'Disco Phonic';
+  src: url('../fonts/DiscoPhonic-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -15,7 +12,13 @@
 
 body {
   padding: 60px 0;
-  background: linear-gradient(rgba(110, 0, 0, 0.92), rgba(20, 0, 0, 0.98)), url("background-login.jpg");
+  /* DEGRADÊ INVERTIDO: Preto no topo transicionando para o vermelho escuro na parte inferior */
+  background: linear-gradient(
+    180deg, 
+    rgba(0, 0, 0, 1) 0%, 
+    rgba(25, 0, 0, 0.98) 50%, 
+    rgba(70, 0, 0, 0.95) 100%
+  ), url("background-login.jpg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -69,7 +72,7 @@ body {
 
 /* TÍTULO PRINCIPAL (ESTANDES 2026) */
 .main-title { 
-  font-family: 'Sceageus', sans-serif !important;
+  font-family: 'Disco Phonic', sans-serif !important;
   font-size: 3rem;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -83,7 +86,7 @@ body {
 
 /* Garante que o 2026 use A MESMA FONTE e O MESMO TAMANHO do ESTANDES */
 .main-title span {
-  font-family: 'Sceageus', sans-serif !important;
+  font-family: 'Disco Phonic', sans-serif !important;
   font-size: 3rem !important;
   color: #ffffff;
   line-height: 1;
@@ -92,7 +95,7 @@ body {
 /* --- CAMPOS DO FORMULÁRIO --- */
 .custom-input,
 .custom-textarea {
-  font-family: 'Sceageus', sans-serif !important;
+  font-family: 'Disco Phonic', sans-serif !important;
   font-size: 1rem;
   color: #ffffff;
 }
@@ -100,20 +103,20 @@ body {
 /* Texto de dica (placeholder) */
 .custom-input::placeholder,
 .custom-textarea::placeholder {
-  font-family: 'Sceageus', sans-serif !important;
+  font-family: 'Disco Phonic', sans-serif !important;
   color: rgba(255, 255, 255, 0.7);
 }
 
 /* Botões */
 .btn-upload,
 .btn-main {
-  font-family: 'Sceageus', sans-serif !important;
+  font-family: 'Disco Phonic', sans-serif !important;
 }
 
 /* BANNER CENTRALIZADO */
 .banner-container {
   width: 100%;
-  max-width: 600px; /* Aumentado um pouco para acompanhar a expansão da tela */
+  max-width: 600px;
   height: 300px;
   margin: 0 auto 30px auto;
   border-radius: 35px;
@@ -131,7 +134,7 @@ body {
   display: block;
 }
 
-/* TEMA COM FONTE SCEAGEUS E COR BRANCA */
+/* TEMA COM FONTE DISKO PHONIC E COR BRANCA */
 .theme-section {
   text-align: center;
   margin-bottom: 40px;
@@ -158,7 +161,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 40px; /* DISTÂNCIA: Aumentado de 25px para 40px para afastar o texto da mídia */
+  gap: 40px;
   background: rgba(0, 0, 0, 0.25);
   padding: 25px;
   border-radius: 30px;
@@ -166,7 +169,7 @@ body {
 
 .estande-info {
   flex: 1;
-  text-align: left; /* Alinhamento do texto para facilitar a leitura */
+  text-align: left;
 }
 
 /* --- ALERTAS DE ERRO E SUCESSO --- */
@@ -197,6 +200,7 @@ body {
   background-color: #28a745;
   color: #ffffff;
 }
+
 /* TÍTULOS DOS ESTANDES */
 .estande-title { 
   margin-bottom: 12px; 
@@ -217,8 +221,8 @@ body {
 
 /* AUMENTADO: Imagem e container de mídia maiores */
 .estande-media {
-  width: 420px;  /* Aumentado de 330px para 420px */
-  height: 260px; /* Aumentado de 210px para 260px */
+  width: 420px;
+  height: 260px;
   flex-shrink: 0;
   position: relative;
 }
@@ -310,7 +314,7 @@ body {
   padding: 40px;
   background: rgba(0, 0, 0, 0.25);
   border-radius: 20px;
-  font-family: 'Sceageus', sans-serif;
+  font-family: 'Disco Phonic', sans-serif;
   font-size: 18px;
   color: #ffffff;
 }
