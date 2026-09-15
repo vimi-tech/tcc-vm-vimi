@@ -55,7 +55,7 @@
     .btn-main-red:hover { transform: scale(1.05); color: white; }
     .img-evento { border-radius: 40px; max-width: 100%; height: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
 
-    /* Seção Sobre (Degradê Travado nas Seções) */
+    /* Seção Sobre */
     .about-section { 
       padding: 120px 0; 
       color: white; 
@@ -249,7 +249,6 @@
     </section>
 
     <section class="about-section" id="sobre">
-      <!-- Estrela SVG de 12 Pontas no Fundo -->
       <svg class="star-bg" viewBox="0 0 500 500" fill="white">
         <path d="M250,0 L273,176 L426,73 L323,226 L500,250 L323,273 L426,426 L273,323 L250,500 L226,323 L73,426 L176,273 L0,250 L176,226 L73,73 L226,176 Z" />
       </svg>
@@ -277,52 +276,83 @@
       </div>
     </section>
 
+    <!-- SEÇÃO DE NOTÍCIAS (DYNÂMICA COM JINJA2 OU ESTÁTICA) -->
     <section class="news-section" id="noticias">
       <div class="container">
         <h2 class="text-center text-uppercase mb-5" style="letter-spacing: 2px; color: #ffffff;">Últimas Notícias</h2>
         
         <div class="row g-4 justify-content-center">
-          <div class="col-md-4">
-            <div class="news-card">
-              <div class="news-img-wrapper">
-                <img src="{{ url_for('static', filename='evento.jpg') }}" alt="Notícia 1" class="news-img">
-              </div>
-              <div class="news-body">
-                <div>
-                  <div class="news-date">15 de Junho, 2026</div>
-                  <h3 class="news-title">Grande Abertura da Feira Tecnológica</h3>
-                  <p class="news-text">Os portões estão abertos! Venha conferir os projetos inovadores desenvolvidos pelos alunos deste ano.</p>
+          
+          {% if noticias %}
+            {% for noticia in noticias %}
+            <div class="col-md-4">
+              <div class="news-card">
+                <div class="news-img-wrapper">
+                  <img src="{{ url_for('static', filename=noticia.imagem) }}" alt="{{ noticia.titulo }}" class="news-img">
                 </div>
-                <div>
-                  <button class="btn-news-link" data-bs-toggle="collapse" data-bs-target="#materia1" onclick="toggleText(this)">Ler Matéria Completa ↓</button>
-                  <div class="collapse full-story-text" id="materia1">
-                    A cerimônia contou com a presença de diretores, professores e representantes da comunidade local. Estão expostos mais de 40 estandes com tecnologias que variam de automação até IA.
+                <div class="news-body">
+                  <div>
+                    <div class="news-date">{{ noticia.data }}</div>
+                    <h3 class="news-title">{{ noticia.titulo }}</h3>
+                    <p class="news-text">{{ noticia.resumo }}</p>
+                  </div>
+                  <div>
+                    <button class="btn-news-link" data-bs-toggle="collapse" data-bs-target="#materia-{{ loop.index }}" onclick="toggleText(this)">Ler Matéria Completa ↓</button>
+                    <div class="collapse full-story-text" id="materia-{{ loop.index }}">
+                      {{ noticia.conteudo }}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+            {% endfor %}
+          {% else %}
 
-          <div class="col-md-4">
-            <div class="news-card">
-              <div class="news-img-wrapper">
-                <img src="{{ url_for('static', filename='vimi_logo.jpg') }}" alt="Notícia 2" class="news-img">
-              </div>
-              <div class="news-body">
-                <div>
-                  <div class="news-date">14 de Junho, 2026</div>
-                  <h3 class="news-title">Como Funciona o Novo Sistema Score</h3>
-                  <p class="news-text">Entenda como a sua avaliação digital ajuda a computar as notas parciais e definir os vencedores em tempo real.</p>
+            <!-- Estande de notícias padrão (Caso a variável 'noticias' esteja vazia) -->
+            <div class="col-md-4">
+              <div class="news-card">
+                <div class="news-img-wrapper">
+                  <img src="{{ url_for('static', filename='evento.jpg') }}" alt="Notícia 1" class="news-img">
                 </div>
-                <div>
-                  <button class="btn-news-link" data-bs-toggle="collapse" data-bs-target="#materia2" onclick="toggleText(this)">Ler Matéria Completa ↓</button>
-                  <div class="collapse full-story-text" id="materia2">
-                    Cada QR Code presente nos estandes leva diretamente para a área de votação. A contagem utiliza algoritmos em tempo real para ranking justo dos projetos.
+                <div class="news-body">
+                  <div>
+                    <div class="news-date">15 de Junho, 2026</div>
+                    <h3 class="news-title">Grande Abertura da Feira Tecnológica</h3>
+                    <p class="news-text">Os portões estão abertos! Venha conferir os projetos inovadores desenvolvidos pelos alunos deste ano.</p>
+                  </div>
+                  <div>
+                    <button class="btn-news-link" data-bs-toggle="collapse" data-bs-target="#materia1" onclick="toggleText(this)">Ler Matéria Completa ↓</button>
+                    <div class="collapse full-story-text" id="materia1">
+                      A cerimônia contou com a presença de diretores, professores e representantes da comunidade local. Estão expostos mais de 40 estandes com tecnologias que variam de automação até IA.
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+
+            <div class="col-md-4">
+              <div class="news-card">
+                <div class="news-img-wrapper">
+                  <img src="{{ url_for('static', filename='vimi_logo.jpg') }}" alt="Notícia 2" class="news-img">
+                </div>
+                <div class="news-body">
+                  <div>
+                    <div class="news-date">14 de Junho, 2026</div>
+                    <h3 class="news-title">Como Funciona o Novo Sistema Score</h3>
+                    <p class="news-text">Entenda como a sua avaliação digital ajuda a computar as notas parciais e definir os vencedores em tempo real.</p>
+                  </div>
+                  <div>
+                    <button class="btn-news-link" data-bs-toggle="collapse" data-bs-target="#materia2" onclick="toggleText(this)">Ler Matéria Completa ↓</button>
+                    <div class="collapse full-story-text" id="materia2">
+                      Cada QR Code presente nos estandes leva diretamente para a área de votação. A contagem utiliza algoritmos em tempo real para ranking justo dos projetos.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          {% endif %}
+
         </div>
       </div>
     </section>
