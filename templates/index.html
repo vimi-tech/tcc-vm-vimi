@@ -16,20 +16,23 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    /* Fundo Gradiente Ajustado (Empurrando o vermelho para baixo) */
-    html, body {
-      min-height: 100vh !important;
+    /* Fundo Gradiente Fluido (Acompanha a rolagem da página) */
+    html {
+      height: 100%;
+    }
+
+    body {
+      min-height: 100%;
       background: linear-gradient(
         180deg, 
         #ffffff 0%, 
-        #ffffff 45%, 
-        #f5f5f5 55%, 
-        #d82929 70%, 
-        #b61c1c 80%, 
-        #520000 90%, 
+        #ffffff 20%, 
+        #f5f5f5 35%, 
+        #d82929 55%, 
+        #b61c1c 70%, 
+        #520000 85%, 
         #000000 100%
       ) !important;
-      background-attachment: fixed !important;
       color: #333; 
       scroll-behavior: smooth; 
       font-family: 'Russo One', sans-serif; 
@@ -72,7 +75,7 @@
     .btn-main-white { width: 190px; height: 48px; border: none; border-radius: 25px; background: #ffffff; color: #7a0000; font-size: 16px; text-transform: uppercase; margin: 10px; transition: 0.3s; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
     .btn-main-white:hover { transform: scale(1.05); color: #b61c1c; }
 
-    /* CORREÇÃO DOS CARDS DE NOTÍCIAS */
+    /* Cards de Notícias */
     .news-section { padding: 90px 0; }
     .news-card { 
       background: rgba(20, 20, 20, 0.85) !important; 
@@ -88,7 +91,6 @@
     }
     .news-card:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(0,0,0,0.5); }
     
-    /* Trava a imagem no tamanho certo */
     .news-img-wrapper { 
       height: 220px; 
       width: 100%; 
@@ -111,8 +113,12 @@
     .btn-news-link { color: #ff4d4d; text-decoration: none; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; transition: 0.2s; display: inline-block; cursor: pointer; border: none; background: none; padding: 0; font-weight: bold; }
     .btn-news-link:hover { color: #ffffff; }
 
-    /* Feed Card Especial */
-    .feed-card { background: rgba(255, 255, 255, 0.05) !important; border: 2px dashed rgba(255, 255, 255, 0.3) !important; }
+    /* Feed Card Especial Ajustado */
+    .feed-card { 
+      background: rgba(20, 20, 20, 0.85) !important; 
+      border: 2px dashed rgba(255, 255, 255, 0.3) !important; 
+      color: #ffffff;
+    }
 
     /* Localização */
     .location-section { padding: 90px 0; color: white; text-align: center; }
@@ -223,7 +229,6 @@
       </div>
     </section>
 
-    <!-- SEÇÃO DE NOTÍCIAS RESTRUTURADA E CORRIGIDA -->
     <section class="news-section" id="noticias">
       <div class="container">
         <h2 class="text-center text-uppercase mb-5" style="letter-spacing: 2px; color: #ffffff;">Últimas Notícias</h2>
@@ -252,7 +257,7 @@
             </div>
           </div>
 
-          <!-- Card 2 (Imagem que estava estourando agora contida) -->
+          <!-- Card 2 -->
           <div class="col-md-4">
             <div class="news-card">
               <div class="news-img-wrapper">
@@ -274,10 +279,10 @@
             </div>
           </div>
 
-          <!-- Card 3 (Feed Dinâmico) -->
+          <!-- Card 3 (Feed Dinâmico com Visual Corrigido) -->
           <div class="col-md-4">
             <div class="news-card feed-card text-center justify-content-center align-items-center p-4">
-              <i class="fa-solid fa-rss fs-1 color-white mb-3" style="color: #ff4d4d;"></i>
+              <i class="fa-solid fa-rss fs-1 mb-3" style="color: #ff4d4d;"></i>
               <div class="news-date">Atualizado agora</div>
               <h3 class="news-title text-center">Carregando feed de notícias...</h3>
               <p class="news-text text-center">Este bloco está integrado via script para puxar dinamicamente novidades do mundo da tecnologia.</p>
