@@ -276,7 +276,7 @@
       </div>
     </section>
 
-    <!-- SEÇÃO DE NOTÍCIAS (DYNÂMICA COM JINJA2 OU ESTÁTICA) -->
+    <!-- SEÇÃO DE NOTÍCIAS -->
     <section class="news-section" id="noticias">
       <div class="container">
         <h2 class="text-center text-uppercase mb-5" style="letter-spacing: 2px; color: #ffffff;">Últimas Notícias</h2>
@@ -297,10 +297,14 @@
                     <p class="news-text">{{ noticia.resumo }}</p>
                   </div>
                   <div>
-                    <button class="btn-news-link" data-bs-toggle="collapse" data-bs-target="#materia-{{ loop.index }}" onclick="toggleText(this)">Ler Matéria Completa ↓</button>
-                    <div class="collapse full-story-text" id="materia-{{ loop.index }}">
-                      {{ noticia.conteudo }}
-                    </div>
+                    {% if noticia.link_externo %}
+                      <a href="{{ noticia.link_externo }}" target="_blank" rel="noopener noreferrer" class="btn-news-link">Acessar Notícia Externa <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i></a>
+                    {% else %}
+                      <button class="btn-news-link" data-bs-toggle="collapse" data-bs-target="#materia-{{ loop.index }}" onclick="toggleText(this)">Ler Matéria Completa ↓</button>
+                      <div class="collapse full-story-text" id="materia-{{ loop.index }}">
+                        {{ noticia.conteudo }}
+                      </div>
+                    {% endif %}
                   </div>
                 </div>
               </div>
@@ -308,7 +312,7 @@
             {% endfor %}
           {% else %}
 
-            <!-- Estande de notícias padrão (Caso a variável 'noticias' esteja vazia) -->
+            <!-- Notícia 1 (Interna) -->
             <div class="col-md-4">
               <div class="news-card">
                 <div class="news-img-wrapper">
@@ -330,10 +334,11 @@
               </div>
             </div>
 
+            <!-- Notícia 2 (Interna) -->
             <div class="col-md-4">
               <div class="news-card">
                 <div class="news-img-wrapper">
-                  <img src="{{ url_for('static', filename='vimi_logo.jpg') }}" alt="Notícia 2" class="news-img">
+                  <img src="{{ url_for('static', filename='meninas_votando.jpg') }}" alt="Notícia 2" class="news-img">
                 </div>
                 <div class="news-body">
                   <div>
@@ -346,6 +351,25 @@
                     <div class="collapse full-story-text" id="materia2">
                       Cada QR Code presente nos estandes leva diretamente para a área de votação. A contagem utiliza algoritmos em tempo real para ranking justo dos projetos.
                     </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Notícia 3 (Externa) -->
+            <div class="col-md-4">
+              <div class="news-card">
+                <div class="news-img-wrapper">
+                  <img src="{{ url_for('static', filename='vimi_logo.jpg') }}" alt="Notícia Externa" class="news-img">
+                </div>
+                <div class="news-body">
+                  <div>
+                    <div class="news-date">Mundo Tech</div>
+                    <h3 class="news-title">Principais Tendências em Tecnologia</h3>
+                    <p class="news-text">Confira os mais recentes avanços globais em inteligência artificial, robótica e inovação no portal TechCrunch.</p>
+                  </div>
+                  <div>
+                    <a href="https://techcrunch.com" target="_blank" rel="noopener noreferrer" class="btn-news-link">Acessar Portal Tech <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i></a>
                   </div>
                 </div>
               </div>
