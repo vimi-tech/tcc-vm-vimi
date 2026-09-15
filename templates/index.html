@@ -16,18 +16,17 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    /* Fundo Gradiente Geral */
+    /* Fundo Gradiente Ajustado (Empurrando o vermelho para baixo) */
     html, body {
       min-height: 100vh !important;
       background: linear-gradient(
         180deg, 
         #ffffff 0%, 
-        #f5f5f5 18%, 
-        #ededed 32%, 
-        #d82929 55%, 
-        #b61c1c 65%, 
-        #520000 80%, 
-        #0d0b0b 92%, 
+        #ffffff 45%, 
+        #f5f5f5 55%, 
+        #d82929 70%, 
+        #b61c1c 80%, 
+        #520000 90%, 
         #000000 100%
       ) !important;
       background-attachment: fixed !important;
@@ -37,13 +36,12 @@
       text-align: center;
     }
 
-    /* Transparência Geral das Seções */
     header, main, section, footer {
       background: transparent !important;
       background-color: transparent !important;
     }
 
-    /* Header e Nav */
+    /* Navbar */
     .navbar-custom { padding: 15px 0; }
     .btn-nav-red { width: 110px; height: 40px; border: none; border-radius: 20px; background: linear-gradient(180deg, #c41c1c 0%, #830000 100%); color: white; font-size: 16px; text-transform: uppercase; text-decoration: none; display: flex; justify-content: center; align-items: center; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
     .btn-nav-red:hover { transform: scale(1.05); color: white; }
@@ -55,12 +53,9 @@
     /* Intro / Hero Section */
     .intro-section { padding: 40px 0 60px 0; }
     .hero-brand-block { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
-    
-    /* Troféu estilizado */
     .trophy-container { margin-bottom: 15px; display: flex; justify-content: center; align-items: center; }
     .trophy-icon { font-size: 80px; color: #ffd700; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3)); }
     .img-feirascore-brand { width: 100%; max-width: 260px; height: auto; margin: 0 auto 10px auto; display: block; }
-
     .main-title { font-family: 'Orbitron', sans-serif !important; font-weight: 900 !important; color: #b61c1c !important; font-size: 3.5rem !important; line-height: 0.9 !important; text-transform: uppercase !important; margin-bottom: 10px !important; letter-spacing: 2px !important; text-align: center !important; }
     .main-subtitle { font-family: 'Teko', sans-serif !important; font-weight: 700 !important; color: #000 !important; font-size: 2.5rem !important; line-height: 1 !important; text-transform: none !important; margin-bottom: 20px !important; letter-spacing: 1px !important; text-align: center !important; }
     .main-subtitle span { font-family: inherit !important; color: #b61c1c !important; }
@@ -77,7 +72,49 @@
     .btn-main-white { width: 190px; height: 48px; border: none; border-radius: 25px; background: #ffffff; color: #7a0000; font-size: 16px; text-transform: uppercase; margin: 10px; transition: 0.3s; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
     .btn-main-white:hover { transform: scale(1.05); color: #b61c1c; }
 
-    /* Seção Localização Integrada */
+    /* CORREÇÃO DOS CARDS DE NOTÍCIAS */
+    .news-section { padding: 90px 0; }
+    .news-card { 
+      background: rgba(20, 20, 20, 0.85) !important; 
+      border: 1px solid rgba(255, 255, 255, 0.15); 
+      border-radius: 20px; 
+      overflow: hidden; 
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3); 
+      transition: 0.3s; 
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+    }
+    .news-card:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(0,0,0,0.5); }
+    
+    /* Trava a imagem no tamanho certo */
+    .news-img-wrapper { 
+      height: 220px; 
+      width: 100%; 
+      overflow: hidden; 
+      position: relative;
+    }
+    .news-img { 
+      width: 100% !important; 
+      height: 100% !important; 
+      object-fit: cover !important; 
+      display: block;
+    }
+
+    .news-body { padding: 25px; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; }
+    .news-date { font-size: 13px; color: #ff6b6b; font-family: sans-serif; margin-bottom: 8px; font-weight: bold; }
+    .news-title { font-size: 1.25rem; color: #ffffff; margin-bottom: 12px; text-transform: uppercase; line-height: 1.3; }
+    .news-text { font-family: sans-serif; font-size: 14px; color: rgba(255, 255, 255, 0.85); line-height: 1.6; margin-bottom: 15px; }
+    .full-story-text { font-family: sans-serif; font-size: 14px; color: #ddd; line-height: 1.6; border-top: 1px dashed rgba(255, 255, 255, 0.2); padding-top: 15px; margin-top: 10px; }
+    
+    .btn-news-link { color: #ff4d4d; text-decoration: none; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; transition: 0.2s; display: inline-block; cursor: pointer; border: none; background: none; padding: 0; font-weight: bold; }
+    .btn-news-link:hover { color: #ffffff; }
+
+    /* Feed Card Especial */
+    .feed-card { background: rgba(255, 255, 255, 0.05) !important; border: 2px dashed rgba(255, 255, 255, 0.3) !important; }
+
+    /* Localização */
     .location-section { padding: 90px 0; color: white; text-align: center; }
     .location-title { font-size: 2.5rem; letter-spacing: 2px; margin-bottom: 15px; color: #ffffff; text-align: center; }
     .location-subtitle { font-size: 16px; color: rgba(255, 255, 255, 0.9); margin-bottom: 40px; text-align: center; font-family: sans-serif; }
@@ -102,7 +139,6 @@
 
     @media(max-width: 991px) { .navbar-custom .container { gap: 10px; } .brand-logos-container { margin-top: 10px; width: 100%; justify-content: center; } }
     @media(max-width: 768px) { .intro-section { padding: 30px 0; } .about-section { padding: 60px 0; } .location-section { padding: 50px 0; } .faq-section { padding: 50px 0; } .main-title { font-size: 2.5rem !important; } .main-subtitle { font-size: 1.8rem !important; margin-bottom: 15px !important; } .about-title { font-size: 1.8rem; } .about-text { font-size: 14px; } .about-section::before { width: 280px; height: 280px; } }
-    @media(max-width: 480px) { .main-title { font-size: 2rem !important; } .main-subtitle { font-size: 1.5rem !important; } .highlight-text { font-size: 15px; } }
   </style>
 </head>
 
@@ -145,15 +181,12 @@
         <div class="row align-items-center justify-content-center">
           
           <div class="col-md-6 mb-4 mb-md-0 hero-brand-block text-center">
-
-            <!-- Troféu com suporte a ícone e imagem -->
             <div class="trophy-container">
               <img src="{{ url_for('static', filename='trofeu.png') }}" alt="Troféu FeiraScore" class="img-feirascore-brand" onerror="this.style.display='none'; document.getElementById('trophy-icon-fallback').style.display='block';">
               <i id="trophy-icon-fallback" class="fa-solid fa-trophy trophy-icon" style="display: none;"></i>
             </div>
 
             <h1 class="main-title">FEIRA<br>SCORE</h1>
-
             <p class="main-subtitle">Quem lidera, <span>brilha.</span></p>
 
             <a href="#sobre" class="btn-main-red d-inline-flex align-items-center justify-content-center text-decoration-none">Saiba Mais</a>
@@ -190,7 +223,71 @@
       </div>
     </section>
 
-    {% include 'noticias.html' %}
+    <!-- SEÇÃO DE NOTÍCIAS RESTRUTURADA E CORRIGIDA -->
+    <section class="news-section" id="noticias">
+      <div class="container">
+        <h2 class="text-center text-uppercase mb-5" style="letter-spacing: 2px; color: #ffffff;">Últimas Notícias</h2>
+        
+        <div class="row g-4 justify-content-center">
+          
+          <!-- Card 1 -->
+          <div class="col-md-4">
+            <div class="news-card">
+              <div class="news-img-wrapper">
+                <img src="{{ url_for('static', filename='evento.jpg') }}" alt="Notícia 1" class="news-img">
+              </div>
+              <div class="news-body">
+                <div>
+                  <div class="news-date">15 de Junho, 2026</div>
+                  <h3 class="news-title">Grande Abertura da Feira Tecnológica</h3>
+                  <p class="news-text">Os portões estão abertos! Venha conferir os projetos inovadores desenvolvidos pelos alunos deste ano.</p>
+                </div>
+                <div>
+                  <button class="btn-news-link" data-bs-toggle="collapse" data-bs-target="#materia1" onclick="toggleText(this)">Ler Matéria Completa ↓</button>
+                  <div class="collapse full-story-text" id="materia1">
+                    A cerimônia contou com a presença de diretores, professores e representantes da comunidade local. Estão expostos mais de 40 estandes com tecnologias que variam de automação até IA.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 (Imagem que estava estourando agora contida) -->
+          <div class="col-md-4">
+            <div class="news-card">
+              <div class="news-img-wrapper">
+                <img src="{{ url_for('static', filename='vimi_logo.jpg') }}" alt="Notícia 2" class="news-img">
+              </div>
+              <div class="news-body">
+                <div>
+                  <div class="news-date">14 de Junho, 2026</div>
+                  <h3 class="news-title">Como Funciona o Novo Sistema Score</h3>
+                  <p class="news-text">Entenda como a sua avaliação digital ajuda a computar as notas parciais e definir os vencedores em tempo real.</p>
+                </div>
+                <div>
+                  <button class="btn-news-link" data-bs-toggle="collapse" data-bs-target="#materia2" onclick="toggleText(this)">Ler Matéria Completa ↓</button>
+                  <div class="collapse full-story-text" id="materia2">
+                    Cada QR Code presente nos estandes leva diretamente para a área de votação. A contagem utiliza algoritmos em tempo real para ranking justo dos projetos.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 (Feed Dinâmico) -->
+          <div class="col-md-4">
+            <div class="news-card feed-card text-center justify-content-center align-items-center p-4">
+              <i class="fa-solid fa-rss fs-1 color-white mb-3" style="color: #ff4d4d;"></i>
+              <div class="news-date">Atualizado agora</div>
+              <h3 class="news-title text-center">Carregando feed de notícias...</h3>
+              <p class="news-text text-center">Este bloco está integrado via script para puxar dinamicamente novidades do mundo da tecnologia.</p>
+              <a href="#" class="btn-news-link mt-3">Ver Feed Externo →</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
 
     <!-- Seção de Localização -->
     <section class="location-section" id="localizacao">
