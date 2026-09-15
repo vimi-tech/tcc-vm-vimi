@@ -16,34 +16,22 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    /* Fundo Gradiente Geral */
-    html, body {
-      min-height: 100vh !important;
-      background: linear-gradient(
-        180deg, 
-        #ffffff 0%, 
-        #f5f5f5 18%, 
-        #ededed 32%, 
-        #d82929 55%, 
-        #b61c1c 65%, 
-        #520000 80%, 
-        #0d0b0b 92%, 
-        #000000 100%
-      ) !important;
-      background-attachment: fixed !important;
-      color: #333; 
-      scroll-behavior: smooth; 
-      font-family: 'Russo One', sans-serif; 
+    body {
+      color: #333;
+      scroll-behavior: smooth;
+      font-family: 'Russo One', sans-serif;
       text-align: center;
+      position: relative;
+      min-height: 100vh;
+      background-color: #f4f4f4;
     }
 
     header, main, section, footer {
-      background: transparent !important;
-      background-color: transparent !important;
+      background: transparent;
     }
 
     /* Navbar */
-    .navbar-custom { padding: 15px 0; }
+    .navbar-custom { padding: 15px 0; background-color: #f4f4f4; }
     .btn-nav-red { width: 110px; height: 40px; border: none; border-radius: 20px; background: linear-gradient(180deg, #c41c1c 0%, #830000 100%); color: white; font-size: 16px; text-transform: uppercase; text-decoration: none; display: flex; justify-content: center; align-items: center; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
     .btn-nav-red:hover { transform: scale(1.05); color: white; }
     .nav-link-custom { color: white !important; text-transform: uppercase; font-size: 14px; letter-spacing: 0.5px; background-color: #b61c1c; padding: 8px 16px !important; border-radius: 20px; display: inline-flex; align-items: center; justify-content: center; transition: 0.3s; }
@@ -52,7 +40,10 @@
     .img-navbar-logo { object-fit: contain; border-radius: 6px; background-color: transparent; }
     
     /* Intro / Hero Section */
-    .intro-section { padding: 40px 0 60px 0; }
+    .intro-section { 
+      padding: 60px 0 80px 0; 
+      background-color: #f4f4f4; 
+    }
     .hero-brand-block { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
     .trophy-container { margin-bottom: 15px; display: flex; justify-content: center; align-items: center; }
     .trophy-icon { font-size: 80px; color: #ffd700; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3)); }
@@ -65,16 +56,59 @@
     .img-evento { border-radius: 40px; max-width: 100%; height: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
 
     /* Seção Sobre */
-    .about-section { padding: 90px 0; color: white; text-align: center; position: relative; overflow: hidden; }
-    .about-section::before { content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 600px; height: 600px; background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 70%); clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); pointer-events: none; }
-    .about-title { font-size: 2.5rem; letter-spacing: 2px; margin-bottom: 40px; line-height: 1.4; text-shadow: 0 2px 10px rgba(0,0,0,0.3); text-align: center; }
-    .about-text { font-size: 16px; line-height: 1.8; max-width: 800px; margin: 0 auto 25px auto; color: rgba(255, 255, 255, 0.95); text-shadow: 0 1px 5px rgba(0,0,0,0.2); text-align: center; }
-    .highlight-text { font-size: 18px; color: #ffffff; margin-top: 40px; margin-bottom: 45px; letter-spacing: 0.5px; font-weight: bold; text-align: center; }
-    .btn-main-white { width: 190px; height: 48px; border: none; border-radius: 25px; background: #ffffff; color: #7a0000; font-size: 16px; text-transform: uppercase; margin: 10px; transition: 0.3s; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
-    .btn-main-white:hover { transform: scale(1.05); color: #b61c1c; }
+    .about-section { 
+      padding: 120px 0; 
+      color: white; 
+      text-align: center; 
+      position: relative; 
+      overflow: hidden; 
+      background: linear-gradient(
+        180deg, 
+        #f4f4f4 0%, 
+        #b61c1c 25%, 
+        #b61c1c 80%, 
+        #000000 100%
+      );
+    }
+    .star-bg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 750px;
+      height: 750px;
+      z-index: 1;
+      opacity: 0.25;
+      pointer-events: none;
+    }
+    .about-section .container {
+      position: relative;
+      z-index: 2;
+    }
+    .about-title { font-size: 3rem; letter-spacing: 2px; margin-bottom: 30px; line-height: 1.2; text-shadow: 0 2px 10px rgba(0,0,0,0.4); text-align: center; }
+    .about-text { font-size: 16px; line-height: 1.8; max-width: 750px; margin: 0 auto 20px auto; color: #ffffff; text-shadow: 0 1px 5px rgba(0,0,0,0.5); text-align: center; }
+    .highlight-text { font-size: 16px; color: #ffffff; margin-top: 30px; margin-bottom: 40px; letter-spacing: 0.5px; font-weight: bold; text-align: center; text-shadow: 0 1px 5px rgba(0,0,0,0.5); }
+    
+    .btn-about-white {
+      width: 180px;
+      height: 45px;
+      border: none;
+      border-radius: 25px;
+      background: #ffffff;
+      color: #000000;
+      font-size: 15px;
+      font-weight: bold;
+      text-transform: uppercase;
+      transition: 0.3s;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+    .btn-about-white:hover { transform: scale(1.05); color: #b61c1c; }
 
-    /* CORREÇÃO DOS CARDS DE NOTÍCIAS */
-    .news-section { padding: 90px 0; }
+    /* Cards de Notícias */
+    .news-section { 
+      padding: 90px 0; 
+      background-color: #000000;
+    }
     .news-card { 
       background: rgba(20, 20, 20, 0.85) !important; 
       border: 1px solid rgba(255, 255, 255, 0.15); 
@@ -89,7 +123,6 @@
     }
     .news-card:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(0,0,0,0.5); }
     
-    /* Trava a imagem no tamanho certo */
     .news-img-wrapper { 
       height: 220px; 
       width: 100%; 
@@ -112,18 +145,25 @@
     .btn-news-link { color: #ff4d4d; text-decoration: none; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; transition: 0.2s; display: inline-block; cursor: pointer; border: none; background: none; padding: 0; font-weight: bold; }
     .btn-news-link:hover { color: #ffffff; }
 
-    /* Feed Card Especial */
-    .feed-card { background: rgba(255, 255, 255, 0.05) !important; border: 2px dashed rgba(255, 255, 255, 0.3) !important; }
-
     /* Localização */
-    .location-section { padding: 90px 0; color: white; text-align: center; }
+    .location-section { 
+      padding: 90px 0; 
+      color: white; 
+      text-align: center; 
+      background-color: #000000;
+    }
     .location-title { font-size: 2.5rem; letter-spacing: 2px; margin-bottom: 15px; color: #ffffff; text-align: center; }
     .location-subtitle { font-size: 16px; color: rgba(255, 255, 255, 0.9); margin-bottom: 40px; text-align: center; font-family: sans-serif; }
     .map-responsive { overflow: hidden; padding-bottom: 450px; position: relative; height: 0; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.4); border: 2px solid rgba(255,255,255,0.2); }
     .map-responsive iframe { left: 0; top: 0; height: 100%; width: 100%; position: absolute; border: 0; }
 
     /* FAQ */
-    .faq-section { padding: 90px 0; color: white; text-align: center; }
+    .faq-section { 
+      padding: 90px 0; 
+      color: white; 
+      text-align: center; 
+      background-color: #000000;
+    }
     .accordion-item-custom { background: rgba(255, 255, 255, 0.08) !important; border: 1px solid rgba(255, 255, 255, 0.15) !important; border-radius: 15px !important; margin-bottom: 15px; overflow: hidden; backdrop-filter: blur(5px); text-align: left; }
     .accordion-button-custom { background: transparent !important; color: white !important; font-size: 15px; text-transform: uppercase; padding: 20px; box-shadow: none !important; }
     .accordion-button-custom:not(.collapsed) { color: #ff4d4d !important; background: rgba(255, 255, 255, 0.05) !important; }
@@ -131,7 +171,14 @@
     .accordion-body-custom { background: rgba(0, 0, 0, 0.4); color: #ddd; font-size: 14px; line-height: 1.6; font-family: sans-serif; }
 
     /* Footer */
-    .footer-custom { color: rgba(255,255,255,0.6); padding: 60px 0; font-size: 14px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; }
+    .footer-custom { 
+      color: rgba(255,255,255,0.6); 
+      padding: 60px 0; 
+      font-size: 14px; 
+      border-top: 1px solid rgba(255,255,255,0.1); 
+      text-align: center; 
+      background-color: #000000;
+    }
     .footer-custom p { text-transform: uppercase; letter-spacing: 0.5px; }
     .footer-custom a { color: #ff4d4d; text-decoration: none; transition: 0.2s; }
     .footer-custom a:hover { color: white; }
@@ -139,7 +186,7 @@
     .social-share-buttons a:hover { background: #b61c1c; transform: translateY(-3px); }
 
     @media(max-width: 991px) { .navbar-custom .container { gap: 10px; } .brand-logos-container { margin-top: 10px; width: 100%; justify-content: center; } }
-    @media(max-width: 768px) { .intro-section { padding: 30px 0; } .about-section { padding: 60px 0; } .location-section { padding: 50px 0; } .faq-section { padding: 50px 0; } .main-title { font-size: 2.5rem !important; } .main-subtitle { font-size: 1.8rem !important; margin-bottom: 15px !important; } .about-title { font-size: 1.8rem; } .about-text { font-size: 14px; } .about-section::before { width: 280px; height: 280px; } }
+    @media(max-width: 768px) { .intro-section { padding: 30px 0; } .about-section { padding: 60px 0; } .location-section { padding: 50px 0; } .faq-section { padding: 50px 0; } .main-title { font-size: 2.5rem !important; } .main-subtitle { font-size: 1.8rem !important; margin-bottom: 15px !important; } .about-title { font-size: 1.8rem; } .about-text { font-size: 14px; } .star-bg { width: 350px; height: 350px; } }
   </style>
 </head>
 
@@ -202,6 +249,10 @@
     </section>
 
     <section class="about-section" id="sobre">
+      <svg class="star-bg" viewBox="0 0 500 500" fill="white">
+        <path d="M250,0 L273,176 L426,73 L323,226 L500,250 L323,273 L426,426 L273,323 L250,500 L226,323 L73,426 L176,273 L0,250 L176,226 L73,73 L226,176 Z" />
+      </svg>
+
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-9 text-center">
@@ -213,84 +264,123 @@
               A ideia é simples: os visitantes podem conhecer os projetos, votar nos que mais gostaram e participar da feira de um jeito muito mais divertido. Além de facilitar a vida de todo mundo, o sistema deixa a contagem dos votos muito mais rápida e organizada.
             </p>
             <p class="highlight-text">
-              SUA OPINIÃO FAZ A DIFERENÇA!<br>
-              CADA VOTO AJUDA A DESTACAR IDEIAS, RECONHECER ESFORÇOS E VALORIZAR PROJETOS INCRÍVEIS.
+              Sua opinião faz a diferença!<br>
+              Cada voto ajuda a destacar ideias, reconhecer esforços e valorizar projetos incríveis.
             </p>
-            <div class="d-flex flex-wrap justify-content-center gap-2">
-              <a class="btn-main-white d-inline-flex align-items-center justify-content-center text-decoration-none" href="{{ url_for('estudantelogin') }}">Votar</a>
+            <div class="d-flex flex-wrap justify-content-center gap-3">
+              <a class="btn-about-white d-inline-flex align-items-center justify-content-center text-decoration-none" href="{{ url_for('estandes') }}">Ver Estandes</a>
+              <a class="btn-about-white d-inline-flex align-items-center justify-content-center text-decoration-none" href="{{ url_for('estudantelogin') }}">Votar</a>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- SEÇÃO DE NOTÍCIAS RESTRUTURADA E CORRIGIDA -->
+    <!-- SEÇÃO DE NOTÍCIAS -->
     <section class="news-section" id="noticias">
       <div class="container">
         <h2 class="text-center text-uppercase mb-5" style="letter-spacing: 2px; color: #ffffff;">Últimas Notícias</h2>
         
         <div class="row g-4 justify-content-center">
           
-          <!-- Card 1 -->
-          <div class="col-md-4">
-            <div class="news-card">
-              <div class="news-img-wrapper">
-                <img src="{{ url_for('static', filename='evento.jpg') }}" alt="Notícia 1" class="news-img">
-              </div>
-              <div class="news-body">
-                <div>
-                  <div class="news-date">15 de Junho, 2026</div>
-                  <h3 class="news-title">Grande Abertura da Feira Tecnológica</h3>
-                  <p class="news-text">Os portões estão abertos! Venha conferir os projetos inovadores desenvolvidos pelos alunos deste ano.</p>
+          {% if noticias %}
+            {% for noticia in noticias %}
+            <div class="col-md-4">
+              <div class="news-card">
+                <div class="news-img-wrapper">
+                  <img src="{{ url_for('static', filename=noticia.imagem) }}" alt="{{ noticia.titulo }}" class="news-img">
                 </div>
-                <div>
-                  <button class="btn-news-link" data-bs-toggle="collapse" data-bs-target="#materia1" onclick="toggleText(this)">Ler Matéria Completa ↓</button>
-                  <div class="collapse full-story-text" id="materia1">
-                    A cerimônia contou com a presença de diretores, professores e representantes da comunidade local. Estão expostos mais de 40 estandes com tecnologias que variam de automação até IA.
+                <div class="news-body">
+                  <div>
+                    <div class="news-date">{{ noticia.data }}</div>
+                    <h3 class="news-title">{{ noticia.titulo }}</h3>
+                    <p class="news-text">{{ noticia.resumo }}</p>
+                  </div>
+                  <div>
+                    {% if noticia.link_externo %}
+                      <a href="{{ noticia.link_externo }}" target="_blank" rel="noopener noreferrer" class="btn-news-link">Acessar Notícia Externa <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i></a>
+                    {% else %}
+                      <button class="btn-news-link" data-bs-toggle="collapse" data-bs-target="#materia-{{ loop.index }}" onclick="toggleText(this)">Ler Matéria Completa ↓</button>
+                      <div class="collapse full-story-text" id="materia-{{ loop.index }}">
+                        {{ noticia.conteudo }}
+                      </div>
+                    {% endif %}
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+            {% endfor %}
+          {% else %}
 
-          <!-- Card 2 (Imagem que estava estourando agora contida) -->
-          <div class="col-md-4">
-            <div class="news-card">
-              <div class="news-img-wrapper">
-                <img src="{{ url_for('static', filename='vimi_logo.jpg') }}" alt="Notícia 2" class="news-img">
-              </div>
-              <div class="news-body">
-                <div>
-                  <div class="news-date">14 de Junho, 2026</div>
-                  <h3 class="news-title">Como Funciona o Novo Sistema Score</h3>
-                  <p class="news-text">Entenda como a sua avaliação digital ajuda a computar as notas parciais e definir os vencedores em tempo real.</p>
+            <!-- Notícia 1 (Interna) -->
+            <div class="col-md-4">
+              <div class="news-card">
+                <div class="news-img-wrapper">
+                  <img src="{{ url_for('static', filename='evento.jpg') }}" alt="Notícia 1" class="news-img">
                 </div>
-                <div>
-                  <button class="btn-news-link" data-bs-toggle="collapse" data-bs-target="#materia2" onclick="toggleText(this)">Ler Matéria Completa ↓</button>
-                  <div class="collapse full-story-text" id="materia2">
-                    Cada QR Code presente nos estandes leva diretamente para a área de votação. A contagem utiliza algoritmos em tempo real para ranking justo dos projetos.
+                <div class="news-body">
+                  <div>
+                    <div class="news-date">15 de Junho, 2026</div>
+                    <h3 class="news-title">Grande Abertura da Feira Tecnológica</h3>
+                    <p class="news-text">Os portões estão abertos! Venha conferir os projetos inovadores desenvolvidos pelos alunos deste ano.</p>
+                  </div>
+                  <div>
+                    <button class="btn-news-link" data-bs-toggle="collapse" data-bs-target="#materia1" onclick="toggleText(this)">Ler Matéria Completa ↓</button>
+                    <div class="collapse full-story-text" id="materia1">
+                      A cerimônia contou com a presença de diretores, professores e representantes da comunidade local. Estão expostos mais de 40 estandes com tecnologias que variam de automação até IA.
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <!-- Card 3 (Feed Dinâmico) -->
-          <div class="col-md-4">
-            <div class="news-card feed-card text-center justify-content-center align-items-center p-4">
-              <i class="fa-solid fa-rss fs-1 color-white mb-3" style="color: #ff4d4d;"></i>
-              <div class="news-date">Atualizado agora</div>
-              <h3 class="news-title text-center">Carregando feed de notícias...</h3>
-              <p class="news-text text-center">Este bloco está integrado via script para puxar dinamicamente novidades do mundo da tecnologia.</p>
-              <a href="#" class="btn-news-link mt-3">Ver Feed Externo →</a>
+            <!-- Notícia 2 (Interna) -->
+            <div class="col-md-4">
+              <div class="news-card">
+                <div class="news-img-wrapper">
+                  <img src="{{ url_for('static', filename='meninas_votando.jpg') }}" alt="Notícia 2" class="news-img">
+                </div>
+                <div class="news-body">
+                  <div>
+                    <div class="news-date">14 de Junho, 2026</div>
+                    <h3 class="news-title">Como Funciona o Novo Sistema Score</h3>
+                    <p class="news-text">Entenda como a sua avaliação digital ajuda a computar as notas parciais e definir os vencedores em tempo real.</p>
+                  </div>
+                  <div>
+                    <button class="btn-news-link" data-bs-toggle="collapse" data-bs-target="#materia2" onclick="toggleText(this)">Ler Matéria Completa ↓</button>
+                    <div class="collapse full-story-text" id="materia2">
+                      Cada QR Code presente nos estandes leva diretamente para a área de votação. A contagem utiliza algoritmos em tempo real para ranking justo dos projetos.
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
+
+            <!-- Notícia 3 (Externa) -->
+            <div class="col-md-4">
+              <div class="news-card">
+                <div class="news-img-wrapper">
+                  <img src="{{ url_for('static', filename='tecnologia.jpg') }}" alt="Notícia Externa" class="news-img">
+                </div>
+                <div class="news-body">
+                  <div>
+                    <div class="news-date">Mundo Tech</div>
+                    <h3 class="news-title">Principais Tendências em Tecnologia</h3>
+                    <p class="news-text">Confira os mais recentes avanços globais em inteligência artificial, robótica e inovação no portal TechCrunch.</p>
+                  </div>
+                  <div>
+                    <a href="https://techcrunch.com" target="_blank" rel="noopener noreferrer" class="btn-news-link">Acessar Portal Tech <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          {% endif %}
 
         </div>
       </div>
     </section>
 
-    <!-- Seção de Localização -->
     <section class="location-section" id="localizacao">
       <div class="container">
         <h2 class="location-title">LOCALIZAÇÃO DO EVENTO</h2>
