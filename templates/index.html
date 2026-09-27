@@ -16,12 +16,12 @@
   <style>
     /* Reset e Configurações Globais */
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { min-height: 100vh; background-color: #ededed; color: #333; scroll-behavior: smooth; font-family: 'Russo One', sans-serif; }
+    body { background-color: #0b0505; color: #ffffff; scroll-behavior: smooth; font-family: 'Russo One', sans-serif; }
 
     /* Header e Navegação */
-    .navbar-custom { background-color: #ededed; padding: 15px 0; }
+    .navbar-custom { background-color: #120707; padding: 15px 0; border-bottom: 2px solid #300a0a; }
     .btn-nav-red { width: 110px; height: 40px; border: none; border-radius: 20px; background-color: #b61c1c; color: white; font-size: 16px; text-transform: uppercase; text-decoration: none; display: flex; justify-content: center; align-items: center; transition: 0.3s; }
-    .btn-nav-red:hover { transform: scale(1.05); color: white; }
+    .btn-nav-red:hover { transform: scale(1.05); color: white; background-color: #d12323; }
     .nav-link-custom { color: white !important; text-transform: uppercase; font-size: 14px; letter-spacing: 0.5px; background-color: #b61c1c; padding: 8px 16px !important; border-radius: 20px; display: inline-flex; align-items: center; justify-content: center; transition: 0.3s; }
     .nav-link-custom:hover { transform: scale(1.05); color: white !important; background-color: #7a0000; }
     .brand-logos-container { display: flex; align-items: center; gap: 12px; }
@@ -30,69 +30,74 @@
     /* Títulos Gerais de Seções */
     .section-title-custom {
       font-family: 'Bungee', cursive !important;
-      color: #b61c1c !important;
+      color: #ff3b3b !important;
       font-size: 2.2rem;
       letter-spacing: 1px;
       margin-bottom: 8px;
       text-transform: uppercase;
       text-align: center;
     }
-    .section-title-custom span { color: #333 !important; }
+    .section-title-custom span { color: #ffffff !important; }
     .section-subtitle-custom {
       font-family: 'Teko', sans-serif !important;
       font-size: 1.6rem;
-      color: #666;
+      color: #b0a0a0;
       margin-bottom: 35px;
       letter-spacing: 0.5px;
       text-align: center;
     }
 
+    /* Seções com cores sólidas delimitadas (SEM DEGRADÊ ENTRE PÁGINAS) */
+    .section-block-dark1 { background-color: #0b0505; border-bottom: 3px solid #240a0a; padding: 70px 0; }
+    .section-block-dark2 { background-color: #1a0808; border-bottom: 3px solid #240a0a; padding: 70px 0; }
+    .section-block-dark3 { background-color: #220b0b; border-bottom: 3px solid #240a0a; padding: 70px 0; }
+
     /* Seção Intro */
-    .intro-section { padding: 40px 0; background-color: #ededed; }
+    .intro-section { padding: 50px 0 70px 0; background-color: #0b0505; border-bottom: 3px solid #240a0a; }
     .hero-brand-block { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
-    .img-feirascore-brand { width: 100%; max-width: 260px; height: auto; margin: 0 auto 10px auto; display: block; }
-    .main-title { font-family: 'Orbitron', sans-serif !important; font-weight: 900 !important; color: #b61c1c !important; font-size: 3.5rem !important; line-height: 0.9 !important; text-transform: uppercase !important; margin-bottom: 10px !important; letter-spacing: 2px !important; }
-    .main-subtitle { font-family: 'Teko', sans-serif !important; font-weight: 700 !important; color: #000 !important; font-size: 2.5rem !important; line-height: 1 !important; text-transform: none !important; margin-bottom: 20px !important; letter-spacing: 1px !important; }
-    .main-subtitle span { color: #b61c1c !important; }
-    .btn-main-red { width: 220px; height: 50px; border: none; border-radius: 25px; background-color: #b61c1c; color: white; font-size: 18px; text-transform: uppercase; transition: 0.3s; letter-spacing: 1px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
-    .btn-main-red:hover { transform: scale(1.05); color: white; background-color: #8a1212; }
-    .img-evento { border-radius: 25px; max-width: 100%; height: auto; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+    .img-feirascore-brand { width: 100%; max-width: 260px; height: auto; margin: 0 auto 10px auto; display: block; filter: drop-shadow(0 0 15px rgba(255, 59, 59, 0.4)); }
+    .main-title { font-family: 'Orbitron', sans-serif !important; font-weight: 900 !important; color: #ff2a2a !important; font-size: 3.5rem !important; line-height: 0.9 !important; text-transform: uppercase !important; margin-bottom: 10px !important; letter-spacing: 2px !important; text-shadow: 0 0 20px rgba(255,0,0,0.5); }
+    .main-subtitle { font-family: 'Teko', sans-serif !important; font-weight: 700 !important; color: #ffffff !important; font-size: 2.5rem !important; line-height: 1 !important; text-transform: none !important; margin-bottom: 20px !important; letter-spacing: 1px !important; }
+    .main-subtitle span { color: #ff2a2a !important; }
+    .btn-main-red { width: 220px; height: 50px; border: none; border-radius: 25px; background-color: #b61c1c; color: white; font-size: 18px; text-transform: uppercase; transition: 0.3s; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(255,0,0,0.3); }
+    .btn-main-red:hover { transform: scale(1.05); color: white; background-color: #e61e1e; }
+    .img-evento { border-radius: 25px; max-width: 100%; height: auto; border: 2px solid #3a0d0d; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
 
     /* Seção Sobre */
-    .about-section { padding: 70px 0; background-color: #f7f7f7; border-top: 1px solid #e0e0e0; border-bottom: 1px solid #e0e0e0; text-align: center; }
-    .about-title { font-size: 2.2rem; color: #b61c1c; letter-spacing: 1px; margin-bottom: 25px; line-height: 1.3; }
-    .about-text { font-family: sans-serif; font-size: 15px; line-height: 1.7; max-width: 800px; margin: 0 auto 20px auto; color: #555; }
-    .highlight-text { font-size: 16px; color: #b61c1c; margin-top: 30px; margin-bottom: 35px; letter-spacing: 0.5px; }
+    .about-title { font-size: 2.2rem; color: #ff3b3b; letter-spacing: 1px; margin-bottom: 25px; line-height: 1.3; }
+    .about-text { font-family: sans-serif; font-size: 15px; line-height: 1.7; max-width: 800px; margin: 0 auto 20px auto; color: #d1c4c4; }
+    .highlight-text { font-size: 16px; color: #ff5555; margin-top: 30px; margin-bottom: 35px; letter-spacing: 0.5px; }
 
-    /* Card Limpo Padrão (Estilo das imagens enviadas) */
+    /* CARDS ESTILO BLOCOS EM BRANCO/CLARO (Como na Imagem) */
     .custom-card {
       background: #ffffff;
+      color: #222222;
       border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-      border: 1px solid #e6e6e6;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+      border: 1px solid #ffffff;
       transition: 0.3s;
       height: 100%;
       display: flex;
       flex-direction: column;
     }
     .custom-card:hover {
-      box-shadow: 0 10px 25px rgba(0,0,0,0.12);
-      transform: translateY(-2px);
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(255, 59, 59, 0.25);
     }
-    .card-img-wrapper { height: 180px; background-color: #f0f0f0; overflow: hidden; }
+    .card-img-wrapper { height: 180px; background-color: #e0e0e0; overflow: hidden; }
     .card-img { width: 100%; height: 100%; object-fit: cover; }
     .card-body-content { padding: 22px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
-    .card-meta-date { font-size: 12px; color: #888; font-family: sans-serif; margin-bottom: 8px; }
-    .card-item-title { font-size: 1.15rem; color: #222; margin-bottom: 10px; text-transform: uppercase; line-height: 1.3; }
-    .card-item-desc { font-family: sans-serif; font-size: 13.5px; color: #666; line-height: 1.6; margin-bottom: 15px; }
+    .card-meta-date { font-size: 12px; color: #777777; font-family: sans-serif; margin-bottom: 8px; }
+    .card-item-title { font-size: 1.15rem; color: #111111; margin-bottom: 10px; text-transform: uppercase; line-height: 1.3; font-weight: bold; }
+    .card-item-desc { font-family: sans-serif; font-size: 13.5px; color: #555555; line-height: 1.6; margin-bottom: 15px; }
     .btn-card-action { color: #b61c1c; text-decoration: none; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; transition: 0.2s; border: none; background: none; padding: 0; font-weight: bold; }
-    .btn-card-action:hover { color: #7a0000; }
+    .btn-card-action:hover { color: #e61e1e; }
 
-    /* Card Borda Tracejada (Terceiro modelo da imagem) */
+    /* Card Borda Tracejada (Terceiro modelo da imagem adaptado ao tema) */
     .custom-card-dashed {
       background: #fff5f5;
-      border: 2px dashed #f0b0b0;
+      border: 2px dashed #ff9999;
       border-radius: 20px;
       padding: 22px;
       height: 100%;
@@ -103,61 +108,54 @@
     }
 
     /* 1. Ranking Geral / Pódio */
-    .ranking-section { padding: 70px 0; background-color: #ededed; }
     .podium-container { display: flex; justify-content: center; align-items: flex-end; gap: 15px; margin-bottom: 35px; }
-    .podium-card { background: #fff; border: 1px solid #ddd; border-radius: 18px; padding: 20px 15px; text-align: center; transition: 0.3s; width: 100%; max-width: 250px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-    .podium-1 { order: 2; border-color: #ffd700; background: #fffdf0; }
+    .podium-card { background: #180909; border: 1px solid #3a1212; border-radius: 18px; padding: 20px 15px; text-align: center; transition: 0.3s; width: 100%; max-width: 250px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+    .podium-1 { order: 2; border-color: #ffd700; background: #241902; }
     .podium-2 { order: 1; border-color: #c0c0c0; }
     .podium-3 { order: 3; border-color: #cd7f32; }
     .podium-crown { font-size: 2rem; margin-bottom: 8px; }
-    .podium-1 .podium-crown { color: #d4af37; }
-    .podium-2 .podium-crown { color: #9a9a9a; }
-    .podium-3 .podium-crown { color: #b87333; }
-    .podium-stand-name { font-size: 1rem; text-transform: uppercase; color: #222; }
-    .podium-class-name { font-family: sans-serif; font-size: 0.85rem; color: #777; margin-bottom: 10px; }
-    .podium-score { font-family: 'Teko', sans-serif; font-size: 1.8rem; color: #b61c1c; line-height: 1; }
+    .podium-1 .podium-crown { color: #ffd700; }
+    .podium-2 .podium-crown { color: #c0c0c0; }
+    .podium-3 .podium-crown { color: #cd7f32; }
+    .podium-stand-name { font-size: 1rem; text-transform: uppercase; color: #fff; }
+    .podium-class-name { font-family: sans-serif; font-size: 0.85rem; color: #b0a0a0; margin-bottom: 10px; }
+    .podium-score { font-family: 'Teko', sans-serif; font-size: 1.8rem; color: #ff4d4d; line-height: 1; }
     
-    .btn-filter-custom { background: #fff; color: #555; border: 1px solid #ccc; border-radius: 20px; padding: 6px 18px; font-size: 13px; transition: 0.3s; }
+    .btn-filter-custom { background: #1a0808; color: #ccc; border: 1px solid #3a1212; border-radius: 20px; padding: 6px 18px; font-size: 13px; transition: 0.3s; }
     .btn-filter-custom:hover, .btn-filter-custom.active { background: #b61c1c; color: #fff; border-color: #b61c1c; }
     
-    .table-light-custom { background: #fff; border-radius: 15px; overflow: hidden; border: 1px solid #e0e0e0; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
-    .table-light-custom th { background: #f8f8f8; color: #333; font-size: 13px; text-transform: uppercase; padding: 14px; border-bottom: 2px solid #b61c1c; }
-    .table-light-custom td { padding: 14px; vertical-align: middle; font-family: sans-serif; font-size: 13.5px; border-bottom: 1px solid #eee; }
+    .table-dark-custom { background: #120606; border-radius: 15px; overflow: hidden; border: 1px solid #2d0e0e; box-shadow: 0 4px 15px rgba(0,0,0,0.5); color: #fff; }
+    .table-dark-custom th { background: #1c0909; color: #ff5555; font-size: 13px; text-transform: uppercase; padding: 14px; border-bottom: 2px solid #b61c1c; }
+    .table-dark-custom td { padding: 14px; vertical-align: middle; font-family: sans-serif; font-size: 13.5px; border-bottom: 1px solid #240a0a; color: #e0e0e0; }
 
     /* 2. Destaque em Alta */
-    .trending-section { padding: 50px 0; background-color: #f7f7f7; border-top: 1px solid #e0e0e0; border-bottom: 1px solid #e0e0e0; }
-    .trending-card { background: #fff; border: 2px solid #b61c1c; border-radius: 20px; padding: 25px; position: relative; box-shadow: 0 6px 20px rgba(182, 28, 28, 0.08); }
+    .trending-card { background: #180707; border: 2px solid #b61c1c; border-radius: 20px; padding: 25px; position: relative; box-shadow: 0 6px 20px rgba(182, 28, 28, 0.2); }
     .badge-trending { position: absolute; top: 18px; right: 20px; background: #b61c1c; color: #fff; padding: 4px 12px; border-radius: 15px; font-size: 11px; text-transform: uppercase; }
 
     /* 3. Transparência / Estatísticas */
-    .stats-section { padding: 70px 0; background-color: #ededed; }
-    .stat-box { background: #fff; border: 1px solid #ddd; border-radius: 18px; padding: 20px; transition: 0.3s; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
-    .stat-box:hover { border-color: #b61c1c; transform: translateY(-2px); }
-    .stat-number { font-family: 'Bungee', cursive; font-size: 2.2rem; color: #b61c1c; }
-    .stat-label { font-family: sans-serif; font-size: 12px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; }
-    .chart-container-box { background: #fff; border: 1px solid #e0e0e0; border-radius: 18px; padding: 22px; margin-top: 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
+    .stat-box { background: #140707; border: 1px solid #330d0d; border-radius: 18px; padding: 20px; transition: 0.3s; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.4); }
+    .stat-box:hover { border-color: #ff2a2a; transform: translateY(-2px); }
+    .stat-number { font-family: 'Bungee', cursive; font-size: 2.2rem; color: #ff3b3b; }
+    .stat-label { font-family: sans-serif; font-size: 12px; color: #aaa; text-transform: uppercase; letter-spacing: 0.5px; }
+    .chart-container-box { background: #120505; border: 1px solid #2d0e0e; border-radius: 18px; padding: 22px; margin-top: 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.4); }
 
     /* 4. Mural do Público */
-    .feed-section { padding: 70px 0; background-color: #f7f7f7; border-top: 1px solid #e0e0e0; border-bottom: 1px solid #e0e0e0; }
-    .btn-like { background: transparent; border: 1px solid #ccc; color: #777; border-radius: 15px; padding: 4px 12px; font-size: 12px; cursor: pointer; transition: 0.2s; }
-    .btn-like:hover, .btn-like.liked { color: #b61c1c; border-color: #b61c1c; background: rgba(182, 28, 28, 0.05); }
+    .btn-like { background: transparent; border: 1px solid #ddd; color: #666; border-radius: 15px; padding: 4px 12px; font-size: 12px; cursor: pointer; transition: 0.2s; }
+    .btn-like:hover, .btn-like.liked { color: #b61c1c; border-color: #b61c1c; background: rgba(182, 28, 28, 0.1); }
 
-    /* Seções Notícias, Localização e FAQ */
-    .news-section { padding: 70px 0; background-color: #ededed; }
-    .location-section { padding: 70px 0; background-color: #f7f7f7; border-top: 1px solid #e0e0e0; border-bottom: 1px solid #e0e0e0; }
-    .map-responsive { overflow: hidden; padding-bottom: 400px; position: relative; height: 0; border-radius: 20px; box-shadow: 0 6px 18px rgba(0,0,0,0.08); }
+    /* Localização e FAQ */
+    .map-responsive { overflow: hidden; padding-bottom: 400px; position: relative; height: 0; border-radius: 20px; box-shadow: 0 6px 18px rgba(0,0,0,0.5); border: 2px solid #2a0a0a; }
     .map-responsive iframe { left: 0; top: 0; height: 100%; width: 100%; position: absolute; }
     
-    .faq-section { padding: 70px 0; background-color: #ededed; }
-    .accordion-item-custom { background: #fff !important; border: 1px solid #ddd !important; border-radius: 15px !important; margin-bottom: 12px; overflow: hidden; box-shadow: 0 3px 8px rgba(0,0,0,0.03); }
-    .accordion-button-custom { background: transparent !important; color: #222 !important; font-size: 15px; text-transform: uppercase; padding: 18px; box-shadow: none !important; }
-    .accordion-button-custom:not(.collapsed) { color: #b61c1c !important; background: #fafafa !important; }
-    .accordion-body-custom { background: #fff; color: #555; font-size: 14px; line-height: 1.6; font-family: sans-serif; }
+    .accordion-item-custom { background: #150707 !important; border: 1px solid #330d0d !important; border-radius: 15px !important; margin-bottom: 12px; overflow: hidden; }
+    .accordion-button-custom { background: transparent !important; color: #ffffff !important; font-size: 15px; text-transform: uppercase; padding: 18px; box-shadow: none !important; }
+    .accordion-button-custom:not(.collapsed) { color: #ff3b3b !important; background: #1f0a0a !important; }
+    .accordion-body-custom { background: #150707; color: #ccc; font-size: 14px; line-height: 1.6; font-family: sans-serif; }
 
     /* Rodapé */
-    .footer-custom { background-color: #1a1a1a; color: rgba(255,255,255,0.7); padding: 50px 0; font-size: 14px; }
+    .footer-custom { background-color: #050202; color: rgba(255,255,255,0.7); padding: 50px 0; font-size: 14px; border-top: 2px solid #200808; }
     .footer-custom p { text-transform: uppercase; letter-spacing: 0.5px; }
-    .footer-custom a { color: #ff6b6b; text-decoration: none; transition: 0.2s; }
+    .footer-custom a { color: #ff5555; text-decoration: none; transition: 0.2s; }
     .footer-custom a:hover { color: white; }
     .social-share-buttons a { font-size: 18px; width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(255,255,255,0.1); color: #fff; transition: 0.3s; }
     .social-share-buttons a:hover { background: #b61c1c; transform: translateY(-3px); }
@@ -178,7 +176,7 @@
       <div class="container">
         <a class="btn-nav-red" href="{{ url_for('estudantelogin') }}">Votar</a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
           <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -222,8 +220,8 @@
     </section>
 
     <!-- SOBRE O PROJETO -->
-    <section class="about-section" id="sobre">
-      <div class="container">
+    <section class="section-block-dark2" id="sobre">
+      <div class="container text-center">
         <div class="row justify-content-center">
           <div class="col-lg-9">
             <h2 class="about-title">O QUE É O FEIRA SCORE?</h2>
@@ -246,7 +244,7 @@
     </section>
 
     <!-- 1. RANKING / HALL DA FAMA -->
-    <section class="ranking-section" id="ranking">
+    <section class="section-block-dark1" id="ranking">
       <div class="container">
         <h2 class="section-title-custom">HALL DA <span>FAMA</span></h2>
         <p class="section-subtitle-custom">Classificação dos projetos mais votados</p>
@@ -281,8 +279,8 @@
           <button class="btn btn-filter-custom" onclick="filterRanking('sustentabilidade')">Sustentabilidade</button>
         </div>
 
-        <div class="table-light-custom table-responsive">
-          <table class="table align-middle mb-0">
+        <div class="table-dark-custom table-responsive">
+          <table class="table table-dark align-middle mb-0">
             <thead>
               <tr>
                 <th style="width: 80px;" class="text-center">Posição</th>
@@ -294,24 +292,24 @@
             </thead>
             <tbody>
               <tr>
-                <td class="fw-bold text-center">4º</td>
+                <td class="fw-bold text-center text-danger">4º</td>
                 <td>Smart Lock com Biometria</td>
                 <td>2º DS - Manhã</td>
-                <td><span class="badge bg-secondary">Automação</span></td>
+                <td><span class="badge bg-danger">Automação</span></td>
                 <td class="text-end fw-bold text-danger">850 pts</td>
               </tr>
               <tr>
-                <td class="fw-bold text-center">5º</td>
+                <td class="fw-bold text-center text-danger">5º</td>
                 <td>Braço Robótico Reciclável</td>
                 <td>1º Mecatrônica</td>
-                <td><span class="badge bg-secondary">Hardware</span></td>
+                <td><span class="badge bg-danger">Hardware</span></td>
                 <td class="text-end fw-bold text-danger">790 pts</td>
               </tr>
               <tr>
-                <td class="fw-bold text-center">6º</td>
+                <td class="fw-bold text-center text-danger">6º</td>
                 <td>App de Reciclagem Comunitária</td>
                 <td>3º DS - Noite</td>
-                <td><span class="badge bg-secondary">Sustentabilidade</span></td>
+                <td><span class="badge bg-danger">Sustentabilidade</span></td>
                 <td class="text-end fw-bold text-danger">710 pts</td>
               </tr>
             </tbody>
@@ -321,7 +319,7 @@
     </section>
 
     <!-- 2. DESTAQUE EM ALTA -->
-    <section class="trending-section" id="em-alta">
+    <section class="section-block-dark3" id="em-alta">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-10">
@@ -330,8 +328,8 @@
               <div class="row align-items-center">
                 <div class="col-md-8 mb-3 mb-md-0">
                   <p class="text-uppercase text-danger mb-1" style="font-size: 12px;">Disparando em Votação 🔥</p>
-                  <h3 class="mb-2" style="font-size: 1.6rem; color: #222;">Visão Computacional na Indústria 4.0</h3>
-                  <p class="font-sans text-muted mb-3" style="font-family: sans-serif; font-size: 14px;">
+                  <h3 class="mb-2" style="font-size: 1.6rem; color: #fff;">Visão Computacional na Indústria 4.0</h3>
+                  <p class="font-sans text-muted mb-3" style="font-family: sans-serif; font-size: 14px; color: #ccc !important;">
                     Projeto de detecção automática de falhas com inteligência artificial. Corra para conhecer e registrar sua avaliação!
                   </p>
                   <span class="badge bg-danger p-2" style="font-family: sans-serif;">Estande #12 - Bloco B</span>
@@ -349,7 +347,7 @@
     </section>
 
     <!-- 3. PAINEL DE ESTATÍSTICAS -->
-    <section class="stats-section" id="estatisticas">
+    <section class="section-block-dark1" id="estatisticas">
       <div class="container">
         <h2 class="section-title-custom">PAINEL DE <span>ESTATÍSTICAS</span></h2>
         <p class="section-subtitle-custom">Acompanhe os números da feira em tempo real</p>
@@ -379,14 +377,14 @@
         </div>
 
         <div class="chart-container-box">
-          <h4 class="text-uppercase mb-4 text-center" style="font-size: 1.1rem; color: #333;">Fluxo de Votação por Horário</h4>
+          <h4 class="text-uppercase mb-4 text-center" style="font-size: 1.1rem; color: #fff;">Fluxo de Votação por Horário</h4>
           <canvas id="votesChart" height="90"></canvas>
         </div>
       </div>
     </section>
 
     <!-- 4. MURAL DO PÚBLICO -->
-    <section class="feed-section" id="mural">
+    <section class="section-block-dark2" id="mural">
       <div class="container">
         <h2 class="section-title-custom">MURAL DO <span>PÚBLICO</span></h2>
         <p class="section-subtitle-custom">Comentários e feedback dos visitantes</p>
@@ -443,8 +441,8 @@
       </div>
     </section>
 
-    <!-- SEÇÃO DE NOTÍCIAS (Inspirada diretamente no modelo da imagem enviada) -->
-    <section class="news-section" id="noticias">
+    <!-- SEÇÃO DE NOTÍCIAS (Cards idênticos aos da imagem anexada) -->
+    <section class="section-block-dark1" id="noticias">
       <div class="container">
         <h2 class="section-title-custom">ÚLTIMAS <span>NOTÍCIAS</span></h2>
         <p class="section-subtitle-custom">Fique por dentro das novidades da feira</p>
@@ -494,7 +492,7 @@
             </div>
           </div>
 
-          <!-- Card Borda Tracejada (Inspirado no 3º card da imagem) -->
+          <!-- Card Borda Tracejada (Terceiro modelo da imagem) -->
           <div class="col-md-4">
             <div class="custom-card-dashed text-center">
               <div>
@@ -502,8 +500,8 @@
                   <i class="fa-solid fa-rss"></i>
                 </div>
                 <div class="card-meta-date">Atualizado agora</div>
-                <h3 class="card-item-title" style="font-size: 1.1rem;">CARREGANDO FEED DE NOTÍCIAS...</h3>
-                <p class="card-item-desc" style="font-size: 13px;">Este bloco está integrado via script para puxar dinamicamente novidades do mundo da tecnologia.</p>
+                <h3 class="card-item-title" style="font-size: 1.1rem; color: #111;">CARREGANDO FEED DE NOTÍCIAS...</h3>
+                <p class="card-item-desc" style="font-size: 13px; color: #555;">Este bloco está integrado via script para puxar dinamicamente novidades do mundo da tecnologia.</p>
               </div>
               <div class="text-center">
                 <a href="#" class="btn-card-action">VER FEED EXTERNO →</a>
@@ -515,7 +513,7 @@
     </section>
 
     <!-- LOCALIZAÇÃO -->
-    <section class="location-section" id="localizacao">
+    <section class="section-block-dark3" id="localizacao">
       <div class="container">
         <h2 class="section-title-custom">NOSSA <span>LOCALIZAÇÃO</span></h2>
         <p class="section-subtitle-custom">Venha nos visitar na Etec Sylvio de Mattos Carvalho</p>
@@ -527,7 +525,7 @@
     </section>
 
     <!-- PERGUNTAS FREQUENTES -->
-    <section class="faq-section" id="faq">
+    <section class="section-block-dark1" id="faq">
       <div class="container">
         <h2 class="section-title-custom">PERGUNTAS <span>FREQUENTES</span></h2>
         <p class="section-subtitle-custom">Tire suas dúvidas sobre o evento</p>
@@ -627,21 +625,21 @@
           datasets: [{
             label: 'Votos Registrados / Hora',
             data: [120, 450, 980, 850, 1100, 950, 442],
-            borderColor: '#b61c1c',
-            backgroundColor: 'rgba(182, 28, 28, 0.08)',
+            borderColor: '#ff2a2a',
+            backgroundColor: 'rgba(255, 42, 42, 0.1)',
             fill: true,
             tension: 0.3,
-            pointBackgroundColor: '#b61c1c'
+            pointBackgroundColor: '#ff2a2a'
           }]
         },
         options: {
           responsive: true,
           plugins: {
-            legend: { labels: { color: '#333' } }
+            legend: { labels: { color: '#ffffff' } }
           },
           scales: {
-            x: { ticks: { color: '#666' }, grid: { color: 'rgba(0,0,0,0.05)' } },
-            y: { ticks: { color: '#666' }, grid: { color: 'rgba(0,0,0,0.05)' } }
+            x: { ticks: { color: '#aaaaaa' }, grid: { color: 'rgba(255,255,255,0.05)' } },
+            y: { ticks: { color: '#aaaaaa' }, grid: { color: 'rgba(255,255,255,0.05)' } }
           }
         }
       });
