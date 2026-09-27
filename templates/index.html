@@ -14,158 +14,202 @@
   <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Orbitron:wght@800;900&family=Russo+One&family=Teko:wght@600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* Reset e Configurações Globais */
+    /* Reset e Fonte Padrão */
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background-color: #0b0505; color: #ffffff; scroll-behavior: smooth; font-family: 'Russo One', sans-serif; }
+    body { min-height: 100vh; background-color: #ededed; color: #333; scroll-behavior: smooth; font-family: 'Russo One', sans-serif; }
 
-    /* Header e Navegação */
-    .navbar-custom { background-color: #120707; padding: 15px 0; border-bottom: 2px solid #300a0a; }
+    /* Header e Nav */
+    .navbar-custom { background-color: #ededed; padding: 15px 0; }
     .btn-nav-red { width: 110px; height: 40px; border: none; border-radius: 20px; background-color: #b61c1c; color: white; font-size: 16px; text-transform: uppercase; text-decoration: none; display: flex; justify-content: center; align-items: center; transition: 0.3s; }
-    .btn-nav-red:hover { transform: scale(1.05); color: white; background-color: #d12323; }
+    .btn-nav-red:hover { transform: scale(1.05); color: white; }
     .nav-link-custom { color: white !important; text-transform: uppercase; font-size: 14px; letter-spacing: 0.5px; background-color: #b61c1c; padding: 8px 16px !important; border-radius: 20px; display: inline-flex; align-items: center; justify-content: center; transition: 0.3s; }
     .nav-link-custom:hover { transform: scale(1.05); color: white !important; background-color: #7a0000; }
     .brand-logos-container { display: flex; align-items: center; gap: 12px; }
     .img-navbar-logo { object-fit: contain; border-radius: 6px; background-color: transparent; }
     
-    /* Títulos Gerais de Seções */
+    /* Seção Intro com padding reduzido para puxar o conteúdo para cima */
+    .intro-section { padding: 40px 0; background-color: #ededed; }
+
+    /* Estilo do Bloco de Texto Hero */
+    .hero-brand-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    /* Imagem do Troféu Ajustada */
+    .img-feirascore-brand {
+      width: 100%;
+      max-width: 260px;
+      height: auto;
+      margin: 0 auto 10px auto;
+      display: block;
+    }
+
+    .main-title { 
+      font-family: 'Orbitron', sans-serif !important; 
+      font-weight: 900 !important;
+      color: #b61c1c !important; 
+      font-size: 3.5rem !important; 
+      line-height: 0.9 !important; 
+      text-transform: uppercase !important; 
+      margin-bottom: 10px !important; 
+      letter-spacing: 2px !important;
+    }
+
+    .main-subtitle { 
+      font-family: 'Teko', sans-serif !important; 
+      font-weight: 700 !important;
+      color: #000 !important; 
+      font-size: 2.5rem !important; 
+      line-height: 1 !important;
+      text-transform: none !important; 
+      margin-bottom: 20px !important; 
+      letter-spacing: 1px !important;
+    }
+
+    .main-subtitle span { 
+      font-family: inherit !important; 
+      color: #b61c1c !important; 
+    }
+
+    /* Outras Seções */
+    .btn-main-red { width: 220px; height: 50px; border: none; border-radius: 25px; background-color: #b61c1c; color: white; font-size: 18px; text-transform: uppercase; transition: 0.3s; letter-spacing: 1px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+    .btn-main-red:hover { transform: scale(1.05); color: white; background-color: #8a1212; }
+    .img-evento { border-radius: 40px; max-width: 100%; height: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+    .about-section { padding: 100px 0; background: linear-gradient(rgba(110, 0, 0, 0.92), rgba(20, 0, 0, 0.98)), url("background-login.jpg"); background-size: cover; background-position: center; background-attachment: fixed; color: white; text-align: center; position: relative; overflow: hidden; }
+    .about-section::before { content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 500px; height: 500px; background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%); clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); pointer-events: none; }
+    .about-title { font-size: 2.5rem; letter-spacing: 2px; margin-bottom: 40px; line-height: 1.4; }
+    .about-text { font-size: 16px; line-height: 1.8; max-width: 800px; margin: 0 auto 25px auto; color: rgba(255, 255, 255, 0.9); }
+    .highlight-text { font-size: 18px; color: #ffc107; margin-top: 40px; margin-bottom: 45px; letter-spacing: 0.5px; }
+    .btn-main-white { width: 190px; height: 48px; border: none; border-radius: 25px; background: linear-gradient(to right, #d9d9d9, #ffffff); color: #7a0000; font-size: 16px; text-transform: uppercase; margin: 10px; transition: 0.3s; letter-spacing: 1px; }
+    .btn-main-white:hover { transform: scale(1.05); color: #7a0000; }
+    
+    /* ==========================================
+       ESTILOS DAS NOVAS SEÇÕES
+       ========================================== */
     .section-title-custom {
       font-family: 'Bungee', cursive !important;
-      color: #ff3b3b !important;
-      font-size: 2.2rem;
-      letter-spacing: 1px;
-      margin-bottom: 8px;
+      color: #b61c1c !important;
+      font-size: 2.5rem;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
       text-transform: uppercase;
       text-align: center;
     }
     .section-title-custom span { color: #ffffff !important; }
     .section-subtitle-custom {
       font-family: 'Teko', sans-serif !important;
-      font-size: 1.6rem;
-      color: #b0a0a0;
-      margin-bottom: 35px;
-      letter-spacing: 0.5px;
+      font-size: 1.8rem;
+      color: #ddd;
+      margin-bottom: 40px;
+      letter-spacing: 1px;
       text-align: center;
     }
 
-    /* Seções com cores sólidas delimitadas (SEM DEGRADÊ ENTRE PÁGINAS) */
-    .section-block-dark1 { background-color: #0b0505; border-bottom: 3px solid #240a0a; padding: 70px 0; }
-    .section-block-dark2 { background-color: #1a0808; border-bottom: 3px solid #240a0a; padding: 70px 0; }
-    .section-block-dark3 { background-color: #220b0b; border-bottom: 3px solid #240a0a; padding: 70px 0; }
-
-    /* Seção Intro */
-    .intro-section { padding: 50px 0 70px 0; background-color: #0b0505; border-bottom: 3px solid #240a0a; }
-    .hero-brand-block { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
-    .img-feirascore-brand { width: 100%; max-width: 260px; height: auto; margin: 0 auto 10px auto; display: block; filter: drop-shadow(0 0 15px rgba(255, 59, 59, 0.4)); }
-    .main-title { font-family: 'Orbitron', sans-serif !important; font-weight: 900 !important; color: #ff2a2a !important; font-size: 3.5rem !important; line-height: 0.9 !important; text-transform: uppercase !important; margin-bottom: 10px !important; letter-spacing: 2px !important; text-shadow: 0 0 20px rgba(255,0,0,0.5); }
-    .main-subtitle { font-family: 'Teko', sans-serif !important; font-weight: 700 !important; color: #ffffff !important; font-size: 2.5rem !important; line-height: 1 !important; text-transform: none !important; margin-bottom: 20px !important; letter-spacing: 1px !important; }
-    .main-subtitle span { color: #ff2a2a !important; }
-    .btn-main-red { width: 220px; height: 50px; border: none; border-radius: 25px; background-color: #b61c1c; color: white; font-size: 18px; text-transform: uppercase; transition: 0.3s; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(255,0,0,0.3); }
-    .btn-main-red:hover { transform: scale(1.05); color: white; background-color: #e61e1e; }
-    .img-evento { border-radius: 25px; max-width: 100%; height: auto; border: 2px solid #3a0d0d; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
-
-    /* Seção Sobre */
-    .about-title { font-size: 2.2rem; color: #ff3b3b; letter-spacing: 1px; margin-bottom: 25px; line-height: 1.3; }
-    .about-text { font-family: sans-serif; font-size: 15px; line-height: 1.7; max-width: 800px; margin: 0 auto 20px auto; color: #d1c4c4; }
-    .highlight-text { font-size: 16px; color: #ff5555; margin-top: 30px; margin-bottom: 35px; letter-spacing: 0.5px; }
-
-    /* CARDS ESTILO BLOCOS EM BRANCO/CLARO (Como na Imagem) */
-    .custom-card {
-      background: #ffffff;
-      color: #222222;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-      border: 1px solid #ffffff;
-      transition: 0.3s;
-      height: 100%;
+    /* 1. Ranking / Hall da Fama */
+    .ranking-section {
+      padding: 80px 0;
+      background-color: #080808;
+      color: white;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .podium-container {
       display: flex;
-      flex-direction: column;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 15px;
+      margin-bottom: 40px;
+      padding: 20px 0;
     }
-    .custom-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 30px rgba(255, 59, 59, 0.25);
-    }
-    .card-img-wrapper { height: 180px; background-color: #e0e0e0; overflow: hidden; }
-    .card-img { width: 100%; height: 100%; object-fit: cover; }
-    .card-body-content { padding: 22px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
-    .card-meta-date { font-size: 12px; color: #777777; font-family: sans-serif; margin-bottom: 8px; }
-    .card-item-title { font-size: 1.15rem; color: #111111; margin-bottom: 10px; text-transform: uppercase; line-height: 1.3; font-weight: bold; }
-    .card-item-desc { font-family: sans-serif; font-size: 13.5px; color: #555555; line-height: 1.6; margin-bottom: 15px; }
-    .btn-card-action { color: #b61c1c; text-decoration: none; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; transition: 0.2s; border: none; background: none; padding: 0; font-weight: bold; }
-    .btn-card-action:hover { color: #e61e1e; }
-
-    /* Card Borda Tracejada (Terceiro modelo da imagem adaptado ao tema) */
-    .custom-card-dashed {
-      background: #fff5f5;
-      border: 2px dashed #ff9999;
+    .podium-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(255, 255, 255, 0.1);
       border-radius: 20px;
-      padding: 22px;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      padding: 20px 15px;
+      text-align: center;
       transition: 0.3s;
+      width: 100%;
+      max-width: 260px;
     }
-
-    /* 1. Ranking Geral / Pódio */
-    .podium-container { display: flex; justify-content: center; align-items: flex-end; gap: 15px; margin-bottom: 35px; }
-    .podium-card { background: #180909; border: 1px solid #3a1212; border-radius: 18px; padding: 20px 15px; text-align: center; transition: 0.3s; width: 100%; max-width: 250px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
-    .podium-1 { order: 2; border-color: #ffd700; background: #241902; }
-    .podium-2 { order: 1; border-color: #c0c0c0; }
-    .podium-3 { order: 3; border-color: #cd7f32; }
-    .podium-crown { font-size: 2rem; margin-bottom: 8px; }
+    .podium-1 { order: 2; height: 320px; border-color: #ffd700; box-shadow: 0 0 20px rgba(255, 215, 0, 0.2); background: linear-gradient(180deg, rgba(255, 215, 0, 0.1) 0%, rgba(0,0,0,0.8) 100%); }
+    .podium-2 { order: 1; height: 270px; border-color: #c0c0c0; background: linear-gradient(180deg, rgba(192, 192, 192, 0.1) 0%, rgba(0,0,0,0.8) 100%); }
+    .podium-3 { order: 3; height: 240px; border-color: #cd7f32; background: linear-gradient(180deg, rgba(205, 127, 50, 0.1) 0%, rgba(0,0,0,0.8) 100%); }
+    .podium-crown { font-size: 2.2rem; margin-bottom: 8px; }
     .podium-1 .podium-crown { color: #ffd700; }
     .podium-2 .podium-crown { color: #c0c0c0; }
     .podium-3 .podium-crown { color: #cd7f32; }
-    .podium-stand-name { font-size: 1rem; text-transform: uppercase; color: #fff; }
-    .podium-class-name { font-family: sans-serif; font-size: 0.85rem; color: #b0a0a0; margin-bottom: 10px; }
+    .podium-stand-name { font-size: 1.1rem; text-transform: uppercase; color: #fff; }
+    .podium-class-name { font-family: sans-serif; font-size: 0.85rem; color: #aaa; margin-bottom: 12px; }
     .podium-score { font-family: 'Teko', sans-serif; font-size: 1.8rem; color: #ff4d4d; line-height: 1; }
-    
-    .btn-filter-custom { background: #1a0808; color: #ccc; border: 1px solid #3a1212; border-radius: 20px; padding: 6px 18px; font-size: 13px; transition: 0.3s; }
+    .btn-filter-custom { background: rgba(255, 255, 255, 0.1); color: #fff; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 20px; padding: 6px 18px; font-size: 14px; transition: 0.3s; }
     .btn-filter-custom:hover, .btn-filter-custom.active { background: #b61c1c; color: #fff; border-color: #b61c1c; }
-    
-    .table-dark-custom { background: #120606; border-radius: 15px; overflow: hidden; border: 1px solid #2d0e0e; box-shadow: 0 4px 15px rgba(0,0,0,0.5); color: #fff; }
-    .table-dark-custom th { background: #1c0909; color: #ff5555; font-size: 13px; text-transform: uppercase; padding: 14px; border-bottom: 2px solid #b61c1c; }
-    .table-dark-custom td { padding: 14px; vertical-align: middle; font-family: sans-serif; font-size: 13.5px; border-bottom: 1px solid #240a0a; color: #e0e0e0; }
+    .ranking-table-container { background: rgba(20, 20, 20, 0.9); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 15px; overflow: hidden; }
+    .table-dark-custom { margin-bottom: 0; color: #fff; text-align: left; }
+    .table-dark-custom th { background: #151515; border-bottom: 2px solid #b61c1c; font-size: 14px; text-transform: uppercase; padding: 15px; }
+    .table-dark-custom td { padding: 15px; vertical-align: middle; border-bottom: 1px solid rgba(255, 255, 255, 0.05); font-family: sans-serif; font-size: 14px; }
 
     /* 2. Destaque em Alta */
-    .trending-card { background: #180707; border: 2px solid #b61c1c; border-radius: 20px; padding: 25px; position: relative; box-shadow: 0 6px 20px rgba(182, 28, 28, 0.2); }
-    .badge-trending { position: absolute; top: 18px; right: 20px; background: #b61c1c; color: #fff; padding: 4px 12px; border-radius: 15px; font-size: 11px; text-transform: uppercase; }
+    .trending-section { padding: 60px 0; background: linear-gradient(180deg, #080808 0%, #170303 50%, #080808 100%); color: white; border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+    .trending-card { background: linear-gradient(135deg, rgba(182, 28, 28, 0.25) 0%, rgba(0, 0, 0, 0.9) 100%); border: 2px solid #b61c1c; border-radius: 20px; padding: 30px; position: relative; box-shadow: 0 0 25px rgba(182, 28, 28, 0.25); }
+    .badge-trending { position: absolute; top: 18px; right: 20px; background: #ff4d4d; color: #fff; padding: 5px 12px; border-radius: 20px; font-size: 11px; text-transform: uppercase; animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(255, 77, 77, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0); } }
 
-    /* 3. Transparência / Estatísticas */
-    .stat-box { background: #140707; border: 1px solid #330d0d; border-radius: 18px; padding: 20px; transition: 0.3s; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.4); }
-    .stat-box:hover { border-color: #ff2a2a; transform: translateY(-2px); }
-    .stat-number { font-family: 'Bungee', cursive; font-size: 2.2rem; color: #ff3b3b; }
-    .stat-label { font-family: sans-serif; font-size: 12px; color: #aaa; text-transform: uppercase; letter-spacing: 0.5px; }
-    .chart-container-box { background: #120505; border: 1px solid #2d0e0e; border-radius: 18px; padding: 22px; margin-top: 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.4); }
+    /* 3. Painel de Transparência / Estatísticas */
+    .stats-section { padding: 80px 0; background-color: #0d0b0b; color: white; border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+    .stat-box { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 18px; padding: 22px; transition: 0.3s; text-align: center; }
+    .stat-box:hover { border-color: #b61c1c; transform: translateY(-4px); }
+    .stat-number { font-family: 'Bungee', cursive; font-size: 2.5rem; color: #ff4d4d; }
+    .stat-label { font-family: sans-serif; font-size: 13px; color: #ccc; text-transform: uppercase; letter-spacing: 1px; }
+    .chart-container-box { background: rgba(20, 20, 20, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 18px; padding: 25px; margin-top: 35px; }
 
-    /* 4. Mural do Público */
-    .btn-like { background: transparent; border: 1px solid #ddd; color: #666; border-radius: 15px; padding: 4px 12px; font-size: 12px; cursor: pointer; transition: 0.2s; }
-    .btn-like:hover, .btn-like.liked { color: #b61c1c; border-color: #b61c1c; background: rgba(182, 28, 28, 0.1); }
+    /* 4. Mural do Público / Feedback */
+    .feed-section { padding: 80px 0; background-color: #080808; color: white; }
+    .comment-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 18px; padding: 22px; text-align: left; height: 100%; display: flex; flex-direction: column; justify-content: space-between; }
+    .comment-user { font-size: 0.95rem; color: #fff; }
+    .comment-target { font-size: 12px; color: #ff6b6b; font-family: sans-serif; margin-bottom: 10px; }
+    .comment-text { font-family: sans-serif; font-size: 14px; color: #ddd; line-height: 1.5; margin-bottom: 15px; }
+    .btn-like { background: transparent; border: 1px solid rgba(255, 255, 255, 0.2); color: #aaa; border-radius: 15px; padding: 4px 12px; font-size: 12px; cursor: pointer; transition: 0.2s; }
+    .btn-like:hover, .btn-like.liked { color: #ff4d4d; border-color: #ff4d4d; background: rgba(255, 77, 77, 0.1); }
 
-    /* Localização e FAQ */
-    .map-responsive { overflow: hidden; padding-bottom: 400px; position: relative; height: 0; border-radius: 20px; box-shadow: 0 6px 18px rgba(0,0,0,0.5); border: 2px solid #2a0a0a; }
+    /* Estilos das Seções já Existentes */
+    .news-section { padding: 90px 0; background-color: #ededed; }
+    .news-card { background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.06); transition: 0.3s; }
+    .news-card:hover { box-shadow: 0 12px 25px rgba(0,0,0,0.12); }
+    .news-img-wrapper { height: 200px; background-color: #ccc; overflow: hidden; }
+    .news-img { width: 100%; height: 100%; object-fit: cover; }
+    .news-body { padding: 25px; }
+    .news-date { font-size: 12px; color: #888; font-family: sans-serif; margin-bottom: 8px; }
+    .news-title { font-size: 1.2rem; color: #333; margin-bottom: 12px; text-transform: uppercase; }
+    .news-text { font-family: sans-serif; font-size: 14px; color: #666; line-height: 1.6; margin-bottom: 15px; }
+    .full-story-text { font-family: sans-serif; font-size: 14px; color: #444; line-height: 1.6; border-top: 1px dashed #ddd; padding-top: 15px; margin-top: 10px; }
+    .btn-news-link { color: #b61c1c; text-decoration: none; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; transition: 0.2s; display: inline-block; cursor: pointer; border: none; background: none; padding: 0; }
+    .btn-news-link:hover { color: #7a0000; }
+    .location-section { padding: 90px 0; background-color: #f9f9f9; }
+    .map-responsive { overflow: hidden; padding-bottom: 450px; position: relative; height: 0; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
     .map-responsive iframe { left: 0; top: 0; height: 100%; width: 100%; position: absolute; }
-    
-    .accordion-item-custom { background: #150707 !important; border: 1px solid #330d0d !important; border-radius: 15px !important; margin-bottom: 12px; overflow: hidden; }
-    .accordion-button-custom { background: transparent !important; color: #ffffff !important; font-size: 15px; text-transform: uppercase; padding: 18px; box-shadow: none !important; }
-    .accordion-button-custom:not(.collapsed) { color: #ff3b3b !important; background: #1f0a0a !important; }
-    .accordion-body-custom { background: #150707; color: #ccc; font-size: 14px; line-height: 1.6; font-family: sans-serif; }
-
-    /* Rodapé */
-    .footer-custom { background-color: #050202; color: rgba(255,255,255,0.7); padding: 50px 0; font-size: 14px; border-top: 2px solid #200808; }
+    .faq-section { padding: 90px 0; background: #0d0b0b; color: white; }
+    .accordion-item-custom { background: rgba(255, 255, 255, 0.06) !important; border: 1px solid rgba(255, 255, 255, 0.12) !important; border-radius: 15px !important; margin-bottom: 15px; overflow: hidden; backdrop-filter: blur(4px); }
+    .accordion-button-custom { background: transparent !important; color: white !important; font-size: 15px; text-transform: uppercase; padding: 20px; box-shadow: none !important; }
+    .accordion-button-custom:not(.collapsed) { color: #ff4d4d !important; background: rgba(255, 255, 255, 0.03) !important; }
+    .accordion-button-custom::after { filter: invert(1); }
+    .accordion-body-custom { background: rgba(0, 0, 0, 0.2); color: #ccc; font-size: 14px; line-height: 1.6; font-family: sans-serif; }
+    .footer-custom { background-color: #050505; color: rgba(255,255,255,0.6); padding: 60px 0; font-size: 14px; border-top: 1px solid rgba(255,255,255,0.05); }
     .footer-custom p { text-transform: uppercase; letter-spacing: 0.5px; }
-    .footer-custom a { color: #ff5555; text-decoration: none; transition: 0.2s; }
+    .footer-custom a { color: #ff4d4d; text-decoration: none; transition: 0.2s; }
     .footer-custom a:hover { color: white; }
-    .social-share-buttons a { font-size: 18px; width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(255,255,255,0.1); color: #fff; transition: 0.3s; }
+    .social-share-buttons a { font-size: 20px; width: 45px; height: 45px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(255,255,255,0.1); color: #fff; transition: 0.3s; }
     .social-share-buttons a:hover { background: #b61c1c; transform: translateY(-3px); }
 
+    @media(max-width: 991px) { .navbar-custom .container { gap: 10px; } .brand-logos-container { margin-top: 10px; width: 100%; justify-content: center; } }
     @media(max-width: 768px) {
       .podium-container { flex-direction: column; align-items: center; }
       .podium-card { max-width: 100%; height: auto !important; order: initial !important; }
-      .main-title { font-size: 2.5rem !important; }
-      .main-subtitle { font-size: 1.8rem !important; }
+      .intro-section { padding: 30px 0; } .about-section { padding: 60px 0; } .news-section { padding: 50px 0; } .location-section { padding: 50px 0; } .faq-section { padding: 50px 0; } .main-title { font-size: 2.5rem !important; } .main-subtitle { font-size: 1.8rem !important; margin-bottom: 15px !important; } .about-title { font-size: 1.8rem; } .about-text { font-size: 14px; } .about-section::before { width: 280px; height: 280px; }
     }
+    @media(max-width: 480px) { .main-title { font-size: 2rem !important; } .main-subtitle { font-size: 1.5rem !important; } .highlight-text { font-size: 15px; } }
   </style>
 </head>
 
@@ -176,19 +220,24 @@
       <div class="container">
         <a class="btn-nav-red" href="{{ url_for('estudantelogin') }}">Votar</a>
 
-        <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
           <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
           <ul class="navbar-nav gap-2 my-3 my-lg-0 text-center">
-            <li class="nav-item"><a class="nav-link nav-link-custom" href="{{ url_for('estandes') }}">Estandes</a></li>
+            <li class="nav-item">
+              <a class="nav-link nav-link-custom" href="{{ url_for('estandes') }}">Estandes</a>
+            </li>
             <li class="nav-item"><a class="nav-link nav-link-custom" href="#mural">Mural</a></li>
             <li class="nav-item"><a class="nav-link nav-link-custom" href="#ranking">Ranking</a></li>
             <li class="nav-item"><a class="nav-link nav-link-custom" href="#estatisticas">Estatísticas</a></li>
             <li class="nav-item"><a class="nav-link nav-link-custom" href="#noticias">Notícias</a></li>
             <li class="nav-item"><a class="nav-link nav-link-custom" href="#localizacao">Localização</a></li>
             <li class="nav-item"><a class="nav-link nav-link-custom" href="#faq">FAQ</a></li>
+            <li class="nav-item">
+              <a class="nav-link nav-link-custom" href="{{ url_for('estudantelogin') }}">Buscar por Turma</a>
+            </li>
           </ul>
         </div>
 
@@ -201,10 +250,10 @@
   </header>
 
   <main>
-    <!-- HERO INTRO -->
     <section class="intro-section">
       <div class="container">
         <div class="row align-items-center justify-content-center">
+          
           <div class="col-md-6 mb-4 mb-md-0 hero-brand-block">
             <img src="{{ url_for('static', filename='trofeu.png') }}" alt="Troféu FeiraScore" class="img-feirascore-brand">
             <h1 class="main-title">FEIRA<br>SCORE</h1>
@@ -215,40 +264,41 @@
           <div class="col-md-6 text-center">
             <img src="{{ url_for('static', filename='evento.jpg') }}" alt="Evento Feira" class="img-evento">
           </div>
+
         </div>
       </div>
     </section>
 
-    <!-- SOBRE O PROJETO -->
-    <section class="section-block-dark2" id="sobre">
-      <div class="container text-center">
+    <section class="about-section" id="sobre">
+      <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-9">
-            <h2 class="about-title">O QUE É O FEIRA SCORE?</h2>
+            <h2 class="about-title">O QUE É<br>FEIRA SCORE?</h2>
             <p class="about-text">
-              O FeiraScore foi criado para modernizar a feira tecnológica da Etec Sylvio de Mattos Carvalho. Em vez do método tradicional, tudo acontece de forma digital, prática e sem complicação.
+              O FeiraScore foi criado pra deixar a feira tecnológica da Etec Sylvio de Mattos Carvalho muito mais moderna, rápida e interativa. Em vez daquele jeito tradicional de votação, tudo acontece de forma digital, prática e sem complicação.
             </p>
             <p class="about-text">
-              Os visitantes podem conhecer os projetos, votar nos seus favoritos e acompanhar a classificação em tempo real com total transparência.
+              A ideia é simples: os visitantes podem conhecer os projetos, votar nos que mais gostaram e participar da feira de um jeito muito mais divertido. Além de facilitar a vida de todo mundo, o sistema deixa a contagem dos votos muito mais rápida e organizada.
             </p>
             <p class="highlight-text">
               SUA OPINIÃO FAZ A DIFERENÇA!<br>
-              CADA VOTO AJUDA A DESTACAR IDEIAS E RECONHECER TALENTOS.
+              CADA VOTO AJUDA A DESTACAR IDEIAS, RECONHECER ESFORÇOS E VALORIZAR PROJETOS INCRÍVEIS.
             </p>
-            <div class="d-flex justify-content-center">
-              <a class="btn-main-red d-inline-flex align-items-center justify-content-center text-decoration-none" href="{{ url_for('estudantelogin') }}">Votar Agora</a>
+            <div class="d-flex flex-wrap justify-content-center gap-2">
+              <a class="btn-main-white d-inline-flex align-items-center justify-content-center text-decoration-none" href="{{ url_for('estudantelogin') }}">Votar</a>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 1. RANKING / HALL DA FAMA -->
-    <section class="section-block-dark1" id="ranking">
+    <!-- ================= 1. RANKING GERAL / HALL DA FAMA ================= -->
+    <section class="ranking-section" id="ranking">
       <div class="container">
         <h2 class="section-title-custom">HALL DA <span>FAMA</span></h2>
-        <p class="section-subtitle-custom">Classificação dos projetos mais votados</p>
+        <p class="section-subtitle-custom">Classificação em tempo real dos projetos mais votados</p>
 
+        <!-- PÓDIO (1º, 2º e 3º Lugar) -->
         <div class="podium-container">
           <div class="podium-card podium-2">
             <div class="podium-crown"><i class="fa-solid fa-medal"></i></div>
@@ -260,7 +310,7 @@
           <div class="podium-card podium-1">
             <div class="podium-crown"><i class="fa-solid fa-crown"></i></div>
             <div class="podium-stand-name">FeiraScore</div>
-            <div class="podium-class-name">3º Módulo - Desenvol. Sistemas</div>
+            <div class="podium-class-name">3º Módulo - Desenvolvimento de Sistemas</div>
             <div class="podium-score">1.850 pts</div>
           </div>
 
@@ -272,65 +322,69 @@
           </div>
         </div>
 
+        <!-- FILTROS -->
         <div class="d-flex justify-content-center gap-2 mb-4 flex-wrap">
           <button class="btn btn-filter-custom active" onclick="filterRanking('todos')">Geral</button>
-          <button class="btn btn-filter-custom" onclick="filterRanking('tecnologia')">Tecnologia</button>
-          <button class="btn btn-filter-custom" onclick="filterRanking('automacao')">Automação</button>
+          <button class="btn btn-filter-custom" onclick="filterRanking('tecnologia')">Tecnologia & Software</button>
+          <button class="btn btn-filter-custom" onclick="filterRanking('automacao')">Automação & Hardware</button>
           <button class="btn btn-filter-custom" onclick="filterRanking('sustentabilidade')">Sustentabilidade</button>
         </div>
 
-        <div class="table-dark-custom table-responsive">
-          <table class="table table-dark align-middle mb-0">
-            <thead>
-              <tr>
-                <th style="width: 80px;" class="text-center">Posição</th>
-                <th>Estande / Projeto</th>
-                <th>Turma / Curso</th>
-                <th>Categoria</th>
-                <th class="text-end">Pontuação</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="fw-bold text-center text-danger">4º</td>
-                <td>Smart Lock com Biometria</td>
-                <td>2º DS - Manhã</td>
-                <td><span class="badge bg-danger">Automação</span></td>
-                <td class="text-end fw-bold text-danger">850 pts</td>
-              </tr>
-              <tr>
-                <td class="fw-bold text-center text-danger">5º</td>
-                <td>Braço Robótico Reciclável</td>
-                <td>1º Mecatrônica</td>
-                <td><span class="badge bg-danger">Hardware</span></td>
-                <td class="text-end fw-bold text-danger">790 pts</td>
-              </tr>
-              <tr>
-                <td class="fw-bold text-center text-danger">6º</td>
-                <td>App de Reciclagem Comunitária</td>
-                <td>3º DS - Noite</td>
-                <td><span class="badge bg-danger">Sustentabilidade</span></td>
-                <td class="text-end fw-bold text-danger">710 pts</td>
-              </tr>
-            </tbody>
-          </table>
+        <!-- TABELA DINÂMICA -->
+        <div class="ranking-table-container">
+          <div class="table-responsive">
+            <table class="table table-dark-custom align-middle">
+              <thead>
+                <tr>
+                  <th style="width: 80px;">Posição</th>
+                  <th>Estande / Projeto</th>
+                  <th>Turma / Curso</th>
+                  <th>Categoria</th>
+                  <th class="text-end">Pontuação</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="fw-bold text-center">4º</td>
+                  <td>Smart Lock com Biometria</td>
+                  <td>2º DS - Manhã</td>
+                  <td><span class="badge bg-secondary">Automação</span></td>
+                  <td class="text-end fw-bold text-danger">850 pts</td>
+                </tr>
+                <tr>
+                  <td class="fw-bold text-center">5º</td>
+                  <td>Braço Robótico Reciclável</td>
+                  <td>1º Mecatrônica</td>
+                  <td><span class="badge bg-secondary">Hardware</span></td>
+                  <td class="text-end fw-bold text-danger">790 pts</td>
+                </tr>
+                <tr>
+                  <td class="fw-bold text-center">6º</td>
+                  <td>App de Reciclagem Comunitária</td>
+                  <td>3º DS - Noite</td>
+                  <td><span class="badge bg-secondary">Sustentabilidade</span></td>
+                  <td class="text-end fw-bold text-danger">710 pts</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- 2. DESTAQUE EM ALTA -->
-    <section class="section-block-dark3" id="em-alta">
+    <!-- ================= 2. DESTAQUE DO MOMENTO (EM ALTA) ================= -->
+    <section class="trending-section" id="em-alta">
       <div class="container">
         <div class="row justify-content-center">
-          <div class="col-lg-10">
+          <div class="col-lg-8">
             <div class="trending-card text-center text-md-start">
-              <span class="badge-trending"><i class="fa-solid fa-fire me-1"></i> Em Alta</span>
+              <span class="badge-trending"><i class="fa-solid fa-fire me-1"></i> Em Alta no Momento</span>
               <div class="row align-items-center">
                 <div class="col-md-8 mb-3 mb-md-0">
-                  <p class="text-uppercase text-danger mb-1" style="font-size: 12px;">Disparando em Votação 🔥</p>
-                  <h3 class="mb-2" style="font-size: 1.6rem; color: #fff;">Visão Computacional na Indústria 4.0</h3>
-                  <p class="font-sans text-muted mb-3" style="font-family: sans-serif; font-size: 14px; color: #ccc !important;">
-                    Projeto de detecção automática de falhas com inteligência artificial. Corra para conhecer e registrar sua avaliação!
+                  <p class="text-uppercase text-danger mb-1" style="font-size: 12px; letter-spacing: 1px;">Disparando em Votação 🔥</p>
+                  <h3 class="mb-2" style="font-size: 1.8rem; color: #fff;">Visão Computacional na Indústria 4.0</h3>
+                  <p class="font-sans text-white-50 mb-3" style="font-family: sans-serif; font-size: 14px;">
+                    Projeto de detecção automática de falhas com inteligência artificial. Corra para conhecer e registrar sua nota!
                   </p>
                   <span class="badge bg-danger p-2" style="font-family: sans-serif;">Estande #12 - Bloco B</span>
                 </div>
@@ -346,11 +400,11 @@
       </div>
     </section>
 
-    <!-- 3. PAINEL DE ESTATÍSTICAS -->
-    <section class="section-block-dark1" id="estatisticas">
+    <!-- ================= 3. PAINEL DE TRANSPARÊNCIA E ESTATÍSTICAS ================= -->
+    <section class="stats-section" id="estatisticas">
       <div class="container">
-        <h2 class="section-title-custom">PAINEL DE <span>ESTATÍSTICAS</span></h2>
-        <p class="section-subtitle-custom">Acompanhe os números da feira em tempo real</p>
+        <h2 class="section-title-custom">PAINEL DE <span>TRANSPARÊNCIA</span></h2>
+        <p class="section-subtitle-custom">Dados do volume de avaliações processados pelo sistema</p>
 
         <div class="row g-4">
           <div class="col-md-4">
@@ -377,63 +431,63 @@
         </div>
 
         <div class="chart-container-box">
-          <h4 class="text-uppercase mb-4 text-center" style="font-size: 1.1rem; color: #fff;">Fluxo de Votação por Horário</h4>
-          <canvas id="votesChart" height="90"></canvas>
+          <h4 class="text-uppercase mb-4 text-center" style="font-size: 1.2rem; color: #fff;">Horários de Maior Pico de Avaliação</h4>
+          <canvas id="votesChart" height="100"></canvas>
         </div>
       </div>
     </section>
 
-    <!-- 4. MURAL DO PÚBLICO -->
-    <section class="section-block-dark2" id="mural">
+    <!-- ================= 4. MURAL DO PÚBLICO (FEED DE COMENTÁRIOS) ================= -->
+    <section class="feed-section" id="mural">
       <div class="container">
         <h2 class="section-title-custom">MURAL DO <span>PÚBLICO</span></h2>
-        <p class="section-subtitle-custom">Comentários e feedback dos visitantes</p>
+        <p class="section-subtitle-custom">O que os visitantes estão achando dos projetos expostos</p>
 
         <div class="row g-4 justify-content-center">
           <div class="col-md-4">
-            <div class="custom-card card-body-content">
+            <div class="comment-card">
               <div>
-                <div class="fw-bold text-dark mb-1">Lucas Oliveira</div>
-                <div class="text-danger mb-2" style="font-size: 12px; font-family: sans-serif;">Avaliou: FeiraScore</div>
-                <p class="card-item-desc">"Sistema sensacional e extremamente rápido! Ficou muito mais fácil escolher os melhores estandes."</p>
+                <div class="comment-user fw-bold">Lucas Oliveira</div>
+                <div class="comment-target">Avaliou: FeiraScore</div>
+                <p class="comment-text">"Sistema sensacional e extremamente rápido! Ficou muito mais fácil escolher os melhores estandes."</p>
               </div>
-              <div class="d-flex justify-content-between align-items-center border-top pt-3">
+              <div class="d-flex justify-content-between align-items-center">
                 <button class="btn-like" onclick="likeComment(this)">
                   <i class="fa-regular fa-heart me-1"></i> <span>14</span>
                 </button>
-                <small class="text-muted" style="font-family: sans-serif; font-size: 11px;">Há 10 min</small>
+                <small class="text-white-50" style="font-family: sans-serif; font-size: 11px;">Há 10 min</small>
               </div>
             </div>
           </div>
 
           <div class="col-md-4">
-            <div class="custom-card card-body-content">
+            <div class="comment-card">
               <div>
-                <div class="fw-bold text-dark mb-1">Mariana Costa</div>
-                <div class="text-danger mb-2" style="font-size: 12px; font-family: sans-serif;">Avaliou: EcoTech Sensor</div>
-                <p class="card-item-desc">"Proposta incrível para a preservação de energia. Apresentação do grupo foi ótima e muito clara!"</p>
+                <div class="comment-user fw-bold">Mariana Costa</div>
+                <div class="comment-target">Avaliou: EcoTech Sensor</div>
+                <p class="comment-text">"Proposta incrível para a preservação de energia. Apresentação do grupo foi ótima e muito clara!"</p>
               </div>
-              <div class="d-flex justify-content-between align-items-center border-top pt-3">
+              <div class="d-flex justify-content-between align-items-center">
                 <button class="btn-like" onclick="likeComment(this)">
                   <i class="fa-regular fa-heart me-1"></i> <span>28</span>
                 </button>
-                <small class="text-muted" style="font-family: sans-serif; font-size: 11px;">Há 25 min</small>
+                <small class="text-white-50" style="font-family: sans-serif; font-size: 11px;">Há 25 min</small>
               </div>
             </div>
           </div>
 
           <div class="col-md-4">
-            <div class="custom-card card-body-content">
+            <div class="comment-card">
               <div>
-                <div class="fw-bold text-dark mb-1">Prof. Carlos Santos</div>
-                <div class="text-danger mb-2" style="font-size: 12px; font-family: sans-serif;">Avaliou: Horta Automatizada</div>
-                <p class="card-item-desc">"Impressionado com a dedicação dos alunos na montagem dos sensores. Parabéns aos envolvidos!"</p>
+                <div class="comment-user fw-bold">Prof. Carlos Santos</div>
+                <div class="comment-target">Avaliou: Horta Automatizada</div>
+                <p class="comment-text">"Impressionado com a dedicação dos alunos na montagem dos sensores. Parabéns aos envolvidos!"</p>
               </div>
-              <div class="d-flex justify-content-between align-items-center border-top pt-3">
+              <div class="d-flex justify-content-between align-items-center">
                 <button class="btn-like" onclick="likeComment(this)">
                   <i class="fa-regular fa-heart me-1"></i> <span>42</span>
                 </button>
-                <small class="text-muted" style="font-family: sans-serif; font-size: 11px;">Há 1 hora</small>
+                <small class="text-white-50" style="font-family: sans-serif; font-size: 11px;">Há 1 hora</small>
               </div>
             </div>
           </div>
@@ -441,94 +495,13 @@
       </div>
     </section>
 
-    <!-- SEÇÃO DE NOTÍCIAS (Cards idênticos aos da imagem anexada) -->
-    <section class="section-block-dark1" id="noticias">
+    {% include 'noticias.html' %}
+
+    {% include 'localizacao.html' %}
+
+    <section class="faq-section" id="faq">
       <div class="container">
-        <h2 class="section-title-custom">ÚLTIMAS <span>NOTÍCIAS</span></h2>
-        <p class="section-subtitle-custom">Fique por dentro das novidades da feira</p>
-
-        <div class="row g-4">
-          <!-- Notícia 1 -->
-          <div class="col-md-4">
-            <div class="custom-card">
-              <div class="card-img-wrapper">
-                <img src="{{ url_for('static', filename='evento.jpg') }}" alt="Abertura da Feira" class="card-img">
-              </div>
-              <div class="card-body-content">
-                <div>
-                  <div class="card-meta-date">16 de Junho, 2026</div>
-                  <h3 class="card-item-title">GRANDE ABERTURA DA FEIRA TECNOLÓGICA</h3>
-                  <p class="card-item-desc">Os portões estão abertos! Venha conferir os projetos inovadores desenvolvidos pelos alunos deste ano.</p>
-                </div>
-                <div>
-                  <button class="btn-card-action" data-bs-toggle="collapse" data-bs-target="#newsText1" onclick="toggleText(this)">LER MATÉRIA COMPLETA ↓</button>
-                  <div class="collapse mt-2" id="newsText1">
-                    <p style="font-family: sans-serif; font-size: 13px; color: #555;">A feira conta com mais de 40 estandes cobrindo áreas de software, robótica, sustentabilidade e eletrônica.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Notícia 2 -->
-          <div class="col-md-4">
-            <div class="custom-card">
-              <div class="card-img-wrapper">
-                <img src="{{ url_for('static', filename='vimi_logo.jpg') }}" alt="Sistema Score" class="card-img">
-              </div>
-              <div class="card-body-content">
-                <div>
-                  <div class="card-meta-date">15 de Junho, 2026</div>
-                  <h3 class="card-item-title">COMO FUNCIONA O NOVO SISTEMA SCORE</h3>
-                  <p class="card-item-desc">Entenda como a sua avaliação digital ajuda a computar as notas parciais e definir os vencedores em tempo real.</p>
-                </div>
-                <div>
-                  <button class="btn-card-action" data-bs-toggle="collapse" data-bs-target="#newsText2" onclick="toggleText(this)">LER MATÉRIA COMPLETA ↓</button>
-                  <div class="collapse mt-2" id="newsText2">
-                    <p style="font-family: sans-serif; font-size: 13px; color: #555;">Basta acessar com sua conta e atribuir notas de 1 a 5 para critério de inovação e apresentação.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card Borda Tracejada (Terceiro modelo da imagem) -->
-          <div class="col-md-4">
-            <div class="custom-card-dashed text-center">
-              <div>
-                <div class="text-danger my-3" style="font-size: 2.5rem;">
-                  <i class="fa-solid fa-rss"></i>
-                </div>
-                <div class="card-meta-date">Atualizado agora</div>
-                <h3 class="card-item-title" style="font-size: 1.1rem; color: #111;">CARREGANDO FEED DE NOTÍCIAS...</h3>
-                <p class="card-item-desc" style="font-size: 13px; color: #555;">Este bloco está integrado via script para puxar dinamicamente novidades do mundo da tecnologia.</p>
-              </div>
-              <div class="text-center">
-                <a href="#" class="btn-card-action">VER FEED EXTERNO →</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- LOCALIZAÇÃO -->
-    <section class="section-block-dark3" id="localizacao">
-      <div class="container">
-        <h2 class="section-title-custom">NOSSA <span>LOCALIZAÇÃO</span></h2>
-        <p class="section-subtitle-custom">Venha nos visitar na Etec Sylvio de Mattos Carvalho</p>
-
-        <div class="map-responsive">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3711.23456789!2d-48.3650!3d-21.6150!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjHCsDM2JzU0LjAiUyA0OMKwMjEnNTQuMCJX!5e0!3m2!1spt-BR!2sbr!4v1600000000000!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy"></iframe>
-        </div>
-      </div>
-    </section>
-
-    <!-- PERGUNTAS FREQUENTES -->
-    <section class="section-block-dark1" id="faq">
-      <div class="container">
-        <h2 class="section-title-custom">PERGUNTAS <span>FREQUENTES</span></h2>
-        <p class="section-subtitle-custom">Tire suas dúvidas sobre o evento</p>
+        <h2 class="text-center text-uppercase mb-5" style="letter-spacing: 1px; color: #b61c1c;">Perguntas Frequentes</h2>
 
         <div class="row justify-content-center">
           <div class="col-lg-8">
@@ -542,7 +515,7 @@
                 </h2>
                 <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
                   <div class="accordion-body accordion-body-custom">
-                    Basta clicar no botão "Votar" na navegação ou no card do projeto. Você será direcionado para validar sua conta e efetuar seu voto com segurança.
+                    É muito simples! Basta clicar no botão "Votar" localizado na barra superior ou diretamente no card do estande de sua preferência. Você será redirecionado para a tela de autenticação para validar sua escolha com segurança.
                   </div>
                 </div>
               </div>
@@ -555,7 +528,20 @@
                 </h2>
                 <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
                   <div class="accordion-body accordion-body-custom">
-                    Sim! Você pode avaliar quantos estandes quiser, mas é permitido apenas 1 voto por estande por visitante.
+                    As regras padrão permitem que cada visitante dê sua pontuação para múltiplos estandes distintos, contudo, o sistema restringe o abuso limitando um voto por pessoa dentro de um mesmo projeto.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item accordion-item-custom">
+                <h2 class="accordion-header">
+                  <button class="accordion-button accordion-button-custom collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                    Como os resultados parciais são calculados?
+                  </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
+                  <div class="accordion-body accordion-body-custom">
+                    O painel do FeiraScore realiza uma varredura constante em nosso banco de dados. À medida que as notas entram, a média ponderada é calculada instantaneamente de acordo com a categoria selecionada.
                   </div>
                 </div>
               </div>
@@ -569,16 +555,22 @@
 
   <footer class="footer-custom text-center">
     <div class="container">
-      <p class="mb-2 px-3">Dúvidas adicionais?</p>
-      <p class="mb-3 px-3">Entre em contato conosco pelo e-mail e responderemos em breve!</p>
+      <p class="mb-2 px-3">Você tem mais alguma pergunta que não está na nossa FAQ?</p>
+      <p class="mb-3 px-3">Entre em contato conosco pelo e-mail e responderemos o mais rápido possível!</p>
       <p class="mb-4"><a href="mailto:contato@feirascore.com">contato@feirascore.com</a></p>
 
       <div class="social-share-container">
-        <p class="mb-2" style="font-size: 11px; color: rgba(255,255,255,0.5);">Compartilhe a Feira</p>
+        <p class="mb-2" style="font-size: 12px; color: rgba(255,255,255,0.4);">Compartilhe a Feira</p>
         <div class="social-share-buttons d-flex justify-content-center gap-3">
-          <a href="#" target="_blank" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-          <a href="#" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-          <a href="#" target="_blank" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://feirascore.com" target="_blank" title="Compartilhar no Facebook">
+            <i class="fa-brands fa-facebook-f"></i>
+          </a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://feirascore.com" target="_blank" title="Compartilhar no LinkedIn">
+            <i class="fa-brands fa-linkedin-in"></i>
+          </a>
+          <a href="https://api.whatsapp.com/send?text=Confira%20os%20projetos%20da%20Feira%20Tecnol%C3%B3gica%20no%20FeiraScore!%20https://feirascore.com" target="_blank" title="Compartilhar no WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+          </a>
         </div>
       </div>
     </div>
@@ -591,7 +583,7 @@
     function toggleText(button) {
       setTimeout(() => {
         const isExpanded = button.getAttribute('aria-expanded') === 'true';
-        button.innerHTML = isExpanded ? 'FECHAR MATÉRIA ↑' : 'LER MATÉRIA COMPLETA ↓';
+        button.innerHTML = isExpanded ? 'Fechar Matéria ↑' : 'Ler Matéria Completa ↓';
       }, 50);
     }
 
@@ -625,11 +617,11 @@
           datasets: [{
             label: 'Votos Registrados / Hora',
             data: [120, 450, 980, 850, 1100, 950, 442],
-            borderColor: '#ff2a2a',
-            backgroundColor: 'rgba(255, 42, 42, 0.1)',
+            borderColor: '#b61c1c',
+            backgroundColor: 'rgba(182, 28, 28, 0.2)',
             fill: true,
-            tension: 0.3,
-            pointBackgroundColor: '#ff2a2a'
+            tension: 0.4,
+            pointBackgroundColor: '#ff4d4d'
           }]
         },
         options: {
