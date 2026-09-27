@@ -1,0 +1,637 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FeiraScore - Ranking e Estatísticas</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Google Fonts (Bungee, Teko, Russo One) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Russo+One&family=Teko:wght@600;700&display=swap" rel="stylesheet">
+
+  <!-- Chart.js para o gráfico de pico de votação -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      color: #ffffff;
+      font-family: 'Russo One', sans-serif;
+      text-align: center;
+      background-color: #000000;
+      min-height: 100vh;
+    }
+
+    /* Títulos e Tipografia */
+    .section-title {
+      font-family: 'Bungee', cursive !important;
+      color: #b61c1c !important;
+      font-size: 2.8rem;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .section-title span {
+      color: #ffffff !important;
+    }
+
+    .section-subtitle {
+      font-family: 'Teko', sans-serif !important;
+      font-size: 1.8rem;
+      color: #ddd;
+      margin-bottom: 40px;
+      letter-spacing: 1px;
+    }
+
+    /* 1. SEÇÃO RANKING / HALL DA FAMA */
+    .ranking-section {
+      padding: 80px 0;
+      background-color: #050505;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Pódio Visual */
+    .podium-container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 15px;
+      margin-bottom: 50px;
+      padding: 20px 0;
+    }
+
+    .podium-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 20px 15px;
+      text-align: center;
+      transition: 0.3s;
+      width: 100%;
+      max-width: 260px;
+      position: relative;
+    }
+
+    .podium-1 {
+      order: 2;
+      height: 340px;
+      border-color: #ffd700;
+      box-shadow: 0 0 25px rgba(255, 215, 0, 0.25);
+      background: linear-gradient(180deg, rgba(255, 215, 0, 0.1) 0%, rgba(0,0,0,0.8) 100%);
+    }
+
+    .podium-2 {
+      order: 1;
+      height: 290px;
+      border-color: #c0c0c0;
+      box-shadow: 0 0 15px rgba(192, 192, 192, 0.15);
+      background: linear-gradient(180deg, rgba(192, 192, 192, 0.1) 0%, rgba(0,0,0,0.8) 100%);
+    }
+
+    .podium-3 {
+      order: 3;
+      height: 260px;
+      border-color: #cd7f32;
+      box-shadow: 0 0 15px rgba(205, 127, 50, 0.15);
+      background: linear-gradient(180deg, rgba(205, 127, 50, 0.1) 0%, rgba(0,0,0,0.8) 100%);
+    }
+
+    .podium-crown {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    .podium-1 .podium-crown { color: #ffd700; }
+    .podium-2 .podium-crown { color: #c0c0c0; }
+    .podium-3 .podium-crown { color: #cd7f32; }
+
+    .podium-stand-name {
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 5px;
+    }
+
+    .podium-class-name {
+      font-family: sans-serif;
+      font-size: 0.85rem;
+      color: #aaa;
+      margin-bottom: 15px;
+    }
+
+    .podium-score {
+      font-family: 'Teko', sans-serif;
+      font-size: 2rem;
+      color: #ff4d4d;
+      line-height: 1;
+    }
+
+    /* Filtros do Ranking */
+    .btn-filter-custom {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 8px 20px;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+    .btn-filter-custom:hover, .btn-filter-custom.active {
+      background: #b61c1c;
+      color: #fff;
+      border-color: #b61c1c;
+    }
+
+    /* Tabela do Ranking */
+    .ranking-table-container {
+      background: rgba(20, 20, 20, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 15px;
+      overflow: hidden;
+    }
+
+    .table-dark-custom {
+      margin-bottom: 0;
+      color: #fff;
+      text-align: left;
+    }
+
+    .table-dark-custom th {
+      background: #151515;
+      border-bottom: 2px solid #b61c1c;
+      font-size: 14px;
+      text-transform: uppercase;
+      padding: 15px;
+    }
+
+    .table-dark-custom td {
+      padding: 15px;
+      vertical-align: middle;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-family: sans-serif;
+      font-size: 15px;
+    }
+
+
+    /* 2. DESTAQUE DO MOMENTO */
+    .trending-section {
+      padding: 70px 0;
+      background: linear-gradient(180deg, #050505 0%, #110202 50%, #050505 100%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .trending-card {
+      background: linear-gradient(135deg, rgba(182, 28, 28, 0.2) 0%, rgba(0, 0, 0, 0.9) 100%);
+      border: 2px solid #b61c1c;
+      border-radius: 25px;
+      padding: 30px;
+      box-shadow: 0 0 30px rgba(182, 28, 28, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .badge-trending {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #ff4d4d;
+      color: #fff;
+      padding: 6px 15px;
+      border-radius: 20px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(255, 77, 77, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0); }
+    }
+
+    .btn-trending-vote {
+      background: linear-gradient(180deg, #c41c1c 0%, #7a0000 100%);
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 25px;
+      text-transform: uppercase;
+      text-decoration: none;
+      display: inline-block;
+      transition: 0.3s;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    }
+    .btn-trending-vote:hover {
+      transform: scale(1.05);
+      color: white;
+    }
+
+
+    /* 3. PAINEL DE TRANSPARÊNCIA E ESTATÍSTICAS */
+    .stats-section {
+      padding: 80px 0;
+      background-color: #000000;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .stat-box {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 25px;
+      transition: 0.3s;
+    }
+    .stat-box:hover {
+      border-color: #b61c1c;
+      transform: translateY(-5px);
+    }
+
+    .stat-number {
+      font-family: 'Bungee', cursive;
+      font-size: 2.8rem;
+      color: #ff4d4d;
+      margin-bottom: 5px;
+    }
+
+    .stat-label {
+      font-family: sans-serif;
+      font-size: 14px;
+      color: #ccc;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .chart-container-box {
+      background: rgba(20, 20, 20, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 25px;
+      margin-top: 40px;
+    }
+
+
+    /* 4. MURAL DO PÚBLICO (FEED DE COMENTÁRIOS) */
+    .feed-section {
+      padding: 80px 0;
+      background-color: #050505;
+    }
+
+    .comment-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      padding: 25px;
+      text-align: left;
+      margin: 10px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .comment-user {
+      font-size: 1rem;
+      color: #ffffff;
+      margin-bottom: 2px;
+    }
+
+    .comment-target {
+      font-size: 12px;
+      color: #ff6b6b;
+      font-family: sans-serif;
+      margin-bottom: 12px;
+    }
+
+    .comment-text {
+      font-family: sans-serif;
+      font-size: 14px;
+      color: #ddd;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
+    .btn-like {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #aaa;
+      border-radius: 15px;
+      padding: 4px 12px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .btn-like:hover, .btn-like.liked {
+      color: #ff4d4d;
+      border-color: #ff4d4d;
+      background: rgba(255, 77, 77, 0.1);
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      .podium-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      .podium-card {
+        max-width: 100%;
+        height: auto !important;
+        order: initial !important;
+      }
+      .section-title { font-size: 2rem; }
+      .section-subtitle { font-size: 1.4rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main>
+    <!-- ================= 1. RANKING GERAL / HALL DA FAMA ================= -->
+    <section class="ranking-section" id="ranking">
+      <div class="container">
+        <h2 class="section-title">HALL DA <span>FAMA</span></h2>
+        <p class="section-subtitle">Classificação em tempo real dos projetos mais votados</p>
+
+        <!-- PÓDIO (1º, 2º e 3º Lugar) -->
+        <div class="podium-container">
+          <!-- 2º LUGAR -->
+          <div class="podium-card podium-2">
+            <div class="podium-crown"><i class="fa-solid fa-medal"></i></div>
+            <div class="podium-stand-name">EcoTech Sensor</div>
+            <div class="podium-class-name">3º Módulo - Mechatrônica</div>
+            <div class="podium-score">1.240 pts</div>
+          </div>
+
+          <!-- 1º LUGAR -->
+          <div class="podium-card podium-1">
+            <div class="podium-crown"><i class="fa-solid fa-crown"></i></div>
+            <div class="podium-stand-name">FeiraScore</div>
+            <div class="podium-class-name">3º Módulo - Desenvolvimento de Sistemas</div>
+            <div class="podium-score">1.850 pts</div>
+          </div>
+
+          <!-- 3º LUGAR -->
+          <div class="podium-card podium-3">
+            <div class="podium-crown"><i class="fa-solid fa-award"></i></div>
+            <div class="podium-stand-name">Horta Automatizada</div>
+            <div class="podium-class-name">2º Módulo - Agrinho/Internet das Coisas</div>
+            <div class="podium-score">980 pts</div>
+          </div>
+        </div>
+
+        <!-- FILTROS DE CATEGORIA -->
+        <div class="d-flex justify-content-center gap-2 mb-4 flex-wrap">
+          <button class="btn btn-filter-custom active" onclick="filterRanking('todos')">Geral</button>
+          <button class="btn btn-filter-custom" onclick="filterRanking('tecnologia')">Tecnologia & Software</button>
+          <button class="btn btn-filter-custom" onclick="filterRanking('automacao')">Automação & Hardware</button>
+          <button class="btn btn-filter-custom" onclick="filterRanking('sustentabilidade')">Sustentabilidade</button>
+        </div>
+
+        <!-- TABELA DINÂMICA -->
+        <div class="ranking-table-container">
+          <div class="table-responsive">
+            <table class="table table-dark-custom align-middle">
+              <thead>
+                <tr>
+                  <th style="width: 80px;">Posição</th>
+                  <th>Estande / Projeto</th>
+                  <th>Turma / Curso</th>
+                  <th>Categoria</th>
+                  <th class="text-end">Pontuação</th>
+                </tr>
+              </thead>
+              <tbody id="rankingTableBody">
+                <tr>
+                  <td class="fw-bold text-center">4º</td>
+                  <td>Smart Lock com Biometria</td>
+                  <td>2º DS - Manhã</td>
+                  <td><span class="badge bg-secondary">Automação</span></td>
+                  <td class="text-end fw-bold text-danger">850 pts</td>
+                </tr>
+                <tr>
+                  <td class="fw-bold text-center">5º</td>
+                  <td>Braço Robótico Reciclável</td>
+                  <td>1º Mecatrônica</td>
+                  <td><span class="badge bg-secondary">Hardware</span></td>
+                  <td class="text-end fw-bold text-danger">790 pts</td>
+                </tr>
+                <tr>
+                  <td class="fw-bold text-center">6º</td>
+                  <td>App de Reciclagem Comunitária</td>
+                  <td>3º DS - Noite</td>
+                  <td><span class="badge bg-secondary">Sustentabilidade</span></td>
+                  <td class="text-end fw-bold text-danger">710 pts</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ================= 2. DESTAQUE DO MOMENTO (EM ALTA) ================= -->
+    <section class="trending-section" id="em-alta">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="trending-card text-center text-md-start">
+              <span class="badge-trending"><i class="fa-solid fa-fire me-1"></i> Em Alta no Momento</span>
+              
+              <div class="row align-items-center">
+                <div class="col-md-8 mb-3 mb-md-0">
+                  <p class="text-uppercase text-danger mb-1" style="font-size: 13px; letter-spacing: 1px;">Disparando em Votação na última hora 🔥</p>
+                  <h3 class="mb-2" style="font-size: 2rem; color: #fff;">Visão Computacional na Indústria 4.0</h3>
+                  <p class="font-sans text-white-50 mb-3" style="font-family: sans-serif; font-size: 14px;">
+                    Projeto de detecção automática de falhas com inteligência artificial. Corra para conhecer e registrar sua nota!
+                  </p>
+                  <span class="badge bg-danger p-2" style="font-family: sans-serif;">Estande #12 - Bloco B</span>
+                </div>
+                <div class="col-md-4 text-center">
+                  <a href="{{ url_for('estudantelogin') }}" class="btn-trending-vote">
+                    Votar Agora <i class="fa-solid fa-arrow-right ms-1"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ================= 3. PAINEL DE TRANSPARÊNCIA E ESTATÍSTICAS ================= -->
+    <section class="stats-section" id="estatisticas">
+      <div class="container">
+        <h2 class="section-title">PAINEL DE <span>TRANSPARÊNCIA</span></h2>
+        <p class="section-subtitle">Dados do volume de avaliações processados pelo sistema</p>
+
+        <!-- CONTADORES DINÂMICOS -->
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="stat-box">
+              <i class="fa-solid fa-check-to-slot fa-2x text-danger mb-2"></i>
+              <div class="stat-number" id="totalVotos">4.892</div>
+              <div class="stat-label">Votos Registrados</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="stat-box">
+              <i class="fa-solid fa-store fa-2x text-danger mb-2"></i>
+              <div class="stat-number" id="totalEstandes">42</div>
+              <div class="stat-label">Estandes Participantes</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="stat-box">
+              <i class="fa-solid fa-users-gear fa-2x text-danger mb-2"></i>
+              <div class="stat-number" id="totalTurmas">18</div>
+              <div class="stat-label">Turmas Envolvidas</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- GRÁFICO DE PICO DE VOTAÇÃO -->
+        <div class="chart-container-box">
+          <h4 class="text-uppercase mb-4" style="font-size: 1.2rem; color: #fff;">Horários de Maior Pico de Avaliação</h4>
+          <canvas id="votesChart" height="100"></canvas>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ================= 4. MURAL DO PÚBLICO (FEED DE COMENTÁRIOS) ================= -->
+    <section class="feed-section" id="mural">
+      <div class="container">
+        <h2 class="section-title">MURAL DO <span>PÚBLICO</span></h2>
+        <p class="section-subtitle">O que os visitantes estão achando dos projetos expostos</p>
+
+        <div class="row g-4 justify-content-center">
+          
+          <!-- Comentário 1 -->
+          <div class="col-md-4">
+            <div class="comment-card">
+              <div>
+                <div class="comment-user fw-bold">Lucas Oliveira</div>
+                <div class="comment-target">Avaliou: FeiraScore</div>
+                <p class="comment-text">"Sistema sensacional e extremamente rápido! Ficou muito mais fácil escolher os melhores estandes."</p>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <button class="btn-like" onclick="likeComment(this)">
+                  <i class="fa-regular fa-heart me-1"></i> <span>14</span>
+                </button>
+                <small class="text-white-50" style="font-family: sans-serif; font-size: 11px;">Há 10 min</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Comentário 2 -->
+          <div class="col-md-4">
+            <div class="comment-card">
+              <div>
+                <div class="comment-user fw-bold">Mariana Costa</div>
+                <div class="comment-target">Avaliou: EcoTech Sensor</div>
+                <p class="comment-text">"Proposta incrível para a preservação de energia. Apresentação do grupo foi ótima e muito clara!"</p>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <button class="btn-like" onclick="likeComment(this)">
+                  <i class="fa-regular fa-heart me-1"></i> <span>28</span>
+                </button>
+                <small class="text-white-50" style="font-family: sans-serif; font-size: 11px;">Há 25 min</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Comentário 3 -->
+          <div class="col-md-4">
+            <div class="comment-card">
+              <div>
+                <div class="comment-user fw-bold">Prof. Carlos Santos</div>
+                <div class="comment-target">Avaliou: Horta Automatizada</div>
+                <p class="comment-text">"Impressionado com a dedicação dos alunos na montagem dos sensores. Parabéns aos envolvidos!"</p>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <button class="btn-like" onclick="likeComment(this)">
+                  <i class="fa-regular fa-heart me-1"></i> <span>42</span>
+                </button>
+                <small class="text-white-50" style="font-family: sans-serif; font-size: 11px;">Há 1 hora</small>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Script Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Lógica JavaScript Dinâmica -->
+  <script>
+    // 1. Função da Curtida nos Comentários
+    function likeComment(btn) {
+      const heartIcon = btn.querySelector('i');
+      const countSpan = btn.querySelector('span');
+      let currentLikes = parseInt(countSpan.innerText);
+
+      if (btn.classList.contains('liked')) {
+        btn.classList.remove('liked');
+        heartIcon.classList.replace('fa-solid', 'fa-regular');
+        countSpan.innerText = currentLikes - 1;
+      } else {
+        btn.classList.add('liked');
+        heartIcon.classList.replace('fa-regular', 'fa-solid');
+        countSpan.innerText = currentLikes + 1;
+      }
+    }
+
+    // 2. Filtro Simulado do Ranking
+    function filterRanking(categoria) {
+      document.querySelectorAll('.btn-filter-custom').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+      // Aqui você adicionaria a lógica para filtrar a tabela dinamicamente com dados do backend (Flask/API)
+    }
+
+    // 3. Inicialização do Gráfico com Chart.js
+    document.addEventListener("DOMContentLoaded", function () {
+      const ctx = document.getElementById('votesChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['08:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00'],
+          datasets: [{
+            label: 'Votos Registrados / Hora',
+            data: [120, 450, 980, 850, 1100, 950, 442],
+            borderColor: '#b61c1c',
+            backgroundColor: 'rgba(182, 28, 28, 0.2)',
+            fill: true,
+            tension: 0.4,
+            pointBackgroundColor: '#ff4d4d'
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { labels: { color: '#ffffff' } }
+          },
+          scales: {
+            x: { ticks: { color: '#aaaaaa' }, grid: { color: 'rgba(255,255,255,0.05)' } },
+            y: { ticks: { color: '#aaaaaa' }, grid: { color: 'rgba(255,255,255,0.05)' } }
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

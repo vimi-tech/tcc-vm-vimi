@@ -10,7 +10,7 @@ class AuthService:
             raise ValueError("As senhas não coincidem.")
 
         try:
-            # Coloque aqui a sua lógica de cadastro
+       
             return True, "Usuário cadastrado com sucesso!"
         except Exception as e:
             raise Exception(f"Erro no cadastro: {str(e)}")
