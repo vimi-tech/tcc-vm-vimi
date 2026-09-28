@@ -14,20 +14,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@800;900&family=Russo+One&family=Teko:wght@600;700&display=swap" rel="stylesheet">
 
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    /*
-      COLOQUE O ARQUIVO DA FONTE EM:
-      static/fonts/DiscoPhonic.woff2
-
-      Se o arquivo tiver outro nome, altere o "src" abaixo.
-    */
-    @font-face {
-      font-family: 'Disco Phonic';
-      src: url("{{ url_for('static', filename='fonts/DiscoPhonic.woff2') }}") format('woff2');
-      font-weight: normal;
-      font-style: normal;
-      font-display: swap;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
     body {
@@ -40,11 +30,17 @@
       background-color: #f4f4f4;
     }
 
-    header, main, section, footer {
+    header,
+    main,
+    section,
+    footer {
       background: transparent;
     }
 
-    /* Navbar */
+    /* =========================
+       NAVBAR
+    ========================= */
+
     .navbar-custom {
       padding: 15px 0;
       background-color: #f4f4f4;
@@ -64,7 +60,7 @@
       justify-content: center;
       align-items: center;
       transition: 0.3s;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     }
 
     .btn-nav-red:hover {
@@ -105,9 +101,13 @@
       background-color: transparent;
     }
 
-    /* Intro / Hero Section */
+
+    /* =========================
+       INTRO / HERO
+    ========================= */
+
     .intro-section {
-      padding: 55px 0 80px 0;
+      padding: 35px 0 60px 0;
       background-color: #f4f4f4;
     }
 
@@ -117,87 +117,47 @@
       align-items: center;
       justify-content: center;
       text-align: center;
+      padding: 10px 20px;
     }
 
+    /* Troféu */
     .trophy-container {
-      margin-bottom: 2px;
+      margin-bottom: 8px;
       display: flex;
       justify-content: center;
       align-items: center;
       width: 100%;
     }
 
-    .trophy-icon {
-      font-size: 80px;
-      color: #ffd700;
-      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
-    }
-
     .img-feirascore-brand {
       width: 100%;
-      max-width: 390px;
+      max-width: 320px;
       height: auto;
       margin: 0 auto;
       display: block;
     }
 
-    /*
-      NOVO LOGO FEIRASCORE
-      Substitui a antiga legenda.png.
-      FEIRA = preto
-      SCORE = vermelho
-    */
-    .feirascore-logo {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      white-space: nowrap;
-      text-align: center;
-      margin: 0 auto 8px auto;
-      font-family: 'Disco Phonic', 'Russo One', sans-serif;
-      font-size: clamp(4rem, 6vw, 6.8rem);
-      line-height: 0.9;
-      letter-spacing: -2px;
-      transform: scaleX(1.03);
-      transform-origin: center;
+    .trophy-icon {
+      font-size: 80px;
+      color: #ffd700;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
     }
 
-    .feira-text,
-    .score-text {
-      display: inline-block;
-      font-family: 'Disco Phonic', 'Russo One', sans-serif;
-      font-weight: normal;
-    }
-
-    .feira-text {
-      color: #080808;
-      -webkit-text-stroke: 2px #ffffff;
-      text-shadow:
-        2px 2px 0 #777,
-        4px 4px 0 rgba(0,0,0,0.22);
-    }
-
-    .score-text {
-      color: #b00000;
-      -webkit-text-stroke: 2px #ffffff;
-      text-shadow:
-        2px 2px 0 #777,
-        4px 4px 0 rgba(0,0,0,0.22);
-    }
-
+    /* FEIRASCORE */
     .main-title {
       font-family: 'Orbitron', sans-serif !important;
       font-weight: 900 !important;
       color: #b61c1c !important;
-      font-size: 3.5rem !important;
-      line-height: 0.9 !important;
+      font-size: 4.2rem !important;
+      line-height: 1 !important;
       text-transform: uppercase !important;
-      margin-bottom: 10px !important;
-      letter-spacing: 2px !important;
+      margin: 5px 0 5px 0 !important;
+      letter-spacing: 3px !important;
       text-align: center !important;
+      width: 100%;
     }
 
+    /* QUEM LIDERA, BRILHA */
     .main-subtitle {
       font-family: 'Teko', sans-serif !important;
       font-weight: 700 !important;
@@ -205,9 +165,10 @@
       font-size: 2.7rem !important;
       line-height: 1 !important;
       text-transform: none !important;
-      margin: 0 auto 15px auto !important;
+      margin: 0 auto 18px auto !important;
       letter-spacing: 1px !important;
       text-align: center !important;
+      width: 100%;
     }
 
     .main-subtitle span {
@@ -215,6 +176,7 @@
       color: #b61c1c !important;
     }
 
+    /* Botão principal */
     .btn-main-red {
       width: 220px;
       height: 50px;
@@ -226,7 +188,7 @@
       text-transform: uppercase;
       transition: 0.3s;
       letter-spacing: 1px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
       margin: 0 auto;
     }
 
@@ -239,10 +201,14 @@
       border-radius: 40px;
       max-width: 100%;
       height: auto;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     }
 
-    /* Seção Sobre */
+
+    /* =========================
+       SEÇÃO SOBRE
+    ========================= */
+
     .about-section {
       padding: 120px 0;
       color: white;
@@ -280,7 +246,7 @@
       letter-spacing: 2px;
       margin-bottom: 30px;
       line-height: 1.2;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
       text-align: center;
     }
 
@@ -290,7 +256,7 @@
       max-width: 750px;
       margin: 0 auto 20px auto;
       color: #ffffff;
-      text-shadow: 0 1px 5px rgba(0,0,0,0.5);
+      text-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
       text-align: center;
     }
 
@@ -302,7 +268,7 @@
       letter-spacing: 0.5px;
       font-weight: bold;
       text-align: center;
-      text-shadow: 0 1px 5px rgba(0,0,0,0.5);
+      text-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
     }
 
     .btn-about-white {
@@ -316,7 +282,7 @@
       font-weight: bold;
       text-transform: uppercase;
       transition: 0.3s;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     }
 
     .btn-about-white:hover {
@@ -324,7 +290,11 @@
       color: #b61c1c;
     }
 
-    /* Cards de Notícias */
+
+    /* =========================
+       NOTÍCIAS
+    ========================= */
+
     .news-section {
       padding: 90px 0;
       background-color: #000000;
@@ -335,7 +305,7 @@
       border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
       transition: 0.3s;
       height: 100%;
       display: flex;
@@ -345,7 +315,7 @@
 
     .news-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
     }
 
     .news-img-wrapper {
@@ -423,7 +393,11 @@
       color: #ffffff;
     }
 
-    /* Guia da Feira Tecnológica */
+
+    /* =========================
+       GUIA DA FEIRA
+    ========================= */
+
     .guide-section {
       padding: 90px 0;
       background-color: #f4f4f4;
@@ -456,14 +430,14 @@
       display: flex;
       flex-direction: column;
       text-align: left;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.12);
-      border: 1px solid rgba(0,0,0,0.08);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+      border: 1px solid rgba(0, 0, 0, 0.08);
       transition: 0.3s;
     }
 
     .guide-card:hover {
       transform: translateY(-6px);
-      box-shadow: 0 14px 32px rgba(0,0,0,0.18);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.18);
     }
 
     .guide-img-wrapper {
@@ -520,7 +494,7 @@
       font-size: 14px;
       color: #444444;
       line-height: 1.6;
-      border-top: 1px dashed rgba(0,0,0,0.18);
+      border-top: 1px dashed rgba(0, 0, 0, 0.18);
       padding-top: 15px;
       margin-top: 10px;
     }
@@ -544,7 +518,11 @@
       color: #000000;
     }
 
-    /* Localização */
+
+    /* =========================
+       LOCALIZAÇÃO
+    ========================= */
+
     .location-section {
       padding: 90px 0;
       color: white;
@@ -574,8 +552,8 @@
       position: relative;
       height: 0;
       border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-      border: 2px solid rgba(255,255,255,0.2);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      border: 2px solid rgba(255, 255, 255, 0.2);
     }
 
     .map-responsive iframe {
@@ -587,7 +565,11 @@
       border: 0;
     }
 
-    /* FAQ */
+
+    /* =========================
+       FAQ
+    ========================= */
+
     .faq-section {
       padding: 90px 0;
       color: white;
@@ -631,12 +613,16 @@
       font-family: sans-serif;
     }
 
-    /* Footer */
+
+    /* =========================
+       FOOTER
+    ========================= */
+
     .footer-custom {
-      color: rgba(255,255,255,0.6);
+      color: rgba(255, 255, 255, 0.6);
       padding: 60px 0;
       font-size: 14px;
-      border-top: 1px solid rgba(255,255,255,0.1);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
       text-align: center;
       background-color: #000000;
     }
@@ -664,7 +650,7 @@
       align-items: center;
       justify-content: center;
       border-radius: 50%;
-      background: rgba(255,255,255,0.1);
+      background: rgba(255, 255, 255, 0.1);
       color: #fff;
       transition: 0.3s;
     }
@@ -674,8 +660,13 @@
       transform: translateY(-3px);
     }
 
-    /* Responsividade */
+
+    /* =========================
+       RESPONSIVIDADE
+    ========================= */
+
     @media(max-width: 991px) {
+
       .navbar-custom .container {
         gap: 10px;
       }
@@ -691,45 +682,30 @@
       }
     }
 
+
     @media(max-width: 768px) {
+
       .intro-section {
-        padding: 30px 0 50px;
+        padding: 25px 0 45px 0;
       }
 
-      .about-section {
-        padding: 60px 0;
+      .hero-brand-block {
+        padding: 5px 15px;
       }
 
-      .location-section {
-        padding: 50px 0;
+      .img-feirascore-brand {
+        max-width: 270px;
       }
 
-      .faq-section {
-        padding: 50px 0;
-      }
-
-      .feirascore-logo {
-        font-size: 3.8rem;
-        letter-spacing: -1.5px;
-        -webkit-text-stroke: 1.5px #ffffff;
+      .main-title {
+        font-size: 3rem !important;
+        letter-spacing: 2px !important;
+        margin-top: 5px !important;
       }
 
       .main-subtitle {
-        font-size: 1.9rem !important;
+        font-size: 2rem !important;
         margin-bottom: 15px !important;
-      }
-
-      .about-title {
-        font-size: 1.8rem;
-      }
-
-      .about-text {
-        font-size: 14px;
-      }
-
-      .star-bg {
-        width: 350px;
-        height: 350px;
       }
 
       .guide-section {
@@ -748,16 +724,30 @@
       .guide-img-wrapper {
         height: 210px;
       }
-    }
 
-    @media(max-width: 480px) {
-      .feirascore-logo {
-        font-size: 3rem;
-        letter-spacing: -1px;
+      .about-section {
+        padding: 60px 0;
       }
 
-      .main-subtitle {
-        font-size: 1.7rem !important;
+      .location-section {
+        padding: 50px 0;
+      }
+
+      .faq-section {
+        padding: 50px 0;
+      }
+
+      .about-title {
+        font-size: 1.8rem;
+      }
+
+      .about-text {
+        font-size: 14px;
+      }
+
+      .star-bg {
+        width: 350px;
+        height: 350px;
       }
     }
   </style>
@@ -765,87 +755,214 @@
 
 <body>
 
+  <!-- =========================
+       NAVBAR
+  ========================= -->
+
   <header>
     <nav class="navbar navbar-expand-lg navbar-custom">
-      <div class="container justify-content-center">
-        <a class="btn-nav-red" href="{{ url_for('estudantelogin') }}">Votar</a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <div class="container justify-content-center">
+
+        <a class="btn-nav-red" href="{{ url_for('estudantelogin') }}">
+          Votar
+        </a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav">
+
           <span class="navbar-toggler-icon"></span>
+
         </button>
 
-        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <div
+          class="collapse navbar-collapse justify-content-center"
+          id="navbarNav">
+
           <ul class="navbar-nav gap-2 my-3 my-lg-0 text-center">
+
             <li class="nav-item">
-              <a class="nav-link nav-link-custom" href="{{ url_for('estandes') }}">Estandes</a>
+              <a
+                class="nav-link nav-link-custom"
+                href="{{ url_for('estandes') }}">
+                Estandes
+              </a>
             </li>
-            <li class="nav-item"><a class="nav-link nav-link-custom" href="#noticias">Notícias</a></li>
-            <li class="nav-item"><a class="nav-link nav-link-custom" href="#guia-feira">Guia da Feira</a></li>
-            <li class="nav-item"><a class="nav-link nav-link-custom" href="#localizacao">Localização</a></li>
-            <li class="nav-item"><a class="nav-link nav-link-custom" href="#faq">FAQ</a></li>
+
             <li class="nav-item">
-              <a class="nav-link nav-link-custom" href="{{ url_for('estudantelogin') }}">Buscar por Turma</a>
+              <a
+                class="nav-link nav-link-custom"
+                href="#noticias">
+                Notícias
+              </a>
             </li>
+
+            <li class="nav-item">
+              <a
+                class="nav-link nav-link-custom"
+                href="#guia-feira">
+                Guia da Feira
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a
+                class="nav-link nav-link-custom"
+                href="#localizacao">
+                Localização
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a
+                class="nav-link nav-link-custom"
+                href="#faq">
+                FAQ
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a
+                class="nav-link nav-link-custom"
+                href="{{ url_for('estudantelogin') }}">
+                Buscar por Turma
+              </a>
+            </li>
+
           </ul>
         </div>
 
         <div class="brand-logos-container ms-auto ms-lg-0">
-          <img src="{{ url_for('static', filename='logo_feira.jpg') }}" alt="FeiraScore" class="img-navbar-logo" width="65" height="45">
-          <img src="{{ url_for('static', filename='vimi_logo.jpg') }}" alt="Vimi" class="img-navbar-logo" width="45" height="45">
+
+          <img
+            src="{{ url_for('static', filename='logo_feira.jpg') }}"
+            alt="FeiraScore"
+            class="img-navbar-logo"
+            width="65"
+            height="45">
+
+          <img
+            src="{{ url_for('static', filename='vimi_logo.jpg') }}"
+            alt="Vimi"
+            class="img-navbar-logo"
+            width="45"
+            height="45">
+
         </div>
+
       </div>
     </nav>
   </header>
 
+
+  <!-- =========================
+       CONTEÚDO PRINCIPAL
+  ========================= -->
+
   <main>
+
+    <!-- =========================
+         HERO / INÍCIO
+    ========================= -->
+
     <section class="intro-section">
+
       <div class="container">
+
         <div class="row align-items-center justify-content-center">
+
+          <!-- BLOCO ESQUERDO -->
 
           <div class="col-md-6 mb-4 mb-md-0 hero-brand-block text-center">
 
             <div class="trophy-container">
-              <img src="{{ url_for('static', filename='trofeu.png') }}"
-                   alt="Troféu FeiraScore"
-                   class="img-feirascore-brand"
-                   onerror="this.style.display='none'; document.getElementById('trophy-icon-fallback').style.display='block';">
-              <i id="trophy-icon-fallback"
-                 class="fa-solid fa-trophy trophy-icon"
-                 style="display: none;"></i>
+
+              <img
+                src="{{ url_for('static', filename='trofeu.png') }}"
+                alt="Troféu FeiraScore"
+                class="img-feirascore-brand"
+                onerror="this.style.display='none'; document.getElementById('trophy-icon-fallback').style.display='block';">
+
+              <i
+                id="trophy-icon-fallback"
+                class="fa-solid fa-trophy trophy-icon"
+                style="display: none;">
+              </i>
+
             </div>
 
-            <!-- NOVO FEIRASCORE: centralizado e maior -->
-            <div class="feirascore-logo" aria-label="FeiraScore">
-              <span class="feira-text">FEIRA</span><span class="score-text">SCORE</span>
-            </div>
 
-            <p class="main-subtitle">Quem lidera, <span>brilha.</span></p>
+            <!-- FEIRASCORE AGORA É TEXTO -->
+            <h1 class="main-title">
+              FEIRASCORE
+            </h1>
 
-            <a href="#sobre"
-               class="btn-main-red d-inline-flex align-items-center justify-content-center text-decoration-none">
+
+            <!-- SLOGAN -->
+            <p class="main-subtitle">
+              Quem lidera, <span>brilha.</span>
+            </p>
+
+
+            <!-- BOTÃO -->
+            <a
+              href="#sobre"
+              class="btn-main-red d-inline-flex align-items-center justify-content-center text-decoration-none">
+
               Saiba Mais
+
             </a>
+
           </div>
 
+
+          <!-- FOTO DO EVENTO -->
+
           <div class="col-md-6 text-center">
-            <img src="{{ url_for('static', filename='evento.jpg') }}"
-                 alt="Evento Feira"
-                 class="img-evento">
+
+            <img
+              src="{{ url_for('static', filename='evento.jpg') }}"
+              alt="Evento Feira"
+              class="img-evento">
+
           </div>
 
         </div>
+
       </div>
+
     </section>
 
+
+    <!-- =========================
+         SOBRE
+    ========================= -->
+
     <section class="about-section" id="sobre">
-      <svg class="star-bg" viewBox="0 0 500 500" fill="white">
+
+      <svg
+        class="star-bg"
+        viewBox="0 0 500 500"
+        fill="white">
+
         <path d="M250,0 L273,176 L426,73 L323,226 L500,250 L323,273 L426,426 L273,323 L250,500 L226,323 L73,426 L176,273 L0,250 L176,226 L73,73 L226,176 Z" />
+
       </svg>
 
+
       <div class="container">
+
         <div class="row justify-content-center">
+
           <div class="col-lg-9 text-center">
-            <h2 class="about-title">O QUE É<br>FEIRA SCORE?</h2>
+
+            <h2 class="about-title">
+              O QUE É<br>
+              FEIRA SCORE?
+            </h2>
 
             <p class="about-text">
               O FeiraScore foi criado pra deixar a feira tecnológica da Etec Sylvio de Mattos Carvalho muito mais moderna, rápida e interativa. Em vez daquele jeito tradicional de votação, tudo acontece de forma digital, prática e sem complicação.
@@ -861,200 +978,339 @@
             </p>
 
             <div class="d-flex flex-wrap justify-content-center gap-3">
-              <a class="btn-about-white d-inline-flex align-items-center justify-content-center text-decoration-none"
-                 href="{{ url_for('estandes') }}">
+
+              <a
+                class="btn-about-white d-inline-flex align-items-center justify-content-center text-decoration-none"
+                href="{{ url_for('estandes') }}">
+
                 Ver Estandes
+
               </a>
 
-              <a class="btn-about-white d-inline-flex align-items-center justify-content-center text-decoration-none"
-                 href="{{ url_for('estudantelogin') }}">
+              <a
+                class="btn-about-white d-inline-flex align-items-center justify-content-center text-decoration-none"
+                href="{{ url_for('estudantelogin') }}">
+
                 Votar
+
               </a>
+
             </div>
+
           </div>
+
         </div>
+
       </div>
+
     </section>
 
-    <!-- SEÇÃO DE NOTÍCIAS -->
+
+    <!-- =========================
+         NOTÍCIAS
+    ========================= -->
+
     <section class="news-section" id="noticias">
+
       <div class="container">
 
-        <h2 class="text-center text-uppercase mb-5"
-            style="letter-spacing: 2px; color: #ffffff;">
+        <h2
+          class="text-center text-uppercase mb-5"
+          style="letter-spacing: 2px; color: #ffffff;">
+
           Últimas Notícias
+
         </h2>
+
 
         <div class="row g-4 justify-content-center">
 
           {% if noticias %}
+
             {% for noticia in noticias %}
 
-            <div class="col-md-4">
-              <div class="news-card">
+              <div class="col-md-4">
 
-                <div class="news-img-wrapper">
-                  <img src="{{ url_for('static', filename=noticia.imagem) }}"
-                       alt="{{ noticia.titulo }}"
-                       class="news-img">
-                </div>
+                <div class="news-card">
 
-                <div class="news-body">
-                  <div>
-                    <div class="news-date">{{ noticia.data }}</div>
-                    <h3 class="news-title">{{ noticia.titulo }}</h3>
-                    <p class="news-text">{{ noticia.resumo }}</p>
+                  <div class="news-img-wrapper">
+
+                    <img
+                      src="{{ url_for('static', filename=noticia.imagem) }}"
+                      alt="{{ noticia.titulo }}"
+                      class="news-img">
+
                   </div>
 
-                  <div>
-                    {% if noticia.link_externo %}
 
-                      <a href="{{ noticia.link_externo }}"
-                         target="_blank"
-                         rel="noopener noreferrer"
-                         class="btn-news-link">
-                        Acessar Notícia Externa
-                        <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i>
-                      </a>
+                  <div class="news-body">
 
-                    {% else %}
+                    <div>
 
-                      <button class="btn-news-link"
-                              data-bs-toggle="collapse"
-                              data-bs-target="#materia-{{ loop.index }}"
-                              onclick="toggleText(this)">
-                        Ler Matéria Completa ↓
-                      </button>
-
-                      <div class="collapse full-story-text"
-                           id="materia-{{ loop.index }}">
-                        {{ noticia.conteudo }}
+                      <div class="news-date">
+                        {{ noticia.data }}
                       </div>
 
-                    {% endif %}
+                      <h3 class="news-title">
+                        {{ noticia.titulo }}
+                      </h3>
+
+                      <p class="news-text">
+                        {{ noticia.resumo }}
+                      </p>
+
+                    </div>
+
+
+                    <div>
+
+                      {% if noticia.link_externo %}
+
+                        <a
+                          href="{{ noticia.link_externo }}"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="btn-news-link">
+
+                          Acessar Notícia Externa
+
+                          <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i>
+
+                        </a>
+
+                      {% else %}
+
+                        <button
+                          class="btn-news-link"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#materia-{{ loop.index }}"
+                          onclick="toggleText(this)">
+
+                          Ler Matéria Completa ↓
+
+                        </button>
+
+                        <div
+                          class="collapse full-story-text"
+                          id="materia-{{ loop.index }}">
+
+                          {{ noticia.conteudo }}
+
+                        </div>
+
+                      {% endif %}
+
+                    </div>
+
                   </div>
+
                 </div>
 
               </div>
-            </div>
 
             {% endfor %}
 
           {% else %}
 
-            <!-- Notícia 1 -->
+
+            <!-- NOTÍCIA 1 -->
+
             <div class="col-md-4">
+
               <div class="news-card">
 
                 <div class="news-img-wrapper">
-                  <img src="{{ url_for('static', filename='evento.jpg') }}"
-                       alt="Notícia 1"
-                       class="news-img">
+
+                  <img
+                    src="{{ url_for('static', filename='evento.jpg') }}"
+                    alt="Notícia 1"
+                    class="news-img">
+
                 </div>
 
                 <div class="news-body">
+
                   <div>
-                    <div class="news-date">15 de Junho, 2026</div>
-                    <h3 class="news-title">Grande Abertura da Feira Tecnológica</h3>
+
+                    <div class="news-date">
+                      15 de Junho, 2026
+                    </div>
+
+                    <h3 class="news-title">
+                      Grande Abertura da Feira Tecnológica
+                    </h3>
+
                     <p class="news-text">
                       Os portões estão abertos! Venha conferir os projetos inovadores desenvolvidos pelos alunos deste ano.
                     </p>
+
                   </div>
+
 
                   <div>
-                    <button class="btn-news-link"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#materia1"
-                            onclick="toggleText(this)">
+
+                    <button
+                      class="btn-news-link"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#materia1"
+                      onclick="toggleText(this)">
+
                       Ler Matéria Completa ↓
+
                     </button>
 
-                    <div class="collapse full-story-text" id="materia1">
+                    <div
+                      class="collapse full-story-text"
+                      id="materia1">
+
                       A cerimônia contou com a presença de diretores, professores e representantes da comunidade local. Estão expostos mais de 40 estandes com tecnologias que variam de automação até IA.
+
                     </div>
+
                   </div>
+
                 </div>
 
               </div>
+
             </div>
 
-            <!-- Notícia 2 -->
+
+            <!-- NOTÍCIA 2 -->
+
             <div class="col-md-4">
+
               <div class="news-card">
 
                 <div class="news-img-wrapper">
-                  <img src="{{ url_for('static', filename='meninas_votando.jpg') }}"
-                       alt="Notícia 2"
-                       class="news-img">
+
+                  <img
+                    src="{{ url_for('static', filename='meninas_votando.jpg') }}"
+                    alt="Notícia 2"
+                    class="news-img">
+
                 </div>
 
                 <div class="news-body">
+
                   <div>
-                    <div class="news-date">14 de Junho, 2026</div>
-                    <h3 class="news-title">Como Funciona o Novo Sistema Score</h3>
+
+                    <div class="news-date">
+                      14 de Junho, 2026
+                    </div>
+
+                    <h3 class="news-title">
+                      Como Funciona o Novo Sistema Score
+                    </h3>
+
                     <p class="news-text">
                       Entenda como a sua avaliação digital ajuda a computar as notas parciais e definir os vencedores em tempo real.
                     </p>
+
                   </div>
+
 
                   <div>
-                    <button class="btn-news-link"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#materia2"
-                            onclick="toggleText(this)">
+
+                    <button
+                      class="btn-news-link"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#materia2"
+                      onclick="toggleText(this)">
+
                       Ler Matéria Completa ↓
+
                     </button>
 
-                    <div class="collapse full-story-text" id="materia2">
+                    <div
+                      class="collapse full-story-text"
+                      id="materia2">
+
                       Cada QR Code presente nos estandes leva diretamente para a área de votação. A contagem utiliza algoritmos em tempo real para ranking justo dos projetos.
+
                     </div>
+
                   </div>
+
                 </div>
 
               </div>
+
             </div>
 
-            <!-- Notícia 3 -->
+
+            <!-- NOTÍCIA 3 -->
+
             <div class="col-md-4">
+
               <div class="news-card">
 
                 <div class="news-img-wrapper">
-                  <img src="{{ url_for('static', filename='informatica.jpg') }}"
-                       alt="Notícia Externa"
-                       class="news-img">
+
+                  <img
+                    src="{{ url_for('static', filename='informatica.jpg') }}"
+                    alt="Notícia Externa"
+                    class="news-img">
+
                 </div>
 
                 <div class="news-body">
+
                   <div>
-                    <div class="news-date">Mundo Tech</div>
-                    <h3 class="news-title">Principais Tendências em Tecnologia</h3>
+
+                    <div class="news-date">
+                      Mundo Tech
+                    </div>
+
+                    <h3 class="news-title">
+                      Principais Tendências em Tecnologia
+                    </h3>
+
                     <p class="news-text">
                       Confira os mais recentes avanços globais em inteligência artificial, robótica e inovação no portal TechCrunch.
                     </p>
+
                   </div>
 
+
                   <div>
-                    <a href="https://techcrunch.com"
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       class="btn-news-link">
+
+                    <a
+                      href="https://techcrunch.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="btn-news-link">
+
                       Acessar Portal Tech
+
                       <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i>
+
                     </a>
+
                   </div>
+
                 </div>
 
               </div>
+
             </div>
+
 
           {% endif %}
 
         </div>
+
       </div>
+
     </section>
 
-    <!-- SEÇÃO GUIA DA FEIRA TECNOLÓGICA -->
+
+    <!-- =========================
+         GUIA DA FEIRA
+    ========================= -->
+
     <section class="guide-section" id="guia-feira">
+
       <div class="container">
 
         <h2 class="guide-section-title">
@@ -1066,21 +1322,33 @@
           e apresentar sua criação na Feira Tecnológica da Etec.
         </p>
 
+
         <div class="row g-4">
 
+
           <!-- BLOCO 1 -->
+
           <div class="col-lg-3 col-md-6">
+
             <div class="guide-card">
 
               <div class="guide-img-wrapper">
-                <img src="{{ url_for('static', filename='alunos.jpg') }}"
-                     alt="Alunos montando projetos"
-                     class="guide-img">
+
+                <img
+                  src="{{ url_for('static', filename='alunos.jpg') }}"
+                  alt="Alunos montando projetos"
+                  class="guide-img">
+
               </div>
 
+
               <div class="guide-body">
+
                 <div>
-                  <div class="guide-tag">Passo 01 • Comece sua ideia</div>
+
+                  <div class="guide-tag">
+                    Passo 01 • Comece sua ideia
+                  </div>
 
                   <h3 class="guide-title">
                     Como montar seu projeto
@@ -1090,42 +1358,66 @@
                     Tem uma ideia, mas não sabe por onde começar? Veja como transformar
                     um problema do dia a dia em um projeto para a Feira Tecnológica.
                   </p>
+
                 </div>
 
+
                 <div>
-                  <button class="btn-guide-link"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#guia1"
-                          onclick="toggleGuideText(this)">
+
+                  <button
+                    class="btn-guide-link"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#guia1"
+                    onclick="toggleGuideText(this)">
+
                     Ler matéria completa ↓
+
                   </button>
 
-                  <div class="collapse guide-full-text" id="guia1">
+                  <div
+                    class="collapse guide-full-text"
+                    id="guia1">
+
                     Primeiro escolha um problema que você gostaria de resolver.
                     Depois defina o objetivo do projeto, pesquise soluções existentes,
                     planeje os materiais necessários e divida as tarefas entre os
                     integrantes da equipe. Por fim, construa um protótipo, teste,
                     registre os resultados e faça os ajustes necessários antes da feira.
+
                   </div>
+
                 </div>
+
               </div>
 
             </div>
+
           </div>
 
+
           <!-- BLOCO 2 -->
+
           <div class="col-lg-3 col-md-6">
+
             <div class="guide-card">
 
               <div class="guide-img-wrapper">
-                <img src="{{ url_for('static', filename='inovacao.jpg') }}"
-                     alt="Alunos desenvolvendo ideias"
-                     class="guide-img">
+
+                <img
+                  src="{{ url_for('static', filename='inovacao.jpg') }}"
+                  alt="Alunos desenvolvendo ideias"
+                  class="guide-img">
+
               </div>
 
+
               <div class="guide-body">
+
                 <div>
-                  <div class="guide-tag">Passo 02 • Inspire-se</div>
+
+                  <div class="guide-tag">
+                    Passo 02 • Inspire-se
+                  </div>
 
                   <h3 class="guide-title">
                     De onde tirar boas ideias?
@@ -1135,42 +1427,66 @@
                     Grandes projetos podem nascer de situações simples. Observe sua
                     escola, sua comunidade e os problemas que fazem parte da rotina.
                   </p>
+
                 </div>
 
+
                 <div>
-                  <button class="btn-guide-link"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#guia2"
-                          onclick="toggleGuideText(this)">
+
+                  <button
+                    class="btn-guide-link"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#guia2"
+                    onclick="toggleGuideText(this)">
+
                     Ler matéria completa ↓
+
                   </button>
 
-                  <div class="collapse guide-full-text" id="guia2">
+                  <div
+                    class="collapse guide-full-text"
+                    id="guia2">
+
                     Pense em temas como sustentabilidade, acessibilidade, segurança,
                     educação, saúde, tecnologia e automação. Converse com outras
                     pessoas para descobrir necessidades reais e tente imaginar uma
                     solução que seja útil, viável e que possa ser demonstrada durante
                     a Feira Tecnológica.
+
                   </div>
+
                 </div>
+
               </div>
 
             </div>
+
           </div>
 
+
           <!-- BLOCO 3 -->
+
           <div class="col-lg-3 col-md-6">
+
             <div class="guide-card">
 
               <div class="guide-img-wrapper">
-                <img src="{{ url_for('static', filename='tecnologia.jpg') }}"
-                     alt="Tecnologia e inovação"
-                     class="guide-img">
+
+                <img
+                  src="{{ url_for('static', filename='tecnologia.jpg') }}"
+                  alt="Tecnologia e inovação"
+                  class="guide-img">
+
               </div>
 
+
               <div class="guide-body">
+
                 <div>
-                  <div class="guide-tag">Passo 03 • Desenvolva</div>
+
+                  <div class="guide-tag">
+                    Passo 03 • Desenvolva
+                  </div>
 
                   <h3 class="guide-title">
                     Do protótipo à solução
@@ -1180,42 +1496,66 @@
                     Um bom projeto precisa ser testado. Descubra como melhorar sua
                     criação antes de apresentá-la aos visitantes.
                   </p>
+
                 </div>
 
+
                 <div>
-                  <button class="btn-guide-link"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#guia3"
-                          onclick="toggleGuideText(this)">
+
+                  <button
+                    class="btn-guide-link"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#guia3"
+                    onclick="toggleGuideText(this)">
+
                     Ler matéria completa ↓
+
                   </button>
 
-                  <div class="collapse guide-full-text" id="guia3">
+                  <div
+                    class="collapse guide-full-text"
+                    id="guia3">
+
                     Monte uma primeira versão do protótipo e teste cada parte.
                     Anote o que funcionou, identifique os problemas e faça melhorias.
                     Se possível, peça para colegas ou professores experimentarem a
                     solução e darem sugestões. Esse processo ajuda a deixar o projeto
                     mais funcional e preparado para a apresentação.
+
                   </div>
+
                 </div>
+
               </div>
 
             </div>
+
           </div>
 
+
           <!-- BLOCO 4 -->
+
           <div class="col-lg-3 col-md-6">
+
             <div class="guide-card">
 
               <div class="guide-img-wrapper">
-                <img src="{{ url_for('static', filename='duvidas.jpg') }}"
-                     alt="Apresentação dos projetos"
-                     class="guide-img">
+
+                <img
+                  src="{{ url_for('static', filename='duvidas.jpg') }}"
+                  alt="Apresentação dos projetos"
+                  class="guide-img">
+
               </div>
 
+
               <div class="guide-body">
+
                 <div>
-                  <div class="guide-tag">Passo 04 • Apresente</div>
+
+                  <div class="guide-tag">
+                    Passo 04 • Apresente
+                  </div>
 
                   <h3 class="guide-title">
                     Como chamar atenção na feira
@@ -1225,35 +1565,55 @@
                     Seu projeto já está pronto? Agora é hora de mostrar por que sua
                     ideia é importante e como ela funciona.
                   </p>
+
                 </div>
 
+
                 <div>
-                  <button class="btn-guide-link"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#guia4"
-                          onclick="toggleGuideText(this)">
+
+                  <button
+                    class="btn-guide-link"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#guia4"
+                    onclick="toggleGuideText(this)">
+
                     Ler matéria completa ↓
+
                   </button>
 
-                  <div class="collapse guide-full-text" id="guia4">
+                  <div
+                    class="collapse guide-full-text"
+                    id="guia4">
+
                     Prepare uma explicação curta e clara: apresente o problema,
                     explique sua solução, mostre o protótipo e destaque os resultados.
                     Use cartazes, imagens, gráficos ou uma demonstração prática para
                     facilitar o entendimento. O mais importante é que todos da equipe
                     saibam explicar o projeto e responder às perguntas dos visitantes.
+
                   </div>
+
                 </div>
+
               </div>
 
             </div>
+
           </div>
 
         </div>
+
       </div>
+
     </section>
 
-    <!-- LOCALIZAÇÃO -->
+
+    <!-- =========================
+         LOCALIZAÇÃO
+    ========================= -->
+
     <section class="location-section" id="localizacao">
+
       <div class="container">
 
         <h2 class="location-title">
@@ -1264,108 +1624,178 @@
           Venha nos visitar na Etec Sylvio de Mattos Carvalho
         </p>
 
+
         <div class="row justify-content-center">
+
           <div class="col-lg-10">
 
             <div class="map-responsive">
+
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3705.548483256058!2d-48.36858228505481!3d-21.60356998560023!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b8e154f2669e41%3A0xb249339ff7292275!2sEtec%20Sylvio%20de%20Mattos%20Carvalho!5e0!3m2!1spt-BR!2sbr!4v1625000000000!5m2!1spt-BR!2sbr"
                 allowfullscreen=""
                 loading="lazy">
               </iframe>
+
             </div>
 
           </div>
+
         </div>
+
       </div>
+
     </section>
 
-    <!-- FAQ -->
+
+    <!-- =========================
+         FAQ
+    ========================= -->
+
     <section class="faq-section" id="faq">
+
       <div class="container">
 
-        <h2 class="text-center text-uppercase mb-5"
-            style="letter-spacing: 1px; color: #ffffff;">
+        <h2
+          class="text-center text-uppercase mb-5"
+          style="letter-spacing: 1px; color: #ffffff;">
+
           Perguntas Frequentes
+
         </h2>
 
+
         <div class="row justify-content-center">
+
           <div class="col-lg-8">
 
             <div class="accordion" id="accordionFAQ">
 
+
+              <!-- FAQ 1 -->
+
               <div class="accordion-item accordion-item-custom">
+
                 <h2 class="accordion-header">
-                  <button class="accordion-button accordion-button-custom collapsed"
-                          type="button"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#collapseOne">
+
+                  <button
+                    class="accordion-button accordion-button-custom collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseOne">
+
                     Como posso registrar meu voto em um estande?
+
                   </button>
+
                 </h2>
 
-                <div id="collapseOne"
-                     class="accordion-collapse collapse"
-                     data-bs-parent="#accordionFAQ">
+
+                <div
+                  id="collapseOne"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#accordionFAQ">
 
                   <div class="accordion-body accordion-body-custom">
+
                     É muito simples! Basta clicar no botão "Votar" localizado na barra superior ou diretamente no card do estande de sua preferência. Você será redirecionado para a tela de autenticação para validar sua escolha com segurança.
+
                   </div>
 
                 </div>
+
               </div>
 
+
+              <!-- FAQ 2 -->
+
               <div class="accordion-item accordion-item-custom">
+
                 <h2 class="accordion-header">
-                  <button class="accordion-button accordion-button-custom collapsed"
-                          type="button"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#collapseTwo">
+
+                  <button
+                    class="accordion-button accordion-button-custom collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseTwo">
+
                     Posso votar em mais de um projeto diferente?
+
                   </button>
+
                 </h2>
 
-                <div id="collapseTwo"
-                     class="accordion-collapse collapse"
-                     data-bs-parent="#accordionFAQ">
+
+                <div
+                  id="collapseTwo"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#accordionFAQ">
 
                   <div class="accordion-body accordion-body-custom">
+
                     As regras padrão permitem que cada visitante dê sua pontuação para múltiplos estandes distintos, contudo, o sistema restringe o abuso limitando um voto por pessoa dentro de um mesmo projeto.
+
                   </div>
 
                 </div>
+
               </div>
+
+
+              <!-- FAQ 3 -->
 
               <div class="accordion-item accordion-item-custom">
+
                 <h2 class="accordion-header">
-                  <button class="accordion-button accordion-button-custom collapsed"
-                          type="button"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#collapseThree">
+
+                  <button
+                    class="accordion-button accordion-button-custom collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseThree">
+
                     Como os resultados parciais são calculados?
+
                   </button>
+
                 </h2>
 
-                <div id="collapseThree"
-                     class="accordion-collapse collapse"
-                     data-bs-parent="#accordionFAQ">
+
+                <div
+                  id="collapseThree"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#accordionFAQ">
 
                   <div class="accordion-body accordion-body-custom">
+
                     O painel do FeiraScore realiza uma varredura constante em nosso banco de dados. À medida que as notas entram, a média ponderada é calculada instantaneamente de acordo com a categoria selecionada.
+
                   </div>
 
                 </div>
+
               </div>
+
 
             </div>
+
           </div>
+
         </div>
+
       </div>
+
     </section>
+
   </main>
 
-  <!-- FOOTER -->
+
+  <!-- =========================
+       FOOTER
+  ========================= -->
+
   <footer class="footer-custom text-center">
+
     <div class="container">
 
       <p class="mb-2 px-3">
@@ -1382,58 +1812,100 @@
         </a>
       </p>
 
+
       <div class="social-share-container">
 
-        <p class="mb-2"
-           style="font-size: 12px; color: rgba(255,255,255,0.4);">
+        <p
+          class="mb-2"
+          style="font-size: 12px; color: rgba(255,255,255,0.4);">
+
           Compartilhe a Feira
+
         </p>
+
 
         <div class="social-share-buttons d-flex justify-content-center gap-3">
 
-          <a href="https://www.facebook.com/sharer/sharer.php?u=https://feirascore.com"
-             target="_blank"
-             title="Compartilhar no Facebook">
+          <a
+            href="https://www.facebook.com/sharer/sharer.php?u=https://feirascore.com"
+            target="_blank"
+            title="Compartilhar no Facebook">
+
             <i class="fa-brands fa-facebook-f"></i>
+
           </a>
 
-          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://feirascore.com"
-             target="_blank"
-             title="Compartilhar no LinkedIn">
+
+          <a
+            href="https://www.linkedin.com/sharing/share-offsite/?url=https://feirascore.com"
+            target="_blank"
+            title="Compartilhar no LinkedIn">
+
             <i class="fa-brands fa-linkedin-in"></i>
+
           </a>
 
-          <a href="https://api.whatsapp.com/send?text=Confira%20os%20projetos%20da%20Feira%20Tecnol%C3%B3gica%20no%20FeiraScore!%20https://feirascore.com"
-             target="_blank"
-             title="Compartilhar no WhatsApp">
+
+          <a
+            href="https://api.whatsapp.com/send?text=Confira%20os%20projetos%20da%20Feira%20Tecnol%C3%B3gica%20no%20FeiraScore!%20https://feirascore.com"
+            target="_blank"
+            title="Compartilhar no WhatsApp">
+
             <i class="fa-brands fa-whatsapp"></i>
+
           </a>
 
         </div>
+
       </div>
+
     </div>
+
   </footer>
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================= -->
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
+
   <script>
+
     function toggleText(button) {
+
       setTimeout(() => {
-        const isExpanded = button.getAttribute('aria-expanded') === 'true';
-        button.innerHTML = isExpanded
-          ? 'Fechar Matéria ↑'
-          : 'Ler Matéria Completa ↓';
+
+        const isExpanded =
+          button.getAttribute('aria-expanded') === 'true';
+
+        button.innerHTML =
+          isExpanded
+            ? 'Fechar Matéria ↑'
+            : 'Ler Matéria Completa ↓';
+
       }, 50);
+
     }
 
+
     function toggleGuideText(button) {
+
       setTimeout(() => {
-        const isExpanded = button.getAttribute('aria-expanded') === 'true';
-        button.innerHTML = isExpanded
-          ? 'Fechar Matéria ↑'
-          : 'Ler Matéria Completa ↓';
+
+        const isExpanded =
+          button.getAttribute('aria-expanded') === 'true';
+
+        button.innerHTML =
+          isExpanded
+            ? 'Fechar Matéria ↑'
+            : 'Ler Matéria Completa ↓';
+
       }, 50);
+
     }
+
   </script>
 
 </body>
