@@ -100,3 +100,43 @@ if __name__ == "__main__":
     main()
     from controllers.auth_controller import auth_bp
 app.register_blueprint(auth_bp)
+
+@app.route('/listagem-projetos')
+def listagem_projetos():
+    return render_template('listagem_projetos.html')
+
+
+@app.route('/editar-projeto/1', methods=['GET', 'POST'])
+def editar_projeto_1():
+
+    if request.method == 'POST':
+
+        nome = request.form['nome']
+        turma = request.form['turma']
+        categoria = request.form['categoria']
+        resumo = request.form['resumo']
+        descricao = request.form['descricao']
+
+        # Aqui você colocaria a atualização no banco de dados
+
+        return redirect(url_for('listagem_projetos'))
+
+    return render_template('editar_projeto1.html')
+
+
+@app.route('/editar-projeto/2', methods=['GET', 'POST'])
+def editar_projeto_2():
+
+    if request.method == 'POST':
+
+        nome = request.form['nome']
+        turma = request.form['turma']
+        categoria = request.form['categoria']
+        resumo = request.form['resumo']
+        descricao = request.form['descricao']
+
+        # Aqui você colocaria a atualização no banco de dados
+
+        return redirect(url_for('listagem_projetos'))
+
+    return render_template('editar_projeto2.html')
