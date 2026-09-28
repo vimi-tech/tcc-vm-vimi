@@ -198,6 +198,36 @@
       margin: 0 auto;
       object-fit: contain;
     }
+    .hero-logo-fallback {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+    .hero-trophies-fallback {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 8px;
+      color: #b61c1c;
+      margin-bottom: 18px;
+      filter: drop-shadow(0 3px 2px rgba(0,0,0,0.08));
+    }
+    .hero-trophies-fallback i { font-size: 6rem; }
+    .hero-trophies-fallback i:nth-child(2) { font-size: 7rem; }
+    .hero-wordmark-fallback {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      font-size: clamp(3rem, 5vw, 5.2rem);
+      line-height: 0.9;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .hero-wordmark-fallback .feira { color: #111; }
+    .hero-wordmark-fallback .score { color: #b61c1c; }
     .main-title { font-family: 'Orbitron', sans-serif !important; font-weight: 900 !important; color: #b61c1c !important; font-size: 3.5rem !important; line-height: 0.9 !important; text-transform: uppercase !important; margin-bottom: 10px !important; letter-spacing: 2px !important; text-align: center !important; }
     .main-subtitle { font-family: 'Teko', sans-serif !important; font-weight: 700 !important; color: #000 !important; font-size: 2.5rem !important; line-height: 1 !important; text-transform: none !important; margin: 4px auto 10px auto !important; letter-spacing: 1px !important; text-align: center !important; }
     .main-subtitle span { font-family: inherit !important; color: #b61c1c !important; }
@@ -249,6 +279,9 @@
     @media(max-width: 768px) {
       .intro-section { padding: 30px 0; }
       .hero-feirascore-image { max-width: 500px; }
+      .hero-logo-fallback { max-width: 500px; }
+      .hero-trophies-fallback i { font-size: 4rem; }
+      .hero-trophies-fallback i:nth-child(2) { font-size: 5rem; }
       .guide-section { padding: 55px 0; }
       .guide-section-title { font-size: 1.8rem; }
       .guide-section-subtitle { font-size: 14px; padding: 0 15px; }
@@ -326,9 +359,6 @@
             <a class="btn-nav-red" href="{{ url_for('estudantelogin') }}">Votar</a>
             <a class="nav-link-custom" href="{{ url_for('estandes') }}">Estandes</a>
             <a class="nav-link-custom" href="#gerenciar-projetos">Gerenciar<br>Projetos</a>
-            <a class="nav-link-custom" href="#mural">Mural</a>
-            <a class="nav-link-custom" href="#ranking">Ranking</a>
-            <a class="nav-link-custom" href="#estatisticas">Estatísticas</a>
             <a class="nav-link-custom" href="#noticias">Notícias</a>
             <a class="nav-link-custom" href="#localizacao">Localização</a>
             <a class="nav-link-custom" href="#faq">FAQ</a>
@@ -353,8 +383,21 @@
             <!-- Imagem PNG transparente enviada: troféus + FEIRASCORE -->
             <div class="trophy-container">
               <img src="{{ url_for('static', filename='feirascore_trofeus.png') }}"
-                   alt="Troféus FeiraScore"
-                   class="hero-feirascore-image">
+                   alt="Troféus e logo FeiraScore"
+                   class="hero-feirascore-image"
+                   onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+
+              <!-- Fallback: aparece caso a imagem feirascore_trofeus.png não esteja na pasta static -->
+              <div class="hero-logo-fallback">
+                <div class="hero-trophies-fallback">
+                  <i class="fa-solid fa-trophy"></i>
+                  <i class="fa-solid fa-trophy"></i>
+                  <i class="fa-solid fa-trophy"></i>
+                </div>
+                <div class="hero-wordmark-fallback">
+                  <span class="feira">FEIRA</span><span class="score">SCORE</span>
+                </div>
+              </div>
             </div>
 
             <p class="main-subtitle">Quem lidera, <span>brilha.</span></p>
@@ -384,62 +427,6 @@
             <div class="d-flex flex-wrap justify-content-center gap-3">
               <a class="btn-about-white d-inline-flex align-items-center justify-content-center text-decoration-none" href="{{ url_for('estandes') }}">Ver Estandes</a>
               <a class="btn-about-white d-inline-flex align-items-center justify-content-center text-decoration-none" href="{{ url_for('estudantelogin') }}">Votar</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SEÇÃO DE GERENCIAMENTO DE PROJETOS - 4 BLOCOS -->
-    <section class="management-section" id="gerenciar-projetos">
-      <div class="container">
-        <h2 class="management-title">GERENCIAR PROJETOS</h2>
-        <p class="management-subtitle">
-          Acesse as funções de cadastro, listagem e edição dos projetos cadastrados no FeiraScore.
-        </p>
-
-        <div class="row g-4 align-items-stretch">
-          <div class="col-lg-3 col-md-6">
-            <div class="management-card">
-              <div>
-                <div class="management-icon"><i class="fa-solid fa-plus"></i></div>
-                <h3>Cadastrar Projeto</h3>
-                <p>Cadastre um novo projeto ou estande informando turma, nome, resumo e mídias.</p>
-              </div>
-              <a class="management-btn" href="{{ url_for('pagina_descricao') }}">Cadastrar</a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6">
-            <div class="management-card">
-              <div>
-                <div class="management-icon"><i class="fa-solid fa-list"></i></div>
-                <h3>Listar Projetos</h3>
-                <p>Visualize todos os projetos cadastrados e acesse as opções de gerenciamento.</p>
-              </div>
-              <a class="management-btn" href="{{ url_for('listar_projetos') }}">Ver Listagem</a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6">
-            <div class="management-card">
-              <div>
-                <div class="management-icon"><i class="fa-solid fa-pen-to-square"></i></div>
-                <h3>Editar Projeto</h3>
-                <p>Altere dados como turma, nome do projeto e resumo depois do cadastro.</p>
-              </div>
-              <a class="management-btn" href="{{ url_for('listar_projetos') }}">Editar</a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6">
-            <div class="management-card">
-              <div>
-                <div class="management-icon"><i class="fa-solid fa-images"></i></div>
-                <h3>Editar Mídias</h3>
-                <p>Gerencie as imagens e outros arquivos enviados para cada projeto cadastrado.</p>
-              </div>
-              <a class="management-btn" href="{{ url_for('listar_projetos') }}">Gerenciar Mídias</a>
             </div>
           </div>
         </div>
@@ -506,6 +493,63 @@
         </div>
       </div>
     </section>
+
+    <!-- SEÇÃO DE GERENCIAMENTO DE PROJETOS - 4 BLOCOS -->
+    <section class="management-section" id="gerenciar-projetos">
+      <div class="container">
+        <h2 class="management-title">GERENCIAR PROJETOS</h2>
+        <p class="management-subtitle">
+          Acesse as funções de cadastro, listagem e edição dos projetos cadastrados no FeiraScore.
+        </p>
+
+        <div class="row g-4 align-items-stretch">
+          <div class="col-lg-3 col-md-6">
+            <div class="management-card">
+              <div>
+                <div class="management-icon"><i class="fa-solid fa-plus"></i></div>
+                <h3>Cadastrar Projeto</h3>
+                <p>Cadastre um novo projeto ou estande informando turma, nome, resumo e mídias.</p>
+              </div>
+              <a class="management-btn" href="{{ url_for('pagina_descricao') }}">Cadastrar</a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="management-card">
+              <div>
+                <div class="management-icon"><i class="fa-solid fa-list"></i></div>
+                <h3>Listar Projetos</h3>
+                <p>Visualize todos os projetos cadastrados e acesse as opções de gerenciamento.</p>
+              </div>
+              <a class="management-btn" href="{{ url_for('listar_projetos') }}">Ver Listagem</a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="management-card">
+              <div>
+                <div class="management-icon"><i class="fa-solid fa-pen-to-square"></i></div>
+                <h3>Editar Projeto</h3>
+                <p>Altere dados como turma, nome do projeto e resumo depois do cadastro.</p>
+              </div>
+              <a class="management-btn" href="{{ url_for('listar_projetos') }}">Editar</a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="management-card">
+              <div>
+                <div class="management-icon"><i class="fa-solid fa-images"></i></div>
+                <h3>Editar Mídias</h3>
+                <p>Gerencie as imagens e outros arquivos enviados para cada projeto cadastrado.</p>
+              </div>
+              <a class="management-btn" href="{{ url_for('listar_projetos') }}">Gerenciar Mídias</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
 
     <!-- SEÇÃO GUIA DA FEIRA TECNOLÓGICA -->
     <section class="guide-section" id="guia-feira">
