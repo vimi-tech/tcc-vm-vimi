@@ -2,1575 +2,2104 @@
 <html lang="pt-br">
 
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>FeiraScore - Principal</title>
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Orbitron:wght@800;900&family=Russo+One&family=Teko:wght@600;700&display=swap" rel="stylesheet">
-
-  <style>
-
-    /* =========================================================
-       RESET
-       ========================================================= */
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      min-height: 100vh;
-      background-color: #ededed;
-      color: #333;
-      font-family: 'Russo One', sans-serif;
-      overflow-x: hidden;
-    }
-
-
-    /* =========================================================
-       HEADER / MENU
-       ========================================================= */
-
-    .navbar-custom {
-      background-color: #ededed;
-      padding: 15px 0;
-    }
-
-    /*
-      TODOS OS BOTÕES DO MENU FICAM COM O MESMO TAMANHO
-    */
-
-    .btn-nav-red,
-    .nav-link-custom {
-      width: 135px;
-      height: 52px;
-      min-width: 135px;
-
-      border: none;
-      border-radius: 26px;
-
-      background-color: #b61c1c;
-      color: white !important;
-
-      font-size: 14px;
-      font-weight: 700;
-
-      text-transform: uppercase;
-      text-decoration: none;
-
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-
-      text-align: center;
-      line-height: 1.15;
-
-      padding: 8px 10px !important;
-
-      transition: 0.3s ease;
-    }
-
-    .btn-nav-red:hover,
-    .nav-link-custom:hover {
-      transform: translateY(-2px) scale(1.03);
-      background-color: #7a0000;
-      color: white !important;
-    }
-
-    .brand-logos-container {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .img-navbar-logo {
-      object-fit: contain;
-      border-radius: 6px;
-      background-color: transparent;
-    }
-
-
-    /* =========================================================
-       INTRO
-       ========================================================= */
-
-    .intro-section {
-      padding: 40px 0;
-      background-color: #ededed;
-    }
-
-    .hero-brand-block {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-
-    .img-feirascore-brand {
-      width: 100%;
-      max-width: 260px;
-      height: auto;
-      margin: 0 auto 10px auto;
-      display: block;
-    }
-
-    .main-title {
-      font-family: 'Orbitron', sans-serif !important;
-      font-weight: 900 !important;
-      color: #b61c1c !important;
-      font-size: 3.5rem !important;
-      line-height: 0.9 !important;
-      text-transform: uppercase !important;
-      margin-bottom: 10px !important;
-      letter-spacing: 2px !important;
-    }
-
-    .main-subtitle {
-      font-family: 'Teko', sans-serif !important;
-      font-weight: 700 !important;
-      color: #000 !important;
-      font-size: 2.5rem !important;
-      line-height: 1 !important;
-      text-transform: none !important;
-      margin-bottom: 20px !important;
-      letter-spacing: 1px !important;
-    }
-
-    .main-subtitle span {
-      font-family: inherit !important;
-      color: #b61c1c !important;
-    }
-
-
-    /* =========================================================
-       BOTÃO PRINCIPAL
-       ========================================================= */
-
-    .btn-main-red {
-      width: 220px;
-      height: 50px;
-
-      border: none;
-      border-radius: 25px;
-
-      background-color: #b61c1c;
-      color: white;
-
-      font-size: 18px;
-      text-transform: uppercase;
-
-      transition: 0.3s;
-      letter-spacing: 1px;
-
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-    }
-
-    .btn-main-red:hover {
-      transform: scale(1.05);
-      color: white;
-      background-color: #8a1212;
-    }
-
-    .img-evento {
-      border-radius: 40px;
-      max-width: 100%;
-      height: auto;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    }
-
-
-    /* =========================================================
-       SOBRE / O QUE É FEIRA SCORE
-       ========================================================= */
-
-    .about-section {
-      padding: 100px 0;
-
-      background:
-        linear-gradient(
-          rgba(110, 0, 0, 0.92),
-          rgba(20, 0, 0, 0.98)
-        ),
-        url("background-login.jpg");
-
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-
-      color: white;
-      text-align: center;
-
-      position: relative;
-      overflow: hidden;
-
-      /*
-        Deixa a parte inferior mais escura para criar
-        transição suave para o Gerenciar Projetos.
-      */
-      padding-bottom: 120px;
-    }
-
-    .about-section::before {
-      content: "";
-
-      position: absolute;
-
-      top: 50%;
-      left: 50%;
-
-      transform: translate(-50%, -50%);
-
-      width: 500px;
-      height: 500px;
-
-      background: radial-gradient(
-        circle,
-        rgba(255,255,255,0.1) 0%,
-        rgba(255,255,255,0) 70%
-      );
-
-      clip-path: polygon(
-        50% 0%,
-        61% 35%,
-        98% 35%,
-        68% 57%,
-        79% 91%,
-        50% 70%,
-        21% 91%,
-        32% 57%,
-        2% 35%,
-        39% 35%
-      );
-
-      pointer-events: none;
-    }
-
-    .about-section::after {
-      content: "";
-
-      position: absolute;
-
-      bottom: 0;
-      left: 0;
-
-      width: 100%;
-      height: 180px;
-
-      background: linear-gradient(
-        to bottom,
-        rgba(20,0,0,0),
-        #111111
-      );
-
-      pointer-events: none;
-    }
-
-    .about-title {
-      font-size: 2.5rem;
-      letter-spacing: 2px;
-      margin-bottom: 40px;
-      line-height: 1.4;
-      position: relative;
-      z-index: 2;
-    }
-
-    .about-text {
-      font-size: 16px;
-      line-height: 1.8;
-      max-width: 800px;
-      margin: 0 auto 25px auto;
-      color: rgba(255, 255, 255, 0.9);
-      position: relative;
-      z-index: 2;
-    }
-
-    .highlight-text {
-      font-size: 18px;
-      color: #ffc107;
-      margin-top: 40px;
-      margin-bottom: 45px;
-      letter-spacing: 0.5px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .btn-main-white {
-      width: 190px;
-      height: 48px;
-
-      border: none;
-      border-radius: 25px;
-
-      background: linear-gradient(
-        to right,
-        #d9d9d9,
-        #ffffff
-      );
 
-      color: #7a0000;
+  <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
 
-      font-size: 16px;
-      text-transform: uppercase;
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Orbitron:wght@800;900&family=Russo+One&family=Teko:wght@600;700&display=swap"
+        rel="stylesheet">
 
-      margin: 10px;
 
-      transition: 0.3s;
-      letter-spacing: 1px;
-    }
+<style>
 
-    .btn-main-white:hover {
-      transform: scale(1.05);
-      color: #7a0000;
-    }
+/* =========================================================
+   RESET
+========================================================= */
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    /* =========================================================
-       GERENCIAR PROJETOS
-       AGORA FICA ABAIXO DO "O QUE É FEIRA SCORE?"
-       ========================================================= */
+html {
+  scroll-behavior: smooth;
+}
 
-    .gerenciar-projetos-section {
+body {
 
-      padding: 90px 0 80px 0;
+  min-height: 100vh;
 
-      /*
-        DEGRADÊ ENTRE AS DUAS SEÇÕES
-      */
+  background-color: #ededed;
 
-      background: linear-gradient(
-        to bottom,
-        #111111 0%,
-        #111111 15%,
-        #0d0d0d 100%
-      );
+  color: #333;
 
-      border-top: none;
-      border-bottom: 1px solid rgba(182, 28, 28, 0.4);
+  font-family: 'Russo One', sans-serif;
 
-      color: white;
+  overflow-x: hidden;
+}
 
-      position: relative;
-    }
 
-    /*
-      Faixa de transição extra
-    */
+/* =========================================================
+   NAVBAR
+========================================================= */
 
-    .gerenciar-projetos-section::before {
+.navbar-custom {
 
-      content: "";
+  background-color: #ededed;
 
-      position: absolute;
+  padding: 18px 0;
 
-      top: -80px;
-      left: 0;
+  width: 100%;
+}
 
-      width: 100%;
-      height: 80px;
 
-      background: linear-gradient(
-        to bottom,
-        rgba(17,17,17,0),
-        #111111
-      );
+/* Container da navbar */
 
-      pointer-events: none;
-    }
+.navbar-custom .container {
 
-    .gerenciar-projetos-title {
+  max-width: 1500px;
 
-      font-family: 'Bungee', cursive !important;
+  display: flex;
 
-      color: #b61c1c;
+  align-items: center;
 
-      font-size: 2.5rem;
+  justify-content: center;
 
-      letter-spacing: 2px;
+  gap: 12px;
+}
 
-      margin-bottom: 15px;
 
-      text-transform: uppercase;
+/* Área dos botões */
 
-      text-align: center;
-    }
+.navbar-custom .navbar-collapse {
 
-    .gerenciar-projetos-title span {
-      color: #ffffff;
-    }
+  flex-grow: 0 !important;
 
-    .gerenciar-projetos-text {
+  display: flex;
 
-      color: #ccc;
+  justify-content: center;
 
-      font-family: sans-serif;
+  align-items: center;
+}
 
-      font-size: 16px;
 
-      text-align: center;
+/* Lista */
 
-      margin-bottom: 35px;
-    }
+.navbar-custom .navbar-nav {
 
-    .gerenciar-card {
+  display: flex;
 
-      background: rgba(255, 255, 255, 0.05);
+  justify-content: center;
 
-      border: 1px solid rgba(255, 255, 255, 0.1);
+  align-items: center;
 
-      border-radius: 20px;
+  gap: 8px;
 
-      padding: 35px 25px;
+  margin: 0 !important;
+}
 
-      text-align: center;
 
-      transition: 0.3s;
+/* =========================================================
+   BOTÃO VOTAR
+========================================================= */
 
-      height: 100%;
+.btn-nav-red {
 
-      min-height: 365px;
+  width: 150px;
 
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
+  min-width: 150px;
 
-    .gerenciar-card:hover {
+  height: 58px;
 
-      transform: translateY(-5px);
+  border: none;
 
-      border-color: #b61c1c;
+  border-radius: 30px;
 
-      box-shadow:
-        0 10px 30px rgba(182, 28, 28, 0.2);
-    }
+  background-color: #bd1717;
 
-    .gerenciar-icon {
+  color: white;
 
-      font-size: 42px;
+  font-size: 16px;
 
-      color: #b61c1c;
+  text-transform: uppercase;
 
-      margin-bottom: 20px;
-    }
+  text-decoration: none;
 
-    .gerenciar-card h3 {
+  display: flex;
 
-      color: white;
+  justify-content: center;
 
-      font-size: 20px;
+  align-items: center;
 
-      text-transform: uppercase;
+  text-align: center;
 
-      margin-bottom: 12px;
-    }
+  transition: 0.3s;
 
-    .gerenciar-card p {
+  flex-shrink: 0;
+}
 
-      color: #aaa;
+.btn-nav-red:hover {
 
-      font-family: sans-serif;
+  transform: translateY(-2px);
 
-      font-size: 14px;
+  background-color: #8d0000;
 
-      line-height: 1.6;
+  color: white;
+}
 
-      margin-bottom: 25px;
 
-      max-width: 450px;
-    }
+/* =========================================================
+   BOTÕES DO MENU
+========================================================= */
 
+.nav-link-custom {
 
-    /*
-      BOTÕES DOS CARDS
-      MESMO TAMANHO
-    */
+  width: 150px;
 
-    .btn-gerenciar,
-    .btn-gerenciar-branco {
+  min-width: 150px;
 
-      width: 220px;
-      height: 50px;
+  height: 58px;
 
-      border: none;
+  color: white !important;
 
-      border-radius: 25px;
+  text-transform: uppercase;
 
-      font-size: 14px;
+  font-size: 14px;
 
-      text-transform: uppercase;
+  letter-spacing: 0.3px;
 
-      text-decoration: none;
+  background-color: #bd1717;
 
-      display: inline-flex;
+  border-radius: 30px;
 
-      align-items: center;
-      justify-content: center;
+  display: inline-flex !important;
 
-      transition: 0.3s;
+  align-items: center;
 
-      font-family: 'Russo One', sans-serif;
-    }
+  justify-content: center;
 
-    .btn-gerenciar {
+  text-align: center;
 
-      background-color: #b61c1c;
+  padding: 8px 12px !important;
 
-      color: white;
-    }
+  line-height: 1.1;
 
-    .btn-gerenciar:hover {
+  transition: 0.3s;
 
-      background-color: #7a0000;
+  text-decoration: none !important;
+}
 
-      color: white;
+.nav-link-custom:hover {
 
-      transform: scale(1.05);
-    }
+  transform: translateY(-2px);
 
-    .btn-gerenciar-branco {
+  background-color: #7a0000;
 
-      background: linear-gradient(
-        to right,
-        #d9d9d9,
-        #ffffff
-      );
+  color: white !important;
+}
 
-      color: #7a0000;
-    }
 
-    .btn-gerenciar-branco:hover {
+/* =========================================================
+   LOGOS
+========================================================= */
 
-      color: #7a0000;
+.brand-logos-container {
 
-      transform: scale(1.05);
-    }
+  display: flex;
 
+  align-items: center;
 
-    /* =========================================================
-       TÍTULOS DAS SEÇÕES
-       ========================================================= */
+  justify-content: center;
 
-    .section-title-custom {
+  gap: 10px;
 
-      font-family: 'Bungee', cursive !important;
+  flex-shrink: 0;
+}
 
-      color: #b61c1c !important;
+.img-navbar-logo {
 
-      font-size: 2.5rem;
+  object-fit: contain;
 
-      letter-spacing: 2px;
+  border-radius: 6px;
 
-      margin-bottom: 10px;
+  background-color: transparent;
+}
 
-      text-transform: uppercase;
 
-      text-align: center;
-    }
+/* =========================================================
+   INTRO
+========================================================= */
 
-    .section-title-custom span {
-      color: #ffffff !important;
-    }
+.intro-section {
 
-    .section-subtitle-custom {
+  padding: 55px 0 80px;
 
-      font-family: 'Teko', sans-serif !important;
+  background-color: #ededed;
+}
 
-      font-size: 1.8rem;
 
-      color: #ddd;
+.hero-brand-block {
 
-      margin-bottom: 40px;
+  display: flex;
 
-      letter-spacing: 1px;
+  flex-direction: column;
 
-      text-align: center;
-    }
+  align-items: center;
 
+  justify-content: center;
 
-    /* =========================================================
-       1. RANKING / HALL DA FAMA
-       ========================================================= */
+  text-align: center;
+}
 
-    .ranking-section {
 
-      padding: 80px 0;
+.img-feirascore-brand {
 
-      background-color: #080808;
+  width: 100%;
 
-      color: white;
+  max-width: 280px;
 
-      border-bottom: 1px solid rgb(147, 7, 7);
-    }
+  height: auto;
 
-    .podium-container {
+  margin: 0 auto 15px auto;
 
-      display: flex;
+  display: block;
+}
 
-      justify-content: center;
 
-      align-items: flex-end;
+.main-title {
 
-      gap: 15px;
+  font-family: 'Orbitron', sans-serif !important;
 
-      margin-bottom: 40px;
+  font-weight: 900 !important;
 
-      padding: 20px 0;
-    }
+  color: #bd1717 !important;
 
-    .podium-card {
+  font-size: 3.5rem !important;
 
-      background: rgb(162, 5, 5);
+  line-height: 0.9 !important;
 
-      border: 2px solid rgba(255, 255, 255, 0.1);
+  text-transform: uppercase !important;
 
-      border-radius: 20px;
+  margin-bottom: 15px !important;
 
-      padding: 20px 15px;
+  letter-spacing: 2px !important;
+}
 
-      text-align: center;
 
-      transition: 0.3s;
+.main-subtitle {
 
-      width: 100%;
+  font-family: 'Teko', sans-serif !important;
 
-      max-width: 260px;
-    }
+  font-weight: 700 !important;
 
-    .podium-1 {
+  color: #000 !important;
 
-      order: 2;
+  font-size: 2.5rem !important;
 
-      height: 320px;
+  line-height: 1 !important;
 
-      border-color: #ffd700;
+  margin-bottom: 25px !important;
 
-      box-shadow:
-        0 0 20px rgba(255, 215, 0, 0.2);
+  letter-spacing: 1px !important;
+}
 
-      background: linear-gradient(
-        180deg,
-        rgba(255, 215, 0, 0.1) 0%,
-        rgba(0,0,0,0.8) 100%
-      );
-    }
 
-    .podium-2 {
+.main-subtitle span {
 
-      order: 1;
+  color: #bd1717 !important;
+}
 
-      height: 270px;
 
-      border-color: #c0c0c0;
+.btn-main-red {
 
-      background: linear-gradient(
-        180deg,
-        rgba(192, 192, 192, 0.1) 0%,
-        rgba(0,0,0,0.8) 100%
-      );
-    }
+  width: 245px;
 
-    .podium-3 {
+  height: 58px;
 
-      order: 3;
+  border: none;
 
-      height: 240px;
+  border-radius: 30px;
 
-      border-color: #cd7f32;
+  background-color: #bd1717;
 
-      background: linear-gradient(
-        180deg,
-        rgba(205, 127, 50, 0.1) 0%,
-        rgba(0,0,0,0.8) 100%
-      );
-    }
+  color: white;
 
-    .podium-crown {
+  font-size: 18px;
 
-      font-size: 2.2rem;
+  text-transform: uppercase;
 
-      margin-bottom: 8px;
-    }
+  transition: 0.3s;
 
-    .podium-1 .podium-crown {
-      color: #ffd700;
-    }
+  letter-spacing: 1px;
 
-    .podium-2 .podium-crown {
-      color: #c0c0c0;
-    }
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
 
-    .podium-3 .podium-crown {
-      color: #cd7f32;
-    }
+  text-decoration: none;
+}
 
-    .podium-stand-name {
 
-      font-size: 1.1rem;
+.btn-main-red:hover {
 
-      text-transform: uppercase;
+  transform: translateY(-3px);
 
-      color: #fff;
-    }
+  color: white;
 
-    .podium-class-name {
+  background-color: #8a1212;
+}
 
-      font-family: sans-serif;
 
-      font-size: 0.85rem;
+.img-evento {
 
-      color: #aaa;
+  border-radius: 40px;
 
-      margin-bottom: 12px;
-    }
+  max-width: 100%;
 
-    .podium-score {
+  height: auto;
 
-      font-family: 'Teko', sans-serif;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
 
-      font-size: 1.8rem;
 
-      color: #ff4d4d;
+/* =========================================================
+   SOBRE
+========================================================= */
 
-      line-height: 1;
-    }
+.about-section {
 
-    .btn-filter-custom {
+  padding: 100px 0;
 
-      background: rgba(255, 255, 255, 0.1);
+  background:
+    linear-gradient(
+      rgba(110, 0, 0, 0.94),
+      rgba(20, 0, 0, 0.99)
+    ),
+    url("background-login.jpg");
 
-      color: #fff;
+  background-size: cover;
 
-      border: 1px solid rgba(255, 255, 255, 0.2);
+  background-position: center;
 
-      border-radius: 20px;
+  background-attachment: fixed;
 
-      padding: 6px 18px;
+  color: white;
 
-      font-size: 14px;
+  text-align: center;
 
-      transition: 0.3s;
-    }
+  position: relative;
 
-    .btn-filter-custom:hover,
-    .btn-filter-custom.active {
+  overflow: hidden;
+}
 
-      background: #b61c1c;
 
-      color: #fff;
+.about-section::before {
 
-      border-color: #b61c1c;
-    }
+  content: "";
 
-    .ranking-table-container {
+  position: absolute;
 
-      background: rgba(20, 20, 20, 0.9);
+  top: 50%;
 
-      border: 1px solid rgba(255, 255, 255, 0.15);
+  left: 50%;
 
-      border-radius: 15px;
+  transform: translate(-50%, -50%);
 
-      overflow: hidden;
-    }
+  width: 500px;
 
-    .table-dark-custom {
+  height: 500px;
 
-      margin-bottom: 0;
+  background: radial-gradient(
+    circle,
+    rgba(255,255,255,0.1) 0%,
+    rgba(255,255,255,0) 70%
+  );
 
-      color: #fff;
+  clip-path: polygon(
+    50% 0%,
+    61% 35%,
+    98% 35%,
+    68% 57%,
+    79% 91%,
+    50% 70%,
+    21% 91%,
+    32% 57%,
+    2% 35%,
+    39% 35%
+  );
 
-      text-align: left;
-    }
+  pointer-events: none;
+}
 
-    .table-dark-custom th {
 
-      background: #151515;
+.about-title {
 
-      border-bottom: 2px solid #b61c1c;
+  font-family: 'Bungee', cursive;
 
-      font-size: 14px;
+  font-size: 2.8rem;
 
-      text-transform: uppercase;
+  letter-spacing: 2px;
 
-      padding: 15px;
-    }
+  margin-bottom: 40px;
 
-    .table-dark-custom td {
+  line-height: 1.4;
+}
 
-      padding: 15px;
 
-      vertical-align: middle;
+.about-text {
 
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  font-family: sans-serif;
 
-      font-family: sans-serif;
+  font-size: 16px;
 
-      font-size: 14px;
-    }
+  line-height: 1.8;
 
+  max-width: 800px;
 
-    /* =========================================================
-       2. DESTAQUE EM ALTA
-       ========================================================= */
+  margin: 0 auto 25px auto;
 
-    .trending-section {
+  color: rgba(255,255,255,0.9);
+}
 
-      padding: 60px 0;
 
-      background: linear-gradient(
-        180deg,
-        #080808 0%,
-        #170303 50%,
-        #080808 100%
-      );
+.highlight-text {
 
-      color: white;
+  font-size: 18px;
 
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    }
+  color: #ffc107;
 
-    .trending-card {
+  margin-top: 40px;
 
-      background: linear-gradient(
-        135deg,
-        rgba(182, 28, 28, 0.25) 0%,
-        rgba(0, 0, 0, 0.9) 100%
-      );
+  margin-bottom: 45px;
 
-      border: 2px solid #b61c1c;
+  letter-spacing: 0.5px;
+}
 
-      border-radius: 20px;
 
-      padding: 30px;
+.btn-main-white {
 
-      position: relative;
+  width: 210px;
 
-      box-shadow:
-        0 0 25px rgba(182, 28, 28, 0.25);
-    }
+  height: 52px;
 
-    .badge-trending {
+  border: none;
 
-      position: absolute;
+  border-radius: 28px;
 
-      top: 18px;
-      right: 20px;
+  background: linear-gradient(
+    to right,
+    #d9d9d9,
+    #ffffff
+  );
 
-      background: #ff4d4d;
+  color: #7a0000;
 
-      color: #fff;
+  font-size: 16px;
 
-      padding: 5px 12px;
+  text-transform: uppercase;
 
-      border-radius: 20px;
+  transition: 0.3s;
 
-      font-size: 11px;
+  letter-spacing: 1px;
 
-      text-transform: uppercase;
+  text-decoration: none;
+}
 
-      animation: pulse 1.5s infinite;
-    }
 
-    @keyframes pulse {
+.btn-main-white:hover {
 
-      0% {
-        box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.7);
-      }
+  transform: translateY(-3px);
 
-      70% {
-        box-shadow: 0 0 0 10px rgba(255, 77, 77, 0);
-      }
+  color: #7a0000;
+}
 
-      100% {
-        box-shadow: 0 0 0 0 rgba(255, 77, 77, 0);
-      }
-    }
 
+/* =========================================================
+   4 BLOCOS DE ACESSO RÁPIDO
+========================================================= */
 
-    /* =========================================================
-       3. ESTATÍSTICAS
-       ========================================================= */
+.quick-section {
 
-    .stats-section {
+  padding: 75px 0;
 
-      padding: 80px 0;
+  background:
+    linear-gradient(
+      180deg,
+      #090909 0%,
+      #180000 50%,
+      #090909 100%
+    );
 
-      background-color: #0d0b0b;
+  color: white;
 
-      color: white;
+  border-top: 1px solid rgba(182,28,28,0.4);
 
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    }
+  border-bottom: 1px solid rgba(182,28,28,0.4);
+}
 
-    .stat-box {
 
-      background: rgba(255, 255, 255, 0.05);
+.quick-title {
 
-      border: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: 'Bungee', cursive;
 
-      border-radius: 18px;
+  text-align: center;
 
-      padding: 22px;
+  color: #bd1717;
 
-      transition: 0.3s;
+  font-size: 2.5rem;
 
-      text-align: center;
-    }
+  margin-bottom: 10px;
 
-    .stat-box:hover {
+  letter-spacing: 2px;
+}
 
-      border-color: #b61c1c;
 
-      transform: translateY(-4px);
-    }
+.quick-title span {
 
-    .stat-number {
+  color: white;
+}
 
-      font-family: 'Bungee', cursive;
 
-      font-size: 2.5rem;
+.quick-subtitle {
 
-      color: #ff4d4d;
-    }
+  font-family: 'Teko', sans-serif;
 
-    .stat-label {
+  text-align: center;
 
-      font-family: sans-serif;
+  color: #ccc;
 
-      font-size: 13px;
+  font-size: 1.8rem;
 
-      color: #ccc;
+  margin-bottom: 45px;
+}
 
-      text-transform: uppercase;
 
-      letter-spacing: 1px;
-    }
+/* Cada bloco */
 
-    .chart-container-box {
+.quick-card {
 
-      background: rgba(20, 20, 20, 0.8);
+  height: 100%;
 
-      border: 1px solid rgba(255, 255, 255, 0.1);
+  min-height: 230px;
 
-      border-radius: 18px;
+  padding: 35px 25px;
 
-      padding: 25px;
+  background: rgba(255,255,255,0.05);
 
-      margin-top: 35px;
-    }
+  border: 1px solid rgba(255,255,255,0.12);
 
+  border-radius: 20px;
 
-    /* =========================================================
-       4. MURAL
-       ========================================================= */
+  text-align: center;
 
-    .feed-section {
+  display: flex;
 
-      padding: 80px 0;
+  flex-direction: column;
 
-      background-color: #080808;
+  align-items: center;
 
-      color: white;
-    }
+  justify-content: space-between;
 
-    .comment-card {
+  transition: 0.3s;
+}
 
-      background: rgba(255, 255, 255, 0.05);
 
-      border: 1px solid rgba(255, 255, 255, 0.12);
+.quick-card:hover {
 
-      border-radius: 18px;
+  transform: translateY(-7px);
 
-      padding: 22px;
+  border-color: #bd1717;
 
-      text-align: left;
+  box-shadow: 0 12px 30px rgba(182,28,28,0.25);
+}
 
-      height: 100%;
 
-      display: flex;
+.quick-icon {
 
-      flex-direction: column;
+  font-size: 42px;
 
-      justify-content: space-between;
-    }
+  color: #bd1717;
 
-    .comment-user {
+  margin-bottom: 18px;
+}
 
-      font-size: 0.95rem;
 
-      color: #fff;
-    }
+.quick-card h3 {
 
-    .comment-target {
+  color: white;
 
-      font-size: 12px;
+  font-size: 19px;
 
-      color: #ff6b6b;
+  text-transform: uppercase;
 
-      font-family: sans-serif;
+  margin-bottom: 10px;
+}
 
-      margin-bottom: 10px;
-    }
 
-    .comment-text {
+.quick-card p {
 
-      font-family: sans-serif;
+  color: #aaa;
 
-      font-size: 14px;
+  font-family: sans-serif;
 
-      color: #ddd;
+  font-size: 13px;
 
-      line-height: 1.5;
+  line-height: 1.5;
 
-      margin-bottom: 15px;
-    }
+  margin-bottom: 20px;
+}
 
-    .btn-like {
 
-      background: transparent;
+.quick-button {
 
-      border: 1px solid rgba(255, 255, 255, 0.2);
+  width: 190px;
 
-      color: #aaa;
+  height: 45px;
 
-      border-radius: 15px;
+  border-radius: 25px;
 
-      padding: 4px 12px;
+  background-color: #bd1717;
 
-      font-size: 12px;
+  color: white;
 
-      cursor: pointer;
+  text-decoration: none;
 
-      transition: 0.2s;
-    }
+  display: inline-flex;
 
-    .btn-like:hover,
-    .btn-like.liked {
+  align-items: center;
 
-      color: #ff4d4d;
+  justify-content: center;
 
-      border-color: #ff4d4d;
+  font-size: 13px;
 
-      background: rgba(255, 77, 77, 0.1);
-    }
+  transition: 0.3s;
+}
 
 
-    /* =========================================================
-       NOTÍCIAS
-       ========================================================= */
+.quick-button:hover {
 
-    .news-section {
+  background-color: #7a0000;
 
-      padding: 90px 0;
+  color: white;
 
-      background-color: #ededed;
-    }
+  transform: scale(1.04);
+}
 
-    .news-card {
 
-      background: #fff;
+/* =========================================================
+   GERENCIAR PROJETOS
+========================================================= */
 
-      border-radius: 20px;
+.gerenciar-projetos-section {
 
-      overflow: hidden;
+  padding: 80px 0;
 
-      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+  background:
+    linear-gradient(
+      180deg,
+      #111111 0%,
+      #0b0b0b 100%
+    );
 
-      transition: 0.3s;
-    }
+  border-top: 1px solid rgba(182,28,28,0.4);
 
-    .news-card:hover {
+  border-bottom: 1px solid rgba(182,28,28,0.4);
 
-      box-shadow: 0 12px 25px rgba(0,0,0,0.12);
-    }
+  color: white;
+}
 
-    .news-img-wrapper {
 
-      height: 200px;
+.gerenciar-projetos-title {
 
-      background-color: #ccc;
+  font-family: 'Bungee', cursive !important;
 
-      overflow: hidden;
-    }
+  color: #bd1717;
 
-    .news-img {
+  font-size: 2.5rem;
 
-      width: 100%;
+  letter-spacing: 2px;
 
-      height: 100%;
+  margin-bottom: 15px;
 
-      object-fit: cover;
-    }
+  text-transform: uppercase;
 
-    .news-body {
+  text-align: center;
+}
 
-      padding: 25px;
-    }
 
-    .news-date {
+.gerenciar-projetos-title span {
 
-      font-size: 12px;
+  color: white;
+}
 
-      color: #888;
 
-      font-family: sans-serif;
+.gerenciar-projetos-text {
 
-      margin-bottom: 8px;
-    }
+  color: #ccc;
 
-    .news-title {
+  font-family: sans-serif;
 
-      font-size: 1.2rem;
+  font-size: 16px;
 
-      color: #333;
+  text-align: center;
 
-      margin-bottom: 12px;
+  margin-bottom: 40px;
+}
 
-      text-transform: uppercase;
-    }
 
-    .news-text {
+.gerenciar-card {
 
-      font-family: sans-serif;
+  background: rgba(255,255,255,0.05);
 
-      font-size: 14px;
+  border: 1px solid rgba(255,255,255,0.12);
 
-      color: #666;
+  border-radius: 20px;
 
-      line-height: 1.6;
+  padding: 40px 25px;
 
-      margin-bottom: 15px;
-    }
+  text-align: center;
 
-    .full-story-text {
+  transition: 0.3s;
 
-      font-family: sans-serif;
+  height: 100%;
+}
 
-      font-size: 14px;
 
-      color: #444;
+.gerenciar-card:hover {
 
-      line-height: 1.6;
+  transform: translateY(-6px);
 
-      border-top: 1px dashed #ddd;
+  border-color: #bd1717;
 
-      padding-top: 15px;
+  box-shadow: 0 10px 30px rgba(182,28,28,0.2);
+}
 
-      margin-top: 10px;
-    }
 
-    .btn-news-link {
+.gerenciar-icon {
 
-      color: #b61c1c;
+  font-size: 42px;
 
-      text-decoration: none;
+  color: #bd1717;
 
-      font-size: 14px;
+  margin-bottom: 20px;
+}
 
-      text-transform: uppercase;
 
-      letter-spacing: 0.5px;
+.gerenciar-card h3 {
 
-      transition: 0.2s;
+  color: white;
 
-      display: inline-block;
+  font-size: 20px;
 
-      cursor: pointer;
+  text-transform: uppercase;
 
-      border: none;
+  margin-bottom: 12px;
+}
 
-      background: none;
 
-      padding: 0;
-    }
+.gerenciar-card p {
 
-    .btn-news-link:hover {
+  color: #aaa;
 
-      color: #7a0000;
-    }
+  font-family: sans-serif;
 
+  font-size: 14px;
 
-    /* =========================================================
-       LOCALIZAÇÃO
-       ========================================================= */
+  line-height: 1.6;
 
-    .location-section {
+  margin-bottom: 25px;
+}
 
-      padding: 90px 0;
 
-      background-color: #f9f9f9;
-    }
+.btn-gerenciar,
+.btn-gerenciar-branco {
 
-    .map-responsive {
+  width: 220px;
 
-      overflow: hidden;
+  height: 48px;
 
-      padding-bottom: 450px;
+  border-radius: 25px;
 
-      position: relative;
+  text-decoration: none;
 
-      height: 0;
+  display: inline-flex;
 
-      border-radius: 20px;
+  align-items: center;
 
-      box-shadow:
-        0 10px 25px rgba(0,0,0,0.1);
-    }
+  justify-content: center;
 
-    .map-responsive iframe {
+  font-size: 14px;
 
-      left: 0;
-      top: 0;
+  text-transform: uppercase;
 
-      height: 100%;
-      width: 100%;
+  transition: 0.3s;
+}
 
-      position: absolute;
-    }
 
+.btn-gerenciar {
 
-    /* =========================================================
-       FAQ
-       ========================================================= */
+  background-color: #bd1717;
 
-    .faq-section {
+  color: white;
+}
 
-      padding: 90px 0;
 
-      background: #0d0b0b;
+.btn-gerenciar:hover {
 
-      color: white;
-    }
+  background-color: #7a0000;
 
-    .accordion-item-custom {
+  color: white;
 
-      background: rgba(255, 255, 255, 0.06) !important;
+  transform: scale(1.04);
+}
 
-      border: 1px solid rgba(255, 255, 255, 0.12) !important;
 
-      border-radius: 15px !important;
+.btn-gerenciar-branco {
 
-      margin-bottom: 15px;
+  background: linear-gradient(
+    to right,
+    #d9d9d9,
+    #ffffff
+  );
 
-      overflow: hidden;
+  color: #7a0000;
+}
 
-      backdrop-filter: blur(4px);
-    }
 
-    .accordion-button-custom {
+.btn-gerenciar-branco:hover {
 
-      background: transparent !important;
+  color: #7a0000;
 
-      color: white !important;
+  transform: scale(1.04);
+}
 
-      font-size: 15px;
 
-      text-transform: uppercase;
+/* =========================================================
+   TÍTULOS DAS SEÇÕES
+========================================================= */
 
-      padding: 20px;
+.section-title-custom {
 
-      box-shadow: none !important;
-    }
+  font-family: 'Bungee', cursive !important;
 
-    .accordion-button-custom:not(.collapsed) {
+  color: #bd1717 !important;
 
-      color: #ff4d4d !important;
+  font-size: 2.5rem;
 
-      background: rgba(255, 255, 255, 0.03) !important;
-    }
+  letter-spacing: 2px;
 
-    .accordion-button-custom::after {
+  margin-bottom: 10px;
 
-      filter: invert(1);
-    }
+  text-transform: uppercase;
 
-    .accordion-body-custom {
+  text-align: center;
+}
 
-      background: rgba(0, 0, 0, 0.2);
 
-      color: #ccc;
+.section-title-custom span {
 
-      font-size: 14px;
+  color: #ffffff !important;
+}
 
-      line-height: 1.6;
 
-      font-family: sans-serif;
-    }
+.section-subtitle-custom {
 
+  font-family: 'Teko', sans-serif !important;
 
-    /* =========================================================
-       FOOTER
-       ========================================================= */
+  font-size: 1.8rem;
 
-    .footer-custom {
+  color: #ddd;
 
-      background-color: #050505;
+  margin-bottom: 40px;
 
-      color: rgba(255,255,255,0.6);
+  letter-spacing: 1px;
 
-      padding: 60px 0;
+  text-align: center;
+}
 
-      font-size: 14px;
 
-      border-top: 1px solid rgba(255,255,255,0.05);
-    }
+/* =========================================================
+   RANKING
+========================================================= */
 
-    .footer-custom p {
+.ranking-section {
 
-      text-transform: uppercase;
+  padding: 80px 0;
 
-      letter-spacing: 0.5px;
-    }
+  background-color: #080808;
 
-    .footer-custom a {
+  color: white;
 
-      color: #ff4d4d;
+  border-bottom: 1px solid #930707;
+}
 
-      text-decoration: none;
 
-      transition: 0.2s;
-    }
+.podium-container {
 
-    .footer-custom a:hover {
+  display: flex;
 
-      color: white;
-    }
+  justify-content: center;
 
-    .social-share-buttons a {
+  align-items: flex-end;
 
-      font-size: 20px;
+  gap: 15px;
 
-      width: 45px;
-      height: 45px;
+  margin-bottom: 40px;
 
-      display: inline-flex;
+  padding: 20px 0;
+}
 
-      align-items: center;
-      justify-content: center;
 
-      border-radius: 50%;
+.podium-card {
 
-      background: rgba(255,255,255,0.1);
+  background: rgb(162,5,5);
 
-      color: #fff;
+  border: 2px solid rgba(255,255,255,0.1);
 
-      transition: 0.3s;
-    }
+  border-radius: 20px;
 
-    .social-share-buttons a:hover {
+  padding: 20px 15px;
 
-      background: #b61c1c;
+  text-align: center;
 
-      transform: translateY(-3px);
-    }
+  width: 100%;
 
+  max-width: 260px;
+}
 
-    /* =========================================================
-       RESPONSIVO
-       ========================================================= */
 
-    @media(max-width: 1500px) {
+.podium-1 {
 
-      .btn-nav-red,
-      .nav-link-custom {
+  order: 2;
 
-        width: 120px;
-        min-width: 120px;
+  height: 320px;
 
-        font-size: 12px;
-      }
+  border-color: #ffd700;
 
-      .navbar-nav {
-        gap: 5px !important;
-      }
+  background: linear-gradient(
+    180deg,
+    rgba(255,215,0,0.1),
+    rgba(0,0,0,0.8)
+  );
+}
 
-      .brand-logos-container {
-        gap: 5px;
-      }
-    }
 
+.podium-2 {
 
-    @media(max-width: 991px) {
+  order: 1;
 
-      .navbar-custom .container {
+  height: 270px;
 
-        gap: 10px;
-      }
+  border-color: #c0c0c0;
 
-      .brand-logos-container {
+  background: linear-gradient(
+    180deg,
+    rgba(192,192,192,0.1),
+    rgba(0,0,0,0.8)
+  );
+}
 
-        margin-top: 10px;
 
-        width: 100%;
+.podium-3 {
 
-        justify-content: center;
-      }
+  order: 3;
 
-      .navbar-nav {
+  height: 240px;
 
-        width: 100%;
+  border-color: #cd7f32;
 
-        align-items: center;
-      }
+  background: linear-gradient(
+    180deg,
+    rgba(205,127,50,0.1),
+    rgba(0,0,0,0.8)
+  );
+}
 
-      .btn-nav-red,
-      .nav-link-custom {
 
-        width: 220px;
-        min-width: 220px;
-      }
-    }
+.podium-crown {
 
+  font-size: 2.2rem;
 
-    @media(max-width: 768px) {
+  margin-bottom: 8px;
+}
 
-      .podium-container {
 
-        flex-direction: column;
+.podium-1 .podium-crown {
+  color: #ffd700;
+}
 
-        align-items: center;
-      }
+.podium-2 .podium-crown {
+  color: #c0c0c0;
+}
 
-      .podium-card {
+.podium-3 .podium-crown {
+  color: #cd7f32;
+}
 
-        max-width: 100%;
 
-        height: auto !important;
+.podium-stand-name {
 
-        order: initial !important;
-      }
+  font-size: 1.1rem;
 
-      .intro-section {
+  text-transform: uppercase;
 
-        padding: 30px 0;
-      }
+  color: #fff;
+}
 
-      .about-section {
 
-        padding: 60px 0 100px 0;
-      }
+.podium-class-name {
 
-      .news-section {
+  font-family: sans-serif;
 
-        padding: 50px 0;
-      }
+  font-size: 0.85rem;
 
-      .location-section {
+  color: #aaa;
 
-        padding: 50px 0;
-      }
+  margin-bottom: 12px;
+}
 
-      .faq-section {
 
-        padding: 50px 0;
-      }
+.podium-score {
 
-      .main-title {
+  font-family: 'Teko', sans-serif;
 
-        font-size: 2.5rem !important;
-      }
+  font-size: 1.8rem;
 
-      .main-subtitle {
+  color: #ff4d4d;
 
-        font-size: 1.8rem !important;
+  line-height: 1;
+}
 
-        margin-bottom: 15px !important;
-      }
 
-      .about-title {
+/* filtros */
 
-        font-size: 1.8rem;
-      }
+.btn-filter-custom {
 
-      .about-text {
+  background: rgba(255,255,255,0.1);
 
-        font-size: 14px;
-      }
+  color: #fff;
 
-      .about-section::before {
+  border: 1px solid rgba(255,255,255,0.2);
 
-        width: 280px;
-        height: 280px;
-      }
+  border-radius: 20px;
 
-      .gerenciar-projetos-title {
+  padding: 6px 18px;
 
-        font-size: 1.8rem;
-      }
+  font-size: 14px;
 
-      .gerenciar-card {
+  transition: 0.3s;
+}
 
-        min-height: 330px;
-      }
 
-      .badge-trending {
+.btn-filter-custom:hover,
+.btn-filter-custom.active {
 
-        position: static;
+  background: #bd1717;
 
-        display: inline-block;
+  color: white;
 
-        margin-bottom: 15px;
-      }
-    }
+  border-color: #bd1717;
+}
 
 
-    @media(max-width: 480px) {
+/* tabela */
 
-      .main-title {
+.ranking-table-container {
 
-        font-size: 2rem !important;
-      }
+  background: rgba(20,20,20,0.9);
 
-      .main-subtitle {
+  border: 1px solid rgba(255,255,255,0.15);
 
-        font-size: 1.5rem !important;
-      }
+  border-radius: 15px;
 
-      .highlight-text {
+  overflow: hidden;
+}
 
-        font-size: 15px;
-      }
 
-      .btn-gerenciar,
-      .btn-gerenciar-branco {
+.table-dark-custom {
 
-        width: 200px;
-      }
-    }
+  margin-bottom: 0;
 
-  </style>
+  color: #fff;
+
+  text-align: left;
+}
+
+
+.table-dark-custom th {
+
+  background: #151515;
+
+  border-bottom: 2px solid #bd1717;
+
+  font-size: 14px;
+
+  text-transform: uppercase;
+
+  padding: 15px;
+}
+
+
+.table-dark-custom td {
+
+  padding: 15px;
+
+  vertical-align: middle;
+
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+
+  font-family: sans-serif;
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   EM ALTA
+========================================================= */
+
+.trending-section {
+
+  padding: 60px 0;
+
+  background: linear-gradient(
+    180deg,
+    #080808 0%,
+    #170303 50%,
+    #080808 100%
+  );
+
+  color: white;
+}
+
+
+.trending-card {
+
+  background: linear-gradient(
+    135deg,
+    rgba(182,28,28,0.25),
+    rgba(0,0,0,0.9)
+  );
+
+  border: 2px solid #bd1717;
+
+  border-radius: 20px;
+
+  padding: 30px;
+
+  position: relative;
+
+  box-shadow: 0 0 25px rgba(182,28,28,0.25);
+}
+
+
+.badge-trending {
+
+  position: absolute;
+
+  top: 18px;
+
+  right: 20px;
+
+  background: #ff4d4d;
+
+  color: white;
+
+  padding: 5px 12px;
+
+  border-radius: 20px;
+
+  font-size: 11px;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   ESTATÍSTICAS
+========================================================= */
+
+.stats-section {
+
+  padding: 80px 0;
+
+  background-color: #0d0b0b;
+
+  color: white;
+}
+
+
+.stat-box {
+
+  background: rgba(255,255,255,0.05);
+
+  border: 1px solid rgba(255,255,255,0.1);
+
+  border-radius: 18px;
+
+  padding: 22px;
+
+  transition: 0.3s;
+
+  text-align: center;
+}
+
+
+.stat-box:hover {
+
+  border-color: #bd1717;
+
+  transform: translateY(-4px);
+}
+
+
+.stat-number {
+
+  font-family: 'Bungee', cursive;
+
+  font-size: 2.5rem;
+
+  color: #ff4d4d;
+}
+
+
+.stat-label {
+
+  font-family: sans-serif;
+
+  font-size: 13px;
+
+  color: #ccc;
+
+  text-transform: uppercase;
+
+  letter-spacing: 1px;
+}
+
+
+.chart-container-box {
+
+  background: rgba(20,20,20,0.8);
+
+  border: 1px solid rgba(255,255,255,0.1);
+
+  border-radius: 18px;
+
+  padding: 25px;
+
+  margin-top: 35px;
+}
+
+
+/* =========================================================
+   MURAL
+========================================================= */
+
+.feed-section {
+
+  padding: 80px 0;
+
+  background-color: #080808;
+
+  color: white;
+}
+
+
+.comment-card {
+
+  background: rgba(255,255,255,0.05);
+
+  border: 1px solid rgba(255,255,255,0.12);
+
+  border-radius: 18px;
+
+  padding: 22px;
+
+  text-align: left;
+
+  height: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: space-between;
+}
+
+
+.comment-user {
+
+  font-size: 0.95rem;
+
+  color: white;
+}
+
+
+.comment-target {
+
+  font-size: 12px;
+
+  color: #ff6b6b;
+
+  font-family: sans-serif;
+
+  margin-bottom: 10px;
+}
+
+
+.comment-text {
+
+  font-family: sans-serif;
+
+  font-size: 14px;
+
+  color: #ddd;
+
+  line-height: 1.5;
+
+  margin-bottom: 15px;
+}
+
+
+.btn-like {
+
+  background: transparent;
+
+  border: 1px solid rgba(255,255,255,0.2);
+
+  color: #aaa;
+
+  border-radius: 15px;
+
+  padding: 4px 12px;
+
+  font-size: 12px;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+
+.btn-like:hover,
+.btn-like.liked {
+
+  color: #ff4d4d;
+
+  border-color: #ff4d4d;
+
+  background: rgba(255,77,77,0.1);
+}
+
+
+/* =========================================================
+   NOTÍCIAS
+========================================================= */
+
+.news-section {
+
+  padding: 90px 0;
+
+  background-color: #ededed;
+}
+
+
+.news-card {
+
+  background: white;
+
+  border-radius: 20px;
+
+  overflow: hidden;
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+
+
+/* =========================================================
+   LOCALIZAÇÃO
+========================================================= */
+
+.location-section {
+
+  padding: 90px 0;
+
+  background-color: #f9f9f9;
+}
+
+
+.map-responsive {
+
+  overflow: hidden;
+
+  padding-bottom: 450px;
+
+  position: relative;
+
+  height: 0;
+
+  border-radius: 20px;
+
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+
+.map-responsive iframe {
+
+  left: 0;
+
+  top: 0;
+
+  height: 100%;
+
+  width: 100%;
+
+  position: absolute;
+}
+
+
+/* =========================================================
+   FAQ
+========================================================= */
+
+.faq-section {
+
+  padding: 90px 0;
+
+  background: #0d0b0b;
+
+  color: white;
+}
+
+
+.accordion-item-custom {
+
+  background: rgba(255,255,255,0.06) !important;
+
+  border: 1px solid rgba(255,255,255,0.12) !important;
+
+  border-radius: 15px !important;
+
+  margin-bottom: 15px;
+
+  overflow: hidden;
+}
+
+
+.accordion-button-custom {
+
+  background: transparent !important;
+
+  color: white !important;
+
+  font-size: 15px;
+
+  text-transform: uppercase;
+
+  padding: 20px;
+
+  box-shadow: none !important;
+}
+
+
+.accordion-button-custom:not(.collapsed) {
+
+  color: #ff4d4d !important;
+
+  background: rgba(255,255,255,0.03) !important;
+}
+
+
+.accordion-button-custom::after {
+
+  filter: invert(1);
+}
+
+
+.accordion-body-custom {
+
+  background: rgba(0,0,0,0.2);
+
+  color: #ccc;
+
+  font-size: 14px;
+
+  line-height: 1.6;
+
+  font-family: sans-serif;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer-custom {
+
+  background-color: #050505;
+
+  color: rgba(255,255,255,0.6);
+
+  padding: 60px 0;
+
+  font-size: 14px;
+
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+
+.footer-custom a {
+
+  color: #ff4d4d;
+
+  text-decoration: none;
+}
+
+
+.social-share-buttons a {
+
+  font-size: 20px;
+
+  width: 45px;
+
+  height: 45px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: rgba(255,255,255,0.1);
+
+  color: white;
+
+  transition: 0.3s;
+}
+
+
+.social-share-buttons a:hover {
+
+  background: #bd1717;
+
+  transform: translateY(-3px);
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+========================================================= */
+
+@media (max-width: 1500px) {
+
+  .navbar-custom .container {
+
+    max-width: 1400px;
+
+    gap: 7px;
+  }
+
+  .btn-nav-red,
+  .nav-link-custom {
+
+    width: 135px;
+
+    min-width: 135px;
+
+    font-size: 13px;
+  }
+
+}
+
+
+@media (max-width: 1200px) {
+
+  .navbar-custom .container {
+
+    max-width: 100%;
+
+    padding-left: 15px;
+
+    padding-right: 15px;
+  }
+
+  .btn-nav-red,
+  .nav-link-custom {
+
+    width: 115px;
+
+    min-width: 115px;
+
+    font-size: 11px;
+  }
+
+  .navbar-custom .navbar-nav {
+
+    gap: 4px;
+  }
+
+}
+
+
+@media (max-width: 991px) {
+
+  .navbar-custom .container {
+
+    flex-wrap: wrap;
+  }
+
+  .navbar-custom .navbar-collapse {
+
+    width: 100%;
+
+    flex-basis: 100%;
+  }
+
+  .navbar-custom .navbar-nav {
+
+    flex-direction: column;
+
+    width: 100%;
+  }
+
+  .btn-nav-red,
+  .nav-link-custom {
+
+    width: 100%;
+
+    max-width: 300px;
+
+    margin: 4px auto;
+  }
+
+  .brand-logos-container {
+
+    margin: 10px auto 0;
+  }
+
+}
+
+
+@media (max-width: 768px) {
+
+  .intro-section {
+
+    padding: 35px 0 55px;
+  }
+
+  .main-title {
+
+    font-size: 2.5rem !important;
+  }
+
+  .main-subtitle {
+
+    font-size: 1.8rem !important;
+  }
+
+  .about-section {
+
+    padding: 60px 0;
+  }
+
+  .about-title {
+
+    font-size: 1.8rem;
+  }
+
+  .about-text {
+
+    font-size: 14px;
+  }
+
+  .quick-section {
+
+    padding: 55px 0;
+  }
+
+  .quick-title {
+
+    font-size: 1.8rem;
+  }
+
+  .podium-container {
+
+    flex-direction: column;
+
+    align-items: center;
+  }
+
+  .podium-card {
+
+    max-width: 100%;
+
+    height: auto !important;
+
+    order: initial !important;
+  }
+
+  .trending-card {
+
+    padding: 25px 20px;
+  }
+
+}
+
+
+@media (max-width: 480px) {
+
+  .main-title {
+
+    font-size: 2rem !important;
+  }
+
+  .main-subtitle {
+
+    font-size: 1.5rem !important;
+  }
+
+  .quick-button,
+  .btn-gerenciar,
+  .btn-gerenciar-branco {
+
+    width: 100%;
+
+    max-width: 220px;
+  }
+
+}
+
+</style>
+
 </head>
 
 
 <body>
 
 
-  <!-- =====================================================
-       HEADER
-       ===================================================== -->
+<!-- =========================================================
+     NAVBAR
+========================================================= -->
 
-  <header>
+<header>
 
-    <nav class="navbar navbar-expand-lg navbar-custom">
+<nav class="navbar navbar-expand-lg navbar-custom">
 
-      <div class="container">
+  <div class="container">
 
 
-        <!-- VOTAR -->
+    <!-- VOTAR -->
 
-        <a class="btn-nav-red"
+    <a class="btn-nav-red"
+       href="{{ url_for('estudantelogin') }}">
+
+      Votar
+
+    </a>
+
+
+    <!-- BOTÃO MOBILE -->
+
+    <button class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav">
+
+      <span class="navbar-toggler-icon"></span>
+
+    </button>
+
+
+    <!-- MENU -->
+
+    <div class="collapse navbar-collapse justify-content-center"
+         id="navbarNav">
+
+      <ul class="navbar-nav">
+
+
+        <li class="nav-item">
+
+          <a class="nav-link nav-link-custom"
+             href="{{ url_for('estandes') }}">
+
+            Estandes
+
+          </a>
+
+        </li>
+
+
+        <li class="nav-item">
+
+          <a class="nav-link nav-link-custom"
+             href="{{ url_for('listar_projetos') }}">
+
+            Gerenciar
+            Projetos
+
+          </a>
+
+        </li>
+
+
+        <li class="nav-item">
+
+          <a class="nav-link nav-link-custom"
+             href="#mural">
+
+            Mural
+
+          </a>
+
+        </li>
+
+
+        <li class="nav-item">
+
+          <a class="nav-link nav-link-custom"
+             href="#ranking">
+
+            Ranking
+
+          </a>
+
+        </li>
+
+
+        <li class="nav-item">
+
+          <a class="nav-link nav-link-custom"
+             href="#estatisticas">
+
+            Estatísticas
+
+          </a>
+
+        </li>
+
+
+        <li class="nav-item">
+
+          <a class="nav-link nav-link-custom"
+             href="#noticias">
+
+            Notícias
+
+          </a>
+
+        </li>
+
+
+        <li class="nav-item">
+
+          <a class="nav-link nav-link-custom"
+             href="#localizacao">
+
+            Localização
+
+          </a>
+
+        </li>
+
+
+        <li class="nav-item">
+
+          <a class="nav-link nav-link-custom"
+             href="#faq">
+
+            FAQ
+
+          </a>
+
+        </li>
+
+
+        <li class="nav-item">
+
+          <a class="nav-link nav-link-custom"
+             href="{{ url_for('estudantelogin') }}">
+
+            Buscar por
+            Turma
+
+          </a>
+
+        </li>
+
+
+      </ul>
+
+    </div>
+
+
+    <!-- LOGOS -->
+
+    <div class="brand-logos-container">
+
+      <img src="{{ url_for('static', filename='logo_feira.jpg') }}"
+           alt="FeiraScore"
+           class="img-navbar-logo"
+           width="65"
+           height="45">
+
+
+      <img src="{{ url_for('static', filename='vimi_logo.jpg') }}"
+           alt="Vimi"
+           class="img-navbar-logo"
+           width="45"
+           height="45">
+
+    </div>
+
+
+  </div>
+
+</nav>
+
+</header>
+
+
+
+<main>
+
+
+<!-- =========================================================
+     INTRO
+========================================================= -->
+
+<section class="intro-section">
+
+  <div class="container">
+
+    <div class="row align-items-center justify-content-center">
+
+
+      <div class="col-md-6 mb-4 mb-md-0 hero-brand-block">
+
+
+        <img src="{{ url_for('static', filename='trofeu.png') }}"
+             alt="Troféu FeiraScore"
+             class="img-feirascore-brand">
+
+
+        <h1 class="main-title">
+
+          FEIRA<br>SCORE
+
+        </h1>
+
+
+        <p class="main-subtitle">
+
+          Quem lidera,
+          <span>brilha.</span>
+
+        </p>
+
+
+        <a href="#sobre"
+           class="btn-main-red d-inline-flex align-items-center justify-content-center">
+
+          Saiba Mais
+
+        </a>
+
+
+      </div>
+
+
+      <div class="col-md-6 text-center">
+
+        <img src="{{ url_for('static', filename='evento.jpg') }}"
+             alt="Evento Feira"
+             class="img-evento">
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     SOBRE
+========================================================= -->
+
+<section class="about-section"
+         id="sobre">
+
+  <div class="container">
+
+    <div class="row justify-content-center">
+
+      <div class="col-lg-9">
+
+
+        <h2 class="about-title">
+
+          O QUE É<br>
+          FEIRA SCORE?
+
+        </h2>
+
+
+        <p class="about-text">
+
+          O FeiraScore foi criado pra deixar a feira tecnológica
+          da Etec Sylvio de Mattos Carvalho muito mais moderna,
+          rápida e interativa. Em vez daquele jeito tradicional
+          de votação, tudo acontece de forma digital, prática
+          e sem complicação.
+
+        </p>
+
+
+        <p class="about-text">
+
+          A ideia é simples: os visitantes podem conhecer os
+          projetos, votar nos que mais gostaram e participar
+          da feira de um jeito muito mais divertido. Além de
+          facilitar a vida de todo mundo, o sistema deixa a
+          contagem dos votos muito mais rápida e organizada.
+
+        </p>
+
+
+        <p class="highlight-text">
+
+          SUA OPINIÃO FAZ A DIFERENÇA!<br>
+
+          CADA VOTO AJUDA A DESTACAR IDEIAS,
+          RECONHECER ESFORÇOS E VALORIZAR
+          PROJETOS INCRÍVEIS.
+
+        </p>
+
+
+        <a class="btn-main-white
+                  d-inline-flex
+                  align-items-center
+                  justify-content-center"
            href="{{ url_for('estudantelogin') }}">
 
           Votar
@@ -1578,1515 +2107,479 @@
         </a>
 
 
-        <!-- MENU MOBILE -->
-
-        <button class="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarNav">
-
-          <span class="navbar-toggler-icon"></span>
-
-        </button>
-
-
-        <div class="collapse navbar-collapse justify-content-center"
-             id="navbarNav">
-
-
-          <ul class="navbar-nav gap-2 my-3 my-lg-0 text-center">
-
-
-            <!-- ESTANDES -->
-
-            <li class="nav-item">
-
-              <a class="nav-link nav-link-custom"
-                 href="{{ url_for('estandes') }}">
-
-                Estandes
-
-              </a>
-
-            </li>
-
-
-            <!-- GERENCIAR -->
-
-            <li class="nav-item">
-
-              <a class="nav-link nav-link-custom"
-                 href="{{ url_for('listar_projetos') }}">
-
-                Gerenciar Projetos
-
-              </a>
-
-            </li>
-
-
-            <!-- MURAL -->
-
-            <li class="nav-item">
-
-              <a class="nav-link nav-link-custom"
-                 href="#mural">
-
-                Mural
-
-              </a>
-
-            </li>
-
-
-            <!-- RANKING -->
-
-            <li class="nav-item">
-
-              <a class="nav-link nav-link-custom"
-                 href="#ranking">
-
-                Ranking
-
-              </a>
-
-            </li>
-
-
-            <!-- ESTATÍSTICAS -->
-
-            <li class="nav-item">
-
-              <a class="nav-link nav-link-custom"
-                 href="#estatisticas">
-
-                Estatísticas
-
-              </a>
-
-            </li>
-
-
-            <!-- NOTÍCIAS -->
-
-            <li class="nav-item">
-
-              <a class="nav-link nav-link-custom"
-                 href="#noticias">
-
-                Notícias
-
-              </a>
-
-            </li>
-
-
-            <!-- LOCALIZAÇÃO -->
-
-            <li class="nav-item">
-
-              <a class="nav-link nav-link-custom"
-                 href="#localizacao">
-
-                Localização
-
-              </a>
-
-            </li>
-
-
-            <!-- FAQ -->
-
-            <li class="nav-item">
-
-              <a class="nav-link nav-link-custom"
-                 href="#faq">
-
-                FAQ
-
-              </a>
-
-            </li>
-
-
-            <!-- BUSCAR -->
-
-            <li class="nav-item">
-
-              <a class="nav-link nav-link-custom"
-                 href="{{ url_for('estudantelogin') }}">
-
-                Buscar por Turma
-
-              </a>
-
-            </li>
-
-
-          </ul>
-
-        </div>
-
-
-        <!-- LOGOS -->
-
-        <div class="brand-logos-container ms-auto ms-lg-0">
-
-          <img src="{{ url_for('static', filename='logo_feira.jpg') }}"
-               alt="FeiraScore"
-               class="img-navbar-logo"
-               width="65"
-               height="45">
-
-          <img src="{{ url_for('static', filename='vimi_logo.jpg') }}"
-               alt="Vimi"
-               class="img-navbar-logo"
-               width="45"
-               height="45">
-
-        </div>
-
-
       </div>
 
-    </nav>
+    </div>
 
-  </header>
+  </div>
 
-
-
-  <main>
+</section>
 
 
-    <!-- =====================================================
-         INTRO
-         ===================================================== -->
 
-    <section class="intro-section">
+<!-- =========================================================
+     4 BLOCOS
+========================================================= -->
 
-      <div class="container">
+<section class="quick-section">
 
-        <div class="row align-items-center justify-content-center">
-
-
-          <div class="col-md-6 mb-4 mb-md-0 hero-brand-block">
+  <div class="container">
 
 
-            <img src="{{ url_for('static', filename='trofeu.png') }}"
-                 alt="Troféu FeiraScore"
-                 class="img-feirascore-brand">
+    <h2 class="quick-title">
+
+      EXPLORE A
+      <span>FEIRA</span>
+
+    </h2>
 
 
-            <h1 class="main-title">
+    <p class="quick-subtitle">
 
-              FEIRA<br>SCORE
+      Acesse rapidamente as principais áreas do FeiraScore
 
-            </h1>
+    </p>
 
 
-            <p class="main-subtitle">
+    <div class="row g-4">
 
-              Quem lidera,
-              <span>brilha.</span>
+
+      <!-- RANKING -->
+
+      <div class="col-lg-3 col-md-6">
+
+        <div class="quick-card">
+
+
+          <div>
+
+            <div class="quick-icon">
+
+              <i class="fa-solid fa-ranking-star"></i>
+
+            </div>
+
+
+            <h3>
+
+              Ranking
+
+            </h3>
+
+
+            <p>
+
+              Veja os projetos que estão
+              se destacando na votação.
 
             </p>
 
-
-            <a href="#sobre"
-               class="btn-main-red d-inline-flex align-items-center justify-content-center text-decoration-none">
-
-              Saiba Mais
-
-            </a>
-
-
           </div>
 
 
-          <div class="col-md-6 text-center">
+          <a href="#ranking"
+             class="quick-button">
 
-            <img src="{{ url_for('static', filename='evento.jpg') }}"
-                 alt="Evento Feira"
-                 class="img-evento">
-
-          </div>
-
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-
-    <!-- =====================================================
-         SOBRE
-         AGORA VEM ANTES DO GERENCIAR
-         ===================================================== -->
-
-    <section class="about-section"
-             id="sobre">
-
-
-      <div class="container">
-
-
-        <div class="row justify-content-center">
-
-
-          <div class="col-lg-9">
-
-
-            <h2 class="about-title">
-
-              O QUE É<br>
-              FEIRA SCORE?
-
-            </h2>
-
-
-            <p class="about-text">
-
-              O FeiraScore foi criado pra deixar a feira tecnológica da Etec Sylvio de Mattos Carvalho muito mais moderna, rápida e interativa. Em vez daquele jeito tradicional de votação, tudo acontece de forma digital, prática e sem complicação.
-
-            </p>
-
-
-            <p class="about-text">
-
-              A ideia é simples: os visitantes podem conhecer os projetos, votar nos que mais gostaram e participar da feira de um jeito muito mais divertido. Além de facilitar a vida de todo mundo, o sistema deixa a contagem dos votos muito mais rápida e organizada.
-
-            </p>
-
-
-            <p class="highlight-text">
-
-              SUA OPINIÃO FAZ A DIFERENÇA!<br>
-
-              CADA VOTO AJUDA A DESTACAR IDEIAS,
-              RECONHECER ESFORÇOS E VALORIZAR
-              PROJETOS INCRÍVEIS.
-
-            </p>
-
-
-            <div class="d-flex flex-wrap justify-content-center gap-2">
-
-              <a class="btn-main-white d-inline-flex align-items-center justify-content-center text-decoration-none"
-                 href="{{ url_for('estudantelogin') }}">
-
-                Votar
-
-              </a>
-
-            </div>
-
-
-          </div>
-
-
-        </div>
-
-
-      </div>
-
-
-    </section>
-
-
-
-    <!-- =====================================================
-         GERENCIAR PROJETOS
-         AGORA ESTÁ ABAIXO DO "O QUE É FEIRA SCORE?"
-         ===================================================== -->
-
-    <section class="gerenciar-projetos-section"
-             id="gerenciar-projetos">
-
-
-      <div class="container">
-
-
-        <h2 class="gerenciar-projetos-title">
-
-          GERENCIAR
-          <span>PROJETOS</span>
-
-        </h2>
-
-
-        <p class="gerenciar-projetos-text">
-
-          Cadastre, edite e gerencie os projetos participantes da FeiraScore.
-
-        </p>
-
-
-        <div class="row g-4 justify-content-center">
-
-
-          <!-- =================================================
-               PROJETOS CADASTRADOS
-               ================================================= -->
-
-          <div class="col-md-5">
-
-
-            <div class="gerenciar-card">
-
-
-              <div class="gerenciar-icon">
-
-                <i class="fa-solid fa-list"></i>
-
-              </div>
-
-
-              <h3>
-
-                Projetos Cadastrados
-
-              </h3>
-
-
-              <p>
-
-                Visualize todos os projetos cadastrados,
-                edite informações, gerencie mídias ou exclua
-                projetos.
-
-              </p>
-
-
-              <a href="{{ url_for('listar_projetos') }}"
-                 class="btn-gerenciar">
-
-
-                <i class="fa-solid fa-list me-2"></i>
-
-                Listar Projetos
-
-
-              </a>
-
-
-            </div>
-
-
-          </div>
-
-
-
-          <!-- =================================================
-               NOVO PROJETO
-               ================================================= -->
-
-          <div class="col-md-5">
-
-
-            <div class="gerenciar-card">
-
-
-              <div class="gerenciar-icon">
-
-                <i class="fa-solid fa-plus"></i>
-
-              </div>
-
-
-              <h3>
-
-                Novo Projeto
-
-              </h3>
-
-
-              <p>
-
-                Cadastre um novo projeto da feira,
-                informando a turma, nome, resumo e
-                mídias do estande.
-
-              </p>
-
-
-              <a href="{{ url_for('pagina_descricao') }}"
-                 class="btn-gerenciar-branco">
-
-
-                <i class="fa-solid fa-plus me-2"></i>
-
-                Cadastrar Projeto
-
-
-              </a>
-
-
-            </div>
-
-
-          </div>
-
-
-        </div>
-
-
-      </div>
-
-
-    </section>
-
-
-
-    <!-- =====================================================
-         1. RANKING GERAL / HALL DA FAMA
-         ===================================================== -->
-
-    <section class="ranking-section"
-             id="ranking">
-
-
-      <div class="container">
-
-
-        <h2 class="section-title-custom">
-
-          HALL DA
-          <span>FAMA</span>
-
-        </h2>
-
-
-        <p class="section-subtitle-custom">
-
-          Classificação em tempo real dos projetos mais votados
-
-        </p>
-
-
-
-        <!-- PÓDIO -->
-
-        <div class="podium-container">
-
-
-          <div class="podium-card podium-2">
-
-
-            <div class="podium-crown">
-
-              <i class="fa-solid fa-medal"></i>
-
-            </div>
-
-
-            <div class="podium-stand-name">
-
-              EcoTech Sensor
-
-            </div>
-
-
-            <div class="podium-class-name">
-
-              3º Módulo - Mecatrônica
-
-            </div>
-
-
-            <div class="podium-score">
-
-              1.240 pts
-
-            </div>
-
-
-          </div>
-
-
-
-          <div class="podium-card podium-1">
-
-
-            <div class="podium-crown">
-
-              <i class="fa-solid fa-crown"></i>
-
-            </div>
-
-
-            <div class="podium-stand-name">
-
-              FeiraScore
-
-            </div>
-
-
-            <div class="podium-class-name">
-
-              3º Módulo - Desenvolvimento de Sistemas
-
-            </div>
-
-
-            <div class="podium-score">
-
-              1.850 pts
-
-            </div>
-
-
-          </div>
-
-
-
-          <div class="podium-card podium-3">
-
-
-            <div class="podium-crown">
-
-              <i class="fa-solid fa-award"></i>
-
-            </div>
-
-
-            <div class="podium-stand-name">
-
-              Horta Automatizada
-
-            </div>
-
-
-            <div class="podium-class-name">
-
-              2º Módulo - IoT
-
-            </div>
-
-
-            <div class="podium-score">
-
-              980 pts
-
-            </div>
-
-
-          </div>
-
-
-        </div>
-
-
-
-        <!-- FILTROS -->
-
-        <div class="d-flex justify-content-center gap-2 mb-4 flex-wrap">
-
-
-          <button class="btn btn-filter-custom active"
-                  onclick="filterRanking('todos', this)">
-
-            Geral
-
-          </button>
-
-
-          <button class="btn btn-filter-custom"
-                  onclick="filterRanking('tecnologia', this)">
-
-            Tecnologia & Software
-
-          </button>
-
-
-          <button class="btn btn-filter-custom"
-                  onclick="filterRanking('automacao', this)">
-
-            Automação & Hardware
-
-          </button>
-
-
-          <button class="btn btn-filter-custom"
-                  onclick="filterRanking('sustentabilidade', this)">
-
-            Sustentabilidade
-
-          </button>
-
-
-        </div>
-
-
-
-        <!-- TABELA -->
-
-        <div class="ranking-table-container">
-
-
-          <div class="table-responsive">
-
-
-            <table class="table table-dark-custom align-middle">
-
-
-              <thead>
-
-
-                <tr>
-
-                  <th style="width: 80px;">
-                    Posição
-                  </th>
-
-                  <th>
-                    Estande / Projeto
-                  </th>
-
-                  <th>
-                    Turma / Curso
-                  </th>
-
-                  <th>
-                    Categoria
-                  </th>
-
-                  <th class="text-end">
-                    Pontuação
-                  </th>
-
-                </tr>
-
-
-              </thead>
-
-
-              <tbody>
-
-
-                <tr>
-
-                  <td class="fw-bold text-center">
-                    4º
-                  </td>
-
-                  <td>
-                    Smart Lock com Biometria
-                  </td>
-
-                  <td>
-                    2º DS - Manhã
-                  </td>
-
-                  <td>
-
-                    <span class="badge bg-secondary">
-                      Automação
-                    </span>
-
-                  </td>
-
-                  <td class="text-end fw-bold text-danger">
-                    850 pts
-                  </td>
-
-                </tr>
-
-
-                <tr>
-
-                  <td class="fw-bold text-center">
-                    5º
-                  </td>
-
-                  <td>
-                    Braço Robótico Reciclável
-                  </td>
-
-                  <td>
-                    1º Mecatrônica
-                  </td>
-
-                  <td>
-
-                    <span class="badge bg-secondary">
-                      Hardware
-                    </span>
-
-                  </td>
-
-                  <td class="text-end fw-bold text-danger">
-                    790 pts
-                  </td>
-
-                </tr>
-
-
-                <tr>
-
-                  <td class="fw-bold text-center">
-                    6º
-                  </td>
-
-                  <td>
-                    App de Reciclagem Comunitária
-                  </td>
-
-                  <td>
-                    3º DS - Noite
-                  </td>
-
-                  <td>
-
-                    <span class="badge bg-secondary">
-                      Sustentabilidade
-                    </span>
-
-                  </td>
-
-                  <td class="text-end fw-bold text-danger">
-                    710 pts
-                  </td>
-
-                </tr>
-
-
-              </tbody>
-
-
-            </table>
-
-
-          </div>
-
-
-        </div>
-
-
-      </div>
-
-
-    </section>
-
-
-
-    <!-- =====================================================
-         2. DESTAQUE DO MOMENTO
-         ===================================================== -->
-
-    <section class="trending-section"
-             id="em-alta">
-
-
-      <div class="container">
-
-
-        <div class="row justify-content-center">
-
-
-          <div class="col-lg-8">
-
-
-            <div class="trending-card text-center text-md-start">
-
-
-              <span class="badge-trending">
-
-                <i class="fa-solid fa-fire me-1"></i>
-
-                Em Alta no Momento
-
-              </span>
-
-
-              <div class="row align-items-center">
-
-
-                <div class="col-md-8 mb-3 mb-md-0">
-
-
-                  <p class="text-uppercase text-danger mb-1"
-                     style="font-size: 12px; letter-spacing: 1px;">
-
-                    Disparando em Votação 🔥
-
-                  </p>
-
-
-                  <h3 class="mb-2"
-                      style="font-size: 1.8rem; color: #fff;">
-
-                    Visão Computacional na Indústria 4.0
-
-                  </h3>
-
-
-                  <p class="font-sans text-white-50 mb-3"
-                     style="font-family: sans-serif; font-size: 14px;">
-
-                    Projeto de detecção automática de falhas com inteligência artificial. Corra para conhecer e registrar sua nota!
-
-                  </p>
-
-
-                  <span class="badge bg-danger p-2"
-                        style="font-family: sans-serif;">
-
-                    Estande #12 - Bloco B
-
-                  </span>
-
-
-                </div>
-
-
-                <div class="col-md-4 text-center">
-
-
-                  <a href="{{ url_for('estudantelogin') }}"
-                     class="btn-main-red d-inline-flex align-items-center justify-content-center text-decoration-none"
-                     style="width: 220px; padding: 10px 20px; font-size: 15px;">
-
-                    Votar Agora
-
-                    <i class="fa-solid fa-arrow-right ms-2"></i>
-
-                  </a>
-
-
-                </div>
-
-
-              </div>
-
-
-            </div>
-
-
-          </div>
-
-
-        </div>
-
-
-      </div>
-
-
-    </section>
-
-
-
-    <!-- =====================================================
-         3. PAINEL DE TRANSPARÊNCIA
-         ===================================================== -->
-
-    <section class="stats-section"
-             id="estatisticas">
-
-
-      <div class="container">
-
-
-        <h2 class="section-title-custom">
-
-          PAINEL DE
-          <span>TRANSPARÊNCIA</span>
-
-        </h2>
-
-
-        <p class="section-subtitle-custom">
-
-          Dados do volume de avaliações processados pelo sistema
-
-        </p>
-
-
-        <div class="row g-4">
-
-
-          <div class="col-md-4">
-
-            <div class="stat-box">
-
-              <i class="fa-solid fa-check-to-slot fa-2x text-danger mb-2"></i>
-
-              <div class="stat-number">
-                4.892
-              </div>
-
-              <div class="stat-label">
-                Votos Registrados
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <div class="col-md-4">
-
-            <div class="stat-box">
-
-              <i class="fa-solid fa-store fa-2x text-danger mb-2"></i>
-
-              <div class="stat-number">
-                42
-              </div>
-
-              <div class="stat-label">
-                Estandes Participantes
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <div class="col-md-4">
-
-            <div class="stat-box">
-
-              <i class="fa-solid fa-users-gear fa-2x text-danger mb-2"></i>
-
-              <div class="stat-number">
-                18
-              </div>
-
-              <div class="stat-label">
-                Turmas Envolvidas
-              </div>
-
-            </div>
-
-          </div>
-
-
-        </div>
-
-
-        <div class="chart-container-box">
-
-
-          <h4 class="text-uppercase mb-4 text-center"
-              style="font-size: 1.2rem; color: #fff;">
-
-            Horários de Maior Pico de Avaliação
-
-          </h4>
-
-
-          <canvas id="votesChart"
-                  height="100"></canvas>
-
-
-        </div>
-
-
-      </div>
-
-
-    </section>
-
-
-
-    <!-- =====================================================
-         4. MURAL DO PÚBLICO
-         ===================================================== -->
-
-    <section class="feed-section"
-             id="mural">
-
-
-      <div class="container">
-
-
-        <h2 class="section-title-custom">
-
-          MURAL DO
-          <span>PÚBLICO</span>
-
-        </h2>
-
-
-        <p class="section-subtitle-custom">
-
-          O que os visitantes estão achando dos projetos expostos
-
-        </p>
-
-
-        <div class="row g-4 justify-content-center">
-
-
-          <!-- COMENTÁRIO 1 -->
-
-          <div class="col-md-4">
-
-
-            <div class="comment-card">
-
-
-              <div>
-
-
-                <div class="comment-user fw-bold">
-
-                  Lucas Oliveira
-
-                </div>
-
-
-                <div class="comment-target">
-
-                  Avaliou: FeiraScore
-
-                </div>
-
-
-                <p class="comment-text">
-
-                  "Sistema sensacional e extremamente rápido! Ficou muito mais fácil escolher os melhores estandes."
-
-                </p>
-
-
-              </div>
-
-
-              <div class="d-flex justify-content-between align-items-center">
-
-
-                <button class="btn-like"
-                        onclick="likeComment(this)">
-
-                  <i class="fa-regular fa-heart me-1"></i>
-
-                  <span>14</span>
-
-                </button>
-
-
-                <small class="text-white-50"
-                       style="font-family: sans-serif; font-size: 11px;">
-
-                  Há 10 min
-
-                </small>
-
-
-              </div>
-
-
-            </div>
-
-
-          </div>
-
-
-
-          <!-- COMENTÁRIO 2 -->
-
-          <div class="col-md-4">
-
-
-            <div class="comment-card">
-
-
-              <div>
-
-
-                <div class="comment-user fw-bold">
-
-                  Mariana Costa
-
-                </div>
-
-
-                <div class="comment-target">
-
-                  Avaliou: EcoTech Sensor
-
-                </div>
-
-
-                <p class="comment-text">
-
-                  "Proposta incrível para a preservação de energia. Apresentação do grupo foi ótima e muito clara!"
-
-                </p>
-
-
-              </div>
-
-
-              <div class="d-flex justify-content-between align-items-center">
-
-
-                <button class="btn-like"
-                        onclick="likeComment(this)">
-
-                  <i class="fa-regular fa-heart me-1"></i>
-
-                  <span>28</span>
-
-                </button>
-
-
-                <small class="text-white-50"
-                       style="font-family: sans-serif; font-size: 11px;">
-
-                  Há 25 min
-
-                </small>
-
-
-              </div>
-
-
-            </div>
-
-
-          </div>
-
-
-
-          <!-- COMENTÁRIO 3 -->
-
-          <div class="col-md-4">
-
-
-            <div class="comment-card">
-
-
-              <div>
-
-
-                <div class="comment-user fw-bold">
-
-                  Prof. Carlos Santos
-
-                </div>
-
-
-                <div class="comment-target">
-
-                  Avaliou: Horta Automatizada
-
-                </div>
-
-
-                <p class="comment-text">
-
-                  "Impressionado com a dedicação dos alunos na montagem dos sensores. Parabéns aos envolvidos!"
-
-                </p>
-
-
-              </div>
-
-
-              <div class="d-flex justify-content-between align-items-center">
-
-
-                <button class="btn-like"
-                        onclick="likeComment(this)">
-
-                  <i class="fa-regular fa-heart me-1"></i>
-
-                  <span>42</span>
-
-                </button>
-
-
-                <small class="text-white-50"
-                       style="font-family: sans-serif; font-size: 11px;">
-
-                  Há 1 hora
-
-                </small>
-
-
-              </div>
-
-
-            </div>
-
-
-          </div>
-
-
-        </div>
-
-
-      </div>
-
-
-    </section>
-
-
-
-    <!-- =====================================================
-         NOTÍCIAS
-         ===================================================== -->
-
-    {% include 'noticias.html' %}
-
-
-    <!-- =====================================================
-         LOCALIZAÇÃO
-         ===================================================== -->
-
-    {% include 'localizacao.html' %}
-
-
-
-    <!-- =====================================================
-         FAQ
-         ===================================================== -->
-
-    <section class="faq-section"
-             id="faq">
-
-
-      <div class="container">
-
-
-        <h2 class="text-center text-uppercase mb-5"
-            style="letter-spacing: 1px; color: #b61c1c;">
-
-          Perguntas Frequentes
-
-        </h2>
-
-
-        <div class="row justify-content-center">
-
-
-          <div class="col-lg-8">
-
-
-            <div class="accordion"
-                 id="accordionFAQ">
-
-
-              <!-- FAQ 1 -->
-
-              <div class="accordion-item accordion-item-custom">
-
-
-                <h2 class="accordion-header">
-
-
-                  <button class="accordion-button accordion-button-custom collapsed"
-                          type="button"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#collapseOne">
-
-                    Como posso registrar meu voto em um estande?
-
-                  </button>
-
-
-                </h2>
-
-
-                <div id="collapseOne"
-                     class="accordion-collapse collapse"
-                     data-bs-parent="#accordionFAQ">
-
-
-                  <div class="accordion-body accordion-body-custom">
-
-                    É muito simples! Basta clicar no botão "Votar" localizado na barra superior ou diretamente no card do estande de sua preferência. Você será redirecionado para a tela de autenticação para validar sua escolha com segurança.
-
-                  </div>
-
-
-                </div>
-
-
-              </div>
-
-
-
-              <!-- FAQ 2 -->
-
-              <div class="accordion-item accordion-item-custom">
-
-
-                <h2 class="accordion-header">
-
-
-                  <button class="accordion-button accordion-button-custom collapsed"
-                          type="button"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#collapseTwo">
-
-                    Posso votar em mais de um projeto diferente?
-
-                  </button>
-
-
-                </h2>
-
-
-                <div id="collapseTwo"
-                     class="accordion-collapse collapse"
-                     data-bs-parent="#accordionFAQ">
-
-
-                  <div class="accordion-body accordion-body-custom">
-
-                    As regras padrão permitem que cada visitante dê sua pontuação para múltiplos estandes distintos, contudo, o sistema restringe o abuso limitando um voto por pessoa dentro de um mesmo projeto.
-
-                  </div>
-
-
-                </div>
-
-
-              </div>
-
-
-
-              <!-- FAQ 3 -->
-
-              <div class="accordion-item accordion-item-custom">
-
-
-                <h2 class="accordion-header">
-
-
-                  <button class="accordion-button accordion-button-custom collapsed"
-                          type="button"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#collapseThree">
-
-                    Como os resultados parciais são calculados?
-
-                  </button>
-
-
-                </h2>
-
-
-                <div id="collapseThree"
-                     class="accordion-collapse collapse"
-                     data-bs-parent="#accordionFAQ">
-
-
-                  <div class="accordion-body accordion-body-custom">
-
-                    O painel do FeiraScore realiza uma varredura constante em nosso banco de dados. À medida que as notas entram, a média ponderada é calculada instantaneamente de acordo com a categoria selecionada.
-
-                  </div>
-
-
-                </div>
-
-
-              </div>
-
-
-            </div>
-
-
-          </div>
-
-
-        </div>
-
-
-      </div>
-
-
-    </section>
-
-
-  </main>
-
-
-
-  <!-- =====================================================
-       FOOTER
-       ===================================================== -->
-
-  <footer class="footer-custom text-center">
-
-
-    <div class="container">
-
-
-      <p class="mb-2 px-3">
-
-        Você tem mais alguma pergunta que não está na nossa FAQ?
-
-      </p>
-
-
-      <p class="mb-3 px-3">
-
-        Entre em contato conosco pelo e-mail e responderemos o mais rápido possível!
-
-      </p>
-
-
-      <p class="mb-4">
-
-        <a href="mailto:contato@feirascore.com">
-
-          contato@feirascore.com
-
-        </a>
-
-      </p>
-
-
-      <div class="social-share-container">
-
-
-        <p class="mb-2"
-           style="font-size: 12px; color: rgba(255,255,255,0.4);">
-
-          Compartilhe a Feira
-
-        </p>
-
-
-        <div class="social-share-buttons d-flex justify-content-center gap-3">
-
-
-          <a href="https://www.facebook.com/sharer/sharer.php?u=https://feirascore.com"
-             target="_blank"
-             title="Compartilhar no Facebook">
-
-            <i class="fa-brands fa-facebook-f"></i>
-
-          </a>
-
-
-          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://feirascore.com"
-             target="_blank"
-             title="Compartilhar no LinkedIn">
-
-            <i class="fa-brands fa-linkedin-in"></i>
-
-          </a>
-
-
-          <a href="https://api.whatsapp.com/send?text=Confira%20os%20projetos%20da%20Feira%20Tecnol%C3%B3gica%20no%20FeiraScore!%20https://feirascore.com"
-             target="_blank"
-             title="Compartilhar no WhatsApp">
-
-            <i class="fa-brands fa-whatsapp"></i>
+            Ver Ranking
 
           </a>
 
 
         </div>
 
+      </div>
+
+
+
+      <!-- EM ALTA -->
+
+      <div class="col-lg-3 col-md-6">
+
+        <div class="quick-card">
+
+
+          <div>
+
+            <div class="quick-icon">
+
+              <i class="fa-solid fa-fire"></i>
+
+            </div>
+
+
+            <h3>
+
+              Em Alta
+
+            </h3>
+
+
+            <p>
+
+              Descubra quais projetos
+              estão recebendo mais atenção.
+
+            </p>
+
+          </div>
+
+
+          <a href="#em-alta"
+             class="quick-button">
+
+            Ver Destaque
+
+          </a>
+
+
+        </div>
+
+      </div>
+
+
+
+      <!-- ESTATÍSTICAS -->
+
+      <div class="col-lg-3 col-md-6">
+
+        <div class="quick-card">
+
+
+          <div>
+
+            <div class="quick-icon">
+
+              <i class="fa-solid fa-chart-column"></i>
+
+            </div>
+
+
+            <h3>
+
+              Estatísticas
+
+            </h3>
+
+
+            <p>
+
+              Confira os dados e números
+              das avaliações realizadas.
+
+            </p>
+
+          </div>
+
+
+          <a href="#estatisticas"
+             class="quick-button">
+
+            Ver Dados
+
+          </a>
+
+
+        </div>
+
+      </div>
+
+
+
+      <!-- MURAL -->
+
+      <div class="col-lg-3 col-md-6">
+
+        <div class="quick-card">
+
+
+          <div>
+
+            <div class="quick-icon">
+
+              <i class="fa-solid fa-comments"></i>
+
+            </div>
+
+
+            <h3>
+
+              Mural
+
+            </h3>
+
+
+            <p>
+
+              Veja os comentários e opiniões
+              dos visitantes da feira.
+
+            </p>
+
+          </div>
+
+
+          <a href="#mural"
+             class="quick-button">
+
+            Ver Mural
+
+          </a>
+
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     GERENCIAR PROJETOS
+========================================================= -->
+
+<section class="gerenciar-projetos-section"
+         id="gerenciar-projetos">
+
+  <div class="container">
+
+
+    <h2 class="gerenciar-projetos-title">
+
+      GERENCIAR
+      <span>PROJETOS</span>
+
+    </h2>
+
+
+    <p class="gerenciar-projetos-text">
+
+      Cadastre, edite e gerencie os projetos participantes
+      da FeiraScore.
+
+    </p>
+
+
+    <div class="row g-4 justify-content-center">
+
+
+      <!-- PROJETOS CADASTRADOS -->
+
+      <div class="col-md-5">
+
+        <div class="gerenciar-card">
+
+
+          <div class="gerenciar-icon">
+
+            <i class="fa-solid fa-list"></i>
+
+          </div>
+
+
+          <h3>
+
+            Projetos Cadastrados
+
+          </h3>
+
+
+          <p>
+
+            Visualize todos os projetos cadastrados,
+            edite informações, gerencie mídias ou
+            exclua projetos.
+
+          </p>
+
+
+          <a href="{{ url_for('listar_projetos') }}"
+             class="btn-gerenciar">
+
+            <i class="fa-solid fa-list me-2"></i>
+
+            Listar Projetos
+
+          </a>
+
+
+        </div>
+
+      </div>
+
+
+
+      <!-- NOVO PROJETO -->
+
+      <div class="col-md-5">
+
+        <div class="gerenciar-card">
+
+
+          <div class="gerenciar-icon">
+
+            <i class="fa-solid fa-plus"></i>
+
+          </div>
+
+
+          <h3>
+
+            Novo Projeto
+
+          </h3>
+
+
+          <p>
+
+            Cadastre um novo projeto da feira,
+            informando a turma, nome, resumo
+            e mídias do estande.
+
+          </p>
+
+
+          <a href="{{ url_for('pagina_descricao') }}"
+             class="btn-gerenciar-branco">
+
+            <i class="fa-solid fa-plus me-2"></i>
+
+            Cadastrar Projeto
+
+          </a>
+
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     RANKING
+========================================================= -->
+
+<section class="ranking-section"
+         id="ranking">
+
+  <div class="container">
+
+
+    <h2 class="section-title-custom">
+
+      HALL DA
+      <span>FAMA</span>
+
+    </h2>
+
+
+    <p class="section-subtitle-custom">
+
+      Classificação em tempo real dos projetos mais votados
+
+    </p>
+
+
+    <div class="podium-container">
+
+
+      <div class="podium-card podium-2">
+
+        <div class="podium-crown">
+
+          <i class="fa-solid fa-medal"></i>
+
+        </div>
+
+        <div class="podium-stand-name">
+
+          EcoTech Sensor
+
+        </div>
+
+        <div class="podium-class-name">
+
+          3º Módulo - Mecatrônica
+
+        </div>
+
+        <div class="podium-score">
+
+          1.240 pts
+
+        </div>
+
+      </div>
+
+
+
+      <div class="podium-card podium-1">
+
+        <div class="podium-crown">
+
+          <i class="fa-solid fa-crown"></i>
+
+        </div>
+
+        <div class="podium-stand-name">
+
+          FeiraScore
+
+        </div>
+
+        <div class="podium-class-name">
+
+          3º Módulo - Desenvolvimento de Sistemas
+
+        </div>
+
+        <div class="podium-score">
+
+          1.850 pts
+
+        </div>
+
+      </div>
+
+
+
+      <div class="podium-card podium-3">
+
+        <div class="podium-crown">
+
+          <i class="fa-solid fa-award"></i>
+
+        </div>
+
+        <div class="podium-stand-name">
+
+          Horta Automatizada
+
+        </div>
+
+        <div class="podium-class-name">
+
+          2º Módulo - IoT
+
+        </div>
+
+        <div class="podium-score">
+
+          980 pts
+
+        </div>
 
       </div>
 
@@ -3094,279 +2587,1108 @@
     </div>
 
 
-  </footer>
+    <div class="d-flex justify-content-center gap-2 mb-4 flex-wrap">
+
+
+      <button class="btn btn-filter-custom active"
+              onclick="filterRanking('todos', this)">
+
+        Geral
+
+      </button>
+
+
+      <button class="btn btn-filter-custom"
+              onclick="filterRanking('tecnologia', this)">
+
+        Tecnologia & Software
+
+      </button>
+
+
+      <button class="btn btn-filter-custom"
+              onclick="filterRanking('automacao', this)">
+
+        Automação & Hardware
+
+      </button>
+
+
+      <button class="btn btn-filter-custom"
+              onclick="filterRanking('sustentabilidade', this)">
+
+        Sustentabilidade
+
+      </button>
+
+
+    </div>
+
+
+    <div class="ranking-table-container">
+
+      <div class="table-responsive">
+
+        <table class="table table-dark-custom align-middle">
+
+
+          <thead>
+
+            <tr>
+
+              <th>Posição</th>
+
+              <th>Estande / Projeto</th>
+
+              <th>Turma / Curso</th>
+
+              <th>Categoria</th>
+
+              <th class="text-end">Pontuação</th>
+
+            </tr>
+
+          </thead>
+
+
+          <tbody>
+
+
+            <tr>
+
+              <td class="fw-bold text-center">
+                4º
+              </td>
+
+              <td>
+                Smart Lock com Biometria
+              </td>
+
+              <td>
+                2º DS - Manhã
+              </td>
+
+              <td>
+
+                <span class="badge bg-secondary">
+                  Automação
+                </span>
+
+              </td>
+
+              <td class="text-end fw-bold text-danger">
+
+                850 pts
+
+              </td>
+
+            </tr>
+
+
+            <tr>
+
+              <td class="fw-bold text-center">
+                5º
+              </td>
+
+              <td>
+                Braço Robótico Reciclável
+              </td>
+
+              <td>
+                1º Mecatrônica
+              </td>
+
+              <td>
+
+                <span class="badge bg-secondary">
+                  Hardware
+                </span>
+
+              </td>
+
+              <td class="text-end fw-bold text-danger">
+
+                790 pts
+
+              </td>
+
+            </tr>
+
+
+            <tr>
+
+              <td class="fw-bold text-center">
+                6º
+              </td>
+
+              <td>
+                App de Reciclagem Comunitária
+              </td>
+
+              <td>
+                3º DS - Noite
+              </td>
+
+              <td>
+
+                <span class="badge bg-secondary">
+                  Sustentabilidade
+                </span>
+
+              </td>
+
+              <td class="text-end fw-bold text-danger">
+
+                710 pts
+
+              </td>
+
+            </tr>
+
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
 
 
 
-  <!-- =====================================================
-       SCRIPTS
-       ===================================================== -->
+<!-- =========================================================
+     EM ALTA
+========================================================= -->
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<section class="trending-section"
+         id="em-alta">
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <div class="container">
+
+    <div class="row justify-content-center">
+
+      <div class="col-lg-8">
 
 
-  <script>
+        <div class="trending-card">
 
 
-    /* =====================================================
-       BOTÃO DE NOTÍCIAS
-       ===================================================== */
+          <span class="badge-trending">
 
-    function toggleText(button) {
+            <i class="fa-solid fa-fire me-1"></i>
 
-      setTimeout(() => {
+            Em Alta no Momento
 
-        const isExpanded =
-          button.getAttribute('aria-expanded') === 'true';
+          </span>
 
-        button.innerHTML =
-          isExpanded
-            ? 'Fechar Matéria ↑'
-            : 'Ler Matéria Completa ↓';
 
-      }, 50);
+          <div class="row align-items-center">
+
+
+            <div class="col-md-8 mb-3 mb-md-0">
+
+
+              <p class="text-uppercase text-danger mb-1"
+                 style="font-size:12px;">
+
+                Disparando em Votação 🔥
+
+              </p>
+
+
+              <h3 class="mb-2"
+                  style="font-size:1.8rem;color:#fff;">
+
+                Visão Computacional na Indústria 4.0
+
+              </h3>
+
+
+              <p style="font-family:sans-serif;
+                        font-size:14px;
+                        color:#ccc;">
+
+                Projeto de detecção automática de falhas
+                com inteligência artificial.
+
+              </p>
+
+
+              <span class="badge bg-danger p-2">
+
+                Estande #12 - Bloco B
+
+              </span>
+
+
+            </div>
+
+
+            <div class="col-md-4 text-center">
+
+
+              <a href="{{ url_for('estudantelogin') }}"
+                 class="btn-main-red
+                        d-inline-flex
+                        align-items-center
+                        justify-content-center"
+                 style="width:auto;
+                        padding:10px 20px;
+                        font-size:15px;">
+
+                Votar Agora
+
+                <i class="fa-solid fa-arrow-right ms-2"></i>
+
+              </a>
+
+
+            </div>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     ESTATÍSTICAS
+========================================================= -->
+
+<section class="stats-section"
+         id="estatisticas">
+
+  <div class="container">
+
+
+    <h2 class="section-title-custom">
+
+      PAINEL DE
+      <span>TRANSPARÊNCIA</span>
+
+    </h2>
+
+
+    <p class="section-subtitle-custom">
+
+      Dados do volume de avaliações processados pelo sistema
+
+    </p>
+
+
+    <div class="row g-4">
+
+
+      <div class="col-md-4">
+
+        <div class="stat-box">
+
+          <i class="fa-solid fa-check-to-slot fa-2x text-danger mb-2"></i>
+
+          <div class="stat-number">
+            4.892
+          </div>
+
+          <div class="stat-label">
+            Votos Registrados
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="col-md-4">
+
+        <div class="stat-box">
+
+          <i class="fa-solid fa-store fa-2x text-danger mb-2"></i>
+
+          <div class="stat-number">
+            42
+          </div>
+
+          <div class="stat-label">
+            Estandes Participantes
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="col-md-4">
+
+        <div class="stat-box">
+
+          <i class="fa-solid fa-users-gear fa-2x text-danger mb-2"></i>
+
+          <div class="stat-number">
+            18
+          </div>
+
+          <div class="stat-label">
+            Turmas Envolvidas
+          </div>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+    <div class="chart-container-box">
+
+      <h4 class="text-uppercase mb-4 text-center"
+          style="font-size:1.2rem;color:#fff;">
+
+        Horários de Maior Pico de Avaliação
+
+      </h4>
+
+
+      <canvas id="votesChart"
+              height="100"></canvas>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     MURAL
+========================================================= -->
+
+<section class="feed-section"
+         id="mural">
+
+  <div class="container">
+
+
+    <h2 class="section-title-custom">
+
+      MURAL DO
+      <span>PÚBLICO</span>
+
+    </h2>
+
+
+    <p class="section-subtitle-custom">
+
+      O que os visitantes estão achando dos projetos expostos
+
+    </p>
+
+
+    <div class="row g-4 justify-content-center">
+
+
+      <!-- COMENTÁRIO 1 -->
+
+      <div class="col-md-4">
+
+        <div class="comment-card">
+
+
+          <div>
+
+            <div class="comment-user fw-bold">
+
+              Lucas Oliveira
+
+            </div>
+
+
+            <div class="comment-target">
+
+              Avaliou: FeiraScore
+
+            </div>
+
+
+            <p class="comment-text">
+
+              "Sistema sensacional e extremamente rápido!
+              Ficou muito mais fácil escolher os melhores estandes."
+
+            </p>
+
+          </div>
+
+
+          <div class="d-flex justify-content-between align-items-center">
+
+
+            <button class="btn-like"
+                    onclick="likeComment(this)">
+
+              <i class="fa-regular fa-heart me-1"></i>
+
+              <span>14</span>
+
+            </button>
+
+
+            <small class="text-white-50">
+
+              Há 10 min
+
+            </small>
+
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+
+      <!-- COMENTÁRIO 2 -->
+
+      <div class="col-md-4">
+
+        <div class="comment-card">
+
+
+          <div>
+
+            <div class="comment-user fw-bold">
+
+              Mariana Costa
+
+            </div>
+
+
+            <div class="comment-target">
+
+              Avaliou: EcoTech Sensor
+
+            </div>
+
+
+            <p class="comment-text">
+
+              "Proposta incrível para a preservação de energia.
+              Apresentação do grupo foi ótima e muito clara!"
+
+            </p>
+
+          </div>
+
+
+          <div class="d-flex justify-content-between align-items-center">
+
+
+            <button class="btn-like"
+                    onclick="likeComment(this)">
+
+              <i class="fa-regular fa-heart me-1"></i>
+
+              <span>28</span>
+
+            </button>
+
+
+            <small class="text-white-50">
+
+              Há 25 min
+
+            </small>
+
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+
+      <!-- COMENTÁRIO 3 -->
+
+      <div class="col-md-4">
+
+        <div class="comment-card">
+
+
+          <div>
+
+            <div class="comment-user fw-bold">
+
+              Prof. Carlos Santos
+
+            </div>
+
+
+            <div class="comment-target">
+
+              Avaliou: Horta Automatizada
+
+            </div>
+
+
+            <p class="comment-text">
+
+              "Impressionado com a dedicação dos alunos
+              na montagem dos sensores. Parabéns aos envolvidos!"
+
+            </p>
+
+          </div>
+
+
+          <div class="d-flex justify-content-between align-items-center">
+
+
+            <button class="btn-like"
+                    onclick="likeComment(this)">
+
+              <i class="fa-regular fa-heart me-1"></i>
+
+              <span>42</span>
+
+            </button>
+
+
+            <small class="text-white-50">
+
+              Há 1 hora
+
+            </small>
+
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     NOTÍCIAS
+========================================================= -->
+
+{% include 'noticias.html' %}
+
+
+<!-- =========================================================
+     LOCALIZAÇÃO
+========================================================= -->
+
+{% include 'localizacao.html' %}
+
+
+
+<!-- =========================================================
+     FAQ
+========================================================= -->
+
+<section class="faq-section"
+         id="faq">
+
+  <div class="container">
+
+
+    <h2 class="text-center text-uppercase mb-5"
+        style="letter-spacing:1px;
+               color:#bd1717;">
+
+      Perguntas Frequentes
+
+    </h2>
+
+
+    <div class="row justify-content-center">
+
+      <div class="col-lg-8">
+
+
+        <div class="accordion"
+             id="accordionFAQ">
+
+
+          <!-- FAQ 1 -->
+
+          <div class="accordion-item accordion-item-custom">
+
+            <h2 class="accordion-header">
+
+              <button class="accordion-button accordion-button-custom collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseOne">
+
+                Como posso registrar meu voto em um estande?
+
+              </button>
+
+            </h2>
+
+
+            <div id="collapseOne"
+                 class="accordion-collapse collapse"
+                 data-bs-parent="#accordionFAQ">
+
+              <div class="accordion-body accordion-body-custom">
+
+                É muito simples! Basta clicar no botão
+                "Votar" localizado na barra superior ou
+                diretamente no card do estande de sua
+                preferência.
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+
+          <!-- FAQ 2 -->
+
+          <div class="accordion-item accordion-item-custom">
+
+            <h2 class="accordion-header">
+
+              <button class="accordion-button accordion-button-custom collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseTwo">
+
+                Posso votar em mais de um projeto diferente?
+
+              </button>
+
+            </h2>
+
+
+            <div id="collapseTwo"
+                 class="accordion-collapse collapse"
+                 data-bs-parent="#accordionFAQ">
+
+              <div class="accordion-body accordion-body-custom">
+
+                As regras padrão permitem que cada visitante
+                dê sua pontuação para múltiplos estandes distintos.
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+
+          <!-- FAQ 3 -->
+
+          <div class="accordion-item accordion-item-custom">
+
+            <h2 class="accordion-header">
+
+              <button class="accordion-button accordion-button-custom collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseThree">
+
+                Como os resultados parciais são calculados?
+
+              </button>
+
+            </h2>
+
+
+            <div id="collapseThree"
+                 class="accordion-collapse collapse"
+                 data-bs-parent="#accordionFAQ">
+
+              <div class="accordion-body accordion-body-custom">
+
+                O painel do FeiraScore realiza uma varredura
+                constante em nosso banco de dados.
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+</main>
+
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="footer-custom text-center">
+
+  <div class="container">
+
+
+    <p class="mb-2 px-3">
+
+      Você tem mais alguma pergunta que não está na nossa FAQ?
+
+    </p>
+
+
+    <p class="mb-3 px-3">
+
+      Entre em contato conosco pelo e-mail e responderemos
+      o mais rápido possível!
+
+    </p>
+
+
+    <p class="mb-4">
+
+      <a href="mailto:contato@feirascore.com">
+
+        contato@feirascore.com
+
+      </a>
+
+    </p>
+
+
+    <div class="social-share-container">
+
+
+      <p class="mb-2"
+         style="font-size:12px;
+                color:rgba(255,255,255,0.4);">
+
+        Compartilhe a Feira
+
+      </p>
+
+
+      <div class="social-share-buttons
+                  d-flex
+                  justify-content-center
+                  gap-3">
+
+
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://feirascore.com"
+           target="_blank">
+
+          <i class="fa-brands fa-facebook-f"></i>
+
+        </a>
+
+
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://feirascore.com"
+           target="_blank">
+
+          <i class="fa-brands fa-linkedin-in"></i>
+
+        </a>
+
+
+        <a href="https://api.whatsapp.com/send?text=Confira%20os%20projetos%20da%20Feira%20Tecnol%C3%B3gica%20no%20FeiraScore!"
+           target="_blank">
+
+          <i class="fa-brands fa-whatsapp"></i>
+
+        </a>
+
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+</footer>
+
+
+
+<!-- =========================================================
+     SCRIPTS
+========================================================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js">
+</script>
+
+
+<script>
+
+
+/* =========================================================
+   CURTIR COMENTÁRIO
+========================================================= */
+
+function likeComment(btn) {
+
+  const heartIcon = btn.querySelector('i');
+
+  const countSpan = btn.querySelector('span');
+
+  let currentLikes =
+    parseInt(countSpan.innerText);
+
+
+  if (btn.classList.contains('liked')) {
+
+
+    btn.classList.remove('liked');
+
+
+    heartIcon.classList.replace(
+      'fa-solid',
+      'fa-regular'
+    );
+
+
+    countSpan.innerText =
+      currentLikes - 1;
+
+
+  } else {
+
+
+    btn.classList.add('liked');
+
+
+    heartIcon.classList.replace(
+      'fa-regular',
+      'fa-solid'
+    );
+
+
+    countSpan.innerText =
+      currentLikes + 1;
+
+  }
+
+}
+
+
+/* =========================================================
+   FILTRO RANKING
+========================================================= */
+
+function filterRanking(categoria, button) {
+
+  document
+    .querySelectorAll('.btn-filter-custom')
+    .forEach(function(btn) {
+
+      btn.classList.remove('active');
+
+    });
+
+
+  button.classList.add('active');
+
+}
+
+
+/* =========================================================
+   GRÁFICO
+========================================================= */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function() {
+
+
+    const canvas =
+      document.getElementById('votesChart');
+
+
+    if (!canvas) {
+
+      return;
 
     }
 
 
-    /* =====================================================
-       CURTIR COMENTÁRIO
-       ===================================================== */
+    const ctx =
+      canvas.getContext('2d');
 
-    function likeComment(btn) {
 
-      const heartIcon =
-        btn.querySelector('i');
+    new Chart(ctx, {
 
-      const countSpan =
-        btn.querySelector('span');
 
-      let currentLikes =
-        parseInt(countSpan.innerText);
+      type: 'line',
 
 
-      if (btn.classList.contains('liked')) {
+      data: {
 
-        btn.classList.remove('liked');
+        labels: [
 
-        heartIcon.classList.replace(
-          'fa-solid',
-          'fa-regular'
-        );
+          '08:00',
+          '10:00',
+          '12:00',
+          '14:00',
+          '16:00',
+          '18:00',
+          '20:00'
 
-        countSpan.innerText =
-          currentLikes - 1;
+        ],
 
-      } else {
 
-        btn.classList.add('liked');
+        datasets: [{
 
-        heartIcon.classList.replace(
-          'fa-regular',
-          'fa-solid'
-        );
+          label:
+            'Votos Registrados / Hora',
 
-        countSpan.innerText =
-          currentLikes + 1;
 
-      }
+          data: [
 
-    }
+            120,
+            450,
+            980,
+            850,
+            1100,
+            950,
+            442
 
+          ],
 
-    /* =====================================================
-       FILTRO DO RANKING
-       ===================================================== */
 
-    function filterRanking(categoria, button) {
+          borderColor:
+            '#bd1717',
 
-      document
-        .querySelectorAll('.btn-filter-custom')
-        .forEach(
-          b => b.classList.remove('active')
-        );
 
-      button.classList.add('active');
+          backgroundColor:
+            'rgba(182,28,28,0.2)',
 
-    }
 
+          fill: true,
 
-    /* =====================================================
-       GRÁFICO
-       ===================================================== */
 
-    document.addEventListener(
-      "DOMContentLoaded",
-      function () {
+          tension: 0.4,
 
 
-        const canvas =
-          document.getElementById('votesChart');
+          pointBackgroundColor:
+            '#ff4d4d'
 
+        }]
 
-        if (!canvas) {
-          return;
-        }
+      },
 
 
-        const ctx =
-          canvas.getContext('2d');
+      options: {
 
+        responsive: true,
 
-        new Chart(ctx, {
 
+        plugins: {
 
-          type: 'line',
+          legend: {
 
+            labels: {
 
-          data: {
+              color: '#ffffff'
 
+            }
 
-            labels: [
+          }
 
-              '08:00',
-              '10:00',
-              '12:00',
-              '14:00',
-              '16:00',
-              '18:00',
-              '20:00'
+        },
 
-            ],
 
+        scales: {
 
-            datasets: [{
+          x: {
 
+            ticks: {
 
-              label:
-                'Votos Registrados / Hora',
-
-
-              data: [
-
-                120,
-                450,
-                980,
-                850,
-                1100,
-                950,
-                442
-
-              ],
-
-
-              borderColor:
-                '#b61c1c',
-
-
-              backgroundColor:
-                'rgba(182, 28, 28, 0.2)',
-
-
-              fill: true,
-
-
-              tension: 0.4,
-
-
-              pointBackgroundColor:
-                '#ff4d4d'
-
-
-            }]
-
-
-          },
-
-
-          options: {
-
-
-            responsive: true,
-
-
-            plugins: {
-
-
-              legend: {
-
-
-                labels: {
-
-                  color: '#ffffff'
-
-                }
-
-
-              }
-
+              color: '#aaaaaa'
 
             },
 
 
-            scales: {
+            grid: {
 
-
-              x: {
-
-
-                ticks: {
-
-                  color: '#aaaaaa'
-
-                },
-
-
-                grid: {
-
-                  color:
-                    'rgba(255,255,255,0.05)'
-
-                }
-
-
-              },
-
-
-              y: {
-
-
-                ticks: {
-
-                  color: '#aaaaaa'
-
-                },
-
-
-                grid: {
-
-                  color:
-                    'rgba(255,255,255,0.05)'
-
-                }
-
-
-              }
-
+              color:
+                'rgba(255,255,255,0.05)'
 
             }
 
+          },
+
+
+          y: {
+
+            ticks: {
+
+              color: '#aaaaaa'
+
+            },
+
+
+            grid: {
+
+              color:
+                'rgba(255,255,255,0.05)'
+
+            }
 
           }
 
-
-        });
-
+        }
 
       }
 
+    });
 
-    );
+  }
 
+);
 
-  </script>
+</script>
 
 
 </body>
