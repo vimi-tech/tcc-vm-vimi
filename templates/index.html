@@ -14,7 +14,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@800;900&family=Russo+One&family=Teko:wght@600;700&display=swap" rel="stylesheet">
 
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     body {
       color: #333;
@@ -26,51 +30,200 @@
       background-color: #f4f4f4;
     }
 
-    header, main, section, footer {
+    header,
+    main,
+    section,
+    footer {
       background: transparent;
     }
 
-    /* Navbar */
-    .navbar-custom { padding: 15px 0; background-color: #f4f4f4; }
-    .btn-nav-red { width: 110px; height: 40px; border: none; border-radius: 20px; background: linear-gradient(180deg, #c41c1c 0%, #830000 100%); color: white; font-size: 16px; text-transform: uppercase; text-decoration: none; display: flex; justify-content: center; align-items: center; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
-    .btn-nav-red:hover { transform: scale(1.05); color: white; }
-    .nav-link-custom { color: white !important; text-transform: uppercase; font-size: 14px; letter-spacing: 0.5px; background-color: #b61c1c; padding: 8px 16px !important; border-radius: 20px; display: inline-flex; align-items: center; justify-content: center; transition: 0.3s; }
-    .nav-link-custom:hover { transform: scale(1.05); color: white !important; background-color: #7a0000; }
-    .brand-logos-container { display: flex; align-items: center; justify-content: center; gap: 12px; }
-    .img-navbar-logo { object-fit: contain; border-radius: 6px; background-color: transparent; }
-    
-    /* Intro / Hero Section */
-    .intro-section { 
-      padding: 60px 0 80px 0; 
-      background-color: #f4f4f4; 
-    }
-    .hero-brand-block { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
-    .trophy-container { margin-bottom: 4px; display: flex; justify-content: center; align-items: center; }
-    .trophy-icon { font-size: 80px; color: #ffd700; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3)); }
-    .img-feirascore-brand { width: 100%; max-width: 390px; height: auto; margin: 0 auto; display: block; }
-    .feirascore-wordmark { width: 100%; max-width: 360px; height: auto; display: block; margin: 0 auto 4px auto; }
-    .main-title { font-family: 'Orbitron', sans-serif !important; font-weight: 900 !important; color: #b61c1c !important; font-size: 3.5rem !important; line-height: 0.9 !important; text-transform: uppercase !important; margin-bottom: 10px !important; letter-spacing: 2px !important; text-align: center !important; }
-    .main-subtitle { font-family: 'Teko', sans-serif !important; font-weight: 700 !important; color: #000 !important; font-size: 2.5rem !important; line-height: 1 !important; text-transform: none !important; margin: 0 auto 10px auto !important; letter-spacing: 1px !important; text-align: center !important; }
-    .main-subtitle span { font-family: inherit !important; color: #b61c1c !important; }
-    .btn-main-red { width: 220px; height: 50px; border: none; border-radius: 25px; background: linear-gradient(180deg, #c41c1c 0%, #7a0000 100%); color: white; font-size: 18px; text-transform: uppercase; transition: 0.3s; letter-spacing: 1px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); margin: 0 auto; }
-    .btn-main-red:hover { transform: scale(1.05); color: white; }
-    .img-evento { border-radius: 40px; max-width: 100%; height: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+    /* =========================
+       NAVBAR
+    ========================= */
 
-    /* Seção Sobre */
-    .about-section { 
-      padding: 120px 0; 
-      color: white; 
-      text-align: center; 
-      position: relative; 
-      overflow: hidden; 
+    .navbar-custom {
+      padding: 15px 0;
+      background-color: #f4f4f4;
+    }
+
+    .btn-nav-red {
+      width: 110px;
+      height: 40px;
+      border: none;
+      border-radius: 20px;
+      background: linear-gradient(180deg, #c41c1c 0%, #830000 100%);
+      color: white;
+      font-size: 16px;
+      text-transform: uppercase;
+      text-decoration: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: 0.3s;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-nav-red:hover {
+      transform: scale(1.05);
+      color: white;
+    }
+
+    .nav-link-custom {
+      color: white !important;
+      text-transform: uppercase;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      background-color: #b61c1c;
+      padding: 8px 16px !important;
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.3s;
+    }
+
+    .nav-link-custom:hover {
+      transform: scale(1.05);
+      color: white !important;
+      background-color: #7a0000;
+    }
+
+    .brand-logos-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .img-navbar-logo {
+      object-fit: contain;
+      border-radius: 6px;
+      background-color: transparent;
+    }
+
+
+    /* =========================
+       INTRO / HERO
+    ========================= */
+
+    .intro-section {
+      padding: 35px 0 60px 0;
+      background-color: #f4f4f4;
+    }
+
+    .hero-brand-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 10px 20px;
+    }
+
+    /* Troféu */
+    .trophy-container {
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+
+    .img-feirascore-brand {
+      width: 100%;
+      max-width: 320px;
+      height: auto;
+      margin: 0 auto;
+      display: block;
+    }
+
+    .trophy-icon {
+      font-size: 80px;
+      color: #ffd700;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+    }
+
+    /* FEIRASCORE */
+    .main-title {
+      font-family: 'Orbitron', sans-serif !important;
+      font-weight: 900 !important;
+      color: #b61c1c !important;
+      font-size: 4.2rem !important;
+      line-height: 1 !important;
+      text-transform: uppercase !important;
+      margin: 5px 0 5px 0 !important;
+      letter-spacing: 3px !important;
+      text-align: center !important;
+      width: 100%;
+    }
+
+    /* QUEM LIDERA, BRILHA */
+    .main-subtitle {
+      font-family: 'Teko', sans-serif !important;
+      font-weight: 700 !important;
+      color: #000 !important;
+      font-size: 2.7rem !important;
+      line-height: 1 !important;
+      text-transform: none !important;
+      margin: 0 auto 18px auto !important;
+      letter-spacing: 1px !important;
+      text-align: center !important;
+      width: 100%;
+    }
+
+    .main-subtitle span {
+      font-family: inherit !important;
+      color: #b61c1c !important;
+    }
+
+    /* Botão principal */
+    .btn-main-red {
+      width: 220px;
+      height: 50px;
+      border: none;
+      border-radius: 25px;
+      background: linear-gradient(180deg, #c41c1c 0%, #7a0000 100%);
+      color: white;
+      font-size: 18px;
+      text-transform: uppercase;
+      transition: 0.3s;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      margin: 0 auto;
+    }
+
+    .btn-main-red:hover {
+      transform: scale(1.05);
+      color: white;
+    }
+
+    .img-evento {
+      border-radius: 40px;
+      max-width: 100%;
+      height: auto;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+
+    /* =========================
+       SEÇÃO SOBRE
+    ========================= */
+
+    .about-section {
+      padding: 120px 0;
+      color: white;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
       background: linear-gradient(
-        180deg, 
-        #f4f4f4 0%, 
-        #b61c1c 25%, 
-        #b61c1c 80%, 
+        180deg,
+        #f4f4f4 0%,
+        #b61c1c 25%,
+        #b61c1c 80%,
         #000000 100%
       );
     }
+
     .star-bg {
       position: absolute;
       top: 50%;
@@ -82,14 +235,42 @@
       opacity: 0.25;
       pointer-events: none;
     }
+
     .about-section .container {
       position: relative;
       z-index: 2;
     }
-    .about-title { font-size: 3rem; letter-spacing: 2px; margin-bottom: 30px; line-height: 1.2; text-shadow: 0 2px 10px rgba(0,0,0,0.4); text-align: center; }
-    .about-text { font-size: 16px; line-height: 1.8; max-width: 750px; margin: 0 auto 20px auto; color: #ffffff; text-shadow: 0 1px 5px rgba(0,0,0,0.5); text-align: center; }
-    .highlight-text { font-size: 16px; color: #ffffff; margin-top: 30px; margin-bottom: 40px; letter-spacing: 0.5px; font-weight: bold; text-align: center; text-shadow: 0 1px 5px rgba(0,0,0,0.5); }
-    
+
+    .about-title {
+      font-size: 3rem;
+      letter-spacing: 2px;
+      margin-bottom: 30px;
+      line-height: 1.2;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+      text-align: center;
+    }
+
+    .about-text {
+      font-size: 16px;
+      line-height: 1.8;
+      max-width: 750px;
+      margin: 0 auto 20px auto;
+      color: #ffffff;
+      text-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+      text-align: center;
+    }
+
+    .highlight-text {
+      font-size: 16px;
+      color: #ffffff;
+      margin-top: 30px;
+      margin-bottom: 40px;
+      letter-spacing: 0.5px;
+      font-weight: bold;
+      text-align: center;
+      text-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+    }
+
     .btn-about-white {
       width: 180px;
       height: 45px;
@@ -101,52 +282,122 @@
       font-weight: bold;
       text-transform: uppercase;
       transition: 0.3s;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     }
-    .btn-about-white:hover { transform: scale(1.05); color: #b61c1c; }
 
-    /* Cards de Notícias */
-    .news-section { 
-      padding: 90px 0; 
+    .btn-about-white:hover {
+      transform: scale(1.05);
+      color: #b61c1c;
+    }
+
+
+    /* =========================
+       NOTÍCIAS
+    ========================= */
+
+    .news-section {
+      padding: 90px 0;
       background-color: #000000;
     }
-    .news-card { 
-      background: rgba(20, 20, 20, 0.85) !important; 
-      border: 1px solid rgba(255, 255, 255, 0.15); 
-      border-radius: 20px; 
-      overflow: hidden; 
-      box-shadow: 0 8px 25px rgba(0,0,0,0.3); 
-      transition: 0.3s; 
+
+    .news-card {
+      background: rgba(20, 20, 20, 0.85) !important;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      transition: 0.3s;
       height: 100%;
       display: flex;
       flex-direction: column;
       text-align: left;
     }
-    .news-card:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(0,0,0,0.5); }
-    
-    .news-img-wrapper { 
-      height: 220px; 
-      width: 100%; 
-      overflow: hidden; 
+
+    .news-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .news-img-wrapper {
+      height: 220px;
+      width: 100%;
+      overflow: hidden;
       position: relative;
     }
-    .news-img { 
-      width: 100% !important; 
-      height: 100% !important; 
-      object-fit: cover !important; 
+
+    .news-img {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
       display: block;
     }
 
-    .news-body { padding: 25px; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; }
-    .news-date { font-size: 13px; color: #ff6b6b; font-family: sans-serif; margin-bottom: 8px; font-weight: bold; }
-    .news-title { font-size: 1.25rem; color: #ffffff; margin-bottom: 12px; text-transform: uppercase; line-height: 1.3; }
-    .news-text { font-family: sans-serif; font-size: 14px; color: rgba(255, 255, 255, 0.85); line-height: 1.6; margin-bottom: 15px; }
-    .full-story-text { font-family: sans-serif; font-size: 14px; color: #ddd; line-height: 1.6; border-top: 1px dashed rgba(255, 255, 255, 0.2); padding-top: 15px; margin-top: 10px; }
-    
-    .btn-news-link { color: #ff4d4d; text-decoration: none; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; transition: 0.2s; display: inline-block; cursor: pointer; border: none; background: none; padding: 0; font-weight: bold; }
-    .btn-news-link:hover { color: #ffffff; }
+    .news-body {
+      padding: 25px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: space-between;
+    }
 
-    /* Guia da Feira Tecnológica - 4 cards */
+    .news-date {
+      font-size: 13px;
+      color: #ff6b6b;
+      font-family: sans-serif;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    .news-title {
+      font-size: 1.25rem;
+      color: #ffffff;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      line-height: 1.3;
+    }
+
+    .news-text {
+      font-family: sans-serif;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .full-story-text {
+      font-family: sans-serif;
+      font-size: 14px;
+      color: #ddd;
+      line-height: 1.6;
+      border-top: 1px dashed rgba(255, 255, 255, 0.2);
+      padding-top: 15px;
+      margin-top: 10px;
+    }
+
+    .btn-news-link {
+      color: #ff4d4d;
+      text-decoration: none;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: 0.2s;
+      display: inline-block;
+      cursor: pointer;
+      border: none;
+      background: none;
+      padding: 0;
+      font-weight: bold;
+    }
+
+    .btn-news-link:hover {
+      color: #ffffff;
+    }
+
+
+    /* =========================
+       GUIA DA FEIRA
+    ========================= */
+
     .guide-section {
       padding: 90px 0;
       background-color: #f4f4f4;
@@ -179,14 +430,14 @@
       display: flex;
       flex-direction: column;
       text-align: left;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.12);
-      border: 1px solid rgba(0,0,0,0.08);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+      border: 1px solid rgba(0, 0, 0, 0.08);
       transition: 0.3s;
     }
 
     .guide-card:hover {
       transform: translateY(-6px);
-      box-shadow: 0 14px 32px rgba(0,0,0,0.18);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.18);
     }
 
     .guide-img-wrapper {
@@ -243,7 +494,7 @@
       font-size: 14px;
       color: #444444;
       line-height: 1.6;
-      border-top: 1px dashed rgba(0,0,0,0.18);
+      border-top: 1px dashed rgba(0, 0, 0, 0.18);
       padding-top: 15px;
       margin-top: 10px;
     }
@@ -267,24 +518,202 @@
       color: #000000;
     }
 
+
+    /* =========================
+       LOCALIZAÇÃO
+    ========================= */
+
+    .location-section {
+      padding: 90px 0;
+      color: white;
+      text-align: center;
+      background-color: #000000;
+    }
+
+    .location-title {
+      font-size: 2.5rem;
+      letter-spacing: 2px;
+      margin-bottom: 15px;
+      color: #ffffff;
+      text-align: center;
+    }
+
+    .location-subtitle {
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 40px;
+      text-align: center;
+      font-family: sans-serif;
+    }
+
+    .map-responsive {
+      overflow: hidden;
+      padding-bottom: 450px;
+      position: relative;
+      height: 0;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .map-responsive iframe {
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      border: 0;
+    }
+
+
+    /* =========================
+       FAQ
+    ========================= */
+
+    .faq-section {
+      padding: 90px 0;
+      color: white;
+      text-align: center;
+      background-color: #000000;
+    }
+
+    .accordion-item-custom {
+      background: rgba(255, 255, 255, 0.08) !important;
+      border: 1px solid rgba(255, 255, 255, 0.15) !important;
+      border-radius: 15px !important;
+      margin-bottom: 15px;
+      overflow: hidden;
+      backdrop-filter: blur(5px);
+      text-align: left;
+    }
+
+    .accordion-button-custom {
+      background: transparent !important;
+      color: white !important;
+      font-size: 15px;
+      text-transform: uppercase;
+      padding: 20px;
+      box-shadow: none !important;
+    }
+
+    .accordion-button-custom:not(.collapsed) {
+      color: #ff4d4d !important;
+      background: rgba(255, 255, 255, 0.05) !important;
+    }
+
+    .accordion-button-custom::after {
+      filter: invert(1);
+    }
+
+    .accordion-body-custom {
+      background: rgba(0, 0, 0, 0.4);
+      color: #ddd;
+      font-size: 14px;
+      line-height: 1.6;
+      font-family: sans-serif;
+    }
+
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    .footer-custom {
+      color: rgba(255, 255, 255, 0.6);
+      padding: 60px 0;
+      font-size: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      text-align: center;
+      background-color: #000000;
+    }
+
+    .footer-custom p {
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .footer-custom a {
+      color: #ff4d4d;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+
+    .footer-custom a:hover {
+      color: white;
+    }
+
+    .social-share-buttons a {
+      font-size: 20px;
+      width: 45px;
+      height: 45px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      transition: 0.3s;
+    }
+
+    .social-share-buttons a:hover {
+      background: #b61c1c;
+      transform: translateY(-3px);
+    }
+
+
+    /* =========================
+       RESPONSIVIDADE
+    ========================= */
+
     @media(max-width: 991px) {
+
+      .navbar-custom .container {
+        gap: 10px;
+      }
+
+      .brand-logos-container {
+        margin-top: 10px;
+        width: 100%;
+        justify-content: center;
+      }
+
       .guide-section {
         padding: 70px 0;
       }
     }
 
-    @media(max-width: 768px) { .img-feirascore-brand { max-width: 330px; } .feirascore-wordmark { max-width: 300px; } }
+
     @media(max-width: 768px) {
+
+      .intro-section {
+        padding: 25px 0 45px 0;
+      }
+
+      .hero-brand-block {
+        padding: 5px 15px;
+      }
+
+      .img-feirascore-brand {
+        max-width: 270px;
+      }
+
+      .main-title {
+        font-size: 3rem !important;
+        letter-spacing: 2px !important;
+        margin-top: 5px !important;
+      }
+
+      .main-subtitle {
+        font-size: 2rem !important;
+        margin-bottom: 15px !important;
+      }
+
       .guide-section {
         padding: 55px 0;
       }
 
       .guide-section-title {
         font-size: 1.8rem;
-      }
-
-      .img-feirascore-logo-completa {
-        max-width: 390px;
       }
 
       .guide-section-subtitle {
@@ -295,532 +724,1189 @@
       .guide-img-wrapper {
         height: 210px;
       }
-    }
 
-    /* Localização */
-    .location-section { 
-      padding: 90px 0; 
-      color: white; 
-      text-align: center; 
-      background-color: #000000;
-    }
-    .location-title { font-size: 2.5rem; letter-spacing: 2px; margin-bottom: 15px; color: #ffffff; text-align: center; }
-    .location-subtitle { font-size: 16px; color: rgba(255, 255, 255, 0.9); margin-bottom: 40px; text-align: center; font-family: sans-serif; }
-    .map-responsive { overflow: hidden; padding-bottom: 450px; position: relative; height: 0; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.4); border: 2px solid rgba(255,255,255,0.2); }
-    .map-responsive iframe { left: 0; top: 0; height: 100%; width: 100%; position: absolute; border: 0; }
+      .about-section {
+        padding: 60px 0;
+      }
 
-    /* FAQ */
-    .faq-section { 
-      padding: 90px 0; 
-      color: white; 
-      text-align: center; 
-      background-color: #000000;
-    }
-    .accordion-item-custom { background: rgba(255, 255, 255, 0.08) !important; border: 1px solid rgba(255, 255, 255, 0.15) !important; border-radius: 15px !important; margin-bottom: 15px; overflow: hidden; backdrop-filter: blur(5px); text-align: left; }
-    .accordion-button-custom { background: transparent !important; color: white !important; font-size: 15px; text-transform: uppercase; padding: 20px; box-shadow: none !important; }
-    .accordion-button-custom:not(.collapsed) { color: #ff4d4d !important; background: rgba(255, 255, 255, 0.05) !important; }
-    .accordion-button-custom::after { filter: invert(1); }
-    .accordion-body-custom { background: rgba(0, 0, 0, 0.4); color: #ddd; font-size: 14px; line-height: 1.6; font-family: sans-serif; }
+      .location-section {
+        padding: 50px 0;
+      }
 
-    /* Footer */
-    .footer-custom { 
-      color: rgba(255,255,255,0.6); 
-      padding: 60px 0; 
-      font-size: 14px; 
-      border-top: 1px solid rgba(255,255,255,0.1); 
-      text-align: center; 
-      background-color: #000000;
-    }
-    .footer-custom p { text-transform: uppercase; letter-spacing: 0.5px; }
-    .footer-custom a { color: #ff4d4d; text-decoration: none; transition: 0.2s; }
-    .footer-custom a:hover { color: white; }
-    .social-share-buttons a { font-size: 20px; width: 45px; height: 45px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(255,255,255,0.1); color: #fff; transition: 0.3s; }
-    .social-share-buttons a:hover { background: #b61c1c; transform: translateY(-3px); }
+      .faq-section {
+        padding: 50px 0;
+      }
 
-    @media(max-width: 991px) { .navbar-custom .container { gap: 10px; } .brand-logos-container { margin-top: 10px; width: 100%; justify-content: center; } }
-    @media(max-width: 768px) { .intro-section { padding: 30px 0; } .about-section { padding: 60px 0; } .location-section { padding: 50px 0; } .faq-section { padding: 50px 0; } .main-title { font-size: 2.5rem !important; } .main-subtitle { font-size: 1.8rem !important; margin-bottom: 15px !important; } .about-title { font-size: 1.8rem; } .about-text { font-size: 14px; } .star-bg { width: 350px; height: 350px; } }
+      .about-title {
+        font-size: 1.8rem;
+      }
+
+      .about-text {
+        font-size: 14px;
+      }
+
+      .star-bg {
+        width: 350px;
+        height: 350px;
+      }
+    }
   </style>
 </head>
 
 <body>
 
+  <!-- =========================
+       NAVBAR
+  ========================= -->
+
   <header>
     <nav class="navbar navbar-expand-lg navbar-custom">
-      <div class="container justify-content-center">
-        <a class="btn-nav-red" href="{{ url_for('estudantelogin') }}">Votar</a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <div class="container justify-content-center">
+
+        <a class="btn-nav-red" href="{{ url_for('estudantelogin') }}">
+          Votar
+        </a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav">
+
           <span class="navbar-toggler-icon"></span>
+
         </button>
 
-        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <div
+          class="collapse navbar-collapse justify-content-center"
+          id="navbarNav">
+
           <ul class="navbar-nav gap-2 my-3 my-lg-0 text-center">
+
             <li class="nav-item">
-              <a class="nav-link nav-link-custom" href="{{ url_for('estandes') }}">Estandes</a>
+              <a
+                class="nav-link nav-link-custom"
+                href="{{ url_for('estandes') }}">
+                Estandes
+              </a>
             </li>
-            <li class="nav-item"><a class="nav-link nav-link-custom" href="#noticias">Notícias</a></li>
-            <li class="nav-item"><a class="nav-link nav-link-custom" href="#guia-feira">Guia da Feira</a></li>
-            <li class="nav-item"><a class="nav-link nav-link-custom" href="#localizacao">Localização</a></li>
-            <li class="nav-item"><a class="nav-link nav-link-custom" href="#faq">FAQ</a></li>
+
             <li class="nav-item">
-              <a class="nav-link nav-link-custom" href="{{ url_for('estudantelogin') }}">Buscar por Turma</a>
+              <a
+                class="nav-link nav-link-custom"
+                href="#noticias">
+                Notícias
+              </a>
             </li>
+
+            <li class="nav-item">
+              <a
+                class="nav-link nav-link-custom"
+                href="#guia-feira">
+                Guia da Feira
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a
+                class="nav-link nav-link-custom"
+                href="#localizacao">
+                Localização
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a
+                class="nav-link nav-link-custom"
+                href="#faq">
+                FAQ
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a
+                class="nav-link nav-link-custom"
+                href="{{ url_for('estudantelogin') }}">
+                Buscar por Turma
+              </a>
+            </li>
+
           </ul>
         </div>
 
         <div class="brand-logos-container ms-auto ms-lg-0">
-          <img src="{{ url_for('static', filename='logo_feira.jpg') }}" alt="FeiraScore" class="img-navbar-logo" width="65" height="45">
-          <img src="{{ url_for('static', filename='vimi_logo.jpg') }}" alt="Vimi" class="img-navbar-logo" width="45" height="45">
+
+          <img
+            src="{{ url_for('static', filename='logo_feira.jpg') }}"
+            alt="FeiraScore"
+            class="img-navbar-logo"
+            width="65"
+            height="45">
+
+          <img
+            src="{{ url_for('static', filename='vimi_logo.jpg') }}"
+            alt="Vimi"
+            class="img-navbar-logo"
+            width="45"
+            height="45">
+
         </div>
+
       </div>
     </nav>
   </header>
 
+
+  <!-- =========================
+       CONTEÚDO PRINCIPAL
+  ========================= -->
+
   <main>
+
+    <!-- =========================
+         HERO / INÍCIO
+    ========================= -->
+
     <section class="intro-section">
+
       <div class="container">
+
         <div class="row align-items-center justify-content-center">
-          
+
+          <!-- BLOCO ESQUERDO -->
+
           <div class="col-md-6 mb-4 mb-md-0 hero-brand-block text-center">
+
             <div class="trophy-container">
-              <img src="{{ url_for('static', filename='trofeu.png') }}" alt="Troféu FeiraScore" class="img-feirascore-brand" onerror="this.style.display='none'; document.getElementById('trophy-icon-fallback').style.display='block';">
-              <i id="trophy-icon-fallback" class="fa-solid fa-trophy trophy-icon" style="display: none;"></i>
+
+              <img
+                src="{{ url_for('static', filename='trofeu.png') }}"
+                alt="Troféu FeiraScore"
+                class="img-feirascore-brand"
+                onerror="this.style.display='none'; document.getElementById('trophy-icon-fallback').style.display='block';">
+
+              <i
+                id="trophy-icon-fallback"
+                class="fa-solid fa-trophy trophy-icon"
+                style="display: none;">
+              </i>
+
             </div>
 
-            <img src="{{ url_for('static', filename='legenda.png') }}" alt="FeiraScore" class="feirascore-wordmark">
 
-            <p class="main-subtitle">Quem lidera, <span>brilha.</span></p>
+            <!-- FEIRASCORE AGORA É TEXTO -->
+            <h1 class="main-title">
+              FEIRASCORE
+            </h1>
 
-            <a href="#sobre" class="btn-main-red d-inline-flex align-items-center justify-content-center text-decoration-none">Saiba Mais</a>
+
+            <!-- SLOGAN -->
+            <p class="main-subtitle">
+              Quem lidera, <span>brilha.</span>
+            </p>
+
+
+            <!-- BOTÃO -->
+            <a
+              href="#sobre"
+              class="btn-main-red d-inline-flex align-items-center justify-content-center text-decoration-none">
+
+              Saiba Mais
+
+            </a>
+
           </div>
 
+
+          <!-- FOTO DO EVENTO -->
+
           <div class="col-md-6 text-center">
-            <img src="{{ url_for('static', filename='evento.jpg') }}" alt="Evento Feira" class="img-evento">
+
+            <img
+              src="{{ url_for('static', filename='evento.jpg') }}"
+              alt="Evento Feira"
+              class="img-evento">
+
           </div>
 
         </div>
+
       </div>
+
     </section>
 
+
+    <!-- =========================
+         SOBRE
+    ========================= -->
+
     <section class="about-section" id="sobre">
-      <svg class="star-bg" viewBox="0 0 500 500" fill="white">
+
+      <svg
+        class="star-bg"
+        viewBox="0 0 500 500"
+        fill="white">
+
         <path d="M250,0 L273,176 L426,73 L323,226 L500,250 L323,273 L426,426 L273,323 L250,500 L226,323 L73,426 L176,273 L0,250 L176,226 L73,73 L226,176 Z" />
+
       </svg>
 
+
       <div class="container">
+
         <div class="row justify-content-center">
+
           <div class="col-lg-9 text-center">
-            <h2 class="about-title">O QUE É<br>FEIRA SCORE?</h2>
+
+            <h2 class="about-title">
+              O QUE É<br>
+              FEIRA SCORE?
+            </h2>
+
             <p class="about-text">
               O FeiraScore foi criado pra deixar a feira tecnológica da Etec Sylvio de Mattos Carvalho muito mais moderna, rápida e interativa. Em vez daquele jeito tradicional de votação, tudo acontece de forma digital, prática e sem complicação.
             </p>
+
             <p class="about-text">
               A ideia é simples: os visitantes podem conhecer os projetos, votar nos que mais gostaram e participar da feira de um jeito muito mais divertido. Além de facilitar a vida de todo mundo, o sistema deixa a contagem dos votos muito mais rápida e organizada.
             </p>
+
             <p class="highlight-text">
               Sua opinião faz a diferença!<br>
               Cada voto ajuda a destacar ideias, reconhecer esforços e valorizar projetos incríveis.
             </p>
+
             <div class="d-flex flex-wrap justify-content-center gap-3">
-              <a class="btn-about-white d-inline-flex align-items-center justify-content-center text-decoration-none" href="{{ url_for('estandes') }}">Ver Estandes</a>
-              <a class="btn-about-white d-inline-flex align-items-center justify-content-center text-decoration-none" href="{{ url_for('estudantelogin') }}">Votar</a>
+
+              <a
+                class="btn-about-white d-inline-flex align-items-center justify-content-center text-decoration-none"
+                href="{{ url_for('estandes') }}">
+
+                Ver Estandes
+
+              </a>
+
+              <a
+                class="btn-about-white d-inline-flex align-items-center justify-content-center text-decoration-none"
+                href="{{ url_for('estudantelogin') }}">
+
+                Votar
+
+              </a>
+
             </div>
+
           </div>
+
         </div>
+
       </div>
+
     </section>
 
-    <!-- SEÇÃO DE NOTÍCIAS -->
+
+    <!-- =========================
+         NOTÍCIAS
+    ========================= -->
+
     <section class="news-section" id="noticias">
+
       <div class="container">
-        <h2 class="text-center text-uppercase mb-5" style="letter-spacing: 2px; color: #ffffff;">Últimas Notícias</h2>
-        
+
+        <h2
+          class="text-center text-uppercase mb-5"
+          style="letter-spacing: 2px; color: #ffffff;">
+
+          Últimas Notícias
+
+        </h2>
+
+
         <div class="row g-4 justify-content-center">
-          
+
           {% if noticias %}
+
             {% for noticia in noticias %}
-            <div class="col-md-4">
-              <div class="news-card">
-                <div class="news-img-wrapper">
-                  <img src="{{ url_for('static', filename=noticia.imagem) }}" alt="{{ noticia.titulo }}" class="news-img">
-                </div>
-                <div class="news-body">
-                  <div>
-                    <div class="news-date">{{ noticia.data }}</div>
-                    <h3 class="news-title">{{ noticia.titulo }}</h3>
-                    <p class="news-text">{{ noticia.resumo }}</p>
+
+              <div class="col-md-4">
+
+                <div class="news-card">
+
+                  <div class="news-img-wrapper">
+
+                    <img
+                      src="{{ url_for('static', filename=noticia.imagem) }}"
+                      alt="{{ noticia.titulo }}"
+                      class="news-img">
+
                   </div>
-                  <div>
-                    {% if noticia.link_externo %}
-                      <a href="{{ noticia.link_externo }}" target="_blank" rel="noopener noreferrer" class="btn-news-link">Acessar Notícia Externa <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i></a>
-                    {% else %}
-                      <button class="btn-news-link" data-bs-toggle="collapse" data-bs-target="#materia-{{ loop.index }}" onclick="toggleText(this)">Ler Matéria Completa ↓</button>
-                      <div class="collapse full-story-text" id="materia-{{ loop.index }}">
-                        {{ noticia.conteudo }}
+
+
+                  <div class="news-body">
+
+                    <div>
+
+                      <div class="news-date">
+                        {{ noticia.data }}
                       </div>
-                    {% endif %}
+
+                      <h3 class="news-title">
+                        {{ noticia.titulo }}
+                      </h3>
+
+                      <p class="news-text">
+                        {{ noticia.resumo }}
+                      </p>
+
+                    </div>
+
+
+                    <div>
+
+                      {% if noticia.link_externo %}
+
+                        <a
+                          href="{{ noticia.link_externo }}"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="btn-news-link">
+
+                          Acessar Notícia Externa
+
+                          <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i>
+
+                        </a>
+
+                      {% else %}
+
+                        <button
+                          class="btn-news-link"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#materia-{{ loop.index }}"
+                          onclick="toggleText(this)">
+
+                          Ler Matéria Completa ↓
+
+                        </button>
+
+                        <div
+                          class="collapse full-story-text"
+                          id="materia-{{ loop.index }}">
+
+                          {{ noticia.conteudo }}
+
+                        </div>
+
+                      {% endif %}
+
+                    </div>
+
                   </div>
+
                 </div>
+
               </div>
-            </div>
+
             {% endfor %}
+
           {% else %}
 
-            <!-- Notícia 1 (Interna) -->
+
+            <!-- NOTÍCIA 1 -->
+
             <div class="col-md-4">
+
               <div class="news-card">
+
                 <div class="news-img-wrapper">
-                  <img src="{{ url_for('static', filename='evento.jpg') }}" alt="Notícia 1" class="news-img">
+
+                  <img
+                    src="{{ url_for('static', filename='evento.jpg') }}"
+                    alt="Notícia 1"
+                    class="news-img">
+
                 </div>
+
                 <div class="news-body">
+
                   <div>
-                    <div class="news-date">15 de Junho, 2026</div>
-                    <h3 class="news-title">Grande Abertura da Feira Tecnológica</h3>
-                    <p class="news-text">Os portões estão abertos! Venha conferir os projetos inovadores desenvolvidos pelos alunos deste ano.</p>
+
+                    <div class="news-date">
+                      15 de Junho, 2026
+                    </div>
+
+                    <h3 class="news-title">
+                      Grande Abertura da Feira Tecnológica
+                    </h3>
+
+                    <p class="news-text">
+                      Os portões estão abertos! Venha conferir os projetos inovadores desenvolvidos pelos alunos deste ano.
+                    </p>
+
                   </div>
+
+
                   <div>
-                    <button class="btn-news-link" data-bs-toggle="collapse" data-bs-target="#materia1" onclick="toggleText(this)">Ler Matéria Completa ↓</button>
-                    <div class="collapse full-story-text" id="materia1">
+
+                    <button
+                      class="btn-news-link"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#materia1"
+                      onclick="toggleText(this)">
+
+                      Ler Matéria Completa ↓
+
+                    </button>
+
+                    <div
+                      class="collapse full-story-text"
+                      id="materia1">
+
                       A cerimônia contou com a presença de diretores, professores e representantes da comunidade local. Estão expostos mais de 40 estandes com tecnologias que variam de automação até IA.
+
                     </div>
+
                   </div>
+
                 </div>
+
               </div>
+
             </div>
 
-            <!-- Notícia 2 (Interna) -->
+
+            <!-- NOTÍCIA 2 -->
+
             <div class="col-md-4">
+
               <div class="news-card">
+
                 <div class="news-img-wrapper">
-                  <img src="{{ url_for('static', filename='meninas_votando.jpg') }}" alt="Notícia 2" class="news-img">
+
+                  <img
+                    src="{{ url_for('static', filename='meninas_votando.jpg') }}"
+                    alt="Notícia 2"
+                    class="news-img">
+
                 </div>
+
                 <div class="news-body">
+
                   <div>
-                    <div class="news-date">14 de Junho, 2026</div>
-                    <h3 class="news-title">Como Funciona o Novo Sistema Score</h3>
-                    <p class="news-text">Entenda como a sua avaliação digital ajuda a computar as notas parciais e definir os vencedores em tempo real.</p>
+
+                    <div class="news-date">
+                      14 de Junho, 2026
+                    </div>
+
+                    <h3 class="news-title">
+                      Como Funciona o Novo Sistema Score
+                    </h3>
+
+                    <p class="news-text">
+                      Entenda como a sua avaliação digital ajuda a computar as notas parciais e definir os vencedores em tempo real.
+                    </p>
+
                   </div>
+
+
                   <div>
-                    <button class="btn-news-link" data-bs-toggle="collapse" data-bs-target="#materia2" onclick="toggleText(this)">Ler Matéria Completa ↓</button>
-                    <div class="collapse full-story-text" id="materia2">
+
+                    <button
+                      class="btn-news-link"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#materia2"
+                      onclick="toggleText(this)">
+
+                      Ler Matéria Completa ↓
+
+                    </button>
+
+                    <div
+                      class="collapse full-story-text"
+                      id="materia2">
+
                       Cada QR Code presente nos estandes leva diretamente para a área de votação. A contagem utiliza algoritmos em tempo real para ranking justo dos projetos.
+
                     </div>
+
                   </div>
+
                 </div>
+
               </div>
+
             </div>
 
-            <!-- Notícia 3 (Externa) -->
+
+            <!-- NOTÍCIA 3 -->
+
             <div class="col-md-4">
+
               <div class="news-card">
+
                 <div class="news-img-wrapper">
-                  <img src="{{ url_for('static', filename='informatica.jpg') }}" alt="Notícia Externa" class="news-img">
+
+                  <img
+                    src="{{ url_for('static', filename='informatica.jpg') }}"
+                    alt="Notícia Externa"
+                    class="news-img">
+
                 </div>
+
                 <div class="news-body">
+
                   <div>
-                    <div class="news-date">Mundo Tech</div>
-                    <h3 class="news-title">Principais Tendências em Tecnologia</h3>
-                    <p class="news-text">Confira os mais recentes avanços globais em inteligência artificial, robótica e inovação no portal TechCrunch.</p>
+
+                    <div class="news-date">
+                      Mundo Tech
+                    </div>
+
+                    <h3 class="news-title">
+                      Principais Tendências em Tecnologia
+                    </h3>
+
+                    <p class="news-text">
+                      Confira os mais recentes avanços globais em inteligência artificial, robótica e inovação no portal TechCrunch.
+                    </p>
+
                   </div>
+
+
                   <div>
-                    <a href="https://techcrunch.com" target="_blank" rel="noopener noreferrer" class="btn-news-link">Acessar Portal Tech <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i></a>
+
+                    <a
+                      href="https://techcrunch.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="btn-news-link">
+
+                      Acessar Portal Tech
+
+                      <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i>
+
+                    </a>
+
                   </div>
+
                 </div>
+
               </div>
+
             </div>
+
 
           {% endif %}
 
         </div>
+
       </div>
+
     </section>
 
 
-    <!-- SEÇÃO GUIA DA FEIRA TECNOLÓGICA -->
+    <!-- =========================
+         GUIA DA FEIRA
+    ========================= -->
+
     <section class="guide-section" id="guia-feira">
+
       <div class="container">
-        <h2 class="guide-section-title">GUIA DA FEIRA TECNOLÓGICA</h2>
+
+        <h2 class="guide-section-title">
+          GUIA DA FEIRA TECNOLÓGICA
+        </h2>
+
         <p class="guide-section-subtitle">
           Confira dicas para transformar uma ideia em projeto, preparar seu protótipo
           e apresentar sua criação na Feira Tecnológica da Etec.
         </p>
 
+
         <div class="row g-4">
 
+
           <!-- BLOCO 1 -->
+
           <div class="col-lg-3 col-md-6">
+
             <div class="guide-card">
+
               <div class="guide-img-wrapper">
-                <img src="{{ url_for('static', filename='alunos.jpg') }}"
-                     alt="Alunos montando projetos"
-                     class="guide-img">
+
+                <img
+                  src="{{ url_for('static', filename='alunos.jpg') }}"
+                  alt="Alunos montando projetos"
+                  class="guide-img">
+
               </div>
 
+
               <div class="guide-body">
+
                 <div>
-                  <div class="guide-tag">Passo 01 • Comece sua ideia</div>
-                  <h3 class="guide-title">Como montar seu projeto</h3>
+
+                  <div class="guide-tag">
+                    Passo 01 • Comece sua ideia
+                  </div>
+
+                  <h3 class="guide-title">
+                    Como montar seu projeto
+                  </h3>
+
                   <p class="guide-text">
                     Tem uma ideia, mas não sabe por onde começar? Veja como transformar
                     um problema do dia a dia em um projeto para a Feira Tecnológica.
                   </p>
+
                 </div>
 
+
                 <div>
-                  <button class="btn-guide-link"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#guia1"
-                          onclick="toggleGuideText(this)">
+
+                  <button
+                    class="btn-guide-link"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#guia1"
+                    onclick="toggleGuideText(this)">
+
                     Ler matéria completa ↓
+
                   </button>
 
-                  <div class="collapse guide-full-text" id="guia1">
+                  <div
+                    class="collapse guide-full-text"
+                    id="guia1">
+
                     Primeiro escolha um problema que você gostaria de resolver.
                     Depois defina o objetivo do projeto, pesquise soluções existentes,
                     planeje os materiais necessários e divida as tarefas entre os
                     integrantes da equipe. Por fim, construa um protótipo, teste,
                     registre os resultados e faça os ajustes necessários antes da feira.
+
                   </div>
+
                 </div>
+
               </div>
+
             </div>
+
           </div>
 
+
           <!-- BLOCO 2 -->
+
           <div class="col-lg-3 col-md-6">
+
             <div class="guide-card">
+
               <div class="guide-img-wrapper">
-                <img src="{{ url_for('static', filename='inovacao.jpg') }}"
-                     alt="Alunos desenvolvendo ideias"
-                     class="guide-img">
+
+                <img
+                  src="{{ url_for('static', filename='inovacao.jpg') }}"
+                  alt="Alunos desenvolvendo ideias"
+                  class="guide-img">
+
               </div>
 
+
               <div class="guide-body">
+
                 <div>
-                  <div class="guide-tag">Passo 02 • Inspire-se</div>
-                  <h3 class="guide-title">De onde tirar boas ideias?</h3>
+
+                  <div class="guide-tag">
+                    Passo 02 • Inspire-se
+                  </div>
+
+                  <h3 class="guide-title">
+                    De onde tirar boas ideias?
+                  </h3>
+
                   <p class="guide-text">
                     Grandes projetos podem nascer de situações simples. Observe sua
                     escola, sua comunidade e os problemas que fazem parte da rotina.
                   </p>
+
                 </div>
 
+
                 <div>
-                  <button class="btn-guide-link"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#guia2"
-                          onclick="toggleGuideText(this)">
+
+                  <button
+                    class="btn-guide-link"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#guia2"
+                    onclick="toggleGuideText(this)">
+
                     Ler matéria completa ↓
+
                   </button>
 
-                  <div class="collapse guide-full-text" id="guia2">
+                  <div
+                    class="collapse guide-full-text"
+                    id="guia2">
+
                     Pense em temas como sustentabilidade, acessibilidade, segurança,
                     educação, saúde, tecnologia e automação. Converse com outras
                     pessoas para descobrir necessidades reais e tente imaginar uma
                     solução que seja útil, viável e que possa ser demonstrada durante
                     a Feira Tecnológica.
+
                   </div>
+
                 </div>
+
               </div>
+
             </div>
+
           </div>
 
+
           <!-- BLOCO 3 -->
+
           <div class="col-lg-3 col-md-6">
+
             <div class="guide-card">
+
               <div class="guide-img-wrapper">
-                <img src="{{ url_for('static', filename='tecnologia.jpg') }}"
-                     alt="Tecnologia e inovação"
-                     class="guide-img">
+
+                <img
+                  src="{{ url_for('static', filename='tecnologia.jpg') }}"
+                  alt="Tecnologia e inovação"
+                  class="guide-img">
+
               </div>
 
+
               <div class="guide-body">
+
                 <div>
-                  <div class="guide-tag">Passo 03 • Desenvolva</div>
-                  <h3 class="guide-title">Do protótipo à solução</h3>
+
+                  <div class="guide-tag">
+                    Passo 03 • Desenvolva
+                  </div>
+
+                  <h3 class="guide-title">
+                    Do protótipo à solução
+                  </h3>
+
                   <p class="guide-text">
                     Um bom projeto precisa ser testado. Descubra como melhorar sua
                     criação antes de apresentá-la aos visitantes.
                   </p>
+
                 </div>
 
+
                 <div>
-                  <button class="btn-guide-link"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#guia3"
-                          onclick="toggleGuideText(this)">
+
+                  <button
+                    class="btn-guide-link"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#guia3"
+                    onclick="toggleGuideText(this)">
+
                     Ler matéria completa ↓
+
                   </button>
 
-                  <div class="collapse guide-full-text" id="guia3">
+                  <div
+                    class="collapse guide-full-text"
+                    id="guia3">
+
                     Monte uma primeira versão do protótipo e teste cada parte.
                     Anote o que funcionou, identifique os problemas e faça melhorias.
                     Se possível, peça para colegas ou professores experimentarem a
                     solução e darem sugestões. Esse processo ajuda a deixar o projeto
                     mais funcional e preparado para a apresentação.
+
                   </div>
+
                 </div>
+
               </div>
+
             </div>
+
           </div>
 
+
           <!-- BLOCO 4 -->
+
           <div class="col-lg-3 col-md-6">
+
             <div class="guide-card">
+
               <div class="guide-img-wrapper">
-                <img src="{{ url_for('static', filename='duvidas.jpg') }}"
-                     alt="Apresentação dos projetos"
-                     class="guide-img">
+
+                <img
+                  src="{{ url_for('static', filename='duvidas.jpg') }}"
+                  alt="Apresentação dos projetos"
+                  class="guide-img">
+
               </div>
 
+
               <div class="guide-body">
+
                 <div>
-                  <div class="guide-tag">Passo 04 • Apresente</div>
-                  <h3 class="guide-title">Como chamar atenção na feira</h3>
+
+                  <div class="guide-tag">
+                    Passo 04 • Apresente
+                  </div>
+
+                  <h3 class="guide-title">
+                    Como chamar atenção na feira
+                  </h3>
+
                   <p class="guide-text">
                     Seu projeto já está pronto? Agora é hora de mostrar por que sua
                     ideia é importante e como ela funciona.
                   </p>
+
                 </div>
 
+
                 <div>
-                  <button class="btn-guide-link"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#guia4"
-                          onclick="toggleGuideText(this)">
+
+                  <button
+                    class="btn-guide-link"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#guia4"
+                    onclick="toggleGuideText(this)">
+
                     Ler matéria completa ↓
+
                   </button>
 
-                  <div class="collapse guide-full-text" id="guia4">
+                  <div
+                    class="collapse guide-full-text"
+                    id="guia4">
+
                     Prepare uma explicação curta e clara: apresente o problema,
                     explique sua solução, mostre o protótipo e destaque os resultados.
                     Use cartazes, imagens, gráficos ou uma demonstração prática para
                     facilitar o entendimento. O mais importante é que todos da equipe
                     saibam explicar o projeto e responder às perguntas dos visitantes.
+
                   </div>
+
                 </div>
+
               </div>
+
             </div>
+
           </div>
 
         </div>
+
       </div>
+
     </section>
+
+
+    <!-- =========================
+         LOCALIZAÇÃO
+    ========================= -->
 
     <section class="location-section" id="localizacao">
+
       <div class="container">
-        <h2 class="location-title">LOCALIZAÇÃO DO EVENTO</h2>
-        <p class="location-subtitle">Venha nos visitar na Etec Sylvio de Mattos Carvalho</p>
-        
+
+        <h2 class="location-title">
+          LOCALIZAÇÃO DO EVENTO
+        </h2>
+
+        <p class="location-subtitle">
+          Venha nos visitar na Etec Sylvio de Mattos Carvalho
+        </p>
+
+
         <div class="row justify-content-center">
+
           <div class="col-lg-10">
+
             <div class="map-responsive">
-              <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3705.548483256058!2d-48.36858228505481!3d-21.60356998560023!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b8e154f2669e41%3A0xb249339ff7292275!2sEtec%20Sylvio%20de%20Mattos%20Carvalho!5e0!3m2!1spt-BR!2sbr!4v1625000000000!5m2!1spt-BR!2sbr" 
-                allowfullscreen="" 
+
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3705.548483256058!2d-48.36858228505481!3d-21.60356998560023!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b8e154f2669e41%3A0xb249339ff7292275!2sEtec%20Sylvio%20de%20Mattos%20Carvalho!5e0!3m2!1spt-BR!2sbr!4v1625000000000!5m2!1spt-BR!2sbr"
+                allowfullscreen=""
                 loading="lazy">
               </iframe>
+
             </div>
+
           </div>
+
         </div>
+
       </div>
+
     </section>
+
+
+    <!-- =========================
+         FAQ
+    ========================= -->
 
     <section class="faq-section" id="faq">
+
       <div class="container">
-        <h2 class="text-center text-uppercase mb-5" style="letter-spacing: 1px; color: #ffffff;">Perguntas Frequentes</h2>
+
+        <h2
+          class="text-center text-uppercase mb-5"
+          style="letter-spacing: 1px; color: #ffffff;">
+
+          Perguntas Frequentes
+
+        </h2>
+
 
         <div class="row justify-content-center">
+
           <div class="col-lg-8">
+
             <div class="accordion" id="accordionFAQ">
 
+
+              <!-- FAQ 1 -->
+
               <div class="accordion-item accordion-item-custom">
+
                 <h2 class="accordion-header">
-                  <button class="accordion-button accordion-button-custom collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+
+                  <button
+                    class="accordion-button accordion-button-custom collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseOne">
+
                     Como posso registrar meu voto em um estande?
+
                   </button>
+
                 </h2>
-                <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
+
+
+                <div
+                  id="collapseOne"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#accordionFAQ">
+
                   <div class="accordion-body accordion-body-custom">
+
                     É muito simples! Basta clicar no botão "Votar" localizado na barra superior ou diretamente no card do estande de sua preferência. Você será redirecionado para a tela de autenticação para validar sua escolha com segurança.
+
                   </div>
+
                 </div>
+
               </div>
 
+
+              <!-- FAQ 2 -->
+
               <div class="accordion-item accordion-item-custom">
+
                 <h2 class="accordion-header">
-                  <button class="accordion-button accordion-button-custom collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+
+                  <button
+                    class="accordion-button accordion-button-custom collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseTwo">
+
                     Posso votar em mais de um projeto diferente?
+
                   </button>
+
                 </h2>
-                <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
+
+
+                <div
+                  id="collapseTwo"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#accordionFAQ">
+
                   <div class="accordion-body accordion-body-custom">
+
                     As regras padrão permitem que cada visitante dê sua pontuação para múltiplos estandes distintos, contudo, o sistema restringe o abuso limitando um voto por pessoa dentro de um mesmo projeto.
+
                   </div>
+
                 </div>
+
               </div>
 
+
+              <!-- FAQ 3 -->
+
               <div class="accordion-item accordion-item-custom">
+
                 <h2 class="accordion-header">
-                  <button class="accordion-button accordion-button-custom collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+
+                  <button
+                    class="accordion-button accordion-button-custom collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseThree">
+
                     Como os resultados parciais são calculados?
+
                   </button>
+
                 </h2>
-                <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
+
+
+                <div
+                  id="collapseThree"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#accordionFAQ">
+
                   <div class="accordion-body accordion-body-custom">
+
                     O painel do FeiraScore realiza uma varredura constante em nosso banco de dados. À medida que as notas entram, a média ponderada é calculada instantaneamente de acordo com a categoria selecionada.
+
                   </div>
+
                 </div>
+
               </div>
+
 
             </div>
+
           </div>
+
         </div>
+
       </div>
+
     </section>
+
   </main>
 
+
+  <!-- =========================
+       FOOTER
+  ========================= -->
+
   <footer class="footer-custom text-center">
+
     <div class="container">
-      <p class="mb-2 px-3">Você tem mais alguma pergunta que não está na nossa FAQ?</p>
-      <p class="mb-3 px-3">Entre em contato conosco pelo e-mail e responderemos o mais rápido possível!</p>
-      <p class="mb-4"><a href="mailto:contato@feirascore.com">contato@feirascore.com</a></p>
+
+      <p class="mb-2 px-3">
+        Você tem mais alguma pergunta que não está na nossa FAQ?
+      </p>
+
+      <p class="mb-3 px-3">
+        Entre em contato conosco pelo e-mail e responderemos o mais rápido possível!
+      </p>
+
+      <p class="mb-4">
+        <a href="mailto:contato@feirascore.com">
+          contato@feirascore.com
+        </a>
+      </p>
+
 
       <div class="social-share-container">
-        <p class="mb-2" style="font-size: 12px; color: rgba(255,255,255,0.4);">Compartilhe a Feira</p>
+
+        <p
+          class="mb-2"
+          style="font-size: 12px; color: rgba(255,255,255,0.4);">
+
+          Compartilhe a Feira
+
+        </p>
+
+
         <div class="social-share-buttons d-flex justify-content-center gap-3">
-          <a href="https://www.facebook.com/sharer/sharer.php?u=https://feirascore.com" target="_blank" title="Compartilhar no Facebook">
+
+          <a
+            href="https://www.facebook.com/sharer/sharer.php?u=https://feirascore.com"
+            target="_blank"
+            title="Compartilhar no Facebook">
+
             <i class="fa-brands fa-facebook-f"></i>
+
           </a>
-          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://feirascore.com" target="_blank" title="Compartilhar no LinkedIn">
+
+
+          <a
+            href="https://www.linkedin.com/sharing/share-offsite/?url=https://feirascore.com"
+            target="_blank"
+            title="Compartilhar no LinkedIn">
+
             <i class="fa-brands fa-linkedin-in"></i>
+
           </a>
-          <a href="https://api.whatsapp.com/send?text=Confira%20os%20projetos%20da%20Feira%20Tecnol%C3%B3gica%20no%20FeiraScore!%20https://feirascore.com" target="_blank" title="Compartilhar no WhatsApp">
+
+
+          <a
+            href="https://api.whatsapp.com/send?text=Confira%20os%20projetos%20da%20Feira%20Tecnol%C3%B3gica%20no%20FeiraScore!%20https://feirascore.com"
+            target="_blank"
+            title="Compartilhar no WhatsApp">
+
             <i class="fa-brands fa-whatsapp"></i>
+
           </a>
+
         </div>
+
       </div>
+
     </div>
+
   </footer>
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================= -->
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-  <script>
-  function toggleText(button) {
-    setTimeout(() => {
-      const isExpanded = button.getAttribute('aria-expanded') === 'true';
-      button.innerHTML = isExpanded ? 'Fechar Matéria ↑' : 'Ler Matéria Completa ↓';
-    }, 50);
-  }
 
-  function toggleGuideText(button) {
-    setTimeout(() => {
-      const isExpanded = button.getAttribute('aria-expanded') === 'true';
-      button.innerHTML = isExpanded ? 'Fechar Matéria ↑' : 'Ler Matéria Completa ↓';
-    }, 50);
-  }
-</script>
-  
-</script>
+  <script>
+
+    function toggleText(button) {
+
+      setTimeout(() => {
+
+        const isExpanded =
+          button.getAttribute('aria-expanded') === 'true';
+
+        button.innerHTML =
+          isExpanded
+            ? 'Fechar Matéria ↑'
+            : 'Ler Matéria Completa ↓';
+
+      }, 50);
+
+    }
+
+
+    function toggleGuideText(button) {
+
+      setTimeout(() => {
+
+        const isExpanded =
+          button.getAttribute('aria-expanded') === 'true';
+
+        button.innerHTML =
+          isExpanded
+            ? 'Fechar Matéria ↑'
+            : 'Ler Matéria Completa ↓';
+
+      }, 50);
+
+    }
+
+  </script>
+
 </body>
 </html>
