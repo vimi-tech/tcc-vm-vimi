@@ -48,6 +48,8 @@
     .trophy-container { margin-bottom: 15px; display: flex; justify-content: center; align-items: center; }
     .trophy-icon { font-size: 80px; color: #ffd700; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3)); }
     .img-feirascore-brand { width: 100%; max-width: 260px; height: auto; margin: 0 auto 10px auto; display: block; }
+    .img-feirascore-logo-completa { width: 100%; max-width: 560px; height: auto; display: block; margin: 0 auto 18px auto; }
+    .feirascore-logo-completa { width: 100%; margin-bottom: 5px; }
     .main-title { font-family: 'Orbitron', sans-serif !important; font-weight: 900 !important; color: #b61c1c !important; font-size: 3.5rem !important; line-height: 0.9 !important; text-transform: uppercase !important; margin-bottom: 10px !important; letter-spacing: 2px !important; text-align: center !important; }
     .main-subtitle { font-family: 'Teko', sans-serif !important; font-weight: 700 !important; color: #000 !important; font-size: 2.5rem !important; line-height: 1 !important; text-transform: none !important; margin-bottom: 20px !important; letter-spacing: 1px !important; text-align: center !important; }
     .main-subtitle span { font-family: inherit !important; color: #b61c1c !important; }
@@ -281,6 +283,10 @@
         font-size: 1.8rem;
       }
 
+      .img-feirascore-logo-completa {
+        max-width: 390px;
+      }
+
       .guide-section-subtitle {
         font-size: 14px;
         padding: 0 15px;
@@ -376,12 +382,9 @@
         <div class="row align-items-center justify-content-center">
           
           <div class="col-md-6 mb-4 mb-md-0 hero-brand-block text-center">
-            <div class="trophy-container">
-              <img src="{{ url_for('static', filename='trofeu.png') }}" alt="Troféu FeiraScore" class="img-feirascore-brand" onerror="this.style.display='none'; document.getElementById('trophy-icon-fallback').style.display='block';">
-              <i id="trophy-icon-fallback" class="fa-solid fa-trophy trophy-icon" style="display: none;"></i>
+            <div class="trophy-container feirascore-logo-completa">
+              <img src="{{ url_for('static', filename='feirascore_logo_completa.png') }}" alt="FeiraScore" class="img-feirascore-logo-completa">
             </div>
-
-            <h1 class="main-title">FEIRA<br>SCORE</h1>
             <p class="main-subtitle">Quem lidera, <span>brilha.</span></p>
 
             <a href="#sobre" class="btn-main-red d-inline-flex align-items-center justify-content-center text-decoration-none">Saiba Mais</a>
@@ -544,7 +547,7 @@
           <div class="col-lg-3 col-md-6">
             <div class="guide-card">
               <div class="guide-img-wrapper">
-                <img src="{{ url_for('static', filename='alunos.jpg') }}"
+                <img src="{{ url_for('static', filename='evento.jpg') }}"
                      alt="Alunos montando projetos"
                      class="guide-img">
               </div>
@@ -583,7 +586,7 @@
           <div class="col-lg-3 col-md-6">
             <div class="guide-card">
               <div class="guide-img-wrapper">
-                <img src="{{ url_for('static', filename='inovacao.jpg') }}"
+                <img src="{{ url_for('static', filename='meninas_votando.jpg') }}"
                      alt="Alunos desenvolvendo ideias"
                      class="guide-img">
               </div>
@@ -622,7 +625,7 @@
           <div class="col-lg-3 col-md-6">
             <div class="guide-card">
               <div class="guide-img-wrapper">
-                <img src="{{ url_for('static', filename='tecnologia.jpg') }}"
+                <img src="{{ url_for('static', filename='vimi_logo.jpg') }}"
                      alt="Tecnologia e inovação"
                      class="guide-img">
               </div>
