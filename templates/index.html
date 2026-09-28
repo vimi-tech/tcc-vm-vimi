@@ -668,7 +668,7 @@
           <div class="col-lg-3 col-md-6">
             <div class="guide-card">
               <div class="guide-img-wrapper">
-                <img src="{{ url_for('static', filename='duvidas.jpg) }}"
+                <img src="{{ url_for('static', filename='duvidas.jpg') }}"
                      alt="Apresentação dos projetos"
                      class="guide-img">
               </div>
@@ -806,19 +806,19 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
-    function toggleText(button) {
-      setTimeout(() => {
-        const isExpanded = button.getAttribute('aria-expanded') === 'true';
-        button.innerHTML = isExpanded ? 'Fechar Matéria ↑' : 'Ler Matéria Completa ↓';
-      }, 50);
-    }
+  function toggleText(button) {
+    setTimeout(() => {
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+      button.innerHTML = isExpanded ? 'Fechar Matéria ↑' : 'Ler Matéria Completa ↓';
+    }, 50);
+  }
 
-    function toggleGuideText(button) {
-      setTimeout(() => {
-        const isExpanded = button.getAttribute('aria-expanded') === 'true';
-        button.innerHTML = isExpanded ? 'Fechar Matéria ↑' : 'Ler Matéria Completa ↓';
-      }, 50);
-    }
-  </script>
+  function toggleGuideText(button) {
+    setTimeout(() => {
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+      button.innerHTML = isExpanded ? 'Fechar Matéria ↑' : 'Ler Matéria Completa ↓';
+    }, 50);
+  }
+</script>
 </body>
 </html>
