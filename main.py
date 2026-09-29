@@ -253,14 +253,7 @@ def listar_projetos():
 
 # ==========================================================
 # PRIMEIRA TELA DE EDIÇÃO
-# EDITAR NOME, TURMA E RESUMO
-# ==========================================================
 
-@app.route(
-    '/projetos/editar/<int:index>',
-    methods=['GET', 'POST']
-)
-def editar_projeto(index):
 
     # ------------------------------------------------------
     # VERIFICA SE O PROJETO EXISTE
