@@ -64,5 +64,5 @@ class projectrepositories:
             'criteria': project.criteria,
             'average': project.avarage
         })
-    return True: 
+       return True
                             
