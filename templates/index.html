@@ -648,51 +648,100 @@
         </p>
 
         <div class="row g-4 align-items-stretch">
-          <div class="col-lg-3 col-md-6">
-            <div class="management-card">
-              <div>
-                <div class="management-icon"><i class="fa-solid fa-plus"></i></div>
-                <h3>Cadastrar Projeto</h3>
-                <p>Cadastre um novo projeto ou estande informando turma, nome, resumo e mídias.</p>
-              </div>
-              <a class="management-btn" href="{{ url_for('pagina_descricao') }}">Cadastrar</a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6">
-            <div class="management-card">
-              <div>
-                <div class="management-icon"><i class="fa-solid fa-list"></i></div>
-                <h3>Listar Projetos</h3>
-                <p>Visualize todos os projetos cadastrados e acesse as opções de gerenciamento.</p>
-              </div>
-              <a class="management-btn" href="{{ url_for('listar_projetos') }}">Ver Listagem</a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6">
-            <div class="management-card">
-              <div>
-                <div class="management-icon"><i class="fa-solid fa-pen-to-square"></i></div>
-                <h3>Editar Projeto</h3>
-                <p>Altere dados como turma, nome do projeto e resumo depois do cadastro.</p>
-              </div>
-              <a class="management-btn" href="{{ url_for('listar_projetos') }}">Editar</a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6">
-            <div class="management-card">
-              <div>
-                <div class="management-icon"><i class="fa-solid fa-images"></i></div>
-                <h3>Editar Mídias</h3>
-                <p>Gerencie as imagens e outros arquivos enviados para cada projeto cadastrado.</p>
-              </div>
-              <a class="management-btn" href="{{ url_for('listar_projetos') }}">Gerenciar Mídias</a>
-            </div>
-          </div>
-        </div>
+          <!-- BLOCO 1 -->
+<div class="col-lg-3 col-md-6">
+  <div class="management-card">
+    <div>
+      <div class="management-icon">
+        <i class="fa-solid fa-plus"></i>
       </div>
+
+      <h3>Cadastrar Projeto</h3>
+
+      <p>
+        Cadastre um novo projeto ou estande informando turma, nome, resumo e mídias.
+      </p>
+    </div>
+
+    <a
+      class="management-btn"
+      href="{{ url_for('pagina_descricao') }}">
+      Cadastrar
+    </a>
+  </div>
+</div>
+
+
+<!-- BLOCO 2 -->
+<div class="col-lg-3 col-md-6">
+  <div class="management-card">
+    <div>
+      <div class="management-icon">
+        <i class="fa-solid fa-list"></i>
+      </div>
+
+      <h3>Listar Projetos</h3>
+
+      <p>
+        Visualize todos os projetos cadastrados e acesse as opções de gerenciamento.
+      </p>
+    </div>
+
+    <a
+      class="management-btn"
+      href="{{ url_for('pagina_descricao') }}">
+      Ver Listagem
+    </a>
+  </div>
+</div>
+
+
+<!-- BLOCO 3 -->
+<div class="col-lg-3 col-md-6">
+  <div class="management-card">
+    <div>
+      <div class="management-icon">
+        <i class="fa-solid fa-pen-to-square"></i>
+      </div>
+
+      <h3>Editar Projeto</h3>
+
+      <p>
+        Altere dados como turma, nome do projeto e resumo depois do cadastro.
+      </p>
+    </div>
+
+    <a
+      class="management-btn"
+      href="{{ url_for('pagina_descricao') }}">
+      Editar
+    </a>
+  </div>
+</div>
+
+
+<!-- BLOCO 4 -->
+<div class="col-lg-3 col-md-6">
+  <div class="management-card">
+    <div>
+      <div class="management-icon">
+        <i class="fa-solid fa-images"></i>
+      </div>
+
+      <h3>Editar Mídias</h3>
+
+      <p>
+        Gerencie as imagens e outros arquivos enviados para cada projeto cadastrado.
+      </p>
+    </div>
+
+    <a
+      class="management-btn"
+      href="{{ url_for('pagina_descricao') }}">
+      Gerenciar Mídias
+    </a>
+  </div>
+</div>
     </section>
 
 
