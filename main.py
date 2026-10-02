@@ -31,20 +31,23 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 # Cada estande: {'id', 'turma', 'nome', 'resumo', 'midias'}
 estandes_cadastrados = []
 
-# Votos por estande: {id_do_estande: [[8 notas], [8 notas], ...]}
-votos = {}
-
-# As 8 perguntas oficiais da votação (nota de 1 a 5 em cada uma)
+# As 8 perguntas da votação: o visitante escolhe UM projeto em cada uma
 PERGUNTAS_VOTACAO = [
-    "Como você avalia a inovação e criatividade do projeto?",
-    "O protótipo/demonstração prática funcionou corretamente?",
-    "A equipe apresentou o projeto com clareza e domínio do assunto?",
-    "O projeto resolve um problema real da comunidade/mercado?",
-    "Qual o nível de acabamento e organização visual do estande?",
-    "A documentação/material de apoio estava bem estruturada?",
-    "O projeto utilizou tecnologias adequadas ao proposto?",
-    "Qual sua nota geral para a experiência no estande?",
+    {"titulo": "Tema da feira",      "pergunta": "Qual projeto se relaciona completamente com o tema da feira?"},
+    {"titulo": "Melhor decoração",   "pergunta": "Qual teve a melhor decoração?"},
+    {"titulo": "Melhor didática",    "pergunta": "Qual teve a melhor didática?"},
+    {"titulo": "Mais relevante",     "pergunta": "Qual foi o mais relevante?"},
+    {"titulo": "Mais interessante",  "pergunta": "Qual foi o mais interessante?"},
+    {"titulo": "Mais criativo",      "pergunta": "Qual foi o mais criativo?"},
+    {"titulo": "Mais organizado",    "pergunta": "Qual foi o mais organizado?"},
+    {"titulo": "Melhor explicação",  "pergunta": "Qual teve a melhor explicação?"},
 ]
+
+# Votos: um contador por pergunta -> votos[i] = {id_do_estande: quantidade}
+votos = [{} for _ in PERGUNTAS_VOTACAO]
+
+# Quantas pessoas já enviaram a cédula
+contagem = {"votantes": 0}
 
 
 def buscar_estande(estande_id):
@@ -244,7 +247,8 @@ def excluir_projeto(index):
     estande = estandes_cadastrados.pop(index)
 
     # apaga também os votos desse projeto
-    votos.pop(estande['id'], None)
+    for contador in votos:
+        contador.pop(estande['id'], None)
 
     for arquivo in estande.get('midias', []):
         caminho = os.path.join(app.config['UPLOAD_FOLDER'], arquivo)
@@ -283,84 +287,139 @@ def excluir_midia(index, midia_index):
 
 
 # ==========================================================
-# VOTAÇÃO
+# VOTAÇÃO  (uma cédula com 8 perguntas, 1 projeto por pergunta)
 # ==========================================================
+
+def garantir_ids():
+    for e in estandes_cadastrados:
+        e.setdefault('id', uuid.uuid4().hex)
+
+
+def primeira_sem_resposta(respostas):
+    for i in range(1, len(PERGUNTAS_VOTACAO) + 1):
+        if str(i) not in respostas:
+            return i
+    return len(PERGUNTAS_VOTACAO)
+
 
 @app.route('/votacao')
 def iniciar_votacao():
-    """Lista os projetos. Se não houver nenhum, a página mostra
-    'Nenhum projeto disponível para votação'."""
-    for e in estandes_cadastrados:
-        e.setdefault('id', uuid.uuid4().hex)
-        e.setdefault('resumo', '')
-        e['resumo'] = e['resumo'] or ''
+    """Se houver projetos e a pessoa ainda não votou, começa as perguntas.
+    Senão mostra 'nenhum projeto disponível' ou 'você já votou'."""
+    garantir_ids()
+
+    if estandes_cadastrados and not session.get('votou'):
+        return redirect(url_for(
+            'exibir_pergunta',
+            numero=primeira_sem_resposta(session.get('respostas', {}))
+        ))
 
     return render_template(
         'votacao/lista.html',
         estandes=estandes_cadastrados,
-        ja_votou=session.get('votou_em', []),
-        total_perguntas=len(PERGUNTAS_VOTACAO),
+        ja_votou=session.get('votou', False),
     )
 
 
-@app.route('/votacao/<estande_id>', methods=['GET', 'POST'])
-def votar_estande(estande_id):
-    """Mostra as 8 perguntas de UM projeto e salva as notas."""
+@app.route('/votacao/pergunta/<int:numero>', methods=['GET', 'POST'])
+def exibir_pergunta(numero):
+    """Uma pergunta por tela. A resposta de cada tela fica na sessão
+    e os votos só são contados ao finalizar a pergunta 8."""
+    garantir_ids()
+    total = len(PERGUNTAS_VOTACAO)
 
-    estande = buscar_estande(estande_id)
-    if not estande:
-        flash('Projeto não encontrado!', 'error')
+    if not estandes_cadastrados:
+        flash('Não há nenhum projeto disponível para votação.', 'error')
         return redirect(url_for('iniciar_votacao'))
 
-    ja_votou = session.get('votou_em', [])
-    if estande_id in ja_votou:
-        flash('Você já avaliou este projeto.', 'error')
+    if session.get('votou'):
+        flash('Você já votou. Obrigado pela participação!', 'error')
         return redirect(url_for('iniciar_votacao'))
+
+    if numero < 1 or numero > total:
+        return redirect(url_for('exibir_pergunta', numero=1))
+
+    ids_validos = {e['id'] for e in estandes_cadastrados}
+    respostas = {
+        k: v for k, v in session.get('respostas', {}).items()
+        if v in ids_validos
+    }
 
     if request.method == 'POST':
-        notas = []
-        for i in range(len(PERGUNTAS_VOTACAO)):
-            try:
-                nota = int(request.form.get(f'nota_{i + 1}', ''))
-            except ValueError:
-                nota = 0
-            if nota < 1 or nota > 5:
-                flash('Responda todas as perguntas com uma nota de 1 a 5.', 'error')
-                return redirect(url_for('votar_estande', estande_id=estande_id))
-            notas.append(nota)
+        escolha = request.form.get('estande')
+        if escolha not in ids_validos:
+            flash('Escolha um projeto para continuar.', 'error')
+            return redirect(url_for('exibir_pergunta', numero=numero))
 
-        votos.setdefault(estande_id, []).append(notas)
-        session['votou_em'] = ja_votou + [estande_id]
+        respostas[str(numero)] = escolha
+        session['respostas'] = respostas
 
-        flash(f'Voto registrado para "{estande["nome"]}". Obrigado!', 'success')
+        if numero < total:
+            return redirect(url_for('exibir_pergunta', numero=numero + 1))
+
+        # última pergunta: confere se todas foram respondidas e registra
+        if len(respostas) < total:
+            return redirect(url_for(
+                'exibir_pergunta', numero=primeira_sem_resposta(respostas)
+            ))
+
+        for i in range(total):
+            escolhido = respostas[str(i + 1)]
+            votos[i][escolhido] = votos[i].get(escolhido, 0) + 1
+        contagem['votantes'] += 1
+        session['votou'] = True
+        session.pop('respostas', None)
+
+        flash('Voto registrado com sucesso! Obrigado pela participação.', 'success')
         return redirect(url_for('iniciar_votacao'))
 
+    # GET: não deixa pular perguntas
+    faltando = primeira_sem_resposta(respostas)
+    if numero > faltando:
+        return redirect(url_for('exibir_pergunta', numero=faltando))
+
     return render_template(
-        'votacao/avaliar.html',
-        estande=estande,
-        perguntas=PERGUNTAS_VOTACAO,
+        'votacao/etapa.html',
+        numero=numero,
+        total=total,
+        pergunta=PERGUNTAS_VOTACAO[numero - 1],
+        estandes=estandes_cadastrados,
+        escolhida=respostas.get(str(numero)),
     )
 
 
 @app.route('/ranking')
 def ranking():
-    """Média das notas de cada projeto, do melhor para o pior."""
-    lista = []
-    for estande in estandes_cadastrados:
-        votos_estande = votos.get(estande['id'], [])
-        qtd = len(votos_estande)
-        if qtd:
-            medias = [
-                sum(v[i] for v in votos_estande) / qtd
-                for i in range(len(PERGUNTAS_VOTACAO))
-            ]
-            geral = sum(medias) / len(medias)
-        else:
-            geral = 0
-        lista.append({'estande': estande, 'qtd_votos': qtd, 'media': round(geral, 2)})
+    """Vencedor de cada pergunta + classificação geral (soma dos votos)."""
+    garantir_ids()
+    categorias = []
+    total_geral = {e['id']: 0 for e in estandes_cadastrados}
 
-    lista.sort(key=lambda r: (r['media'], r['qtd_votos']), reverse=True)
-    return render_template('votacao/ranking.html', ranking=lista)
+    for i, item in enumerate(PERGUNTAS_VOTACAO):
+        linhas = []
+        for e in estandes_cadastrados:
+            qtd = votos[i].get(e['id'], 0)
+            total_geral[e['id']] += qtd
+            linhas.append({'estande': e, 'qtd': qtd})
+        linhas.sort(key=lambda l: l['qtd'], reverse=True)
+        categorias.append({
+            'titulo': item['titulo'],
+            'pergunta': item['pergunta'],
+            'linhas': linhas,
+            'maior': linhas[0]['qtd'] if linhas else 0,
+        })
+
+    geral = sorted(
+        ({'estande': e, 'qtd': total_geral[e['id']]} for e in estandes_cadastrados),
+        key=lambda l: l['qtd'], reverse=True,
+    )
+
+    return render_template(
+        'votacao/ranking.html',
+        categorias=categorias,
+        geral=geral,
+        votantes=contagem['votantes'],
+    )
 
 
 # ==========================================================

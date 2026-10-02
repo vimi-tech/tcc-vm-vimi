@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Votação - Pergunta {{ numero }} de {{ total }}</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+  <style>
+    body { background:#f4f4f4; font-family:'Russo One',sans-serif; color:#333; min-height:100vh; }
+    .btn-red { background:#c51b1b; color:#fff !important; border:none; border-radius:30px; padding:12px 26px; text-transform:uppercase; text-decoration:none; display:inline-block; transition:.25s; }
+    .btn-red:hover { background:#850000; }
+    .btn-red:disabled { background:#bbb; cursor:not-allowed; }
+    .btn-voltar { background:#fff; color:#c51b1b !important; border:2px solid #c51b1b; border-radius:30px; padding:10px 22px; text-transform:uppercase; text-decoration:none; display:inline-block; }
+    .cartao { background:#fff; border-radius:22px; box-shadow:0 8px 24px rgba(0,0,0,.12); padding:28px 22px; }
+    .badge-perg { background:#c51b1b; color:#fff; border-radius:20px; padding:4px 16px; font-size:14px; display:inline-block; margin-bottom:12px; }
+    .opcao { display:block; width:100%; text-align:left; border:2px solid #c51b1b; color:#333; border-radius:14px; padding:12px 16px; font-family:sans-serif; font-size:16px; cursor:pointer; transition:.2s; }
+    .opcao small { color:#c51b1b; font-weight:bold; }
+    .opcao:hover { background:#fbeaea; }
+    .btn-check:checked + .opcao { background:#c51b1b; color:#fff; }
+    .btn-check:checked + .opcao small { color:#fff; }
+    .barra { width:100%; height:10px; accent-color:#c51b1b; }
+  </style>
+</head>
+<body>
+  <div class="container py-4" style="max-width:640px;">
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }} alert-dismissible fade show text-center" role="alert">
+          <strong>{{ message }}</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+        </div>
+      {% endfor %}
+    {% endwith %}
+
+    <div class="d-flex justify-content-between align-items-center mb-2" style="font-size:14px;">
+      <a href="{{ url_for('index') }}" style="color:#c51b1b; text-decoration:none;">&times; Sair</a>
+      <span>Pergunta {{ numero }} de {{ total }}</span>
+    </div>
+    <progress class="barra mb-4" value="{{ numero }}" max="{{ total }}"></progress>
+
+    <div class="cartao">
+      <div class="text-center">
+        <span class="badge-perg">{{ pergunta.titulo }}</span>
+        <h4 class="mb-4">{{ pergunta.pergunta }}</h4>
+      </div>
+
+      <form method="POST" action="{{ url_for('exibir_pergunta', numero=numero) }}">
+        <div class="d-grid gap-2 mb-4">
+          {% for estande in estandes %}
+            <div>
+              <input type="radio" class="btn-check" name="estande" id="e{{ loop.index }}" value="{{ estande.id }}" required {% if estande.id == escolhida %}checked{% endif %}>
+              <label class="opcao" for="e{{ loop.index }}"><small>{{ estande.turma }}</small> &mdash; {{ estande.nome }}</label>
+            </div>
+          {% endfor %}
+        </div>
+
+        <div class="d-flex justify-content-between gap-2">
+          {% if numero > 1 %}
+            <a href="{{ url_for('exibir_pergunta', numero=numero - 1) }}" class="btn-voltar">&larr; Voltar</a>
+          {% else %}
+            <span></span>
+          {% endif %}
+
+          <button type="submit" class="btn-red" id="btnProxima" {% if not escolhida %}disabled{% endif %}>
+            {% if numero < total %}Próxima &rarr;{% else %}Finalizar votação &check;{% endif %}
+          </button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.querySelectorAll('input[name="estande"]').forEach(function (r) {
+      r.addEventListener('change', function () {
+        document.getElementById('btnProxima').disabled = false;
+      });
+    });
+  </script>
+</body>
+</html>
