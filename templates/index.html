@@ -500,8 +500,8 @@
     <!-- Botão Votar existente (vai para o login) -->
     <a class="btn-nav-red" href="{{ url_for('estudantelogin') }}">Votar</a>
     
-    <!-- NOVO BOTÃO VOTAÇÃO (vai para a verificação das 8 perguntas) -->
-    <a class="btn-nav-red text-decoration-none ms-2" href="{{ url_for('iniciar_votacao') }}">VOTAÇÃO</a>
+    <!-- Botão VOTAÇÃO (lista de projetos + 8 perguntas) -->
+    <a class="btn-nav-red" href="{{ url_for('iniciar_votacao') }}">Votação</a>
     
     <a class="nav-link-custom" href="{{ url_for('estandes') }}">Estandes</a>
     <a class="nav-link-custom" href="#gerenciar-projetos">Gerenciar<br>Projetos</a>
@@ -521,8 +521,6 @@
 
   </header>
 
-  </header>
-
 <!-- ADICIONE O BLOCO DE ALERTAS EXATAMENTE AQUI -->
 {% with messages = get_flashed_messages(with_categories=true) %}
   {% if messages %}
@@ -536,11 +534,6 @@
     </div>
   {% endif %}
 {% endwith %}
-
-<!-- SEÇÃO SEGUINTE DA SUA PÁGINA (Ex: Hero ou Sobre) -->
-<section id="sobre">
-   ...
-</section>
 
   <main>
     <section class="intro-section">
@@ -598,7 +591,7 @@
             <p class="highlight-text">Sua opinião faz a diferença!<br>Cada voto ajuda a destacar ideias, reconhecer esforços e valorizar projetos incríveis.</p>
             <div class="d-flex flex-wrap justify-content-center gap-3">
               <a class="btn-about-white d-inline-flex align-items-center justify-content-center text-decoration-none" href="{{ url_for('estandes') }}">Ver Estandes</a>
-              <a class="btn-about-white d-inline-flex align-items-center justify-content-center text-decoration-none" href="{{ url_for('estudantelogin') }}">Votar</a>
+              <a class="btn-about-white d-inline-flex align-items-center justify-content-center text-decoration-none" href="{{ url_for('iniciar_votacao') }}">Votar</a>
             </div>
           </div>
         </div>
@@ -671,12 +664,12 @@
       <div class="container">
         <h2 class="management-title">GERENCIAR PROJETOS</h2>
         <p class="management-subtitle">
-          Acesse as funções de cadastro, listagem e edição dos projetos cadastrados no FeiraScore.
+          Acesse as funções de cadastro, listagem e mídias dos projetos cadastrados no FeiraScore.
         </p>
 
         <div class="row g-4 align-items-stretch">
           <!-- BLOCO 1 -->
-<div class="col-lg-3 col-md-6">
+<div class="col-lg-4 col-md-6">
   <div class="management-card">
     <div>
       <div class="management-icon">
@@ -700,7 +693,7 @@
 
 
 <!-- BLOCO 2 -->
-<div class="col-lg-3 col-md-6">
+<div class="col-lg-4 col-md-6">
   <div class="management-card">
     <div>
       <div class="management-icon">
@@ -716,40 +709,15 @@
 
     <a
   class="management-btn"
-  href="{{ url_for('estudantelogin') }}">
+  href="{{ url_for('listar_projetos') }}">
   Ver Listagem
 </a>
-    </a>
-  </div>
-</div>
-
-
-<!-- BLOCO 3 -->
-<div class="col-lg-3 col-md-6">
-  <div class="management-card">
-    <div>
-      <div class="management-icon">
-        <i class="fa-solid fa-pen-to-square"></i>
-      </div>
-
-      <h3>Editar Projeto</h3>
-
-      <p>
-        Altere dados como turma, nome do projeto e resumo depois do cadastro.
-      </p>
-    </div>
-
-    <a
-      class="management-btn"
-      href="{{ url_for('pagina_descricao') }}">
-      Editar
-    </a>
   </div>
 </div>
 
 
 <!-- BLOCO 4 -->
-<div class="col-lg-3 col-md-6">
+<div class="col-lg-4 col-md-6">
   <div class="management-card">
     <div>
       <div class="management-icon">
@@ -765,7 +733,7 @@
 
     <a
       class="management-btn"
-      href="{{ url_for('pagina_descricao') }}">
+      href="{{ url_for('listar_projetos') }}">
       Gerenciar Mídias
     </a>
   </div>
@@ -788,8 +756,7 @@
     </section>
 
     <div id="mural" aria-hidden="true" style="position:relative; top:-80px;"></div>
-    <div id="ranking" aria-hidden="true" style="position:relative; top:-80px;"></div>
-    <div id="estatisticas" aria-hidden="true" style="position:relative; top:-80px;"></div>
+        <div id="estatisticas" aria-hidden="true" style="position:relative; top:-80px;"></div>
 
     <section class="location-section" id="localizacao">
       <div class="container">
