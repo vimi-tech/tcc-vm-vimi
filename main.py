@@ -1,4 +1,6 @@
+import html
 import os
+import traceback
 import uuid
 
 from flask import (
@@ -288,6 +290,11 @@ def excluir_midia(index, midia_index):
 def iniciar_votacao():
     """Lista os projetos. Se não houver nenhum, a página mostra
     'Nenhum projeto disponível para votação'."""
+    for e in estandes_cadastrados:
+        e.setdefault('id', uuid.uuid4().hex)
+        e.setdefault('resumo', '')
+        e['resumo'] = e['resumo'] or ''
+
     return render_template(
         'votacao/lista.html',
         estandes=estandes_cadastrados,
@@ -354,6 +361,21 @@ def ranking():
 
     lista.sort(key=lambda r: (r['media'], r['qtd_votos']), reverse=True)
     return render_template('votacao/ranking.html', ranking=lista)
+
+
+# ==========================================================
+# DIAGNÓSTICO: com a variável MOSTRAR_ERROS=1 o erro 500 mostra
+# o motivo na própria página (remova a variável depois de resolver)
+# ==========================================================
+
+@app.errorhandler(500)
+def erro_interno(e):
+    if os.environ.get('MOSTRAR_ERROS') == '1':
+        original = getattr(e, 'original_exception', None) or e
+        texto = ''.join(traceback.format_exception(
+            type(original), original, original.__traceback__))
+        return f'<h2>Erro 500</h2><pre>{html.escape(texto)}</pre>', 500
+    return 'Erro interno do servidor.', 500
 
 
 # ==========================================================
