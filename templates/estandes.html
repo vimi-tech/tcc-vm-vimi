@@ -16,24 +16,22 @@
 
   <div class="page-container">
 
-    <!-- NAVEGAÇÃO / BOTÃO VOLTAR -->
+
     <div class="top-nav">
       <a href="{{ url_for('index') }}" class="btn-back">
         <span class="arrow">&larr;</span> Voltar para página inicial
       </a>
     </div>
 
-    <!-- TÍTULO EM IMAGEM -->
-<!-- TÍTULO EM IMAGEM -->
-<header class="header-section">
-  <img
-    src="{{ url_for('static', filename='uploads/estandes.jpeg') }}"
-    alt="Estandes 2026"
-    class="main-title-image"
-  >
+
+    <header class="header-section">
+      <img
+        src="{{ url_for('static', filename='uploads/estandes.jpeg') }}"
+        alt="Estandes 2026"
+        class="main-title-image"
+      >
     </header>
 
-    <!-- BANNER -->
     <div class="banner-container">
       <img
         src="{{ url_for('static', filename='evento.jpg') }}"
@@ -42,12 +40,11 @@
       >
     </div>
 
-    <!-- TEMA -->
     <div class="theme-section">
       <h2>TEMA: Explorando o invisível, avanço para o mundo inteligente</h2>
     </div>
 
-    <!-- LISTA DOS ESTANDES -->
+
     <main class="estandes-list">
 
       {% for estande in estandes %}
@@ -64,7 +61,7 @@
 
           {% if estande.midias and estande.midias|length > 1 %}
 
-            <!-- CARROSSEL -->
+      
             <div class="carousel" id="carousel-{{ estande_index }}">
 
               <div class="carousel-slides">
@@ -175,39 +172,27 @@
   </div>
 
   <script>
-
     document.addEventListener('click', function(e) {
-
       const btn = e.target.closest('.carousel-prev, .carousel-next');
 
       if (btn) {
-
         const carouselId = btn.getAttribute('data-carousel');
         const direction = parseInt(btn.getAttribute('data-dir'));
-
         moveSlide(carouselId, direction);
-
         return;
       }
 
       const dot = e.target.closest('.dot');
 
       if (dot) {
-
         const carouselId = dot.getAttribute('data-carousel');
         const slideIndex = parseInt(dot.getAttribute('data-slide'));
-
         setSlide(carouselId, slideIndex);
-
       }
-
     });
 
-
     function moveSlide(carouselId, direction) {
-
       const carousel = document.getElementById('carousel-' + carouselId);
-
       if (!carousel) return;
 
       const slides = carousel.querySelectorAll('.slide');
@@ -224,22 +209,17 @@
         dots[activeIndex].classList.remove('active');
       }
 
-      activeIndex =
-        (activeIndex + direction + slides.length) % slides.length;
+      activeIndex = (activeIndex + direction + slides.length) % slides.length;
 
       slides[activeIndex].classList.add('active');
 
       if (dots.length && dots[activeIndex]) {
         dots[activeIndex].classList.add('active');
       }
-
     }
 
-
     function setSlide(carouselId, slideIndex) {
-
       const carousel = document.getElementById('carousel-' + carouselId);
-
       if (!carousel) return;
 
       const slides = carousel.querySelectorAll('.slide');
@@ -255,9 +235,7 @@
       if (dots[slideIndex]) {
         dots[slideIndex].classList.add('active');
       }
-
     }
-
   </script>
 
 </body>

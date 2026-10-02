@@ -73,7 +73,7 @@
 
         <div class="upload-box">
           <label for="file-upload" class="btn-upload">
-            Upload das Imagens e vídeo
+            Upload das Imagens e do vídeo
           </label>
           <input type="file" id="file-upload" name="midias" multiple accept="image/*,video/*" hidden onchange="addFiles(this)">
           
@@ -106,7 +106,6 @@
   <script>
     let selectedFiles = [];
 
-    // Funções de controle do Modal Personalizado
     function showAlert(msg) {
       document.getElementById('custom-alert-message').innerText = msg;
       document.getElementById('custom-alert').classList.add('active');
@@ -147,7 +146,7 @@
           try {
             const duration = await getVideoDuration(file);
             if (duration > 60) {
-              showAlert(`O vídeo "${file.name}" excede o limite de 1 minuto (${Math.round(duration)}s) e não foi adicionado.`);
+              showAlert(`O vídeo "${file.name}" excede o limite de 1 minuto (${Math.round(duration)}s) e não pode ser adicionado.`);
               continue;
             }
             selectedFiles.push(file);
