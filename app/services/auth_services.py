@@ -14,4 +14,4 @@ class AuthService:
           
             return True, "Cadastro feito com sucesso! Agora você pode votar nos projetos"
         except Exception as e:
-            raise Exception(f"Erro ao criar conta: {str(e)}")
+            raise Exception(f"Erro ao criar conta: {str(e)}") 

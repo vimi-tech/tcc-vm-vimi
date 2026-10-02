@@ -496,27 +496,21 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarNav">
-          <div class="navbar-nav-custom">
-            <!-- BOTÃO VOTAÇÃO NA NAVBAR -->
-           <a class="btn-nav-red" href="{{ url_for('iniciar_votacao') }}">Votação</a> 
-           {% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-    {% for category, message in messages %}
-      <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }} text-center my-3">
-        {{ message }}
-      </div>
-    {% endfor %}
-  {% endif %}
-{% endwith %}
-            <a class="btn-nav-red" href="{{ url_for('estudantelogin') }}">Votar</a>
-            <a class="nav-link-custom" href="{{ url_for('estandes') }}">Estandes</a>
-            <a class="nav-link-custom" href="#gerenciar-projetos">Gerenciar<br>Projetos</a>
-            <a class="nav-link-custom" href="#noticias">Notícias</a>
-            <a class="nav-link-custom" href="#localizacao">Localização</a>
-            <a class="nav-link-custom" href="#faq">FAQ</a>
-            <a class="nav-link-custom" href="{{ url_for('estudantelogin') }}">Buscar por<br>Turma</a>
-          </div>
-        </div>
+  <div class="navbar-nav-custom">
+    <!-- Botão Votar existente (vai para o login) -->
+    <a class="btn-nav-red" href="{{ url_for('estudantelogin') }}">Votar</a>
+    
+    <!-- NOVO BOTÃO VOTAÇÃO (vai para a verificação das 8 perguntas) -->
+    <a class="btn-nav-red text-decoration-none ms-2" href="{{ url_for('iniciar_votacao') }}">VOTAÇÃO</a>
+    
+    <a class="nav-link-custom" href="{{ url_for('estandes') }}">Estandes</a>
+    <a class="nav-link-custom" href="#gerenciar-projetos">Gerenciar<br>Projetos</a>
+    <a class="nav-link-custom" href="#noticias">Notícias</a>
+    <a class="nav-link-custom" href="#localizacao">Localização</a>
+    <a class="nav-link-custom" href="#faq">FAQ</a>
+    <a class="nav-link-custom" href="{{ url_for('estudantelogin') }}">Buscar por<br>Turma</a>
+  </div>
+</div>
 
         <div class="brand-logos-container">
           <img src="{{ url_for('static', filename='feira_logo.jpeg') }}" alt="FeiraScore" class="img-navbar-logo" width="65" height="45">
@@ -524,7 +518,29 @@
         </div>
       </div>
     </nav>
+
   </header>
+
+  </header>
+
+<!-- ADICIONE O BLOCO DE ALERTAS EXATAMENTE AQUI -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="container mt-3">
+      {% for category, message in messages %}
+        <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }} alert-dismissible fade show text-center" role="alert">
+          <strong>{{ message }}</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<!-- SEÇÃO SEGUINTE DA SUA PÁGINA (Ex: Hero ou Sobre) -->
+<section id="sobre">
+   ...
+</section>
 
   <main>
     <section class="intro-section">
@@ -659,51 +675,101 @@
         </p>
 
         <div class="row g-4 align-items-stretch">
-          <div class="col-lg-3 col-md-6">
-            <div class="management-card">
-              <div>
-                <div class="management-icon"><i class="fa-solid fa-plus"></i></div>
-                <h3>Cadastrar Projeto</h3>
-                <p>Cadastre um novo projeto ou estande informando turma, nome, resumo e mídias.</p>
-              </div>
-              <a class="management-btn" href="{{ url_for('pagina_descricao') }}">Cadastrar</a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6">
-            <div class="management-card">
-              <div>
-                <div class="management-icon"><i class="fa-solid fa-list"></i></div>
-                <h3>Listar Projetos</h3>
-                <p>Visualize todos os projetos cadastrados e acesse as opções de gerenciamento.</p>
-              </div>
-              <a class="management-btn" href="{{ url_for('listar_projetos') }}">Ver Listagem</a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6">
-            <div class="management-card">
-              <div>
-                <div class="management-icon"><i class="fa-solid fa-pen-to-square"></i></div>
-                <h3>Editar Projeto</h3>
-                <p>Altere dados como turma, nome do projeto e resumo depois do cadastro.</p>
-              </div>
-              <a class="management-btn" href="{{ url_for('listar_projetos') }}">Editar</a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6">
-            <div class="management-card">
-              <div>
-                <div class="management-icon"><i class="fa-solid fa-images"></i></div>
-                <h3>Editar Mídias</h3>
-                <p>Gerencie as imagens e outros arquivos enviados para cada projeto cadastrado.</p>
-              </div>
-              <a class="management-btn" href="{{ url_for('listar_projetos') }}">Gerenciar Mídias</a>
-            </div>
-          </div>
-        </div>
+          <!-- BLOCO 1 -->
+<div class="col-lg-3 col-md-6">
+  <div class="management-card">
+    <div>
+      <div class="management-icon">
+        <i class="fa-solid fa-plus"></i>
       </div>
+
+      <h3>Cadastrar Projeto</h3>
+
+      <p>
+        Cadastre um novo projeto ou estande informando turma, nome, resumo e mídias.
+      </p>
+    </div>
+
+    <a
+      class="management-btn"
+      href="{{ url_for('pagina_descricao') }}">
+      Cadastrar
+    </a>
+  </div>
+</div>
+
+
+<!-- BLOCO 2 -->
+<div class="col-lg-3 col-md-6">
+  <div class="management-card">
+    <div>
+      <div class="management-icon">
+        <i class="fa-solid fa-list"></i>
+      </div>
+
+      <h3>Listar Projetos</h3>
+
+      <p>
+        Visualize todos os projetos cadastrados e acesse as opções de gerenciamento.
+      </p>
+    </div>
+
+    <a
+  class="management-btn"
+  href="{{ url_for('estudantelogin') }}">
+  Ver Listagem
+</a>
+    </a>
+  </div>
+</div>
+
+
+<!-- BLOCO 3 -->
+<div class="col-lg-3 col-md-6">
+  <div class="management-card">
+    <div>
+      <div class="management-icon">
+        <i class="fa-solid fa-pen-to-square"></i>
+      </div>
+
+      <h3>Editar Projeto</h3>
+
+      <p>
+        Altere dados como turma, nome do projeto e resumo depois do cadastro.
+      </p>
+    </div>
+
+    <a
+      class="management-btn"
+      href="{{ url_for('pagina_descricao') }}">
+      Editar
+    </a>
+  </div>
+</div>
+
+
+<!-- BLOCO 4 -->
+<div class="col-lg-3 col-md-6">
+  <div class="management-card">
+    <div>
+      <div class="management-icon">
+        <i class="fa-solid fa-images"></i>
+      </div>
+
+      <h3>Editar Mídias</h3>
+
+      <p>
+        Gerencie as imagens e outros arquivos enviados para cada projeto cadastrado.
+      </p>
+    </div>
+
+    <a
+      class="management-btn"
+      href="{{ url_for('pagina_descricao') }}">
+      Gerenciar Mídias
+    </a>
+  </div>
+</div>
     </section>
 
 
