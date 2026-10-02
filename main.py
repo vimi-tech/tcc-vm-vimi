@@ -689,3 +689,61 @@ def main():
 if __name__ == "__main__":
 
     main()
+    # ==========================================================
+# ROTA DE VOTAÇÃO (VALIDAÇÃO E PERGUNTAS)
+# ==========================================================
+
+# Perguntas oficiais da votação (8 perguntas)
+PERGUNTAS_VOTACAO = [
+    "1. Como você avalia a inovação e criatividade do projeto?",
+    "2. O protótipo/demonstração prática funcionou corretamente?",
+    "3. A equipe apresentou o projeto com clareza e domínio do assunto?",
+    "4. O projeto resolve um problema real da comunidade/mercado?",
+    "5. Qual o nível de acabamento e organização visual do estande?",
+    "6. A documentação/material de apoio estava bem estruturada?",
+    "7. O projeto utilizou tecnologias adequadas ao proposto?",
+    "8. Qual sua nota geral para a experiência no estande?"
+]
+
+@app.route('/votacao')
+def iniciar_votacao():
+    # VERIFICAÇÃO: Se a lista estandes_cadastrados estiver vazia
+    if not estandes_cadastrados:
+        flash('Não há nenhum projeto/estande cadastrado para votação no momento!', 'error')
+        return redirect(url_for('index'))
+
+    # Se houver projetos, redireciona para a primeira pergunta (pergunta 1, índice 0)
+    return redirect(url_for('exibir_pergunta', numero=1))
+
+
+@app.route('/votacao/pergunta/<int:numero>', methods=['GET', 'POST'])
+def exibir_pergunta(numero):
+    # Trava de segurança caso tentem acessar via URL sem projetos
+    if not estandes_cadastrados:
+        flash('Não há nenhum projeto cadastrado para votação!', 'error')
+        return redirect(url_for('index'))
+
+    # Validação do número da pergunta (de 1 a 8)
+    total_perguntas = len(PERGUNTAS_VOTACAO)
+    if numero < 1 or numero > total_perguntas:
+        flash('Pergunta inválida!', 'error')
+        return redirect(url_for('index'))
+
+    # Se o utilizador respondeu à pergunta atual (POST)
+    if request.method == 'POST':
+        # Avança para a próxima pergunta ou finaliza
+        if numero < total_perguntas:
+            return redirect(url_for('exibir_pergunta', numero=numero + 1))
+        else:
+            flash('Votação concluída com sucesso! Obrigado pela sua participação.', 'success')
+            return redirect(url_for('index'))
+
+    # Exibe o template da pergunta atual
+    pergunta_atual = PERGUNTAS_VOTACAO[numero - 1]
+    return render_template(
+        'votacao/pergunta.html',
+        pergunta=pergunta_atual,
+        numero_atual=numero,
+        total_perguntas=total_perguntas,
+        estandes=estandes_cadastrados
+    )

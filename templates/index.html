@@ -497,6 +497,17 @@
 
         <div class="collapse navbar-collapse" id="navbarNav">
           <div class="navbar-nav-custom">
+            <!-- BOTÃO VOTAÇÃO NA NAVBAR -->
+           <a class="btn-nav-red" href="{{ url_for('iniciar_votacao') }}">Votação</a> 
+           {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }} text-center my-3">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
             <a class="btn-nav-red" href="{{ url_for('estudantelogin') }}">Votar</a>
             <a class="nav-link-custom" href="{{ url_for('estandes') }}">Estandes</a>
             <a class="nav-link-custom" href="#gerenciar-projetos">Gerenciar<br>Projetos</a>
