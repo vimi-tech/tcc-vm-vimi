@@ -8,26 +8,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
   <style>
     body { background:#f4f4f4; font-family:'Russo One',sans-serif; color:#333; text-align:center; min-height:100vh; }
-    .btn-red { background:#c51b1b; color:#fff !important; border:none; border-radius:30px; padding:10px 26px; text-transform:uppercase; text-decoration:none; display:inline-block; transition:.25s; }
-    .btn-red:hover { background:#850000; transform:scale(1.03); }
-    .btn-gray { background:#999; color:#fff !important; border-radius:30px; padding:10px 26px; text-transform:uppercase; display:inline-block; }
-    .projeto-card { background:#fff; border-radius:22px; border:1px solid rgba(0,0,0,.08); box-shadow:0 8px 24px rgba(0,0,0,.12); padding:28px 22px; height:100%; display:flex; flex-direction:column; justify-content:space-between; }
-    .turma-badge { background:#c51b1b; color:#fff; border-radius:20px; padding:4px 16px; font-size:14px; display:inline-block; margin-bottom:12px; }
-    .projeto-card p { font-family:sans-serif; color:#555; font-size:14px; }
+    .btn-red { background:#c51b1b; color:#fff !important; border:none; border-radius:30px; padding:12px 26px; text-transform:uppercase; text-decoration:none; display:inline-block; transition:.25s; }
+    .btn-red:hover { background:#850000; }
     .vazio { background:#fff; border-radius:22px; box-shadow:0 8px 24px rgba(0,0,0,.12); padding:60px 20px; }
     .vazio .icone { font-size:64px; }
   </style>
 </head>
 <body>
-  <div class="container py-5">
+  <div class="container py-5" style="max-width:700px;">
 
-    <h1 class="mb-2" style="color:#b61c1c; text-transform:uppercase; letter-spacing:2px;">Votação</h1>
-    <p class="mb-4" style="font-family:sans-serif; color:#555;">
-      Escolha um projeto e responda {{ total_perguntas }} perguntas com notas de 1 a 5.
-    </p>
+    <h1 class="mb-3" style="color:#b61c1c; text-transform:uppercase; letter-spacing:2px;">Votação</h1>
 
     <div class="d-flex flex-wrap justify-content-center gap-3 mb-4">
-      <a href="{{ url_for('index') }}" class="btn-red">&larr; Voltar ao início</a>
+      <a href="{{ url_for('index') }}" class="btn-red">&larr; Início</a>
       <a href="{{ url_for('ranking') }}" class="btn-red">Ver ranking</a>
     </div>
 
@@ -40,34 +33,20 @@
       {% endfor %}
     {% endwith %}
 
-    {% if estandes %}
-      <div class="row g-4 justify-content-center">
-        {% for estande in estandes %}
-          <div class="col-lg-4 col-md-6">
-            <div class="projeto-card">
-              <div>
-                <span class="turma-badge">{{ estande.turma }}</span>
-                <h4 class="mb-3">{{ estande.nome }}</h4>
-                {% if estande.resumo %}
-                  <p>{{ estande.resumo[:140] }}{% if estande.resumo|length > 140 %}...{% endif %}</p>
-                {% endif %}
-              </div>
-              {% if estande.id in ja_votou %}
-                <span class="btn-gray">Já avaliado &check;</span>
-              {% else %}
-                <a href="{{ url_for('votar_estande', estande_id=estande.id) }}" class="btn-red">Avaliar projeto</a>
-              {% endif %}
-            </div>
-          </div>
-        {% endfor %}
-      </div>
-    {% else %}
+    {% if not estandes %}
       <div class="vazio">
         <div class="icone">&#128237;</div>
         <h3 class="mt-3">Nenhum projeto disponível</h3>
         <p style="font-family:sans-serif; color:#555;">
           Ainda não há projetos/estandes cadastrados para votação. Volte mais tarde!
         </p>
+      </div>
+    {% else %}
+      <div class="vazio">
+        <div class="icone">&#9989;</div>
+        <h3 class="mt-3">Você já votou</h3>
+        <p style="font-family:sans-serif; color:#555;">Obrigado por participar da votação!</p>
+        <a href="{{ url_for('ranking') }}" class="btn-red">Ver ranking</a>
       </div>
     {% endif %}
 
