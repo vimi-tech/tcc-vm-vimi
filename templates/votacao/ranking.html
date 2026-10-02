@@ -23,7 +23,7 @@
   <div class="container py-5">
     <div class="text-center">
       <h1 class="mb-2" style="color:#b61c1c; text-transform:uppercase; letter-spacing:2px;">Ranking</h1>
-      <p style="font-family:sans-serif; color:#555;">{{ votantes }} pessoa{{ '' if votantes == 1 else 's' }} já votou{{ '' if votantes == 1 else 'ram' }}</p>
+      <p style="font-family:sans-serif; color:#555;">{% if votantes == 1 %}1 pessoa já votou{% else %}{{ votantes }} pessoas já votaram{% endif %}</p>
       <div class="d-flex flex-wrap justify-content-center gap-3 mb-4">
         <a href="{{ url_for('index') }}" class="btn-red">&larr; Início</a>
         <a href="{{ url_for('iniciar_votacao') }}" class="btn-red">Votação</a>
