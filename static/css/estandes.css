@@ -14,7 +14,7 @@
 
 body {
   padding: 60px 0;
-  /* DEGRADÊ INVERTIDO: Preto no topo transicionando para o vermelho escuro na parte inferior */
+
   background: linear-gradient(
     180deg, 
     rgba(0, 0, 0, 1) 0%, 
@@ -43,7 +43,6 @@ body {
   pointer-events: none;
 }
 
-/* EXPANDIDO: Aumentado de 850px para 1050px para dar mais espaço na página */
 .page-container {
   max-width: 1050px;
   margin: 0 auto;
@@ -51,8 +50,7 @@ body {
   position: relative;
 }
 
-/* --- NAVEGAÇÃO "VOLTAR" (FIXADO NO CANTO DA TELA) --- */
-/* NAVEGAÇÃO "VOLTAR" (FIXADO NO CANTO EXTREMO DIREITO E TOPO) */
+
 .top-nav {
   position: fixed;
   top: 15px;
@@ -96,14 +94,7 @@ body {
   transform: translateX(-3px);
 }
 
-.header-section {
-  text-align: center;
-  margin: 5px 0 20px 0;
-}
 
-/* TÍTULO PRINCIPAL (ESTANDES 2026) */
-/* TÍTULO PRINCIPAL (ESTANDES 2026) COM ESTILO ULTRA ULTRA-HEAVY */
-/* --- TÍTULO EM IMAGEM (CENTRALIZADO) --- */
 .header-section {
   text-align: center;
   margin: 15px 0 25px 0;
@@ -117,7 +108,8 @@ body {
   display: block;
   margin: 0 auto;
 }
---- CAMPOS DO FORMULÁRIO --- */
+
+
 .custom-input,
 .custom-textarea {
   font-family: 'Disco Phonic', sans-serif !important;
@@ -125,20 +117,19 @@ body {
   color: #ffffff;
 }
 
-/* Texto de dica (placeholder) */
+
 .custom-input::placeholder,
 .custom-textarea::placeholder {
   font-family: 'Disco Phonic', sans-serif !important;
   color: rgba(255, 255, 255, 0.7);
 }
 
-/* Botões */
 .btn-upload,
 .btn-main {
   font-family: 'Disco Phonic', sans-serif !important;
 }
 
-/* BANNER CENTRALIZADO */
+
 .banner-container {
   width: 100%;
   max-width: 600px;
@@ -159,7 +150,7 @@ body {
   display: block;
 }
 
-/* TEMA COM FONTE DISKO PHONIC E COR BRANCA */
+
 .theme-section {
   text-align: center;
   margin-bottom: 40px;
@@ -175,7 +166,7 @@ body {
   text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
 }
 
-/* LISTA DOS ESTANDES */
+
 .estandes-list {
   display: flex;
   flex-direction: column;
@@ -197,7 +188,7 @@ body {
   text-align: left;
 }
 
-/* --- ALERTAS DE ERRO E SUCESSO --- */
+
 .flash-messages {
   width: 100%;
   max-width: 600px;
@@ -212,7 +203,6 @@ body {
   text-align: center;
 }
 
-/* Mensagem de Erro (Vermelho) */
 .alert-error {
   background-color: #ff3333;
   color: #ffffff;
@@ -220,13 +210,12 @@ body {
   box-shadow: 0 4px 10px rgba(255, 0, 0, 0.3);
 }
 
-/* Mensagem de Sucesso (Verde) */
 .alert-success {
   background-color: #28a745;
   color: #ffffff;
 }
 
-/* TÍTULOS DOS ESTANDES */
+
 .estande-title { 
   margin-bottom: 12px; 
   font-family: 'Russo One', sans-serif;
@@ -234,7 +223,7 @@ body {
   color: #ffffff;
 }
 
-/* Descrição legível */
+
 .estande-description {
   font-family: Arial, sans-serif;
   font-size: 14px;
@@ -244,7 +233,7 @@ body {
   text-align: justify;
 }
 
-/* AUMENTADO: Imagem e container de mídia maiores */
+
 .estande-media {
   width: 420px;
   height: 260px;
@@ -342,4 +331,37 @@ body {
   font-family: 'Disco Phonic', sans-serif;
   font-size: 18px;
   color: #ffffff;
+}
+
+
+@media screen and (max-width: 768px) {
+  
+  .estande-card {
+    flex-direction: column !important; 
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .estande-info {
+    width: 100%;
+  }
+
+  .estande-media {
+    width: 100% !important; 
+    height: auto !important;
+    min-height: 220px;
+  }
+
+  .media-box {
+    height: auto !important;
+    max-height: 280px;
+  }
+
+  .banner-container {
+    height: 200px;
+  }
+
+  .theme-section h2 {
+    font-size: 18px;
+  }
 }
