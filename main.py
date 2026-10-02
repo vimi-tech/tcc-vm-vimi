@@ -1,12 +1,16 @@
 import os
+import uuid
 
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import (
+    Flask, render_template, request, redirect, url_for, flash, session
+)
 from werkzeug.utils import secure_filename
 
 
 app = Flask(__name__)
 
-app.secret_key = 'sua_chave_secreta_aqui'
+# Em produção defina a variável de ambiente SECRET_KEY
+app.secret_key = os.environ.get('SECRET_KEY', 'troque-esta-chave-em-producao')
 
 
 # ==========================================================
@@ -14,17 +18,38 @@ app.secret_key = 'sua_chave_secreta_aqui'
 # ==========================================================
 
 UPLOAD_FOLDER = os.path.join('static', 'uploads')
-
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 
 # ==========================================================
-# LISTA DOS ESTANDES
+# DADOS EM MEMÓRIA
 # ==========================================================
 
+# Cada estande: {'id', 'turma', 'nome', 'resumo', 'midias'}
 estandes_cadastrados = []
+
+# Votos por estande: {id_do_estande: [[8 notas], [8 notas], ...]}
+votos = {}
+
+# As 8 perguntas oficiais da votação (nota de 1 a 5 em cada uma)
+PERGUNTAS_VOTACAO = [
+    "Como você avalia a inovação e criatividade do projeto?",
+    "O protótipo/demonstração prática funcionou corretamente?",
+    "A equipe apresentou o projeto com clareza e domínio do assunto?",
+    "O projeto resolve um problema real da comunidade/mercado?",
+    "Qual o nível de acabamento e organização visual do estande?",
+    "A documentação/material de apoio estava bem estruturada?",
+    "O projeto utilizou tecnologias adequadas ao proposto?",
+    "Qual sua nota geral para a experiência no estande?",
+]
+
+
+def buscar_estande(estande_id):
+    for estande in estandes_cadastrados:
+        if estande['id'] == estande_id:
+            return estande
+    return None
 
 
 # ==========================================================
@@ -44,161 +69,57 @@ except Exception as e:
 
 @app.route("/")
 def index():
-
-    nome = 'Feirascore'
-
-    return render_template(
-        'index.html',
-        site=nome
-    )
+    return render_template('index.html', site='Feirascore')
 
 
 # ==========================================================
 # CADASTRO DE ESTANDE
 # ==========================================================
 
-@app.route(
-    '/descricaoprojeto',
-    methods=['GET', 'POST']
-)
+@app.route('/descricaoprojeto', methods=['GET', 'POST'])
 def pagina_descricao():
-
     if request.method == 'POST':
-
         return processar_envio_estande()
-
-    return render_template(
-        'pages/descricaoprojeto.html'
-    )
+    return render_template('pages/descricaoprojeto.html')
 
 
-@app.route(
-    '/cadastrar-estande',
-    methods=['POST']
-)
+@app.route('/cadastrar-estande', methods=['POST'])
 def cadastrar_estande():
-
     return processar_envio_estande()
 
 
 def processar_envio_estande():
-
     turma = request.form.get('turma')
-
-    nome_projeto = (
-        request.form.get('nome')
-        or request.form.get('nome_projeto')
-    )
-
-    resumo_projeto = (
-        request.form.get('resumo')
-        or request.form.get('resumo_projeto')
-    )
-
-
-    # ======================================================
-    # VALIDAÇÃO DA TURMA
-    # ======================================================
+    nome_projeto = request.form.get('nome') or request.form.get('nome_projeto')
+    resumo_projeto = request.form.get('resumo') or request.form.get('resumo_projeto')
 
     if not turma or not turma.strip():
-
-        flash(
-            'Por favor, informe a sua turma!',
-            'error'
-        )
-
-        return redirect(
-            url_for('pagina_descricao')
-        )
-
+        flash('Por favor, informe a sua turma!', 'error')
+        return redirect(url_for('pagina_descricao'))
 
     turma = turma.strip()
 
-
-    # ======================================================
-    # VERIFICA SE A TURMA JÁ POSSUI ESTANDE
-    # ======================================================
-
-    turma_ja_cadastrou = any(
-
-        estande['turma'].lower() == turma.lower()
-
-        for estande in estandes_cadastrados
-
-    )
-
-
-    if turma_ja_cadastrou:
-
-        flash(
-            f'A turma "{turma}" já possui um estande cadastrado!',
-            'error'
-        )
-
-        return redirect(
-            url_for('pagina_descricao')
-        )
-
-
-    # ======================================================
-    # SALVA AS MÍDIAS
-    # ======================================================
-
-    arquivos = request.files.getlist('midias')
+    if any(e['turma'].lower() == turma.lower() for e in estandes_cadastrados):
+        flash(f'A turma "{turma}" já possui um estande cadastrado!', 'error')
+        return redirect(url_for('pagina_descricao'))
 
     midias_salvas = []
-
-
-    for file in arquivos:
-
+    for file in request.files.getlist('midias'):
         if file and file.filename != '':
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            midias_salvas.append(filename)
 
-            filename = secure_filename(
-                file.filename
-            )
+    estandes_cadastrados.insert(0, {
+        'id': uuid.uuid4().hex,          # identificador fixo (usado na votação)
+        'turma': turma,
+        'nome': nome_projeto or 'Projeto sem título',
+        'resumo': resumo_projeto,
+        'midias': midias_salvas,
+    })
 
-            caminho = os.path.join(
-                app.config['UPLOAD_FOLDER'],
-                filename
-            )
-
-            file.save(caminho)
-
-            midias_salvas.append(
-                filename
-            )
-
-
-    # ======================================================
-    # CADASTRA O ESTANDE
-    # ======================================================
-
-    estandes_cadastrados.insert(
-        0,
-        {
-            'turma': turma,
-
-            'nome': (
-                nome_projeto
-                or 'Projeto sem título'
-            ),
-
-            'resumo': resumo_projeto,
-
-            'midias': midias_salvas
-        }
-    )
-
-
-    flash(
-        'Estande cadastrado com sucesso!',
-        'success'
-    )
-
-
-    return redirect(
-        url_for('estandes')
-    )
+    flash('Estande cadastrado com sucesso!', 'success')
+    return redirect(url_for('estandes'))
 
 
 # ==========================================================
@@ -207,35 +128,21 @@ def processar_envio_estande():
 
 @app.route('/estandes')
 def estandes():
-
-    return render_template(
-        'estandes.html',
-        estandes=estandes_cadastrados
-    )
+    return render_template('estandes.html', estandes=estandes_cadastrados)
 
 
 # ==========================================================
-# LOGIN DO ESTUDANTE
+# LOGIN DO ESTUDANTE / REGISTRO
 # ==========================================================
 
 @app.route('/estandelogin')
 def estudantelogin():
+    return render_template('login/estudantelogin.html')
 
-    return render_template(
-        'login/estudantelogin.html'
-    )
-
-
-# ==========================================================
-# REGISTRO
-# ==========================================================
 
 @app.route('/register')
 def register():
-
-    return render_template(
-        'login/register.html'
-    )
+    return render_template('login/register.html')
 
 
 # ==========================================================
@@ -244,500 +151,218 @@ def register():
 
 @app.route('/projetos')
 def listar_projetos():
-
-    return render_template(
-        'projetos/listar.html',
-        estandes=estandes_cadastrados
-    )
+    return render_template('projetos/listar.html', estandes=estandes_cadastrados)
 
 
-# ==========================================================
-# PRIMEIRA TELA DE EDIÇÃO
+# ----------------------------------------------------------
+# EDITAR PROJETO
+# (no seu arquivo esta função estava SEM o @app.route e o
+#  "def", o que quebrava o programa inteiro)
+# ----------------------------------------------------------
 
+@app.route('/projetos/editar/<int:index>', methods=['GET', 'POST'])
+def editar_projeto(index):
 
-    # ------------------------------------------------------
-    # VERIFICA SE O PROJETO EXISTE
-    # ------------------------------------------------------
-
-    if (
-        index < 0
-        or index >= len(estandes_cadastrados)
-    ):
-
-        flash(
-            'Projeto não encontrado!',
-            'error'
-        )
-
-        return redirect(
-            url_for('listar_projetos')
-        )
-
+    if index < 0 or index >= len(estandes_cadastrados):
+        flash('Projeto não encontrado!', 'error')
+        return redirect(url_for('listar_projetos'))
 
     estande = estandes_cadastrados[index]
 
-
-    # ------------------------------------------------------
-    # SE O FORMULÁRIO FOI ENVIADO
-    # ------------------------------------------------------
-
     if request.method == 'POST':
-
         nome = request.form.get('nome')
-
         turma = request.form.get('turma')
-
         resumo = request.form.get('resumo')
 
-
-        # --------------------------------------------------
-        # VALIDA NOME
-        # --------------------------------------------------
-
         if not nome or not nome.strip():
-
-            flash(
-                'Informe o nome do projeto!',
-                'error'
-            )
-
-            return redirect(
-                url_for(
-                    'editar_projeto',
-                    index=index
-                )
-            )
-
-
-        # --------------------------------------------------
-        # VALIDA TURMA
-        # --------------------------------------------------
+            flash('Informe o nome do projeto!', 'error')
+            return redirect(url_for('editar_projeto', index=index))
 
         if not turma or not turma.strip():
-
-            flash(
-                'Informe a turma!',
-                'error'
-            )
-
-            return redirect(
-                url_for(
-                    'editar_projeto',
-                    index=index
-                )
-            )
-
+            flash('Informe a turma!', 'error')
+            return redirect(url_for('editar_projeto', index=index))
 
         turma = turma.strip()
 
-
-        # --------------------------------------------------
-        # VERIFICA SE OUTRO PROJETO JÁ USA ESSA TURMA
-        # --------------------------------------------------
-
         turma_duplicada = any(
-
-            i != index
-            and est['turma'].lower() == turma.lower()
-
-            for i, est in enumerate(
-                estandes_cadastrados
-            )
-
+            i != index and est['turma'].lower() == turma.lower()
+            for i, est in enumerate(estandes_cadastrados)
         )
-
-
         if turma_duplicada:
-
-            flash(
-                f'A turma "{turma}" já possui outro projeto cadastrado!',
-                'error'
-            )
-
-            return redirect(
-                url_for(
-                    'editar_projeto',
-                    index=index
-                )
-            )
-
-
-        # --------------------------------------------------
-        # ATUALIZA OS DADOS
-        # --------------------------------------------------
+            flash(f'A turma "{turma}" já possui outro projeto cadastrado!', 'error')
+            return redirect(url_for('editar_projeto', index=index))
 
         estande['nome'] = nome.strip()
-
         estande['turma'] = turma
+        estande['resumo'] = resumo.strip() if resumo else ''
 
-        estande['resumo'] = (
-            resumo.strip()
-            if resumo
-            else ''
-        )
+        flash('Projeto atualizado com sucesso!', 'success')
+        return redirect(url_for('listar_projetos'))
 
-
-        flash(
-            'Projeto atualizado com sucesso!',
-            'success'
-        )
+    return render_template('projetos/editar.html', estande=estande, index=index)
 
 
-        return redirect(
-            url_for('listar_projetos')
-        )
-
-
-    # ------------------------------------------------------
-    # ABRE A TELA DE EDIÇÃO
-    # ------------------------------------------------------
-
-    return render_template(
-        'projetos/editar.html',
-        estande=estande,
-        index=index
-    )
-
-
-# ==========================================================
-# SEGUNDA TELA DE EDIÇÃO
+# ----------------------------------------------------------
 # EDITAR MÍDIAS
-# ==========================================================
+# ----------------------------------------------------------
 
-@app.route(
-    '/projetos/editar-midias/<int:index>',
-    methods=['GET', 'POST']
-)
+@app.route('/projetos/editar-midias/<int:index>', methods=['GET', 'POST'])
 def editar_midias(index):
 
-    # ------------------------------------------------------
-    # VERIFICA SE O PROJETO EXISTE
-    # ------------------------------------------------------
-
-    if (
-        index < 0
-        or index >= len(estandes_cadastrados)
-    ):
-
-        flash(
-            'Projeto não encontrado!',
-            'error'
-        )
-
-        return redirect(
-            url_for('listar_projetos')
-        )
-
+    if index < 0 or index >= len(estandes_cadastrados):
+        flash('Projeto não encontrado!', 'error')
+        return redirect(url_for('listar_projetos'))
 
     estande = estandes_cadastrados[index]
 
-
-    # ------------------------------------------------------
-    # RECEBE NOVAS MÍDIAS
-    # ------------------------------------------------------
-
     if request.method == 'POST':
+        for arquivo in request.files.getlist('midias'):
+            if arquivo and arquivo.filename:
+                filename = secure_filename(arquivo.filename)
+                arquivo.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                estande['midias'].append(filename)
 
-        arquivos = request.files.getlist(
-            'midias'
-        )
+        flash('Mídias atualizadas com sucesso!', 'success')
+        return redirect(url_for('editar_midias', index=index))
 
-
-        for arquivo in arquivos:
-
-            if (
-                arquivo
-                and arquivo.filename
-            ):
-
-                filename = secure_filename(
-                    arquivo.filename
-                )
+    return render_template('projetos/editar_midias.html', estande=estande, index=index)
 
 
-                caminho = os.path.join(
-                    app.config['UPLOAD_FOLDER'],
-                    filename
-                )
-
-
-                arquivo.save(caminho)
-
-
-                estande['midias'].append(
-                    filename
-                )
-
-
-        flash(
-            'Mídias atualizadas com sucesso!',
-            'success'
-        )
-
-
-        return redirect(
-            url_for(
-                'editar_midias',
-                index=index
-            )
-        )
-
-
-    # ------------------------------------------------------
-    # ABRE A TELA DE MÍDIAS
-    # ------------------------------------------------------
-
-    return render_template(
-        'projetos/editar_midias.html',
-        estande=estande,
-        index=index
-    )
-
-
-# ==========================================================
+# ----------------------------------------------------------
 # EXCLUIR PROJETO
-# ==========================================================
+# ----------------------------------------------------------
 
-@app.route(
-    '/projetos/excluir/<int:index>',
-    methods=['POST']
-)
+@app.route('/projetos/excluir/<int:index>', methods=['POST'])
 def excluir_projeto(index):
 
-    # ------------------------------------------------------
-    # VERIFICA SE EXISTE
-    # ------------------------------------------------------
-
-    if (
-        index < 0
-        or index >= len(estandes_cadastrados)
-    ):
-
-        flash(
-            'Projeto não encontrado!',
-            'error'
-        )
-
-        return redirect(
-            url_for('listar_projetos')
-        )
-
-
-    # ------------------------------------------------------
-    # REMOVE DA LISTA
-    # ------------------------------------------------------
+    if index < 0 or index >= len(estandes_cadastrados):
+        flash('Projeto não encontrado!', 'error')
+        return redirect(url_for('listar_projetos'))
 
     estande = estandes_cadastrados.pop(index)
 
+    # apaga também os votos desse projeto
+    votos.pop(estande['id'], None)
 
-    # ------------------------------------------------------
-    # REMOVE OS ARQUIVOS
-    # ------------------------------------------------------
-
-    for arquivo in estande.get(
-        'midias',
-        []
-    ):
-
-        caminho = os.path.join(
-            app.config['UPLOAD_FOLDER'],
-            arquivo
-        )
-
-
+    for arquivo in estande.get('midias', []):
+        caminho = os.path.join(app.config['UPLOAD_FOLDER'], arquivo)
         if os.path.exists(caminho):
-
             os.remove(caminho)
 
-
-    flash(
-        'Projeto excluído com sucesso!',
-        'success'
-    )
+    flash('Projeto excluído com sucesso!', 'success')
+    return redirect(url_for('listar_projetos'))
 
 
-    return redirect(
-        url_for('listar_projetos')
-    )
-
-
-# ==========================================================
+# ----------------------------------------------------------
 # EXCLUIR UMA MÍDIA
-# ==========================================================
+# ----------------------------------------------------------
 
-@app.route(
-    '/projetos/excluir-midia/<int:index>/<int:midia_index>',
-    methods=['POST']
-)
-def excluir_midia(
-    index,
-    midia_index
-):
+@app.route('/projetos/excluir-midia/<int:index>/<int:midia_index>', methods=['POST'])
+def excluir_midia(index, midia_index):
 
-    # ------------------------------------------------------
-    # VERIFICA O PROJETO
-    # ------------------------------------------------------
-
-    if (
-        index < 0
-        or index >= len(estandes_cadastrados)
-    ):
-
-        flash(
-            'Projeto não encontrado!',
-            'error'
-        )
-
-        return redirect(
-            url_for('listar_projetos')
-        )
-
+    if index < 0 or index >= len(estandes_cadastrados):
+        flash('Projeto não encontrado!', 'error')
+        return redirect(url_for('listar_projetos'))
 
     estande = estandes_cadastrados[index]
 
+    if midia_index < 0 or midia_index >= len(estande['midias']):
+        flash('Mídia não encontrada!', 'error')
+        return redirect(url_for('editar_midias', index=index))
 
-    # ------------------------------------------------------
-    # VERIFICA A MÍDIA
-    # ------------------------------------------------------
+    arquivo = estande['midias'].pop(midia_index)
 
-    if (
-        midia_index < 0
-        or midia_index >= len(
-            estande['midias']
-        )
-    ):
-
-        flash(
-            'Mídia não encontrada!',
-            'error'
-        )
-
-        return redirect(
-            url_for(
-                'editar_midias',
-                index=index
-            )
-        )
-
-
-    # ------------------------------------------------------
-    # REMOVE DA LISTA
-    # ------------------------------------------------------
-
-    arquivo = estande['midias'].pop(
-        midia_index
-    )
-
-
-    # ------------------------------------------------------
-    # REMOVE DO COMPUTADOR/SERVIDOR
-    # ------------------------------------------------------
-
-    caminho = os.path.join(
-        app.config['UPLOAD_FOLDER'],
-        arquivo
-    )
-
-
+    caminho = os.path.join(app.config['UPLOAD_FOLDER'], arquivo)
     if os.path.exists(caminho):
-
         os.remove(caminho)
 
-
-    flash(
-        'Mídia excluída com sucesso!',
-        'success'
-    )
-
-
-    return redirect(
-        url_for(
-            'editar_midias',
-            index=index
-        )
-    )
+    flash('Mídia excluída com sucesso!', 'success')
+    return redirect(url_for('editar_midias', index=index))
 
 
 # ==========================================================
-# INICIAR SERVIDOR
-# ==========================================================
-
-def main():
-
-    app.run(
-        host="0.0.0.0",
-        port=int(
-            os.environ.get(
-                "PORT",
-                10000
-            )
-        )
-    )
-
-# ==========================================================
-# AS 8 PERGUNTAS OFICIAIS DA VOTAÇÃO
-# ==========================================================
-
-PERGUNTAS_VOTACAO = [
-    "1. Como você avalia a inovação e criatividade do projeto?",
-    "2. O protótipo/demonstração prática funcionou corretamente?",
-    "3. A equipe apresentou o projeto com clareza e domínio do assunto?",
-    "4. O projeto resolve um problema real da comunidade/mercado?",
-    "5. Qual o nível de acabamento e organização visual do estande?",
-    "6. A documentação/material de apoio estava bem estruturada?",
-    "7. O projeto utilizou tecnologias adequadas ao proposto?",
-    "8. Qual sua nota geral para a experiência no estande?"
-]
-
-
-# ==========================================================
-# ROTAS DA VOTAÇÃO
+# VOTAÇÃO
 # ==========================================================
 
 @app.route('/votacao')
 def iniciar_votacao():
-    # Se NÃO houver estandes cadastrados, impede a entrada e manda aviso
-    if not estandes_cadastrados:
-        flash('Não há nenhum projeto/estande cadastrado para votação no momento!', 'error')
-        return redirect(url_for('index'))
+    """Lista os projetos. Se não houver nenhum, a página mostra
+    'Nenhum projeto disponível para votação'."""
+    return render_template(
+        'votacao/lista.html',
+        estandes=estandes_cadastrados,
+        ja_votou=session.get('votou_em', []),
+        total_perguntas=len(PERGUNTAS_VOTACAO),
+    )
 
-    # Se houver estandes, começa a votação na pergunta 1
-    return redirect(url_for('exibir_pergunta', numero=1))
 
+@app.route('/votacao/<estande_id>', methods=['GET', 'POST'])
+def votar_estande(estande_id):
+    """Mostra as 8 perguntas de UM projeto e salva as notas."""
 
-@app.route('/votacao/pergunta/<int:numero>', methods=['GET', 'POST'])
-def exibir_pergunta(numero):
-    if not estandes_cadastrados:
-        flash('Não há nenhum projeto cadastrado para votação!', 'error')
-        return redirect(url_for('index'))
+    estande = buscar_estande(estande_id)
+    if not estande:
+        flash('Projeto não encontrado!', 'error')
+        return redirect(url_for('iniciar_votacao'))
 
-    total_perguntas = len(PERGUNTAS_VOTACAO)
-
-    if numero < 1 or numero > total_perguntas:
-        flash('Pergunta inválida!', 'error')
-        return redirect(url_for('index'))
+    ja_votou = session.get('votou_em', [])
+    if estande_id in ja_votou:
+        flash('Você já avaliou este projeto.', 'error')
+        return redirect(url_for('iniciar_votacao'))
 
     if request.method == 'POST':
-        if numero < total_perguntas:
-            return redirect(url_for('exibir_pergunta', numero=numero + 1))
-        else:
-            flash('Votação concluída com sucesso! Obrigado pela sua participação.', 'success')
-            return redirect(url_for('index'))
+        notas = []
+        for i in range(len(PERGUNTAS_VOTACAO)):
+            try:
+                nota = int(request.form.get(f'nota_{i + 1}', ''))
+            except ValueError:
+                nota = 0
+            if nota < 1 or nota > 5:
+                flash('Responda todas as perguntas com uma nota de 1 a 5.', 'error')
+                return redirect(url_for('votar_estande', estande_id=estande_id))
+            notas.append(nota)
 
-    pergunta_atual = PERGUNTAS_VOTACAO[numero - 1]
+        votos.setdefault(estande_id, []).append(notas)
+        session['votou_em'] = ja_votou + [estande_id]
+
+        flash(f'Voto registrado para "{estande["nome"]}". Obrigado!', 'success')
+        return redirect(url_for('iniciar_votacao'))
 
     return render_template(
-        'votacao/pergunta.html',
-        pergunta=pergunta_atual,
-        numero_atual=numero,
-        total_perguntas=total_perguntas,
-        estandes=estandes_cadastrados
+        'votacao/avaliar.html',
+        estande=estande,
+        perguntas=PERGUNTAS_VOTACAO,
     )
+
+
+@app.route('/ranking')
+def ranking():
+    """Média das notas de cada projeto, do melhor para o pior."""
+    lista = []
+    for estande in estandes_cadastrados:
+        votos_estande = votos.get(estande['id'], [])
+        qtd = len(votos_estande)
+        if qtd:
+            medias = [
+                sum(v[i] for v in votos_estande) / qtd
+                for i in range(len(PERGUNTAS_VOTACAO))
+            ]
+            geral = sum(medias) / len(medias)
+        else:
+            geral = 0
+        lista.append({'estande': estande, 'qtd_votos': qtd, 'media': round(geral, 2)})
+
+    lista.sort(key=lambda r: (r['media'], r['qtd_votos']), reverse=True)
+    return render_template('votacao/ranking.html', ranking=lista)
+
+
 # ==========================================================
 # EXECUÇÃO
 # ==========================================================
 
 if __name__ == "__main__":
-
-    main()
-   
+    app.run(
+        host="0.0.0.0",
+        port=int(os.environ.get("PORT", 5000)),
+        debug=os.environ.get("FLASK_DEBUG") == "1",
+    )
