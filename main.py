@@ -448,8 +448,8 @@ def primeira_sem_resposta(respostas):
 
 @app.route('/votacao')
 def iniciar_votacao():
-    """Se houver projetos e a pessoa ainda não votou, começa as perguntas.
-    Senão mostra 'nenhum projeto disponível' ou 'você já votou'."""
+    """Leva sempre para as perguntas, mesmo sem projetos cadastrados.
+    Só não deixa entrar quem não fez login ou quem já votou."""
     if 'uid' not in session or 'id_dispositivo' not in session:
         return redirect(url_for('register'))
 
@@ -460,25 +460,17 @@ def iniciar_votacao():
         flash('Você já votou com esta conta ou neste aparelho. Obrigado pela participação!', 'error')
         return redirect(url_for('index'))
 
-    lista = carregar_estandes()
-
-    if lista and not session.get('votou'):
-        return redirect(url_for(
-            'exibir_pergunta',
-            numero=primeira_sem_resposta(session.get('respostas', {}))
-        ))
-
-    return render_template(
-        'votacao/lista.html',
-        estandes=lista,
-        ja_votou=session.get('votou', False),
-    )
+    return redirect(url_for(
+        'exibir_pergunta',
+        numero=primeira_sem_resposta(session.get('respostas', {}))
+    ))
 
 
 @app.route('/votacao/pergunta/<int:numero>', methods=['GET', 'POST'])
 def exibir_pergunta(numero):
     """Uma pergunta por tela. A resposta de cada tela fica na sessão
-    e os votos só são contados ao finalizar a pergunta 8."""
+    e os votos só são contados ao finalizar a pergunta 8.
+    Sem projetos cadastrados, a tela abre normalmente, mas não aceita envio."""
     if 'uid' not in session or 'id_dispositivo' not in session:
         return redirect(url_for('register'))
 
@@ -492,10 +484,6 @@ def exibir_pergunta(numero):
     lista = carregar_estandes()
     total = len(PERGUNTAS_VOTACAO)
 
-    if not lista:
-        flash('Não há nenhum projeto disponível para votação.', 'error')
-        return redirect(url_for('iniciar_votacao'))
-
     if numero < 1 or numero > total:
         return redirect(url_for('exibir_pergunta', numero=1))
 
@@ -506,6 +494,10 @@ def exibir_pergunta(numero):
     }
 
     if request.method == 'POST':
+        if not lista:
+            flash('Ainda não há projetos cadastrados para votação.', 'error')
+            return redirect(url_for('exibir_pergunta', numero=numero))
+
         escolha = request.form.get('estande')
         if escolha not in ids_validos:
             flash('Escolha um projeto para continuar.', 'error')
