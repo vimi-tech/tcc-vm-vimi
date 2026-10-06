@@ -70,9 +70,51 @@ def ja_votou_no_banco():
 # CONFIGURAÇÃO DE UPLOAD
 # ==========================================================
 
-UPLOAD_FOLDER = os.path.join('static', 'uploads')
+# Caminho absoluto: funciona mesmo se o main.py for executado de outra pasta
+UPLOAD_FOLDER = os.path.join(app.root_path, 'static', 'uploads')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+# Só aceita imagens e vídeos (evita que alguém envie arquivos perigosos para o site)
+EXTENSOES_PERMITIDAS = {
+    '.jpg', '.jpeg', '.png', '.gif', '.webp',
+    '.mp4', '.webm', '.mov',
+}
+
+
+def salvar_midias(arquivos):
+    """Salva os arquivos enviados em static/uploads com um nome único.
+    Devolve (lista_de_nomes_salvos, quantidade_ignorada)."""
+    salvas = []
+    ignoradas = 0
+
+    for arquivo in arquivos:
+        if not arquivo or not arquivo.filename:
+            continue
+
+        base, extensao = os.path.splitext(arquivo.filename)
+        extensao = extensao.lower()
+
+        if extensao not in EXTENSOES_PERMITIDAS:
+            ignoradas += 1
+            continue
+
+        # O prefixo aleatório impede que um projeto sobrescreva a foto de outro
+        # quando os dois enviam arquivos com o mesmo nome (ex.: "foto.jpg")
+        base_segura = secure_filename(base) or 'midia'
+        nome_final = f'{uuid.uuid4().hex[:8]}_{base_segura}{extensao}'
+
+        arquivo.save(os.path.join(app.config['UPLOAD_FOLDER'], nome_final))
+        salvas.append(nome_final)
+
+    return salvas, ignoradas
+
+
+def apagar_arquivo_midia(nome_arquivo):
+    """Remove um arquivo de static/uploads, se ele existir."""
+    caminho = os.path.join(app.config['UPLOAD_FOLDER'], nome_arquivo)
+    if os.path.exists(caminho):
+        os.remove(caminho)
 
 
 # ==========================================================
@@ -129,7 +171,7 @@ def estande_por_indice(index):
 
 
 # ==========================================================
-# VOTAÇÃO: PERGUNTAS E CONTAGEM (ainda em memória)
+# VOTAÇÃO: PERGUNTAS
 # ==========================================================
 
 # As 8 perguntas da votação: o visitante escolhe UM projeto em cada uma
@@ -144,11 +186,24 @@ PERGUNTAS_VOTACAO = [
     {"titulo": "Melhor explicação",  "pergunta": "Qual teve a melhor explicação?"},
 ]
 
-# Votos: um contador por pergunta -> votos[i] = {id_do_estande: quantidade}
-votos = [{} for _ in PERGUNTAS_VOTACAO]
 
-# Quantas pessoas já enviaram a cédula
-contagem = {"votantes": 0}
+def contar_votos():
+    """Conta os votos direto do Firestore (coleção "votos").
+    Cada documento é a cédula de uma pessoa: {'respostas': {'1': id, ..., '8': id}}.
+    Devolve (contadores, votantes), onde contadores[i] = {id_do_estande: quantidade}."""
+    total = len(PERGUNTAS_VOTACAO)
+    contadores = [{} for _ in range(total)]
+    votantes = 0
+
+    for doc in db.collection('votos').stream():
+        respostas = (doc.to_dict() or {}).get('respostas', {})
+        votantes += 1
+        for i in range(total):
+            escolhido = respostas.get(str(i + 1))
+            if escolhido:
+                contadores[i][escolhido] = contadores[i].get(escolhido, 0) + 1
+
+    return contadores, votantes
 
 
 # ==========================================================
@@ -202,23 +257,29 @@ def processar_envio_estande():
         flash(f'A turma "{turma}" já possui um estande cadastrado!', 'error')
         return redirect(url_for('pagina_descricao'))
 
-    midias_salvas = []
-    for file in request.files.getlist('midias'):
-        if file and file.filename != '':
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            midias_salvas.append(filename)
+    midias_salvas, ignoradas = salvar_midias(request.files.getlist('midias'))
 
     # Salva no Firestore (o ID do documento é o identificador usado na votação)
     estande_id = uuid.uuid4().hex
-    colecao_estandes().document(estande_id).set({
-        'turma': turma,
-        'turma_busca': turma.lower(),
-        'nome': (nome_projeto or 'Projeto sem título').strip(),
-        'resumo': (resumo_projeto or '').strip(),
-        'midias': midias_salvas,
-        'criadoEm': firestore.SERVER_TIMESTAMP,
-    })
+    try:
+        colecao_estandes().document(estande_id).set({
+            'turma': turma,
+            'turma_busca': turma.lower(),
+            'nome': (nome_projeto or 'Projeto sem título').strip(),
+            'resumo': (resumo_projeto or '').strip(),
+            'midias': midias_salvas,
+            'criadoEm': firestore.SERVER_TIMESTAMP,
+        })
+    except Exception as erro:
+        # Se o banco falhar, não deixa arquivos órfãos na pasta de uploads
+        print('Erro ao salvar estande no Firestore:', erro)
+        for arquivo in midias_salvas:
+            apagar_arquivo_midia(arquivo)
+        flash('Não foi possível salvar o estande agora. Tente novamente.', 'error')
+        return redirect(url_for('pagina_descricao'))
+
+    if ignoradas:
+        flash(f'{ignoradas} arquivo(s) ignorado(s): envie apenas imagens ou vídeos.', 'error')
 
     flash('Estande cadastrado com sucesso!', 'success')
     return redirect(url_for('estandes'))
@@ -361,17 +422,16 @@ def editar_midias(index):
         return redirect(url_for('listar_projetos'))
 
     if request.method == 'POST':
-        novas = []
-        for arquivo in request.files.getlist('midias'):
-            if arquivo and arquivo.filename:
-                filename = secure_filename(arquivo.filename)
-                arquivo.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-                novas.append(filename)
+        novas, ignoradas = salvar_midias(request.files.getlist('midias'))
 
         if novas:
+            # ArrayUnion acrescenta na lista do banco sem sobrescrever o que já existe
             colecao_estandes().document(estande['id']).update({
-                'midias': estande['midias'] + novas,
+                'midias': firestore.ArrayUnion(novas),
             })
+
+        if ignoradas:
+            flash(f'{ignoradas} arquivo(s) ignorado(s): envie apenas imagens ou vídeos.', 'error')
 
         flash('Mídias atualizadas com sucesso!', 'success')
         return redirect(url_for('editar_midias', index=index))
@@ -393,14 +453,11 @@ def excluir_projeto(index):
 
     colecao_estandes().document(estande['id']).delete()
 
-    # apaga também os votos desse projeto
-    for contador in votos:
-        contador.pop(estande['id'], None)
+    # Os votos que já apontavam para este projeto continuam no banco,
+    # mas o ranking só conta projetos que ainda existem, então eles são ignorados.
 
     for arquivo in estande.get('midias', []):
-        caminho = os.path.join(app.config['UPLOAD_FOLDER'], arquivo)
-        if os.path.exists(caminho):
-            os.remove(caminho)
+        apagar_arquivo_midia(arquivo)
 
     flash('Projeto excluído com sucesso!', 'success')
     return redirect(url_for('listar_projetos'))
@@ -424,12 +481,13 @@ def excluir_midia(index, midia_index):
         flash('Mídia não encontrada!', 'error')
         return redirect(url_for('editar_midias', index=index))
 
-    arquivo = midias.pop(midia_index)
-    colecao_estandes().document(estande['id']).update({'midias': midias})
+    arquivo = midias[midia_index]
 
-    caminho = os.path.join(app.config['UPLOAD_FOLDER'], arquivo)
-    if os.path.exists(caminho):
-        os.remove(caminho)
+    # ArrayRemove tira só este arquivo da lista no banco
+    colecao_estandes().document(estande['id']).update({
+        'midias': firestore.ArrayRemove([arquivo]),
+    })
+    apagar_arquivo_midia(arquivo)
 
     flash('Mídia excluída com sucesso!', 'success')
     return redirect(url_for('editar_midias', index=index))
@@ -469,7 +527,7 @@ def iniciar_votacao():
 @app.route('/votacao/pergunta/<int:numero>', methods=['GET', 'POST'])
 def exibir_pergunta(numero):
     """Uma pergunta por tela. A resposta de cada tela fica na sessão
-    e os votos só são contados ao finalizar a pergunta 8.
+    e a cédula só é gravada no banco ao finalizar a pergunta 8.
     Sem projetos cadastrados, a tela abre normalmente, mas não aceita envio."""
     if 'uid' not in session or 'id_dispositivo' not in session:
         return redirect(url_for('register'))
@@ -517,6 +575,7 @@ def exibir_pergunta(numero):
 
         # Registra no Firestore: 1 voto por conta e 1 por aparelho.
         # O "create" falha se o documento já existir, e isso bloqueia o voto repetido.
+        # A cédula salva em "votos" é o que o ranking usa para contar.
         try:
             batch = db.batch()
             batch.create(db.collection('votos').document(session['uid']), {
@@ -540,10 +599,6 @@ def exibir_pergunta(numero):
             flash('Não foi possível registrar o voto agora. Tente novamente.', 'error')
             return redirect(url_for('exibir_pergunta', numero=total))
 
-        for i in range(total):
-            escolhido = respostas[str(i + 1)]
-            votos[i][escolhido] = votos[i].get(escolhido, 0) + 1
-        contagem['votantes'] += 1
         session['votou'] = True
         session.pop('respostas', None)
 
@@ -567,8 +622,11 @@ def exibir_pergunta(numero):
 
 @app.route('/ranking')
 def ranking():
-    """Vencedor de cada pergunta + classificação geral (soma dos votos)."""
+    """Vencedor de cada pergunta + classificação geral (soma dos votos).
+    Os votos são lidos do Firestore, então o ranking não zera ao reiniciar o servidor."""
     lista = carregar_estandes()
+    votos, votantes = contar_votos()
+
     categorias = []
     total_geral = {e['id']: 0 for e in lista}
 
@@ -595,7 +653,7 @@ def ranking():
         'votacao/ranking.html',
         categorias=categorias,
         geral=geral,
-        votantes=contagem['votantes'],
+        votantes=votantes,
     )
 
 
