@@ -603,7 +603,7 @@ def exibir_pergunta(numero):
         session.pop('respostas', None)
 
         flash('Voto registrado com sucesso! Obrigado pela participação.', 'success')
-        return redirect(url_for('index'))
+        return redirect(url_for('ranking'))
 
     # GET: não deixa pular perguntas
     faltando = primeira_sem_resposta(respostas)
