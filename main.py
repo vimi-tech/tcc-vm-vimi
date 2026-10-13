@@ -97,27 +97,40 @@ EXTENSOES_PERMITIDAS = {
 # a cada reinício/deploy).
 # ----------------------------------------------------------
 
-CLOUDINARY_ATIVO = bool(
-    cloudinary
-    and os.environ.get('CLOUDINARY_CLOUD_NAME')
-    and os.environ.get('CLOUDINARY_API_KEY')
-    and os.environ.get('CLOUDINARY_API_SECRET')
-)
+PASTA_SEGREDOS = '/etc/secrets'
+
+
+def ler_segredo(nome):
+    """Lê um valor secreto: primeiro como variável de ambiente (Environment
+    Variables do Render) e, se não existir, como Secret File em /etc/secrets."""
+    valor = os.environ.get(nome)
+    if valor and valor.strip():
+        return valor.strip()
+    caminho = os.path.join(PASTA_SEGREDOS, nome)
+    if os.path.isfile(caminho):
+        with open(caminho, encoding='utf-8') as arquivo:
+            return arquivo.read().strip() or None
+    return None
+
+
+_CLOUD_NAME = ler_segredo('CLOUDINARY_CLOUD_NAME')
+_API_KEY = ler_segredo('CLOUDINARY_API_KEY')
+_API_SECRET = ler_segredo('CLOUDINARY_API_SECRET')
+
+CLOUDINARY_ATIVO = bool(cloudinary and _CLOUD_NAME and _API_KEY and _API_SECRET)
 
 if CLOUDINARY_ATIVO:
     cloudinary.config(
-        cloud_name=os.environ['CLOUDINARY_CLOUD_NAME'],
-        api_key=os.environ['CLOUDINARY_API_KEY'],
-        api_secret=os.environ['CLOUDINARY_API_SECRET'],
+        cloud_name=_CLOUD_NAME,
+        api_key=_API_KEY,
+        api_secret=_API_SECRET,
         secure=True,
     )
-
 
 # Aparece nos Logs do Render quando o site inicia
 print('Cloudinary ativo:', CLOUDINARY_ATIVO,
       '| biblioteca instalada:', cloudinary is not None,
-      '| variáveis definidas:', all(os.environ.get(v) for v in (
-          'CLOUDINARY_CLOUD_NAME', 'CLOUDINARY_API_KEY', 'CLOUDINARY_API_SECRET')))
+      '| variáveis definidas:', bool(_CLOUD_NAME and _API_KEY and _API_SECRET))
 
 
 def eh_url(nome):
