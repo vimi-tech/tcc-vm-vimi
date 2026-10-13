@@ -45,7 +45,7 @@
     </div>
 
 
-    <main class="estandes-list">
+    <main class="estandes-list" data-fallback="{{ url_for('static', filename='pessoas.jpeg') }}">
 
       {% for estande in estandes %}
       {% set estande_index = loop.index %}
@@ -61,7 +61,7 @@
 
           {% if estande.midias and estande.midias|length > 1 %}
 
-      
+
             <div class="carousel" id="carousel-{{ estande_index }}">
 
               <div class="carousel-slides">
@@ -70,10 +70,10 @@
 
                   <div class="slide {% if loop.first %}active{% endif %}">
 
-                    {% if midia.endswith('.mp4') or midia.endswith('.webm') or midia.endswith('.mov') %}
+                    {% if eh_video(midia) %}
 
                       <video
-                        src="{{ url_for('static', filename='uploads/' + midia) }}"
+                        src="{{ url_midia(midia) }}"
                         controls
                         class="media-box">
                       </video>
@@ -81,7 +81,7 @@
                     {% else %}
 
                       <img
-                        src="{{ url_for('static', filename='uploads/' + midia) }}"
+                        src="{{ url_midia(midia) }}"
                         alt="Foto do Estande"
                         class="media-box">
 
@@ -129,10 +129,10 @@
 
             {% set midia = estande.midias[0] %}
 
-            {% if midia.endswith('.mp4') or midia.endswith('.webm') or midia.endswith('.mov') %}
+            {% if eh_video(midia) %}
 
               <video
-                src="{{ url_for('static', filename='uploads/' + midia) }}"
+                src="{{ url_midia(midia) }}"
                 controls
                 class="media-box">
               </video>
@@ -140,7 +140,7 @@
             {% else %}
 
               <img
-                src="{{ url_for('static', filename='uploads/' + midia) }}"
+                src="{{ url_midia(midia) }}"
                 alt="Foto do Estande"
                 class="media-box">
 
@@ -172,6 +172,16 @@
   </div>
 
   <script>
+    // Se uma foto não carregar (arquivo apagado ou link quebrado), mostra a imagem padrão
+    document.addEventListener('error', function(e) {
+      const img = e.target;
+      if (img.tagName !== 'IMG' || !img.classList.contains('media-box')) return;
+      const lista = document.querySelector('.estandes-list');
+      if (!lista || img.dataset.semFoto) return;
+      img.dataset.semFoto = '1';
+      img.src = lista.dataset.fallback;
+    }, true);
+
     document.addEventListener('click', function(e) {
       const btn = e.target.closest('.carousel-prev, .carousel-next');
 
