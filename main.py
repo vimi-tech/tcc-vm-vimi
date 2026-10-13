@@ -1,5 +1,6 @@
 import html
 import os
+import re
 import traceback
 import uuid
 
@@ -13,6 +14,12 @@ from firebase_admin import credentials, firestore
 from firebase_admin import auth as firebase_auth
 from google.api_core.exceptions import Conflict
 from google.cloud.firestore_v1.base_query import FieldFilter
+
+try:
+    import cloudinary
+    import cloudinary.uploader
+except ImportError:          # biblioteca ainda não instalada: usa a pasta local
+    cloudinary = None
 
 
 app = Flask(__name__)
@@ -82,9 +89,57 @@ EXTENSOES_PERMITIDAS = {
 }
 
 
+# ----------------------------------------------------------
+# ARMAZENAMENTO DAS MÍDIAS
+# Com as variáveis CLOUDINARY_* definidas no Render, as fotos e vídeos vão
+# para o Cloudinary (ficam guardados para sempre e o Firestore guarda o link).
+# Sem elas, o site continua salvando em static/uploads (que o Render apaga
+# a cada reinício/deploy).
+# ----------------------------------------------------------
+
+CLOUDINARY_ATIVO = bool(
+    cloudinary
+    and os.environ.get('CLOUDINARY_CLOUD_NAME')
+    and os.environ.get('CLOUDINARY_API_KEY')
+    and os.environ.get('CLOUDINARY_API_SECRET')
+)
+
+if CLOUDINARY_ATIVO:
+    cloudinary.config(
+        cloud_name=os.environ['CLOUDINARY_CLOUD_NAME'],
+        api_key=os.environ['CLOUDINARY_API_KEY'],
+        api_secret=os.environ['CLOUDINARY_API_SECRET'],
+        secure=True,
+    )
+
+
+# Aparece nos Logs do Render quando o site inicia
+print('Cloudinary ativo:', CLOUDINARY_ATIVO,
+      '| biblioteca instalada:', cloudinary is not None,
+      '| variáveis definidas:', all(os.environ.get(v) for v in (
+          'CLOUDINARY_CLOUD_NAME', 'CLOUDINARY_API_KEY', 'CLOUDINARY_API_SECRET')))
+
+
+def eh_url(nome):
+    return str(nome).startswith(('http://', 'https://'))
+
+
+@app.template_global()
+def url_midia(nome):
+    """Endereço da mídia: link do Cloudinary ou arquivo em static/uploads."""
+    if eh_url(nome):
+        return nome
+    return url_for('static', filename='uploads/' + nome)
+
+
+@app.template_global()
+def eh_video(nome):
+    return str(nome).lower().split('?')[0].endswith(('.mp4', '.webm', '.mov'))
+
+
 def salvar_midias(arquivos):
-    """Salva os arquivos enviados em static/uploads com um nome único.
-    Devolve (lista_de_nomes_salvos, quantidade_ignorada)."""
+    """Envia os arquivos (Cloudinary ou static/uploads) com um nome único.
+    Devolve (lista_de_nomes_ou_links_salvos, quantidade_nao_enviada)."""
     salvas = []
     ignoradas = 0
 
@@ -102,16 +157,44 @@ def salvar_midias(arquivos):
         # O prefixo aleatório impede que um projeto sobrescreva a foto de outro
         # quando os dois enviam arquivos com o mesmo nome (ex.: "foto.jpg")
         base_segura = secure_filename(base) or 'midia'
-        nome_final = f'{uuid.uuid4().hex[:8]}_{base_segura}{extensao}'
+        sufixo = f'{uuid.uuid4().hex[:8]}_{base_segura}'
 
-        arquivo.save(os.path.join(app.config['UPLOAD_FOLDER'], nome_final))
-        salvas.append(nome_final)
+        if CLOUDINARY_ATIVO:
+            try:
+                arquivo.stream.seek(0)
+                resultado = cloudinary.uploader.upload(
+                    arquivo.stream,
+                    resource_type='auto',
+                    folder='feirascore',
+                    public_id=sufixo,
+                )
+                salvas.append(resultado['secure_url'])
+            except Exception as erro:
+                print('Erro ao enviar para o Cloudinary:', erro)
+                ignoradas += 1
+        else:
+            nome_final = f'{sufixo}{extensao}'
+            arquivo.save(os.path.join(app.config['UPLOAD_FOLDER'], nome_final))
+            salvas.append(nome_final)
 
     return salvas, ignoradas
 
 
 def apagar_arquivo_midia(nome_arquivo):
-    """Remove um arquivo de static/uploads, se ele existir."""
+    """Apaga a mídia: no Cloudinary (se for um link de lá) ou em static/uploads."""
+    if eh_url(nome_arquivo):
+        if CLOUDINARY_ATIVO and 'res.cloudinary.com' in nome_arquivo and '/upload/' in nome_arquivo:
+            try:
+                tipo = 'video' if '/video/upload/' in nome_arquivo else 'image'
+                partes = nome_arquivo.split('/upload/', 1)[1].split('/')
+                if partes and re.fullmatch(r'v\d+', partes[0]):
+                    partes = partes[1:]
+                public_id = os.path.splitext('/'.join(partes))[0]
+                cloudinary.uploader.destroy(public_id, resource_type=tipo)
+            except Exception as erro:
+                print('Erro ao apagar mídia no Cloudinary:', erro)
+        return
+
     caminho = os.path.join(app.config['UPLOAD_FOLDER'], nome_arquivo)
     if os.path.exists(caminho):
         os.remove(caminho)
@@ -279,7 +362,7 @@ def processar_envio_estande():
         return redirect(url_for('pagina_descricao'))
 
     if ignoradas:
-        flash(f'{ignoradas} arquivo(s) ignorado(s): envie apenas imagens ou vídeos.', 'error')
+        flash(f'{ignoradas} arquivo(s) não enviado(s): use imagens ou vídeos e confira o tamanho.', 'error')
 
     flash('Estande cadastrado com sucesso!', 'success')
     return redirect(url_for('estandes'))
@@ -431,7 +514,7 @@ def editar_midias(index):
             })
 
         if ignoradas:
-            flash(f'{ignoradas} arquivo(s) ignorado(s): envie apenas imagens ou vídeos.', 'error')
+            flash(f'{ignoradas} arquivo(s) não enviado(s): use imagens ou vídeos e confira o tamanho.', 'error')
 
         flash('Mídias atualizadas com sucesso!', 'success')
         return redirect(url_for('editar_midias', index=index))
