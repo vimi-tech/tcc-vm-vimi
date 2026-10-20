@@ -617,7 +617,7 @@
                     {% if noticia.link_externo %}
                       <a href="{{ noticia.link_externo }}" target="_blank" rel="noopener noreferrer" class="btn-news-link">Acessar Notícia Externa <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i></a>
                     {% else %}
-                      <button class="btn-news-link" data-bs-toggle="collapse" data-bs-target="#materia-{{ loop.index }}" onclick="toggleText(this)">Ler Matéria Completa ↓</button>
+                      <button class="btn-news-link" data-bs-toggle="collapse" data-bs-target="#materia-{{ loop.index }}" onclick="toggleText(this)">Ler Instruções ↓</button>
                       <div class="collapse full-story-text" id="materia-{{ loop.index }}">{{ noticia.conteudo }}</div>
                     {% endif %}
                   </div>
@@ -631,7 +631,7 @@
                 <div class="news-img-wrapper"><img src="{{ url_for('static', filename='evento.jpg') }}" alt="Notícia 1" class="news-img"></div>
                 <div class="news-body">
                   <div><div class="news-date">15 de Junho, 2026</div><h3 class="news-title">Grande Abertura da Feira Tecnológica</h3><p class="news-text">Os portões estão abertos! Venha conferir os projetos inovadores desenvolvidos pelos alunos deste ano.</p></div>
-                  <div><button class="btn-news-link" data-bs-toggle="collapse" data-bs-target="#materia1" onclick="toggleText(this)">Ler Matéria Completa ↓</button><div class="collapse full-story-text" id="materia1">A cerimônia contou com a presença de diretores, professores e representantes da comunidade local. Estão expostos mais de 40 estandes com tecnologias que variam de automação até IA.</div></div>
+                  <div><button class="btn-news-link" data-bs-toggle="collapse" data-bs-target="#materia1" onclick="toggleText(this)">Ler Instruções ↓</button><div class="collapse full-story-text" id="materia1">A cerimônia contou com a presença de diretores, professores e representantes da comunidade local. Estão expostos mais de 40 estandes com tecnologias que variam de automação até IA.</div></div>
                 </div>
               </div>
             </div>
@@ -640,7 +640,7 @@
                 <div class="news-img-wrapper"><img src="{{ url_for('static', filename='meninas_votando.jpg') }}" alt="Notícia 2" class="news-img"></div>
                 <div class="news-body">
                   <div><div class="news-date">14 de Junho, 2026</div><h3 class="news-title">Como Funciona o Novo Sistema Score</h3><p class="news-text">Entenda como a sua avaliação digital ajuda a computar as notas parciais e definir os vencedores em tempo real.</p></div>
-                  <div><button class="btn-news-link" data-bs-toggle="collapse" data-bs-target="#materia2" onclick="toggleText(this)">Ler Matéria Completa ↓</button><div class="collapse full-story-text" id="materia2">Cada QR Code presente nos estandes leva diretamente para a área de votação. A contagem utiliza algoritmos em tempo real para ranking justo dos projetos.</div></div>
+                  <div><button class="btn-news-link" data-bs-toggle="collapse" data-bs-target="#materia2" onclick="toggleText(this)">Ler Instruções ↓</button><div class="collapse full-story-text" id="materia2">Cada QR Code presente nos estandes leva diretamente para a área de votação. A contagem utiliza algoritmos em tempo real para ranking justo dos projetos.</div></div>
                 </div>
               </div>
             </div>
