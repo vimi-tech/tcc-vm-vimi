@@ -142,7 +142,7 @@
   <header>
     <nav class="navbar navbar-expand-lg navbar-custom">
       <div class="container">
-        <a class="btn-nav-red" href="{{ url_for('login') }}">Votar</a>
+        <a class="btn-nav-red" href="{{ url_for('register') }}">Votar</a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
           <span class="navbar-toggler-icon"></span>
@@ -152,9 +152,10 @@
           <div class="d-flex flex-wrap gap-2 justify-content-center my-3 my-lg-0">
             <a class="btn-nav-custom-red" href="{{ url_for('index') }}">Início</a>
             <a class="btn-nav-custom-red" href="{{ url_for('estandes') }}">Estandes</a>
-            <a class="btn-nav-custom-red" href="{{ url_for('noticias') }}">Notícias</a>
-            <a class="btn-nav-custom-red" href="{{ url_for('localizacao') }}">Localização</a>
-            <a class="btn-nav-custom-red" href="{{ url_for('faq') }}">FAQ</a>
+            <a class="btn-nav-custom-red" href="{{ url_for('listar_projetos') }}">Gerenciar Projetos</a>
+            <a class="btn-nav-custom-red" href="{{ url_for('index') }}#noticias">Notícias</a>
+            <a class="btn-nav-custom-red" href="{{ url_for('index') }}#localizacao">Localização</a>
+            <a class="btn-nav-custom-red" href="{{ url_for('index') }}#faq">FAQ</a>
             <a class="btn-nav-custom-red" href="{{ url_for('estudantelogin') }}">Buscar por Turma</a>
           </div>
         </div>

@@ -460,9 +460,20 @@ def estudantelogin():
 
 
 
+@app.route('/login')
+def login():
+    return redirect(url_for('register'))
+
+
+@app.route('/sobre')
+def sobre():
+    return render_template('pages/sobre.html')
+
+
 @app.route('/register')
 def register():
     return render_template('login/register.html')
+
 
 
 # ----------------------------------------------------------
@@ -522,7 +533,7 @@ def sair():
 
 @app.route('/projetos')
 def listar_projetos():
-    return render_template('projetos/listar.html', estandes=carregar_estandes())
+    return render_template('projetos.html', estandes=carregar_estandes())
 
 
 # ----------------------------------------------------------
@@ -596,7 +607,7 @@ def editar_midias(index):
         flash('Mídias atualizadas com sucesso!', 'success')
         return redirect(url_for('editar_midias', index=index))
 
-    return render_template('projetos/editar_midias.html', estande=estande, index=index)
+    return render_template('midias.html', estande=estande, index=index)
 
 
 # ----------------------------------------------------------
