@@ -49,7 +49,7 @@
         </p>
 
         <div class="input-container">
-          <input type="text" name="turma" class="custom-input" placeholder="Sua turma (Ex: 3º B, 2º A, MKT-01)" required>
+          <input type="text" name="turma" class="custom-input" placeholder="Sua turma (Ex: 3º B, 2º A, MKT-01)" value="{{ request.args.get('turma') or turma or '' }}" required>
         </div>
 
         <div class="input-container">

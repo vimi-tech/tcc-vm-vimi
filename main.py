@@ -32,25 +32,15 @@ app.secret_key = os.environ.get('SECRET_KEY', 'troque-esta-chave-em-producao')
 # FIREBASE (login, controle de 1 voto e banco de dados)
 # ==========================================================
 
-def obter_caminho_chave():
-    """No Render a chave fica em /etc/secrets (Secret File).
-    No computador local fica na mesma pasta do main.py."""
-    caminho_render = '/etc/secrets/serviceAccountKey.json'
-    if os.path.exists(caminho_render):
-        return caminho_render
-    return os.path.join(os.path.dirname(os.path.abspath(__file__)), 'serviceAccountKey.json')
+from app.config.firebase import init_firebase, get_firestore_client, FIREBASE_PROJECT_ID
 
+try:
+    init_firebase()
+    db = get_firestore_client()
+except Exception as erro_fb:
+    print(f"Aviso ao inicializar Firebase ({FIREBASE_PROJECT_ID}): {erro_fb}")
+    db = None
 
-CAMINHO_CHAVE = obter_caminho_chave()
-
-if not os.path.exists(CAMINHO_CHAVE):
-    raise FileNotFoundError(
-        'Chave do Firebase não encontrada. No computador, coloque o serviceAccountKey.json '
-        'na pasta do projeto. No Render, adicione-o em Environment > Secret Files.'
-    )
-
-firebase_admin.initialize_app(credentials.Certificate(CAMINHO_CHAVE))
-db = firestore.client()
 
 
 def id_dispositivo_valido(valor):
@@ -64,6 +54,11 @@ def id_dispositivo_valido(valor):
 
 def ja_votou_no_banco():
     """Confere no Firestore se a conta ou o aparelho da sessão já votou."""
+    global db
+    if db is None:
+        db = get_firestore_client()
+    if db is None:
+        return False
     uid = session.get('uid')
     id_dispositivo = session.get('id_dispositivo')
     if uid and db.collection('votos').document(uid).get().exists:
@@ -213,13 +208,12 @@ def apagar_arquivo_midia(nome_arquivo):
         os.remove(caminho)
 
 
-# ==========================================================
-# ESTANDES NO FIRESTORE
-# Coleção "estandes": um documento por projeto
-# {turma, turma_busca, nome, resumo, midias, criadoEm}
-# ==========================================================
-
 def colecao_estandes():
+    global db
+    if db is None:
+        db = get_firestore_client()
+    if db is None:
+        raise ConnectionError("Cliente do Firestore não conectado ao projeto 'tccfeirascore'.")
     return db.collection('estandes')
 
 
@@ -266,11 +260,6 @@ def estande_por_indice(index):
     return lista[index]
 
 
-# ==========================================================
-# VOTAÇÃO: PERGUNTAS
-# ==========================================================
-
-# As 8 perguntas da votação: o visitante escolhe UM projeto em cada uma
 PERGUNTAS_VOTACAO = [
     {"titulo": "Tema da feira",      "pergunta": "Qual projeto se relaciona completamente com o tema da feira?"},
     {"titulo": "Melhor decoração",   "pergunta": "Qual teve a melhor decoração?"},
@@ -291,6 +280,12 @@ def contar_votos():
     contadores = [{} for _ in range(total)]
     votantes = 0
 
+    global db
+    if db is None:
+        db = get_firestore_client()
+    if db is None:
+        return contadores, votantes
+
     for doc in db.collection('votos').stream():
         respostas = (doc.to_dict() or {}).get('respostas', {})
         votantes += 1
@@ -303,7 +298,7 @@ def contar_votos():
 
 
 # ==========================================================
-# BLUEPRINT DE AUTENTICAÇÃO
+# BLUEPRINT DE AUTENTICAÇÃO E PROJETOS
 # ==========================================================
 
 try:
@@ -311,6 +306,13 @@ try:
     app.register_blueprint(auth_bp)
 except Exception as e:
     print("Aviso: não foi possível carregar o auth_controller:", e)
+
+try:
+    from app.services.project_service import ProjectService
+    project_service = ProjectService()
+except Exception as e:
+    project_service = None
+    print("Aviso: não foi possível inicializar o ProjectService:", e)
 
 
 # ==========================================================
@@ -323,14 +325,15 @@ def index():
 
 
 # ==========================================================
-# CADASTRO DE ESTANDE
+# CADASTRO DE ESTANDE / PROJETO (VINCULADO A TURMA)
 # ==========================================================
 
 @app.route('/descricaoprojeto', methods=['GET', 'POST'])
 def pagina_descricao():
     if request.method == 'POST':
         return processar_envio_estande()
-    return render_template('pages/descricaoprojeto.html')
+    turma = request.args.get('turma', '')
+    return render_template('pages/descricaoprojeto.html', turma=turma)
 
 
 @app.route('/cadastrar-estande', methods=['POST'])
@@ -342,6 +345,27 @@ def processar_envio_estande():
     turma = request.form.get('turma')
     nome_projeto = request.form.get('nome') or request.form.get('nome_projeto')
     resumo_projeto = request.form.get('resumo') or request.form.get('resumo_projeto')
+    arquivos = request.files.getlist('midias')
+
+    if project_service:
+        try:
+            saved_project, ignoradas = project_service.register_project(
+                turma=turma,
+                nome=nome_projeto,
+                resumo=resumo_projeto,
+                arquivos_midia=arquivos
+            )
+            if ignoradas:
+                flash(f'{ignoradas} arquivo(s) não enviado(s): use imagens ou vídeos e confira o tamanho.', 'warning')
+            flash(f'Projeto "{saved_project.nome}" da turma "{saved_project.turma}" cadastrado com sucesso!', 'success')
+            return redirect(url_for('estandes'))
+        except ValueError as ve:
+            flash(str(ve), 'error')
+            return redirect(url_for('pagina_descricao', turma=turma))
+        except Exception as erro:
+            print('Erro ao cadastrar projeto via ProjectService:', erro)
+            flash(f'Não foi possível salvar o projeto agora: {erro}', 'error')
+            return redirect(url_for('pagina_descricao', turma=turma))
 
     if not turma or not turma.strip():
         flash('Por favor, informe a sua turma!', 'error')
@@ -372,13 +396,14 @@ def processar_envio_estande():
         for arquivo in midias_salvas:
             apagar_arquivo_midia(arquivo)
         flash('Não foi possível salvar o estande agora. Tente novamente.', 'error')
-        return redirect(url_for('pagina_descricao'))
+        return redirect(url_for('pagina_descricao', turma=turma))
 
     if ignoradas:
         flash(f'{ignoradas} arquivo(s) não enviado(s): use imagens ou vídeos e confira o tamanho.', 'error')
 
     flash('Estande cadastrado com sucesso!', 'success')
     return redirect(url_for('estandes'))
+
 
 
 # ==========================================================
@@ -435,8 +460,11 @@ def login_google():
     session['id_dispositivo'] = id_dispositivo
 
     # Esta conta ou este aparelho já votou?
-    aparelho_votou = db.collection('dispositivos').document(id_dispositivo).get().exists
-    conta_votou = db.collection('votos').document(uid).get().exists
+    global db
+    if db is None:
+        db = get_firestore_client()
+    aparelho_votou = db.collection('dispositivos').document(id_dispositivo).get().exists if db else False
+    conta_votou = db.collection('votos').document(uid).get().exists if db else False
     session['votou'] = aparelho_votou or conta_votou
 
     if session['votou']:
@@ -673,6 +701,9 @@ def exibir_pergunta(numero):
         # O "create" falha se o documento já existir, e isso bloqueia o voto repetido.
         # A cédula salva em "votos" é o que o ranking usa para contar.
         try:
+            global db
+            if db is None:
+                db = get_firestore_client()
             batch = db.batch()
             batch.create(db.collection('votos').document(session['uid']), {
                 'email': session.get('email'),
