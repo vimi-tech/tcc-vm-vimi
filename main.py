@@ -5,7 +5,7 @@ import traceback
 import uuid
 
 from flask import (
-    Flask, render_template, request, redirect, url_for, flash, session
+    Flask, render_template, request, redirect, url_for, flash, session, jsonify
 )
 from werkzeug.utils import secure_filename
 
@@ -314,6 +314,14 @@ except Exception as e:
     project_service = None
     print("Aviso: não foi possível inicializar o ProjectService:", e)
 
+try:
+    from app.services.turma_service import TurmaService
+    turma_service = TurmaService()
+except Exception as e:
+    turma_service = None
+    print("Aviso: não foi possível inicializar o TurmaService:", e)
+
+
 
 # ==========================================================
 # PÁGINA PRINCIPAL
@@ -419,9 +427,37 @@ def estandes():
 # LOGIN DO ESTUDANTE / REGISTRO
 # ==========================================================
 
-@app.route('/estandelogin')
+@app.route('/estandelogin', methods=['GET', 'POST'])
 def estudantelogin():
+    if request.method == 'POST':
+        # Suporta tanto JSON (fetch) quanto Form POST tradicional
+        dados = request.get_json(silent=True) or request.form
+        usuario = (dados.get('username') or dados.get('usuario') or '').strip()
+        codigo = (dados.get('password') or dados.get('codigo') or '').strip()
+
+        if turma_service:
+            sucesso, turma, msg = turma_service.autenticar_turma(usuario, codigo)
+        else:
+            sucesso = False
+            msg = "Serviço de autenticação temporariamente indisponível."
+
+        if sucesso and turma:
+            session['estudante_usuario'] = usuario
+            session['turma_nome'] = turma.nome
+            session['turma_id'] = turma.id
+
+            redirect_url = url_for('pagina_descricao', turma=turma.nome, usuario=usuario)
+            if request.is_json:
+                return jsonify({'success': True, 'redirect_url': redirect_url})
+            return redirect(redirect_url)
+        else:
+            if request.is_json:
+                return jsonify({'success': False, 'message': msg}), 401
+            flash(msg, 'error')
+            return render_template('login/estudantelogin.html')
+
     return render_template('login/estudantelogin.html')
+
 
 
 @app.route('/register')

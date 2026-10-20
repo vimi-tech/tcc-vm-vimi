@@ -10,15 +10,18 @@ app/
 │   └── __init__.py
 ├── models/
 │   ├── project.py                # Entidade de Domínio Project (vinculada a uma Turma)
+│   ├── turma.py                  # Entidade de Domínio Turma (credenciais e código de acesso)
 │   ├── user.py                   # Entidade de Domínio User
 │   └── __init__.py
 ├── repositories/
 │   ├── project_repositories.py   # Repositório de Projetos no Firestore (coleção: estandes)
+│   ├── turma_repository.py       # Repositório de Turmas no Firestore (coleção: turmas)
 │   └── user_repositories.py      # Repositório de Usuários no Firestore
 ├── services/
 │   ├── media_service.py          # Gestão de upload de mídias (Cloudinary e Local)
 │   ├── project_service.py        # Regras de negócio de projetos e unicidade de turma
-│   └── auth_services.py          # Regras de autenticação
+│   ├── turma_service.py          # Regras de autenticação de turmas via código e administração
+│   └── auth_services.py          # Regras de autenticação de usuários
 └── controllers/
     ├── project_controller.py     # Blueprint e rotas de cadastro e listagem de projetos
     ├── auth_controller.py        # Blueprint de login e registro
@@ -52,12 +55,30 @@ No domínio de negócio da feira:
 
 ---
 
-## 4. Fluxo de Cadastro e Uso da Rota `/descricaoprojeto`
-1. O aluno acessa `/estandelogin`, insere o código da sua turma e é redirecionado para `/descricaoprojeto?turma=Turma%20XX`.
-2. A rota `/descricaoprojeto` pré-preenche o campo da turma no formulário.
-3. Ao submeter o formulário (POST):
+## 4. Gestão e Autenticação de Turmas no Firestore
+Anteriormente, o arquivo `estudantelogin.html` expunha um dicionário estático (`CODIGOS_TURMAS`) com todos os 58 códigos de acesso no código JavaScript visível ao cliente.
+
+**Como funciona agora:**
+1. Os códigos e turmas foram transferidos para o **Cloud Firestore** na coleção **`turmas`**.
+2. Cada documento possui:
+   * `nome`: Nome da turma (ex: "Turma 01", "3º Informática");
+   * `codigo_acesso`: Código secreto impresso para a turma;
+   * `ativo`: Status da turma;
+   * `criado_em`: Data de registro.
+3. O repositório [`TurmaRepository`](file:///c:/tcc-vm-vimi/app/repositories/turma_repository.py) possui rotina de auto-seed garantindo que as turmas padrão sejam migradas automaticamente para o Firestore na primeira execução.
+4. Administradores podem adicionar novas turmas diretamente no Firestore ou via [`TurmaService.cadastrar_turma()`](file:///c:/tcc-vm-vimi/app/services/turma_service.py).
+5. O frontend [`estudantelogin.html`](file:///c:/tcc-vm-vimi/templates/login/estudantelogin.html) faz uma requisição assíncrona (`fetch('/estandelogin')`) protegendo todos os códigos de acesso.
+
+---
+
+## 5. Fluxo de Cadastro e Uso da Rota `/descricaoprojeto`
+1. O aluno acessa `/estandelogin`, insere o código da sua turma.
+2. O backend valida o código contra o Firestore e guarda a sessão da turma autenticada.
+3. O usuário é redirecionado para `/descricaoprojeto?turma=Turma%20XX`.
+4. A rota `/descricaoprojeto` pré-preenche o campo da turma no formulário.
+5. Ao submeter o formulário (POST):
    * O `ProjectService` valida os campos obrigatórios.
    * O `ProjectRepository` confere se a turma já possui um projeto cadastrado no Firestore.
    * O `MediaService` processa as mídias (Cloudinary ou pasta local).
-   * O projeto é persistido na coleção do Firestore.
+   * O projeto é persistido na coleção `estandes` do Firestore.
    * Caso ocorra erro de persistência, as mídias salvas são apagadas para evitar lixo no storage.
