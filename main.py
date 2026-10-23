@@ -5,7 +5,7 @@ import traceback
 import uuid
 
 from flask import (
-    Flask, render_template, request, redirect, url_for, flash, session, jsonify
+    Flask, render_template, request, redirect, url_for, flash, session, g
 )
 from werkzeug.utils import secure_filename
 
@@ -32,15 +32,25 @@ app.secret_key = os.environ.get('SECRET_KEY', 'troque-esta-chave-em-producao')
 # FIREBASE (login, controle de 1 voto e banco de dados)
 # ==========================================================
 
-from app.config.firebase import init_firebase, get_firestore_client, FIREBASE_PROJECT_ID
+def obter_caminho_chave():
+    """No Render a chave fica em /etc/secrets (Secret File).
+    No computador local fica na mesma pasta do main.py."""
+    caminho_render = '/etc/secrets/serviceAccountKey.json'
+    if os.path.exists(caminho_render):
+        return caminho_render
+    return os.path.join(os.path.dirname(os.path.abspath(__file__)), 'serviceAccountKey.json')
 
-try:
-    init_firebase()
-    db = get_firestore_client()
-except Exception as erro_fb:
-    print(f"Aviso ao inicializar Firebase ({FIREBASE_PROJECT_ID}): {erro_fb}")
-    db = None
 
+CAMINHO_CHAVE = obter_caminho_chave()
+
+if not os.path.exists(CAMINHO_CHAVE):
+    raise FileNotFoundError(
+        'Chave do Firebase não encontrada. No computador, coloque o serviceAccountKey.json '
+        'na pasta do projeto. No Render, adicione-o em Environment > Secret Files.'
+    )
+
+firebase_admin.initialize_app(credentials.Certificate(CAMINHO_CHAVE))
+db = firestore.client()
 
 
 def id_dispositivo_valido(valor):
@@ -54,11 +64,6 @@ def id_dispositivo_valido(valor):
 
 def ja_votou_no_banco():
     """Confere no Firestore se a conta ou o aparelho da sessão já votou."""
-    global db
-    if db is None:
-        db = get_firestore_client()
-    if db is None:
-        return False
     uid = session.get('uid')
     id_dispositivo = session.get('id_dispositivo')
     if uid and db.collection('votos').document(uid).get().exists:
@@ -145,6 +150,25 @@ def eh_video(nome):
     return str(nome).lower().split('?')[0].endswith(('.mp4', '.webm', '.mov'))
 
 
+def avisar_falhas(ignoradas):
+    """Avisa quantos arquivos não foram enviados. Com MOSTRAR_ERROS=1 no Render,
+    mostra também o motivo técnico devolvido pelo Cloudinary."""
+    if not ignoradas:
+        return
+    flash(f'{ignoradas} arquivo(s) não enviado(s): use imagens ou vídeos e confira o tamanho.', 'error')
+    detalhe = getattr(g, 'erro_upload', None)
+    if detalhe and os.environ.get('MOSTRAR_ERROS') == '1':
+        flash(f'Detalhe técnico: {detalhe}', 'error')
+
+
+def midia_existe(nome):
+    """Link do Cloudinary sempre vale; arquivo local só se ainda estiver no servidor
+    (o Render apaga a pasta static/uploads a cada reinício/deploy)."""
+    if eh_url(nome):
+        return True
+    return os.path.exists(os.path.join(app.config['UPLOAD_FOLDER'], nome))
+
+
 def salvar_midias(arquivos):
     """Envia os arquivos (Cloudinary ou static/uploads) com um nome único.
     Devolve (lista_de_nomes_ou_links_salvos, quantidade_nao_enviada)."""
@@ -178,7 +202,8 @@ def salvar_midias(arquivos):
                 )
                 salvas.append(resultado['secure_url'])
             except Exception as erro:
-                print('Erro ao enviar para o Cloudinary:', erro)
+                print('Erro ao enviar para o Cloudinary:', repr(erro))
+                g.erro_upload = f'{type(erro).__name__}: {erro}'
                 ignoradas += 1
         else:
             nome_final = f'{sufixo}{extensao}'
@@ -208,12 +233,13 @@ def apagar_arquivo_midia(nome_arquivo):
         os.remove(caminho)
 
 
+# ==========================================================
+# ESTANDES NO FIRESTORE
+# Coleção "estandes": um documento por projeto
+# {turma, turma_busca, nome, resumo, midias, criadoEm}
+# ==========================================================
+
 def colecao_estandes():
-    global db
-    if db is None:
-        db = get_firestore_client()
-    if db is None:
-        raise ConnectionError("Cliente do Firestore não conectado ao projeto 'tccfeirascore'.")
     return db.collection('estandes')
 
 
@@ -230,6 +256,7 @@ def carregar_estandes():
         dados['id'] = doc.id
         dados.setdefault('midias', [])
         dados.setdefault('resumo', '')
+        dados['midias'] = [m for m in dados['midias'] if midia_existe(m)]
         lista.append(dados)
     return lista
 
@@ -251,6 +278,18 @@ def turma_ja_cadastrada(turma, ignorar_id=None):
     return any(doc.id != ignorar_id for doc in consulta)
 
 
+def buscar_estande_por_turma(turma):
+    """Devolve o estande dessa turma (sem diferenciar maiúsculas) ou None."""
+    consulta = colecao_estandes().where(
+        filter=FieldFilter('turma_busca', '==', turma.lower())
+    ).stream()
+    for doc in consulta:
+        dados = doc.to_dict()
+        dados['id'] = doc.id
+        return dados
+    return None
+
+
 def estande_por_indice(index):
     """As rotas de edição usam a posição na lista (index).
     Carrega a lista do banco e devolve o estande dessa posição."""
@@ -260,6 +299,11 @@ def estande_por_indice(index):
     return lista[index]
 
 
+# ==========================================================
+# VOTAÇÃO: PERGUNTAS
+# ==========================================================
+
+# As 8 perguntas da votação: o visitante escolhe UM projeto em cada uma
 PERGUNTAS_VOTACAO = [
     {"titulo": "Tema da feira",      "pergunta": "Qual projeto se relaciona completamente com o tema da feira?"},
     {"titulo": "Melhor decoração",   "pergunta": "Qual teve a melhor decoração?"},
@@ -280,12 +324,6 @@ def contar_votos():
     contadores = [{} for _ in range(total)]
     votantes = 0
 
-    global db
-    if db is None:
-        db = get_firestore_client()
-    if db is None:
-        return contadores, votantes
-
     for doc in db.collection('votos').stream():
         respostas = (doc.to_dict() or {}).get('respostas', {})
         votantes += 1
@@ -298,7 +336,7 @@ def contar_votos():
 
 
 # ==========================================================
-# BLUEPRINT DE AUTENTICAÇÃO E PROJETOS
+# BLUEPRINT DE AUTENTICAÇÃO
 # ==========================================================
 
 try:
@@ -306,21 +344,6 @@ try:
     app.register_blueprint(auth_bp)
 except Exception as e:
     print("Aviso: não foi possível carregar o auth_controller:", e)
-
-try:
-    from app.services.project_service import ProjectService
-    project_service = ProjectService()
-except Exception as e:
-    project_service = None
-    print("Aviso: não foi possível inicializar o ProjectService:", e)
-
-try:
-    from app.services.turma_service import TurmaService
-    turma_service = TurmaService()
-except Exception as e:
-    turma_service = None
-    print("Aviso: não foi possível inicializar o TurmaService:", e)
-
 
 
 # ==========================================================
@@ -333,15 +356,14 @@ def index():
 
 
 # ==========================================================
-# CADASTRO DE ESTANDE / PROJETO (VINCULADO A TURMA)
+# CADASTRO DE ESTANDE
 # ==========================================================
 
 @app.route('/descricaoprojeto', methods=['GET', 'POST'])
 def pagina_descricao():
     if request.method == 'POST':
         return processar_envio_estande()
-    turma = request.args.get('turma', '')
-    return render_template('pages/descricaoprojeto.html', turma=turma)
+    return render_template('pages/descricaoprojeto.html')
 
 
 @app.route('/cadastrar-estande', methods=['POST'])
@@ -353,27 +375,6 @@ def processar_envio_estande():
     turma = request.form.get('turma')
     nome_projeto = request.form.get('nome') or request.form.get('nome_projeto')
     resumo_projeto = request.form.get('resumo') or request.form.get('resumo_projeto')
-    arquivos = request.files.getlist('midias')
-
-    if project_service:
-        try:
-            saved_project, ignoradas = project_service.register_project(
-                turma=turma,
-                nome=nome_projeto,
-                resumo=resumo_projeto,
-                arquivos_midia=arquivos
-            )
-            if ignoradas:
-                flash(f'{ignoradas} arquivo(s) não enviado(s): use imagens ou vídeos e confira o tamanho.', 'warning')
-            flash(f'Projeto "{saved_project.nome}" da turma "{saved_project.turma}" cadastrado com sucesso!', 'success')
-            return redirect(url_for('estandes'))
-        except ValueError as ve:
-            flash(str(ve), 'error')
-            return redirect(url_for('pagina_descricao', turma=turma))
-        except Exception as erro:
-            print('Erro ao cadastrar projeto via ProjectService:', erro)
-            flash(f'Não foi possível salvar o projeto agora: {erro}', 'error')
-            return redirect(url_for('pagina_descricao', turma=turma))
 
     if not turma or not turma.strip():
         flash('Por favor, informe a sua turma!', 'error')
@@ -381,11 +382,35 @@ def processar_envio_estande():
 
     turma = turma.strip()
 
-    if turma_ja_cadastrada(turma):
-        flash(f'A turma "{turma}" já possui um estande cadastrado!', 'error')
-        return redirect(url_for('pagina_descricao'))
+    existente = buscar_estande_por_turma(turma)
 
     midias_salvas, ignoradas = salvar_midias(request.files.getlist('midias'))
+
+    # A turma já tem projeto: só acrescenta as fotos/vídeos novos (o texto, o
+    # identificador e os votos do projeto continuam como estão).
+    if existente:
+        if not midias_salvas:
+            flash(f'A turma "{turma}" já possui um estande cadastrado. '
+                  'Para atualizar, envie ao menos uma foto ou vídeo.', 'error')
+            return redirect(url_for('pagina_descricao'))
+
+        # Remove da lista as mídias antigas que o Render já apagou
+        mantidas = [m for m in existente.get('midias', []) if midia_existe(m)]
+        try:
+            colecao_estandes().document(existente['id']).update({
+                'midias': mantidas + midias_salvas,
+            })
+        except Exception as erro:
+            print('Erro ao atualizar estande no Firestore:', erro)
+            for arquivo in midias_salvas:
+                apagar_arquivo_midia(arquivo)
+            flash('Não foi possível salvar as fotos agora. Tente novamente.', 'error')
+            return redirect(url_for('pagina_descricao'))
+
+        avisar_falhas(ignoradas)
+        flash('Este projeto já estava cadastrado: as novas fotos foram adicionadas a ele.', 'success')
+        return redirect(url_for('estandes'))
+
 
     # Salva no Firestore (o ID do documento é o identificador usado na votação)
     estande_id = uuid.uuid4().hex
@@ -404,14 +429,12 @@ def processar_envio_estande():
         for arquivo in midias_salvas:
             apagar_arquivo_midia(arquivo)
         flash('Não foi possível salvar o estande agora. Tente novamente.', 'error')
-        return redirect(url_for('pagina_descricao', turma=turma))
+        return redirect(url_for('pagina_descricao'))
 
-    if ignoradas:
-        flash(f'{ignoradas} arquivo(s) não enviado(s): use imagens ou vídeos e confira o tamanho.', 'error')
+    avisar_falhas(ignoradas)
 
     flash('Estande cadastrado com sucesso!', 'success')
     return redirect(url_for('estandes'))
-
 
 
 # ==========================================================
@@ -427,53 +450,14 @@ def estandes():
 # LOGIN DO ESTUDANTE / REGISTRO
 # ==========================================================
 
-@app.route('/estandelogin', methods=['GET', 'POST'])
+@app.route('/estandelogin')
 def estudantelogin():
-    if request.method == 'POST':
-        # Suporta tanto JSON (fetch) quanto Form POST tradicional
-        dados = request.get_json(silent=True) or request.form
-        usuario = (dados.get('username') or dados.get('usuario') or '').strip()
-        codigo = (dados.get('password') or dados.get('codigo') or '').strip()
-
-        if turma_service:
-            sucesso, turma, msg = turma_service.autenticar_turma(usuario, codigo)
-        else:
-            sucesso = False
-            msg = "Serviço de autenticação temporariamente indisponível."
-
-        if sucesso and turma:
-            session['estudante_usuario'] = usuario
-            session['turma_nome'] = turma.nome
-            session['turma_id'] = turma.id
-
-            redirect_url = url_for('pagina_descricao', turma=turma.nome, usuario=usuario)
-            if request.is_json:
-                return jsonify({'success': True, 'redirect_url': redirect_url})
-            return redirect(redirect_url)
-        else:
-            if request.is_json:
-                return jsonify({'success': False, 'message': msg}), 401
-            flash(msg, 'error')
-            return render_template('login/estudantelogin.html')
-
     return render_template('login/estudantelogin.html')
-
-
-
-@app.route('/login')
-def login():
-    return redirect(url_for('register'))
-
-
-@app.route('/sobre')
-def sobre():
-    return render_template('pages/sobre.html')
 
 
 @app.route('/register')
 def register():
     return render_template('login/register.html')
-
 
 
 # ----------------------------------------------------------
@@ -507,11 +491,8 @@ def login_google():
     session['id_dispositivo'] = id_dispositivo
 
     # Esta conta ou este aparelho já votou?
-    global db
-    if db is None:
-        db = get_firestore_client()
-    aparelho_votou = db.collection('dispositivos').document(id_dispositivo).get().exists if db else False
-    conta_votou = db.collection('votos').document(uid).get().exists if db else False
+    aparelho_votou = db.collection('dispositivos').document(id_dispositivo).get().exists
+    conta_votou = db.collection('votos').document(uid).get().exists
     session['votou'] = aparelho_votou or conta_votou
 
     if session['votou']:
@@ -525,143 +506,6 @@ def login_google():
 def sair():
     session.clear()
     return redirect(url_for('register'))
-
-
-# ==========================================================
-# GERENCIAMENTO DE PROJETOS
-# ==========================================================
-
-@app.route('/projetos')
-def listar_projetos():
-    return render_template('projetos.html', estandes=carregar_estandes())
-
-
-# ----------------------------------------------------------
-# EDITAR PROJETO
-# ----------------------------------------------------------
-
-@app.route('/projetos/editar/<int:index>', methods=['GET', 'POST'])
-def editar_projeto(index):
-
-    estande = estande_por_indice(index)
-    if estande is None:
-        flash('Projeto não encontrado!', 'error')
-        return redirect(url_for('listar_projetos'))
-
-    if request.method == 'POST':
-        nome = request.form.get('nome')
-        turma = request.form.get('turma')
-        resumo = request.form.get('resumo')
-
-        if not nome or not nome.strip():
-            flash('Informe o nome do projeto!', 'error')
-            return redirect(url_for('editar_projeto', index=index))
-
-        if not turma or not turma.strip():
-            flash('Informe a turma!', 'error')
-            return redirect(url_for('editar_projeto', index=index))
-
-        turma = turma.strip()
-
-        if turma_ja_cadastrada(turma, ignorar_id=estande['id']):
-            flash(f'A turma "{turma}" já possui outro projeto cadastrado!', 'error')
-            return redirect(url_for('editar_projeto', index=index))
-
-        colecao_estandes().document(estande['id']).update({
-            'nome': nome.strip(),
-            'turma': turma,
-            'turma_busca': turma.lower(),
-            'resumo': resumo.strip() if resumo else '',
-        })
-
-        flash('Projeto atualizado com sucesso!', 'success')
-        return redirect(url_for('listar_projetos'))
-
-    return render_template('projetos/editar.html', estande=estande, index=index)
-
-
-# ----------------------------------------------------------
-# EDITAR MÍDIAS
-# ----------------------------------------------------------
-
-@app.route('/projetos/editar-midias/<int:index>', methods=['GET', 'POST'])
-def editar_midias(index):
-
-    estande = estande_por_indice(index)
-    if estande is None:
-        flash('Projeto não encontrado!', 'error')
-        return redirect(url_for('listar_projetos'))
-
-    if request.method == 'POST':
-        novas, ignoradas = salvar_midias(request.files.getlist('midias'))
-
-        if novas:
-            # ArrayUnion acrescenta na lista do banco sem sobrescrever o que já existe
-            colecao_estandes().document(estande['id']).update({
-                'midias': firestore.ArrayUnion(novas),
-            })
-
-        if ignoradas:
-            flash(f'{ignoradas} arquivo(s) não enviado(s): use imagens ou vídeos e confira o tamanho.', 'error')
-
-        flash('Mídias atualizadas com sucesso!', 'success')
-        return redirect(url_for('editar_midias', index=index))
-
-    return render_template('midias.html', estande=estande, index=index)
-
-
-# ----------------------------------------------------------
-# EXCLUIR PROJETO
-# ----------------------------------------------------------
-
-@app.route('/projetos/excluir/<int:index>', methods=['POST'])
-def excluir_projeto(index):
-
-    estande = estande_por_indice(index)
-    if estande is None:
-        flash('Projeto não encontrado!', 'error')
-        return redirect(url_for('listar_projetos'))
-
-    colecao_estandes().document(estande['id']).delete()
-
-    # Os votos que já apontavam para este projeto continuam no banco,
-    # mas o ranking só conta projetos que ainda existem, então eles são ignorados.
-
-    for arquivo in estande.get('midias', []):
-        apagar_arquivo_midia(arquivo)
-
-    flash('Projeto excluído com sucesso!', 'success')
-    return redirect(url_for('listar_projetos'))
-
-
-# ----------------------------------------------------------
-# EXCLUIR UMA MÍDIA
-# ----------------------------------------------------------
-
-@app.route('/projetos/excluir-midia/<int:index>/<int:midia_index>', methods=['POST'])
-def excluir_midia(index, midia_index):
-
-    estande = estande_por_indice(index)
-    if estande is None:
-        flash('Projeto não encontrado!', 'error')
-        return redirect(url_for('listar_projetos'))
-
-    midias = list(estande['midias'])
-
-    if midia_index < 0 or midia_index >= len(midias):
-        flash('Mídia não encontrada!', 'error')
-        return redirect(url_for('editar_midias', index=index))
-
-    arquivo = midias[midia_index]
-
-    # ArrayRemove tira só este arquivo da lista no banco
-    colecao_estandes().document(estande['id']).update({
-        'midias': firestore.ArrayRemove([arquivo]),
-    })
-    apagar_arquivo_midia(arquivo)
-
-    flash('Mídia excluída com sucesso!', 'success')
-    return redirect(url_for('editar_midias', index=index))
 
 
 # ==========================================================
@@ -748,9 +592,6 @@ def exibir_pergunta(numero):
         # O "create" falha se o documento já existir, e isso bloqueia o voto repetido.
         # A cédula salva em "votos" é o que o ranking usa para contar.
         try:
-            global db
-            if db is None:
-                db = get_firestore_client()
             batch = db.batch()
             batch.create(db.collection('votos').document(session['uid']), {
                 'email': session.get('email'),
