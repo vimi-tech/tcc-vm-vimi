@@ -1,20 +1,25 @@
 <!doctype html>
 <html lang="pt-br">
 
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FeiraScore - Principal</title>
 
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@800;900&family=Russo+One&family=Teko:wght@600;700&display=swap" rel="stylesheet">
 
+
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
+
 
     body {
       color: #333;
@@ -26,7 +31,9 @@
       background-color: #f4f4f4;
     }
 
+
     header, main, section, footer { background: transparent; }
+
 
     /* Navbar - centralizada e alinhada */
     .navbar-custom {
@@ -104,6 +111,7 @@
       pointer-events: none;
     }
     .img-navbar-logo { object-fit: contain; border-radius: 6px; background-color: transparent; }
+
 
     /* Gerenciamento de projetos - 4 blocos */
     .management-section {
@@ -186,11 +194,13 @@
     }
     .management-btn:hover { background: #850000; transform: scale(1.03); }
 
+
     /* Intro / Hero Section */
     .intro-section {
   padding: 55px 0 75px 0;
   background-color: #f4f4f4;
 }
+
 
 .hero-brand-block {
   display: flex;
@@ -199,6 +209,7 @@
   justify-content: center;
   text-align: center;
 }
+
 
 /* TROFÉUS */
 .trophy-container {
@@ -210,6 +221,7 @@
   margin-bottom: 5px;
 }
 
+
 .hero-feirascore-image {
   width: auto;
   max-width: 330px;
@@ -219,6 +231,7 @@
   margin: 0 auto 5px auto;
   object-fit: contain;
 }
+
 
 /* TEXTO FEIRA SCORE */
 .hero-wordmark {
@@ -231,17 +244,20 @@
   margin: 5px 0 10px 0;
 }
 
+
 .hero-wordmark .feira {
   display: block;
   color: #b61c1c;
   font-size: 4rem;
 }
 
+
 .hero-wordmark .score {
   display: block;
   color: #b61c1c;
   font-size: 4rem;
 }
+
 
 /* FRASE */
 .main-subtitle {
@@ -256,10 +272,12 @@
   text-align: center !important;
 }
 
+
 .main-subtitle span {
   font-family: inherit !important;
   color: #b61c1c !important;
 }
+
 
 /* BOTÃO SAIBA MAIS */
 .btn-main-red {
@@ -278,10 +296,12 @@
   margin: 0 auto;
 }
 
+
 .btn-main-red:hover {
   transform: scale(1.05);
   color: white;
 }
+
 
 .img-evento {
   border-radius: 40px;
@@ -289,7 +309,7 @@
   height: auto;
   box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
-    
+   
     .hero-logo-fallback {
       display: none;
       flex-direction: column;
@@ -327,6 +347,7 @@
     .btn-main-red:hover { transform: scale(1.05); color: white; }
     .img-evento { border-radius: 40px; max-width: 100%; height: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
 
+
     /* Seção Sobre */
     .about-section { padding: 120px 0; color: white; text-align: center; position: relative; overflow: hidden; background: linear-gradient(180deg, #f4f4f4 0%, #b61c1c 25%, #b61c1c 80%, #000000 100%); }
     .star-bg { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 750px; height: 750px; z-index: 1; opacity: 0.25; pointer-events: none; }
@@ -336,6 +357,7 @@
     .highlight-text { font-size: 16px; color: #ffffff; margin-top: 30px; margin-bottom: 40px; letter-spacing: 0.5px; font-weight: bold; text-align: center; text-shadow: 0 1px 5px rgba(0,0,0,0.5); }
     .btn-about-white { width: 180px; height: 45px; border: none; border-radius: 25px; background: #ffffff; color: #000000; font-size: 15px; font-weight: bold; text-transform: uppercase; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
     .btn-about-white:hover { transform: scale(1.05); color: #b61c1c; }
+
 
     /* Cards de Notícias */
     .news-section { padding: 90px 0; background-color: #000000; }
@@ -350,6 +372,7 @@
     .full-story-text { font-family: sans-serif; font-size: 14px; color: #ddd; line-height: 1.6; border-top: 1px dashed rgba(255, 255, 255, 0.2); padding-top: 15px; margin-top: 10px; }
     .btn-news-link { color: #ff4d4d; text-decoration: none; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; transition: 0.2s; display: inline-block; cursor: pointer; border: none; background: none; padding: 0; font-weight: bold; }
     .btn-news-link:hover { color: #ffffff; }
+
 
     /* Guia da Feira Tecnológica - 4 cards */
     .guide-section { padding: 90px 0; background-color: #f4f4f4; }
@@ -367,75 +390,92 @@
     .btn-guide-link { color: #b61c1c; text-decoration: none; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; transition: 0.2s; display: inline-block; cursor: pointer; border: none; background: none; padding: 0; font-weight: bold; }
     .btn-guide-link:hover { color: #000000; }
 
+
     @media(max-width: 991px) { .guide-section { padding: 70px 0; } }
     @media(max-width: 768px) {
+
 
   .intro-section {
     padding: 30px 0;
   }
+
 
   .hero-feirascore-image {
     max-width: 260px;
     max-height: 180px;
   }
 
+
   .hero-wordmark .feira,
   .hero-wordmark .score {
     font-size: 3rem;
   }
+
 
   .main-subtitle {
     font-size: 1.8rem !important;
     margin: 4px auto 15px auto !important;
   }
 
+
   .guide-section {
     padding: 55px 0;
   }
 
+
   .guide-section-title {
     font-size: 1.8rem;
   }
+
 
   .guide-section-subtitle {
     font-size: 14px;
     padding: 0 15px;
   }
 
+
   .guide-img-wrapper {
     height: 210px;
   }
+
 
   .about-section {
     padding: 60px 0;
   }
 
+
   .location-section {
     padding: 50px 0;
   }
+
 
   .faq-section {
     padding: 50px 0;
   }
 
+
   .main-title {
     font-size: 2.5rem !important;
   }
+
 
   .about-title {
     font-size: 1.8rem;
   }
 
+
   .about-text {
     font-size: 14px;
   }
+
 
   .star-bg {
     width: 350px;
     height: 350px;
   }
 }
-    
+   
+
 
     /* Localização */
     .location-section { padding: 90px 0; color: white; text-align: center; background-color: #000000; }
@@ -443,6 +483,7 @@
     .location-subtitle { font-size: 16px; color: rgba(255, 255, 255, 0.9); margin-bottom: 40px; text-align: center; font-family: sans-serif; }
     .map-responsive { overflow: hidden; padding-bottom: 450px; position: relative; height: 0; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.4); border: 2px solid rgba(255,255,255,0.2); }
     .map-responsive iframe { left: 0; top: 0; height: 100%; width: 100%; position: absolute; border: 0; }
+
 
     /* FAQ */
     .faq-section { padding: 90px 0; color: white; text-align: center; background-color: #000000; }
@@ -452,6 +493,7 @@
     .accordion-button-custom::after { filter: invert(1); }
     .accordion-body-custom { background: rgba(0, 0, 0, 0.4); color: #ddd; font-size: 14px; line-height: 1.6; font-family: sans-serif; }
 
+
     /* Footer */
     .footer-custom { color: rgba(255,255,255,0.6); padding: 60px 0; font-size: 14px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; background-color: #000000; }
     .footer-custom p { text-transform: uppercase; letter-spacing: 0.5px; }
@@ -459,6 +501,7 @@
     .footer-custom a:hover { color: white; }
     .social-share-buttons a { font-size: 20px; width: 45px; height: 45px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(255,255,255,0.1); color: #fff; transition: 0.3s; }
     .social-share-buttons a:hover { background: #b61c1c; transform: translateY(-3px); }
+
 
     @media(max-width: 1200px) {
       .brand-logos-container { display: none; }
@@ -486,7 +529,9 @@
   </style>
 </head>
 
+
 <body>
+
 
   <header>
     <nav class="navbar navbar-expand-lg navbar-custom">
@@ -495,13 +540,15 @@
           <span class="navbar-toggler-icon"></span>
         </button>
 
+
         <div class="collapse navbar-collapse" id="navbarNav">
   <div class="navbar-nav-custom">
     <!-- Botão Votar existente (vai para o login) -->
     <a class="btn-nav-red" href="{{ url_for('register') }}">Votar</a>
-    
+   
 
-    
+
+   
     <a class="nav-link-custom" href="{{ url_for('estandes') }}">Estandes</a>
     <a class="nav-link-custom" href="{{ url_for('ranking') }}">Ranking</a>
     <a class="nav-link-custom" href="#noticias">Notícias</a>
@@ -511,6 +558,7 @@
   </div>
 </div>
 
+
         <div class="brand-logos-container">
           <img src="{{ url_for('static', filename='feira_logo.jpeg') }}" alt="FeiraScore" class="img-navbar-logo" width="65" height="45">
           <img src="{{ url_for('static', filename='vimi.jpg') }}" alt="Vimi" class="img-navbar-logo" width="45" height="45">
@@ -518,7 +566,9 @@
       </div>
     </nav>
 
+
   </header>
+
 
 <!-- ADICIONE O BLOCO DE ALERTAS EXATAMENTE AQUI -->
 {% with messages = get_flashed_messages(with_categories=true) %}
@@ -534,19 +584,24 @@
   {% endif %}
 {% endwith %}
 
+
   <main>
     <section class="intro-section">
       <div class="container">
         <div class="row align-items-center justify-content-center">
 
+
          <div class="col-md-6 mb-4 mb-md-0 hero-brand-block text-center">
+
 
   <!-- TROFÉU -->
   <div class="trophy-container">
 
+
     <img src="{{ url_for('static', filename='trofeu.png') }}"
          alt="Troféu FeiraScore"
          class="hero-feirascore-image">
+
 
     <!-- FEIRA SCORE -->
     <div class="hero-wordmark">
@@ -554,12 +609,15 @@
       <span class="score">SCORE</span>
     </div>
 
+
   </div>
+
 
   <!-- FRASE -->
   <p class="main-subtitle">
     Quem lidera, <span>brilha.</span>
   </p>
+
 
   <!-- BOTÃO -->
   <a href="#sobre"
@@ -567,15 +625,19 @@
     Saiba Mais
   </a>
 
+
 </div>
+
 
           <div class="col-md-6 text-center">
             <img src="{{ url_for('static', filename='evento.jpg') }}" alt="Evento Feira" class="img-evento">
           </div>
 
+
         </div>
       </div>
     </section>
+
 
     <section class="about-section" id="sobre">
       <svg class="star-bg" viewBox="0 0 500 500" fill="white">
@@ -596,6 +658,7 @@
         </div>
       </div>
     </section>
+
 
     <!-- SEÇÃO DE NOTÍCIAS -->
     <section class="news-section" id="noticias">
@@ -658,6 +721,7 @@
       </div>
     </section>
 
+
     <!-- SEÇÃO DE GERENCIAMENTO DE PROJETOS - 4 BLOCOS -->
     <section class="management-section" id="gerenciar-projetos">
       <div class="container">
@@ -665,6 +729,7 @@
         <p class="management-subtitle">
           Acesse as funções de cadastro, listagem e mídias dos projetos cadastrados no FeiraScore.
         </p>
+
 
         <div class="row g-4 align-items-stretch">
           <!-- BLOCO 1 -->
@@ -675,12 +740,15 @@
         <i class="fa-solid fa-plus"></i>
       </div>
 
+
       <h3>Cadastrar Projeto</h3>
+
 
       <p>
         Cadastre um novo projeto ou estande informando turma, nome, resumo e mídias.
       </p>
     </div>
+
 
     <a
       class="management-btn"
@@ -691,6 +759,8 @@
 </div>
 
 
+
+
 <!-- BLOCO 2 -->
 <div class="col-lg-4 col-md-6">
   <div class="management-card">
@@ -699,12 +769,15 @@
         <i class="fa-solid fa-list"></i>
       </div>
 
+
       <h3>Listar Projetos</h3>
+
 
       <p>
         Visualize todos os projetos cadastrados e acesse as opções de gerenciamento.
       </p>
     </div>
+
 
     <a
   class="management-btn"
@@ -715,6 +788,8 @@
 </div>
 
 
+
+
 <!-- BLOCO 4 -->
 <div class="col-lg-4 col-md-6">
   <div class="management-card">
@@ -723,12 +798,15 @@
         <i class="fa-solid fa-images"></i>
       </div>
 
+
       <h3>Editar Mídias</h3>
+
 
       <p>
         Gerencie as imagens e outros arquivos enviados para cada projeto cadastrado.
       </p>
     </div>
+
 
     <a
       class="management-btn"
@@ -738,6 +816,8 @@
   </div>
 </div>
     </section>
+
+
 
 
     <!-- SEÇÃO GUIA DA FEIRA TECNOLÓGICA -->
@@ -754,8 +834,10 @@
       </div>
     </section>
 
+
     <div id="mural" aria-hidden="true" style="position:relative; top:-80px;"></div>
         <div id="estatisticas" aria-hidden="true" style="position:relative; top:-80px;"></div>
+
 
     <section class="location-section" id="localizacao">
       <div class="container">
@@ -764,6 +846,7 @@
         <div class="row justify-content-center"><div class="col-lg-10"><div class="map-responsive"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3705.548483256058!2d-48.36858228505481!3d-21.60356998560023!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b8e154f2669e41%3A0xb249339ff7292275!2sEtec%20Sylvio%20de%20Mattos%20Carvalho!5e0!3m2!1spt-BR!2sbr!4v1625000000000!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy"></iframe></div></div></div>
       </div>
     </section>
+
 
     <section class="faq-section" id="faq">
       <div class="container">
@@ -777,6 +860,7 @@
     </section>
   </main>
 
+
   <footer class="footer-custom text-center">
     <div class="container">
       <p class="mb-2 px-3">Você tem mais alguma pergunta que não está na nossa FAQ?</p>
@@ -789,6 +873,7 @@
       </div></div>
     </div>
   </footer>
+
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
@@ -806,6 +891,7 @@
     }
   </script>
 </body>
+
 
 <div vw class="enabled">
   <div vw-access-button class="active"></div>
