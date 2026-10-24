@@ -1,6 +1,8 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for
+from flask import Blueprint, render_template
 
-city_bp = Blueprint('project', __name__)
+# O nome da variável precisa ser o mesmo usado no @...route e no main.py
+project_bp = Blueprint('project', __name__)
+
 
 @project_bp.route('/project', methods=['GET', 'POST'])
 def project():
