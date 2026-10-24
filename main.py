@@ -347,17 +347,6 @@ except Exception as e:
 
 
 # ==========================================================
-# BLUEPRINT DE PROJETOS (app/controllers/project_controller.py)
-# ==========================================================
-
-try:
-    from app.controllers.project_controller import project_bp
-    app.register_blueprint(project_bp)
-except Exception as e:
-    print("Aviso: não foi possível carregar o project_controller:", e)
-
-
-# ==========================================================
 # PÁGINA PRINCIPAL
 # ==========================================================
 
