@@ -49,7 +49,7 @@
         </p>
 
         <div class="input-container">
-          <input type="text" name="turma" class="custom-input" placeholder="Sua turma (Ex: 3º B, 2º A, MKT-01)" required>
+          <input type="text" name="turma" class="custom-input" placeholder="Sua turma (Ex: 3º B, 2º A, MKT-01)" value="{{ request.args.get('turma') or turma or '' }}" required>
         </div>
 
         <div class="input-container">
@@ -61,7 +61,7 @@
             name="resumo" 
             class="custom-textarea" 
             rows="1" 
-            maxlength="300" 
+            maxlength="900" 
             placeholder="Faça um resumo do seu projeto aqui." 
             required
             oninput="autoResize(this)"></textarea>
@@ -229,4 +229,15 @@
   </script>
 
 </body>
+
+<div vw class="enabled">
+  <div vw-access-button class="active"></div>
+  <div vw-plugin-wrapper>
+    <div class="vw-plugin-top-wrapper"></div>
+  </div>
+</div>
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+<script>
+  new window.VLibras.Widget('https://vlibras.gov.br/app');
+</script>
 </html>

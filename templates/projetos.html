@@ -208,7 +208,7 @@
 
             <div class="text-end">
 
-                <a href="#" class="btn-new">
+                <a href="{{ url_for('pagina_descricao') }}" class="btn-new">
                     + Cadastrar Novo Projeto
                 </a>
 
@@ -233,7 +233,7 @@
 
                                 <th>Turma</th>
 
-                                <th>Categoria</th>
+                                <th>Resumo</th>
 
                                 <th>Ações</th>
 
@@ -243,106 +243,27 @@
 
                         <tbody>
 
-                            <!-- PROJETO 1 -->
-
-                            <tr>
-
-                                <td>01</td>
-
-                                <td class="project-name">
-                                    Robô Reciclador
-                                </td>
-
-                                <td>
-                                    3º Informática
-                                </td>
-
-                                <td>
-                                    Tecnologia
-                                </td>
-
-                                <td>
-
-                                    <a href="/editar-projeto/1"
-                                       class="btn-edit">
-                                        ✏️ Editar
-                                    </a>
-
-                                    <button class="btn-delete">
-                                        🗑️ Excluir
-                                    </button>
-
-                                </td>
-
-                            </tr>
-
-
-                            <!-- PROJETO 2 -->
-
-                            <tr>
-
-                                <td>02</td>
-
-                                <td class="project-name">
-                                    Horta Inteligente
-                                </td>
-
-                                <td>
-                                    2º Administração
-                                </td>
-
-                                <td>
-                                    Sustentabilidade
-                                </td>
-
-                                <td>
-
-                                    <a href="/editar-projeto/2"
-                                       class="btn-edit">
-                                        ✏️ Editar
-                                    </a>
-
-                                    <button class="btn-delete">
-                                        🗑️ Excluir
-                                    </button>
-
-                                </td>
-
-                            </tr>
-
-
-                            <!-- PROJETO 3 -->
-
-                            <tr>
-
-                                <td>03</td>
-
-                                <td class="project-name">
-                                    Sistema de Irrigação
-                                </td>
-
-                                <td>
-                                    3º Meio Ambiente
-                                </td>
-
-                                <td>
-                                    Automação
-                                </td>
-
-                                <td>
-
-                                    <a href="/editar-projeto/3"
-                                       class="btn-edit">
-                                        ✏️ Editar
-                                    </a>
-
-                                    <button class="btn-delete">
-                                        🗑️ Excluir
-                                    </button>
-
-                                </td>
-
-                            </tr>
+                            {% if estandes %}
+                                {% for estande in estandes %}
+                                <tr>
+                                    <td>{{ loop.index }}</td>
+                                    <td class="project-name">{{ estande.nome }}</td>
+                                    <td>{{ estande.turma }}</td>
+                                    <td>{{ estande.resumo[:60] }}{% if estande.resumo|length > 60 %}...{% endif %}</td>
+                                    <td>
+                                        <a href="{{ url_for('editar_projeto', index=loop.index0) }}" class="btn-edit">
+                                            ✏️ Editar
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            {% else %}
+                                <tr>
+                                    <td colspan="5" class="text-center py-4 text-muted">
+                                        Nenhum projeto cadastrado no momento.
+                                    </td>
+                                </tr>
+                            {% endif %}
 
                         </tbody>
 

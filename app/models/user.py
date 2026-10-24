@@ -1,10 +1,12 @@
-from dataclass import dataclass
-from datatime import datetime
+from dataclasses import dataclass, field
+from datetime import datetime
+from typing import Optional
+
 
 @dataclass
 class User:
-    wid: str
+    uid: str
     nome: str
     email: str
-    created_at: datatime = field(default_factory=datatime.utcnow)
- 
+    created_at: datetime = field(default_factory=datetime.utcnow)
+    updated_at: Optional[datetime] = None

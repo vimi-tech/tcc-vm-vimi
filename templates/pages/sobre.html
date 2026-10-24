@@ -1,19 +1,17 @@
 <!doctype html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FeiraScore - Sobre Nós</title>
-  
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
 
   <style>
-    /* ==========================================================================
-       ESTILOS GERAIS & RESET
-       ========================================================================== */
     * {
       margin: 0;
       padding: 0;
@@ -27,9 +25,6 @@
       color: #333;
     }
 
-    /* ==========================================================================
-       HEADER & NAVBAR (Mantendo a Estética Padrão)
-       ========================================================================== */
     .navbar-custom {
       background-color: #ededed;
       padding: 15px 0;
@@ -81,9 +76,6 @@
       color: #ffffff !important;
     }
 
-    /* ==========================================================================
-       CONTEÚDO DA PÁGINA SOBRE NÓS
-       ========================================================================== */
     .about-company-section {
       padding: 80px 0;
     }
@@ -101,12 +93,13 @@
       background: #fff;
       border-radius: 20px;
       padding: 40px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
       border-top: 6px solid #b61c1c;
     }
 
     .company-text {
-      font-family: sans-serif; /* Fonte legível para leitura longa */
+      font-family: sans-serif;
+      /* Fonte legível para leitura longa */
       font-size: 16px;
       color: #444;
       line-height: 1.8;
@@ -127,7 +120,7 @@
        ========================================================================== */
     .footer-custom {
       background-color: #050505;
-      color: rgba(255,255,255,0.6);
+      color: rgba(255, 255, 255, 0.6);
       padding: 40px 0;
       font-size: 14px;
     }
@@ -143,24 +136,26 @@
     }
   </style>
 </head>
+
 <body>
 
   <header>
     <nav class="navbar navbar-expand-lg navbar-custom">
       <div class="container">
-        <a class="btn-nav-red" href="{{ url_for('login') }}">Votar</a>
-        
+        <a class="btn-nav-red" href="{{ url_for('register') }}">Votar</a>
+
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
           <span class="navbar-toggler-icon"></span>
         </button>
-        
+
         <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
           <div class="d-flex flex-wrap gap-2 justify-content-center my-3 my-lg-0">
             <a class="btn-nav-custom-red" href="{{ url_for('index') }}">Início</a>
             <a class="btn-nav-custom-red" href="{{ url_for('estandes') }}">Estandes</a>
-            <a class="btn-nav-custom-red" href="{{ url_for('noticias') }}">Notícias</a>
-            <a class="btn-nav-custom-red" href="{{ url_for('localizacao') }}">Localização</a>
-            <a class="btn-nav-custom-red" href="{{ url_for('faq') }}">FAQ</a>
+            <a class="btn-nav-custom-red" href="{{ url_for('listar_projetos') }}">Gerenciar Projetos</a>
+            <a class="btn-nav-custom-red" href="{{ url_for('index') }}#noticias">Notícias</a>
+            <a class="btn-nav-custom-red" href="{{ url_for('index') }}#localizacao">Localização</a>
+            <a class="btn-nav-custom-red" href="{{ url_for('index') }}#faq">FAQ</a>
             <a class="btn-nav-custom-red" href="{{ url_for('estudantelogin') }}">Buscar por Turma</a>
           </div>
         </div>
@@ -173,23 +168,30 @@
       <div class="col-lg-9">
         <div class="company-card">
           <h2 class="section-title-dark mb-4">Sobre Nós</h2>
-          
+
           <p class="company-text">
-            Nós somos a <strong>Vimi</strong>, uma equipe focada em criar soluções inteligentes, práticas e dinâmicas para o mercado tecnológico. Nosso objetivo é transformar processos tradicionais em experiências digitais completas, unindo design de ponta e eficiência no desenvolvimento.
+            Nós somos a <strong>Vimi</strong>, uma equipe focada em criar soluções inteligentes, práticas e dinâmicas
+            para o mercado tecnológico. Nosso objetivo é transformar processos tradicionais em experiências digitais
+            completas, unindo design de ponta e eficiência no desenvolvimento.
           </p>
-          
+
           <p class="company-text">
-            Nascido dessa visão, desenvolvemos o <strong>FeiraScore</strong>: uma plataforma inovadora criada especialmente para modernizar a tradicional feira tecnológica da <strong>Etec Sylvio de Mattos Carvalho</strong>.
+            Nascido dessa visão, desenvolvemos o <strong>FeiraScore</strong>: uma plataforma inovadora criada
+            especialmente para modernizar a tradicional feira tecnológica da <strong>Etec Sylvio de Mattos
+              Carvalho</strong>.
           </p>
-          
+
           <p class="company-text">
-            O FeiraScore substitui as cédulas de papel e os métodos antigos de avaliação por um sistema de votação 100% digital, interativo e intuitivo. Com ele, os visitantes conseguem explorar os estandes, conhecer os detalhes de cada projeto e registrar seus votos em tempo real direto pelo celular.
+            O FeiraScore substitui as cédulas de papel e os métodos antigos de avaliação por um sistema de votação 100%
+            digital, interativo e intuitivo. Com ele, os visitantes conseguem explorar os estandes, conhecer os detalhes
+            de cada projeto e registrar seus votos em tempo real direto pelo celular.
           </p>
-          
+
           <p class="company-text">
-            Mais do que apenas um sistema de contagem, o FeiraScore valida o esforço dos estudantes, engaja o público e entrega resultados precisos de forma instantânea para a organização do evento.
+            Mais do que apenas um sistema de contagem, o FeiraScore valida o esforço dos estudantes, engaja o público e
+            entrega resultados precisos de forma instantânea para a organização do evento.
           </p>
-          
+
           <div class="text-center mt-4">
             <p class="company-highlight"><strong>Vimi: Inovando processos, destacando ideias.</strong></p>
           </div>
@@ -206,4 +208,5 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
