@@ -20,7 +20,7 @@ body {
     rgba(0, 0, 0, 1) 0%, 
     rgba(25, 0, 0, 0.98) 50%, 
     rgba(70, 0, 0, 0.95) 100%
-  ), url("background-login.jpg");
+  ), url("../background-login.jpg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
