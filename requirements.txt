@@ -6,3 +6,6 @@ autopep8
 flask
 firebase-admin
 cloudinary
+
+# Produção (servidor do Render)
+gunicorn
