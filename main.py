@@ -450,45 +450,15 @@ def estandes():
 # LOGIN DO ESTUDANTE / REGISTRO
 # ==========================================================
 
-# ==========================================================
-# LOGIN DO ESTUDANTE (VALIDADO PARA 8 NÚMEROS DE 1 A 10)
-# ==========================================================
-
-@app.route('/estandelogin', methods=['GET', 'POST'])
+@app.route('/estandelogin')
 def estudantelogin():
-    if request.method == 'POST':
-        dados = request.get_json()
-        
-        if not dados:
-            return jsonify(success=False, message="Dados inválidos."), 400
-
-        usuario = dados.get('username', '').strip()
-        codigo = dados.get('password', '').strip()
-
-        # Validação: aceita se o código for um número inteiro entre 1 e 10, 
-        # ou se corresponder a um estande cadastrado no banco.
-        codigo_valido = False
-        
-        if codigo.isdigit():
-            valor_num = int(codigo)
-            if 1 <= valor_num <= 10:
-                codigo_valido = True
-
-        # Verifica também se bate com a turma de algum estande existente
-        estande_encontrado = buscar_estande_por_turma(codigo) or buscar_estande_por_turma(usuario)
-
-        if codigo_valido or estande_encontrado:
-            return jsonify(
-                success=True, 
-                redirect_url=url_for('listar_projetos')
-            )
-        else:
-            return jsonify(
-                success=False, 
-                message="Código inválido! Por favor, insira um número de 1 a 10 ou o código correto."
-            ), 400
-
     return render_template('login/estudantelogin.html')
+
+
+@app.route('/register')
+def register():
+    return render_template('login/register.html')
+
 
 # ----------------------------------------------------------
 # LOGIN COM GOOGLE (recebe o token enviado pelo firebase.js)
