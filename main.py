@@ -422,7 +422,7 @@ def processar_envio_estande():
 
         avisar_falhas(ignoradas)
         flash('Este projeto já estava cadastrado: as novas fotos foram adicionadas a ele.', 'success')
-        return redirect(url_for('estandes'))
+        return redirect(url_for('descricaoprojeto'))
 
 
     # Salva no Firestore (o ID do documento é o identificador usado na votação)
