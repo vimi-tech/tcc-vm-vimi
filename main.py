@@ -518,6 +518,13 @@ def estudantelogin():
 
     return render_template('login/estudantelogin.html')
 
+# ----------------------------------------------------------
+# DESCRICAO PROJETO
+# ----------------------------------------------------------
+@app.route('/descricaoprojeto')
+def descricaoprojeto():
+    # sua lógica da página aqui
+    return render_template('descricaoprojeto.html')
 
 @app.route('/register')
 def register():
