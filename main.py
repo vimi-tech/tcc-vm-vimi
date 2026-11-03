@@ -217,7 +217,7 @@ def estandes():
 # LOGIN DO ESTUDANTE / REGISTRO
 # ==========================================================
 
-@app.route('/estandelogin')
+@app.route('/estandelogin'), methods=['GET', 'POST'])
 def estudantelogin():
     return render_template('login/estudantelogin.html')
 
