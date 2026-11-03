@@ -458,21 +458,70 @@ def processar_envio_estande():
 def estandes():
     return render_template('estandes.html', estandes=carregar_estandes())
 
+# ==========================================================
+# DICIONÁRIO DE CÓDIGOS DAS TURMAS (VALIDAÇÃO DE LOGIN)
+# ==========================================================
+CODIGOS_TURMAS = {
+    "2176327": "turma 01", "1489922": "turma 02", "8163598": "turma 03", "8629015": "turma 04",
+    "3908372": "turma 05", "8077417": "turma 06", "5337343": "turma 07", "9884271": "turma 08",
+    "2339790": "turma 09", "2427323": "turma 10", "4928715": "turma 11", "3304636": "turma 12",
+    "8016938": "turma 13", "2886634": "turma 14", "3228520": "turma 15", "3828733": "turma 16",
+    "6740665": "turma 17", "2270644": "turma 18", "3599645": "turma 19", "2823172": "turma 20",
+    "3702262": "turma 21", "1903026": "turma 22", "3978598": "turma 23", "1420347": "turma 24",
+    "7451325": "turma 25", "6159853": "turma 26", "2136936": "turma 27", "2703088": "turma 28",
+    "8689658": "turma 29", "2775943": "turma 30", "4532520": "turma 31", "1940696": "turma 32",
+    "7637084": "turma 33", "7969875": "turma 34", "7597285": "turma 35", "7483143": "turma 36",
+    "5888905": "turma 37", "3562208": "turma 38", "2338031": "turma 39", "9281775": "turma 40",
+    "2550093": "turma 41", "9508326": "turma 42", "8564983": "turma 43", "3362444": "turma 44",
+    "1925012": "turma 45", "5703566": "turma 46", "1780694": "turma 47", "1513580": "turma 48",
+    "4344516": "turma 49", "6860590": "turma 50", "3439684": "turma 51", "8418400": "turma 52",
+    "1786135": "turma 53", "4742360": "turma 54", "6880917": "turma 55", "6066107": "turma 56",
+    "2866878": "turma 57", "4802876": "turma 58"
+}
 
 # ==========================================================
 # LOGIN DO ESTUDANTE / REGISTRO
 # ==========================================================
 
+from flask import jsonify
+
 @app.route('/estandelogin', methods=['GET', 'POST'])
 def estudantelogin():
+    if request.method == 'POST':
+        dados = request.get_json()
+        if not dados:
+            return jsonify(success=False, message="Dados inválidos."), 400
+
+        usuario = dados.get('username', '').strip()
+        codigo = dados.get('password', '').strip()
+
+        # Valida se o código inserido pertence à lista oficial de códigos das turmas
+        codigo_valido = codigo in CODIGOS_TURMAS
+
+        # Também verifica se corresponde a um estande registado no Firestore
+        estande_encontrado = buscar_estande_por_turma(codigo) or buscar_estande_por_turma(usuario)
+
+        if codigo_valido or estande_encontrado:
+            # Guarda na sessão a turma correspondente se for válida pela lista
+            if codigo_valido:
+                session['turma_logada'] = CODIGOS_TURMAS[codigo]
+            
+            return jsonify(
+                success=True, 
+                redirect_url=url_for('listar_projetos')
+            )
+        else:
+            return jsonify(
+                success=False, 
+                message="Código de acesso inválido! Verifique o número fornecido."
+            ), 400
+
     return render_template('login/estudantelogin.html')
 
 
 @app.route('/register')
 def register():
     return render_template('login/register.html')
-
-
 # ----------------------------------------------------------
 # LOGIN COM GOOGLE (recebe o token enviado pelo firebase.js)
 # ----------------------------------------------------------
