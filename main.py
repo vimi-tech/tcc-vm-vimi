@@ -508,7 +508,7 @@ def estudantelogin():
             
             return jsonify(
                 success=True, 
-                redirect_url=url_for('register')
+                redirect_url=url_for('descricaoprojeto')
             )
         else:
             return jsonify(
