@@ -26,7 +26,7 @@
       <a href="{{ url_for('pagina_descricao') }}" class="btn btn-success fw-bold px-4 py-2 shadow-sm">
         {% if session.get('turma') %}
     <!-- O botão só vai aparecer se houver uma turma logada na sessão -->
-    <a href="{{ url_for('cadastrar') }}" class="btn ...">+ Cadastrar Estande</a>
+    <a href="{{ url_for('cadastrar') }}" class="btn btn-success">+ Cadastrar Estande</a>
 {% endif %}
       </a>
     </div>
