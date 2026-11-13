@@ -371,12 +371,18 @@ def index():
 # ==========================================================
 # CADASTRO DE ESTANDE
 # ==========================================================
+# ==========================================================
+# CADASTRO DE ESTANDE
+# ==========================================================
 
 @app.route('/descricaoprojeto', methods=['GET', 'POST'])
 def pagina_descricao():
     if request.method == 'POST':
         return processar_envio_estande()
-    return render_template('pages/descricaoprojeto.html')
+    
+    # Passa a turma guardada na sessão para o HTML preencher automaticamente
+    turma_autorizada = session.get('turma_logada', '')
+    return render_template('pages/descricaoprojeto.html', turma_autorizada=turma_autorizada)
 
 
 @app.route('/cadastrar-estande', methods=['POST'])
