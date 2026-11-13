@@ -116,7 +116,7 @@
       text-transform: uppercase;
       margin-bottom: 5px;
       width: 100%;
-      white-space: normal; /* Permite quebrar linha para não cortar o texto */
+      white-space: normal;
       word-break: break-word;
       line-height: 1.1;
       text-align: center;
@@ -173,7 +173,7 @@
     }
     .barra .nome {
       flex: 1;
-      white-space: normal; /* Permite que o nome do projeto quebre linha se necessário */
+      white-space: normal;
       word-break: break-word;
       line-height: 1.2;
     }
@@ -327,6 +327,18 @@
     document.querySelectorAll('[data-w]').forEach(function (el) {
       el.style.width = el.dataset.w + '%';
     });
+  </script>
+
+  <!-- VLIBRAS INTEGRADO -->
+  <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
+  </div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
   </script>
 
 </body>
