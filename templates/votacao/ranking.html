@@ -94,35 +94,37 @@
       justify-content: center;
       gap: 6px;
       margin: 34px auto 10px;
+      flex-wrap: wrap;
     }
     .podio {
       display: flex;
       align-items: flex-end;
       justify-content: center;
-      gap: 8px;
+      gap: 6px;
     }
     .slot {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-end;
-      width: clamp(44px, 11vw, 66px);
+      width: clamp(52px, 13vw, 72px);
     }
     .rotulo {
       font-family: 'Orbitron', sans-serif;
       font-weight: 800;
-      font-size: 10px;
+      font-size: 9px;
       text-transform: uppercase;
       margin-bottom: 5px;
-      max-width: 100%;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      width: 100%;
+      white-space: normal; /* Permite quebrar linha para não cortar o texto */
+      word-break: break-word;
+      line-height: 1.1;
+      text-align: center;
     }
     .coluna {
       position: relative;
       width: 100%;
-      height: 100px;               /* o JavaScript ajusta conforme os votos */
+      height: 100px;
       border-radius: 8px 8px 0 0;
       overflow: hidden;
       transition: height .4s ease;
@@ -140,7 +142,7 @@
 
     .mascote-box { margin-left: 6px; display: flex; align-items: flex-end; }
     .mascote {
-      width: clamp(90px, 24vw, 140px);
+      width: clamp(80px, 22vw, 120px);
       height: auto;
       display: block;
     }
@@ -154,23 +156,33 @@
       align-items: flex-start;
     }
     .barra {
-      width: 100%;                 /* o JavaScript ajusta conforme os votos */
-      min-height: 32px;
-      padding: 8px 14px;
-      border-radius: 4px;
+      width: 100%;
+      min-height: 38px;
+      padding: 8px 12px;
+      border-radius: 6px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       font-family: 'Orbitron', sans-serif;
       font-weight: 800;
-      font-size: 11px;
+      font-size: 10px;
       text-transform: uppercase;
       text-align: left;
       transition: width .4s ease;
     }
-    .barra .nome { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .barra .info { white-space: nowrap; font-weight: 700; }
+    .barra .nome {
+      flex: 1;
+      white-space: normal; /* Permite que o nome do projeto quebre linha se necessário */
+      word-break: break-word;
+      line-height: 1.2;
+    }
+    .barra .info {
+      white-space: nowrap;
+      font-weight: 700;
+      font-size: 9px;
+      flex-shrink: 0;
+    }
     .barra.vermelha { background: linear-gradient(90deg, #c51b1b 0%, #000 100%); color: #fff; }
     .barra.cinza { background: #dcdcdc; color: #222; }
 
@@ -201,7 +213,7 @@
     }
     .cat p { font-size: 12px; color: #666; margin: 2px 0 10px; }
     .cat .lista { margin-top: 0; gap: 6px; }
-    .cat .barra { min-height: 28px; font-size: 10px; padding: 6px 10px; }
+    .cat .barra { min-height: 32px; font-size: 9px; padding: 6px 10px; }
 
     .vazio {
       margin-top: 40px;
@@ -244,7 +256,7 @@
       {% set total = geral|sum(attribute='qtd') %}
       {% set maximo = geral[0].qtd %}
 
-      <!-- PÓDIO: 4º, 2º, 1º, 3º, 5º (só aparecem os que existem) -->
+      <!-- PÓDIO -->
       <div class="podio-area">
         <div class="podio">
           {% for r in [3, 1, 0, 2, 4] if r < geral|length %}
@@ -264,7 +276,7 @@
           {% endfor %}
         </div>
 
-        <!-- Mascote (arquivo: static/mascote.png) -->
+        <!-- Mascote -->
         <div class="mascote-box">
           <img src="{{ url_for('static', filename='mascote.png') }}" alt="Mascote FeiraScore" class="mascote"
                onerror="this.style.display='none'">
@@ -282,7 +294,7 @@
         {% endfor %}
       </div>
 
-      <!-- RESULTADO POR PERGUNTA: só aparece em /ranking?detalhes=1 -->
+      <!-- RESULTADO POR PERGUNTA -->
       {% if request.args.get('detalhes') %}
       <h2 class="secao-titulo">Vencedores por pergunta</h2>
       <div class="categorias">
@@ -302,7 +314,6 @@
           </div>
         {% endfor %}
       </div>
-
       {% endif %}
 
     {% endif %}
@@ -310,7 +321,6 @@
   </div>
 
   <script>
-    // Altura das colunas do pódio e largura das barras, conforme os votos
     document.querySelectorAll('[data-h]').forEach(function (el) {
       el.style.height = Math.round(parseFloat(el.dataset.h) * 1.6) + 'px';
     });
