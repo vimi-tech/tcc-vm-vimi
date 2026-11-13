@@ -21,13 +21,7 @@
         <a href="{{ url_for('index') }}" class="btn-back">
             <span class="arrow">&larr;</span> Voltar para página inicial
         </a>
-
-        <!-- O BOTÃO INTEIRO SÓ EXISTE SE A TURMA ESTIVER LOGADA -->
-        {% if session.get('turma') %}
-            <a href="{{ url_for('cadastrar') }}" class="btn btn-success fw-bold px-4 py-2 shadow-sm">
-                + Cadastrar Estande
-            </a>
-        {% endif %}
+      
     </div>
     <header class="header-section">
       <img
