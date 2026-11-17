@@ -305,14 +305,14 @@ def estande_por_indice(index):
 
 # As 8 perguntas da votação: o visitante escolhe UM projeto em cada uma
 PERGUNTAS_VOTACAO = [
-    {"titulo": "Tema da feira",      "pergunta": "Qual projeto se relaciona completamente com o tema da feira?"},
-    {"titulo": "Melhor decoração",   "pergunta": "Qual teve a melhor decoração?"},
-    {"titulo": "Melhor didática",    "pergunta": "Qual teve a melhor didática?"},
-    {"titulo": "Mais relevante",     "pergunta": "Qual foi o mais relevante?"},
-    {"titulo": "Mais interessante",  "pergunta": "Qual foi o mais interessante?"},
-    {"titulo": "Mais criativo",      "pergunta": "Qual foi o mais criativo?"},
-    {"titulo": "Mais organizado",    "pergunta": "Qual foi o mais organizado?"},
-    {"titulo": "Melhor explicação",  "pergunta": "Qual teve a melhor explicação?"},
+    {"titulo": "Tema da feira",      "pergunta": "Qual website apresentou o melhor design e interface visual?"},
+    {"titulo": "Melhor decoração",   "pergunta": "Qual website ofereceu a experiência de navegação mais fluida?"},
+    {"titulo": "Melhor didática",    "pergunta": "Qual projeto demonstrou maior criatividade na solução proposta?"},
+    {"titulo": "Mais relevante",     "pergunta": "Qual grupo apresentou as informações e o objetivo do site de forma mais clara?"},
+    {"titulo": "Mais interessante",  "pergunta": "Qual grupo apresentou o projeto de forma mais envolvente durante a apresentação do pitch?"},
+    {"titulo": "Mais criativo",      "pergunta": "Qual equipe apresentou o projeto com mais segurança e profissionalismo?"},
+    {"titulo": "Mais organizado",    "pergunta": "Qual website demonstrou maior preocupação em ser acessível e fácil de usar para diferentes tipos de público?"},
+    {"titulo": "Melhor explicação",  "pergunta": "Qual foi o melhor projeto em geral?"},
 ]
 
 
